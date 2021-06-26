@@ -2,6 +2,9 @@
 // import PublicRoute from 'components/PublicRoute';
 
 // import routes from 'routes';
+import './scss/_main.scss';
+
+import LoginPage from 'pages/LoginPage';
 
 import AddPeopleForm from 'components/AddPeopleForm';
 
@@ -10,6 +13,8 @@ const App = () => {
   return (
     <div>
       <AddPeopleForm />
+
+      <LoginPage />
     </div>
   );
 };
