@@ -4,7 +4,7 @@
 // import routes from 'routes';
 import './scss/_main.scss';
 
-import LoginPage from 'pages/LoginPage';
+// import LoginPage from 'pages/LoginPage';
 
 import AddPeopleForm from 'components/AddPeopleForm';
 
@@ -14,7 +14,7 @@ const App = () => {
     <div>
       <AddPeopleForm />
 
-      <LoginPage />
+      {/* <LoginPage /> */}
     </div>
   );
 };

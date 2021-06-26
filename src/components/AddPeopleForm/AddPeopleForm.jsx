@@ -23,7 +23,7 @@ const AddPeopleForm = () => {
 
   return (
     <div className={s.form}>
-      <h2>Add people</h2>
+      <h2 className={s.title}>Add people</h2>
       <form id="add" onSubmit={handleSubmit}>
         <label htmlFor={email}>
           <input
@@ -40,7 +40,7 @@ const AddPeopleForm = () => {
         </label>
       </form>
 
-      <p>Added users:</p>
+      <p className={s.text}>Added users:</p>
       <p>You have not added any users yet</p>
       <button form="add" type="submit" className={s.ready_btn}>
         Ready
