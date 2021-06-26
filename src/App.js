@@ -3,8 +3,15 @@
 
 // import routes from 'routes';
 
+import AddPeopleForm from 'components/AddPeopleForm';
+
 const App = () => {
-  return <p>The best project</p>;
+  // return <p>The best project</p>;
+  return (
+    <div>
+      <AddPeopleForm />
+    </div>
+  );
 };
 
 export default App;

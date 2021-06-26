@@ -1,0 +1,15 @@
+// @import '../../utils/vars'
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.input {
+  display: block;
+}
+.ready_btn,
+.cancel_btn {
+  // display: block;
+  width: 148px;
+  height: 44px;
+}
