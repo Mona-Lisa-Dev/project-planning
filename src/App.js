@@ -9,13 +9,12 @@ import CreateTaskForm from 'components/CreateTaskForm';
 // import routes from 'routes';
 
 const App = () => {
-   return (
+  return (
     <Container>
       <AppBar />
 
       <p>The best project</p>
       <LoginPage />
-      <CreateTaskForm />
     </Container>
   );
 };
