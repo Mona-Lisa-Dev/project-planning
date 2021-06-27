@@ -1,0 +1,112 @@
+@import '../../scss/vars';
+@import '../../scss/breakpoints';
+
+.cont {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.user {
+  font-family: $main-font;
+  font-style: normal;
+
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+}
+
+.exit {
+  fill: white;
+  color: white;
+}
+
+.button {
+  padding: 6px 4px 6px 8px;
+  border: transparent;
+  font-family: $main-font;
+  color: $text-light;
+  cursor: pointer;
+}
+
+// and (min-width: $mobile)
+// and (max-width: $desktop)
+
+// ======================Modile===================
+@media screen and (max-width: $tablet) {
+  .user {
+    margin-right: 20px;
+    font-size: 14px;
+  }
+
+  .button {
+    background-color: #a6a6a6;
+    border-radius: 50%;
+    font-size: 0px;
+    &:hover {
+      background-color: $form-input-error;
+    }
+
+    &:focus {
+      background-color: $form-input-error; //цвет ховер и фокуса обсуждаем
+    }
+  }
+}
+
+//============Tablet==========================================
+
+@media screen and (min-width: $tablet) {
+  .user {
+    margin-right: 77px;
+    font-size: 14px;
+  }
+
+  .exit {
+    margin-right: 10px;
+  }
+
+  .button {
+    padding: 0;
+    display: flex;
+    background-color: transparent;
+
+    font-size: 14px;
+    font-weight: 400;
+    &:hover {
+      color: $form-input-error;
+    }
+
+    &:focus {
+      color: $form-input-error;
+    }
+  }
+}
+
+//============================Desktop===============================
+
+@media screen and (min-width: $desktop) {
+  .user {
+    margin-right: 77px;
+    font-size: 14px;
+  }
+
+  .exit {
+    margin-right: 10px;
+  }
+
+  .button {
+    padding: 0;
+    display: flex;
+    background-color: transparent;
+
+    font-size: 14px;
+    font-weight: 400;
+    &:hover {
+      color: $form-input-error;
+    }
+
+    &:focus {
+      color: $form-input-error;
+    }
+  }
+}

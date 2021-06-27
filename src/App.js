@@ -6,9 +6,16 @@ import './scss/_main.scss';
 
 // import routes from 'routes';
 
+import './scss/_main.scss';
+
+import LoginPage from 'pages/LoginPage';
+import AppBar from 'components/AppBar';
+
 const App = () => {
   return (
     <Container>
+      <AppBar />
+
       <p>The best project</p>
       <LoginPage />
     </Container>
