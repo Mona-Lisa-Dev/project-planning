@@ -8,6 +8,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  background-color: $form-background;
   color: $text-dark;
   border: $form-input-border;
   @media screen and (max-width: $mobile-max) {
@@ -67,7 +68,7 @@
   &:hover,
   &:focus {
     color: $main-orange;
-    background-color: $text-white;
+    background-color: $form-background;
     box-shadow: 0 3px 4px rgba(255, 107, 8, 0.3);
   }
 }
