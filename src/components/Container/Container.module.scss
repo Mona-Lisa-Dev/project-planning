@@ -1,18 +1,15 @@
-@import 'utils/breakpoints';
+@import '../../scss/breakpoints';
 
 .Container {
   margin-left: auto;
   margin-right: auto;
   min-height: 100vh;
-  background-color: aquamarine;
 
   @media screen and (min-width: $tablet) {
     min-width: $tablet;
-    background-color: pink;
   }
 
   @media screen and (min-width: $desktop) {
     width: $desktop;
-    background-color: burlywood;
   }
 }
