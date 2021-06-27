@@ -28,7 +28,8 @@
   text-align: center;
   font-weight: 500;
 }
-.input {
+.input,
+.empty_input {
   margin: 50px 0 30px 0;
   width: 100%;
   height: 30px;
@@ -43,6 +44,12 @@
     margin: 30px 0 30px 0;
   }
 }
+.empty_input {
+  border-bottom: 1px solid $form-input-error;
+  &::placeholder {
+    color: $form-input-error;
+  }
+}
 .ready_btn,
 .cancel_btn {
   margin: 0 auto;
@@ -54,18 +61,25 @@
 .ready_btn {
   margin-top: 60px;
   margin-bottom: 20px;
-  // margin: 60px 0 20px 0;
-  // margin: 0 auto;
   color: $text-white;
   background-color: $main-orange;
-  // font-size: 18px;
-  // border: none;
   border-radius: 25px;
+  &:hover,
+  &:focus {
+    color: $main-orange;
+    background-color: $text-white;
+    box-shadow: 0 3px 4px rgba(255, 107, 8, 0.3);
+  }
 }
 .cancel_btn {
   color: $text-light;
   background-color: transparent;
   text-decoration: underline;
+  &:hover,
+  &:focus {
+    color: $text-dark;
+    text-shadow: 0 3px 4px rgba(45, 44, 46, 0.3);
+  }
 }
 .text {
   margin-bottom: 20px;

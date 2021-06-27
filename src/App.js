@@ -6,13 +6,14 @@ import './scss/_main.scss';
 
 // import LoginPage from 'pages/LoginPage';
 
-import AddPeopleForm from 'components/AddPeopleForm';
+// import AddPeopleForm from 'components/AddPeopleForm';
 
 const App = () => {
   // return <p>The best project</p>;
+
   return (
     <div>
-      <AddPeopleForm />
+      {/* <AddPeopleForm /> */}
 
       {/* <LoginPage /> */}
     </div>
