@@ -31,7 +31,6 @@ const signup = payload => async dispatch => {
     } = await axios.post('/users/signup', payload);
 
     dispatch(signupSuccess(data));
-    token.set(data.token);
 
     return data;
   } catch (error) {
@@ -45,7 +44,7 @@ const login = payload => async dispatch => {
   try {
     const {
       data: { data },
-    } = await axios.post('/users/signin', payload);
+    } = await axios.post('/users/login', payload);
 
     dispatch(loginSuccess(data));
     token.set(data.token);
