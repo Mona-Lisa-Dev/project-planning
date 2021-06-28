@@ -45,7 +45,7 @@ const login = payload => async dispatch => {
   try {
     const {
       data: { data },
-    } = await axios.post('/users/login', payload);
+    } = await axios.post('/users/signin', payload);
 
     dispatch(loginSuccess(data));
     token.set(data.token);
