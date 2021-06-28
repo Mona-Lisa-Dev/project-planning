@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { persistStore } from 'redux-persist';
+import { persistStore, persistReducer } from 'redux-persist';
 
 import middleware from './middleware';
-import auth from './auth/auth-reducer';
+import authPersistConfig from './auth/auth-persist-config';
+import authReducer from './auth/auth-reducer';
 
 export const store = configureStore({
   reducer: {
-    auth,
+    auth: persistReducer(authPersistConfig, authReducer),
   },
   middleware,
   devTools: process.env.NODE_ENV === 'development',
