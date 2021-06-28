@@ -17,8 +17,7 @@
 }
 
 .exit {
-  fill: white;
-  color: white;
+  fill: currentColor;
 }
 
 .button {
@@ -33,7 +32,7 @@
 // and (max-width: $desktop)
 
 // ======================Modile===================
-@media screen and (max-width: $tablet) {
+@media screen and (max-width: $mobile-max) {
   .user {
     margin-right: 20px;
     font-size: 14px;
@@ -43,6 +42,8 @@
     background-color: #a6a6a6;
     border-radius: 50%;
     font-size: 0px;
+
+    color: #ffffff;
     &:hover {
       background-color: $form-input-error;
     }
@@ -69,6 +70,7 @@
     padding: 0;
     display: flex;
     background-color: transparent;
+    color: $text-light;
 
     font-size: 14px;
     font-weight: 400;
