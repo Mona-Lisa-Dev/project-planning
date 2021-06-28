@@ -1,5 +1,6 @@
 import Container from 'components/Container';
 import LoginPage from 'pages/LoginPage';
+import AppBar from 'components/AppBar';
 import './scss/_main.scss';
 // import PrivateRoute from 'components/PrivateRoute';
 // import PublicRoute from 'components/PublicRoute';
@@ -9,7 +10,7 @@ import './scss/_main.scss';
 const App = () => {
   return (
     <Container>
-      <p>The best project</p>
+      <AppBar />
       <LoginPage />
     </Container>
   );
