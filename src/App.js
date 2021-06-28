@@ -1,5 +1,6 @@
 import Container from 'components/Container';
 import LoginPage from 'pages/LoginPage';
+import RegisterPage from 'pages/RegisterPage';
 import AppBar from 'components/AppBar';
 import './scss/_main.scss';
 // import PrivateRoute from 'components/PrivateRoute';
@@ -12,6 +13,7 @@ const App = () => {
     <Container>
       <AppBar />
       <LoginPage />
+      <RegisterPage />
     </Container>
   );
 };
