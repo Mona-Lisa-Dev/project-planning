@@ -1,20 +1,30 @@
-import React from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+// import { logout } from '../../redux/auth/auth-operations';
+
+import authOperations from 'redux/auth/auth-operations';
+
+import { getUserName } from 'redux/auth/auth-selectors';
 
 // import exit from './images/exitIcon.svg';
 
 import styles from './UserBar.module.scss';
 
 export default function UserBar() {
-  //   const dispatch = useDispatch();
-  //   const email = useSelector(); // заготовка под получение имени\мыла юзвера
-  const onLogout = () => {
-    console.log('Dont click on me!');
-  };
+  const dispatch = useDispatch();
+  const name = useSelector(getUserName);
+  const onLogout = useCallback(() => {
+    dispatch(authOperations.logout);
+  }, [dispatch]);
+
+  // const onLogout = () => {
+  //   console.log('Dont click on me!');
+  // };
 
   return (
     <div className={styles.cont}>
-      <p className={styles.user}>Username</p>
+      <p className={styles.user}>{name}</p>
       <button type="button" onClick={onLogout} className={styles.button}>
         {/* <img
           src={exit}
