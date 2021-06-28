@@ -31,7 +31,6 @@ const signup = payload => async dispatch => {
     } = await axios.post('/users/signup', payload);
 
     dispatch(signupSuccess(data));
-    token.set(data.token);
 
     return data;
   } catch (error) {
