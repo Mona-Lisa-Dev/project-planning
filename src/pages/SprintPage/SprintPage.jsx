@@ -18,6 +18,20 @@ const SprintPage = ({ title }) => {
       customTime: '1',
       totalTime: '1',
     },
+    {
+      id: 3,
+      taskName: 'third task',
+      planTime: '2',
+      customTime: '0',
+      totalTime: '0',
+    },
+    {
+      id: 4,
+      taskName: 'fourth task',
+      planTime: '4',
+      customTime: '1',
+      totalTime: '1',
+    },
   ];
   return (
     <>
@@ -27,8 +41,8 @@ const SprintPage = ({ title }) => {
           <button type="button" className={styles.btnChange}>
             {' '}
           </button>
-          <button type="button">
-            <span>Create a task </span>
+          <button type="button" className={styles.btnCreateTask}>
+            {' '}
           </button>
         </div>
 

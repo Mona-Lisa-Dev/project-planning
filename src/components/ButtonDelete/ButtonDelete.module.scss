@@ -1,4 +1,4 @@
-@import '../../../scss/vars';
+@import '../../scss/vars';
 
 .btnDelete {
   border-radius: 50%;
@@ -7,11 +7,9 @@
   outline: none;
   width: 20px;
   height: 20px;
-  background-image: url(./deleteIcon.svg);
+  background: center url(./deleteIcon.svg) no-repeat;
   background-color: #a6a6a6;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 12px;
+  background-size: 90%;
   transition: all 0.5s linear;
   &:hover,
   &:focus {
