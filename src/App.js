@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Modal from 'components/Modal';
 import Container from 'components/Container';
 import LoginPage from 'pages/LoginPage';
+import RegisterPage from 'pages/RegisterPage';
 import AppBar from 'components/AppBar';
 import mobilePlug from 'components/Modal/mobile_plug.png';
 import deskPlug from 'components/Modal/desk_plug.png';
@@ -22,6 +23,8 @@ const App = () => {
     <Container>
       <AppBar />
       <LoginPage />
+    
+// feature/modal
       <button type="button" onClick={toggleModal}>
         Open modal
       </button>
@@ -34,6 +37,9 @@ const App = () => {
           )}
         </Modal>
       )}
+
+      <RegisterPage />
+
     </Container>
   );
 };
