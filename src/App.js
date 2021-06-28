@@ -9,10 +9,12 @@ import './scss/_main.scss';
 
 const App = () => {
   return (
-    <Container>
+    <>
       <AppBar />
-      <LoginPage />
-    </Container>
+      <Container>
+        <LoginPage />
+      </Container>
+    </>
   );
 };
 
