@@ -24,15 +24,13 @@ export const deleteProjectSuccess = createAction(
 );
 export const deleteProjectError = createAction('projects/deleteProjectError');
 
-export const updateProjectNameRequest = createAction(
-  'projects/updateProjectNameRequest',
+export const updateProjectRequest = createAction(
+  'projects/updateProjectRequest',
 );
-export const updateProjectNameSuccess = createAction(
-  'projects/updateProjectNameSuccess',
+export const updateProjectSuccess = createAction(
+  'projects/updateProjectSuccess',
 );
-export const updateProjectNameError = createAction(
-  'projects/updateProjectNameError',
-);
+export const updateProjectError = createAction('projects/updateProjectError');
 
 export const addParticipantRequest = createAction(
   'projects/addParticipantRequest',
@@ -41,3 +39,13 @@ export const addParticipantSuccess = createAction(
   'projects/addParticipantSuccess',
 );
 export const addParticipantError = createAction('projects/addParticipantError');
+
+export const deleteParticipantRequest = createAction(
+  'projects/deleteParticipantRequest',
+);
+export const deleteParticipantSuccess = createAction(
+  'projects/deleteParticipantSuccess',
+);
+export const deleteParticipantError = createAction(
+  'projects/deleteParticipantError',
+);
