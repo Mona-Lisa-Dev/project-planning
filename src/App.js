@@ -20,11 +20,13 @@ const App = () => {
   };
 
   return (
-    <Container>
+    <>
       <AppBar />
-      <LoginPage />
+      <Container>
+        <LoginPage />
+        <RegisterPage />
     
-// feature/modal
+      // feature/modal
       <button type="button" onClick={toggleModal}>
         Open modal
       </button>
@@ -37,10 +39,9 @@ const App = () => {
           )}
         </Modal>
       )}
-
-      <RegisterPage />
-
+      
     </Container>
+ </>
   );
 };
 
