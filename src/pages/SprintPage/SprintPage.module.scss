@@ -1,0 +1,73 @@
+@import '../../scss/vars';
+@import '../../scss/breakpoints';
+
+.title {
+  color: $text-dark;
+  letter-spacing: 0.04em;
+  font-family: $main-font;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.22;
+  @media screen and (max-width: $mobile-max) {
+    width: 260px;
+    font-size: 26px;
+  }
+  @media screen and (min-width: $tablet) {
+    margin-right: 20px;
+    width: 334px;
+    height: 88px;
+    font-size: 36px;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-right: 40px;
+    height: 75px;
+  }
+}
+
+.sprintContent {
+  border-left: 1px solid rgba(24, 28, 39, 0.1);
+  @media screen and (max-width: $mobile-max) {
+    min-width: 320px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  @media screen and (min-width: $tablet) {
+    min-width: 512px;
+  }
+  @media screen and (min-width: $desktop) {
+    width: 1026px;
+  }
+}
+
+.sprintHeader {
+  display: flex;
+  margin-bottom: 30px;
+  align-items: baseline;
+  @media screen and (max-width: $tablet-max) {
+    padding-left: 20px;
+  }
+  @media screen and (min-width: $desktop) {
+    padding-left: 70px;
+  }
+}
+.btnChange {
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  width: 20px;
+  height: 20px;
+  background-color: #a6a6a6;
+  background: url(./btnChange.svg) no-repeat;
+  transition: all 0.25s linear;
+  &:hover,
+  &:focus {
+    background: url(./btnChangeActive.svg) no-repeat;
+    transform: scale(1.2);
+  }
+  @media screen and (min-width: $tablet) {
+    margin-right: 34px;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-right: 230px;
+  }
+}

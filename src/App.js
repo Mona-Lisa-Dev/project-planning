@@ -4,7 +4,7 @@ import AppBar from 'components/AppBar';
 import './scss/_main.scss';
 // import PrivateRoute from 'components/PrivateRoute';
 // import PublicRoute from 'components/PublicRoute';
-
+import SprintPage from 'pages/SprintPage/SprintPage';
 // import routes from 'routes';
 
 const App = () => {
@@ -12,6 +12,7 @@ const App = () => {
     <Container>
       <AppBar />
       <LoginPage />
+      <SprintPage title="title Sprint page" />
     </Container>
   );
 };
