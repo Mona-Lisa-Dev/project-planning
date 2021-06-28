@@ -12,4 +12,4 @@ export const logoutRequest = createAction('auth/logoutRequest');
 export const logoutSuccess = createAction('auth/logoutSuccess');
 export const logoutError = createAction('auth/logoutError');
 
-// export const clearError = createAction('auth/clearError');
+export const clearError = createAction('auth/clearError');
