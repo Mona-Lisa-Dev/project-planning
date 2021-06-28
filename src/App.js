@@ -7,8 +7,6 @@ import Container from 'components/Container';
 // import LoginPage from 'pages/LoginPage';
 // import RegisterPage from 'pages/RegisterPage';
 import AppBar from 'components/AppBar';
-// import mobilePlug from 'components/Modal/mobile_plug.png';
-// import deskPlug from 'components/Modal/desk_plug.png';
 import './scss/_main.scss';
 
 import routes from 'routes';
@@ -31,12 +29,6 @@ const App = () => {
   // useEffect(() => {
   //   dispatch(getCurrentUser());
   // }, [dispatch]);  // Это на будущее
-
-  // const [showModal, setShowModal] = useState(false);
-
-  // const toggleModal = () => {
-  //   setShowModal(!showModal);
-  // };
 
   return (
     <>
