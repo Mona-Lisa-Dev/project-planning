@@ -2,6 +2,9 @@ import { useState } from 'react';
 import Modal from 'components/Modal';
 import Container from 'components/Container';
 import LoginPage from 'pages/LoginPage';
+import AppBar from 'components/AppBar';
+import mobilePlug from 'components/Modal/mobile_plug.png';
+import deskPlug from 'components/Modal/desk_plug.png';
 import './scss/_main.scss';
 // import PrivateRoute from 'components/PrivateRoute';
 // import PublicRoute from 'components/PublicRoute';
@@ -17,19 +20,20 @@ const App = () => {
 
   return (
     <Container>
+      <AppBar />
+      <LoginPage />
       <button type="button" onClick={toggleModal}>
         Open modal
       </button>
       {showModal && (
         <Modal onCloseModal={toggleModal}>
-          <h2>Modal Content</h2>
-          <button type="button" onClick={toggleModal}>
-            Close modal
-          </button>
+          {window.innerWidth < 768 ? (
+            <img src={mobilePlug} alt="mobile plug" />
+          ) : (
+            <img src={deskPlug} alt="mobile plug" />
+          )}
         </Modal>
       )}
-      <p>The best project</p>
-      <LoginPage />
     </Container>
   );
 };
