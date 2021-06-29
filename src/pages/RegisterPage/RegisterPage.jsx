@@ -1,10 +1,14 @@
 import { useState } from 'react';
-
+import { useDispatch } from 'react-redux';
 import styles from './RegisterPage.module.scss';
+
+import authOperations from 'redux/auth/auth-operations';
 
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
 
   const handleChange = event => {
     const { name, value } = event.currentTarget;
@@ -26,10 +30,8 @@ const RegisterPage = () => {
   const handleFormSubmit = event => {
     event.preventDefault();
 
-    // const user = { email, password };
-    // dispatch(authOperations.signUp(user));
-
-    // setNeedVerify(true);
+    const user = { email, password };
+    dispatch(authOperations.signup(user));
 
     reset();
   };

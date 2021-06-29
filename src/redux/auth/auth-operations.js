@@ -31,6 +31,7 @@ const signup = payload => async dispatch => {
     } = await axios.post('/users/signup', payload);
 
     dispatch(signupSuccess(data));
+    console.log('data', data);
 
     return data;
   } catch (error) {
