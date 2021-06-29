@@ -7,12 +7,12 @@
   min-height: 100vh;
 
   @media screen and (min-width: $tablet) {
-    padding: 0 40px 40px;
+    padding: 0 40px;
     min-width: $tablet;
   }
 
   @media screen and (min-width: $desktop) {
-    padding: 0 55px 55px;
+    padding: 0 55px;
     width: $desktop;
   }
 }

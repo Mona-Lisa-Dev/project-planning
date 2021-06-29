@@ -20,6 +20,9 @@ const LoginPage = lazy(
 const RegisterPage = lazy(() =>
   import('./pages/RegisterPage' /* webpackChunkName: "RegisterPage" */),
 );
+const SprintsPage = lazy(() =>
+  import('./pages/SprintsPage' /* webpackChunkName: "SprintsPage" */),
+);
 // const ProjectsPage = lazy(() =>
 //   import('./pages/ProsectsPage' /* webpackChunkName: "ProsectsPage" */),
 // );
@@ -33,8 +36,8 @@ const App = () => {
 
   return (
     <>
-      <AppBar />
       <Container>
+        <AppBar />
         <Suspense fallback={<p>This is spinner, trust me</p>}>
           <Switch>
             <PublicRoute
@@ -49,6 +52,7 @@ const App = () => {
               component={RegisterPage}
               redirectTo={routes.projects}
             />
+            <PublicRoute path={routes.sprints} component={SprintsPage} />
             {/* <PrivateRoute
               path={routes.projects}
               restricted

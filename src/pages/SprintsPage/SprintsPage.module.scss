@@ -1,0 +1,119 @@
+@import '../../scss/vars';
+
+main {
+  display: flex;
+  height: calc(100vh - 80px);
+  background-color: pink;
+
+  aside {
+    width: 200px;
+    // height: 100%;
+
+    background-color: skyblue;
+    border-right: 1px solid rgba(24, 28, 39, 0.1);
+  }
+
+  article {
+    padding: 40px 0 0 70px;
+    height: 100%;
+    background-color: lemonchiffon;
+
+    .headerWrap {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 0 30px;
+      background-color: lightcoral;
+
+      .contentWrap {
+        width: 400px;
+        background-color: lightpink;
+
+        .titleWrap {
+          display: flex;
+          align-items: baseline;
+          margin: 0 0 20px;
+          background-color: #519e84;
+
+          h2 {
+            margin-right: 20px;
+            font-size: 36px;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+          }
+
+          .EditIcon {
+            cursor: pointer;
+          }
+        }
+
+        p {
+          margin: 0 0 30px;
+          line-height: 22px;
+          letter-spacing: 0.04em;
+        }
+
+        .addWrap {
+          display: flex;
+          align-items: center;
+
+          .AddGroupIcon {
+            cursor: pointer;
+            margin-right: 10px;
+          }
+          a {
+            letter-spacing: 0.04em;
+            text-decoration: underline;
+            color: $text-dark;
+          }
+        }
+      }
+
+      .createSprint {
+        display: flex;
+        align-items: center;
+        padding-right: 35px;
+        height: 44px;
+        background-color: red;
+
+        .PlusButtonIcon {
+          margin-right: 15px;
+          cursor: pointer;
+        }
+      }
+    }
+
+    // ul
+    .SprintList {
+      display: flex;
+      flex-wrap: wrap;
+      width: 870px;
+      // height: 100%;
+      background-color: #8db6a8;
+
+      // li
+      .SprintItem {
+        width: 270px;
+        height: 224px;
+        background-color: $primaryWhiteColor;
+        border-radius: 5px;
+        box-shadow: $primaryShadow;
+
+        &:not(:nth-child(3n)) {
+          margin-right: 30px;
+        }
+
+        &:not(:nth-last-child(-n + 3)) {
+          margin-bottom: 30px;
+        }
+      }
+    }
+  }
+}
+
+.modalPlug {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: pink;
+}
