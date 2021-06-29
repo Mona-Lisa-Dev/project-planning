@@ -12,7 +12,7 @@ const TaskList = ({ tasks }) => {
           <li className={styles.taskListHeadItem}>Spent hour / day</li>
           <li className={styles.taskListHeadItem}>Hours spent</li>
         </ul>
-        <input className={styles.findInput} type="text"></input>
+        <input className={styles.findInputActive} type="text"></input>
         <button type="button" className={styles.buttonFind}></button>
       </div>
       <ul className={styles.taskList}>

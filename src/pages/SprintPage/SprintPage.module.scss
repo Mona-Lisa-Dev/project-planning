@@ -1,6 +1,40 @@
 @import '../../scss/vars';
 @import '../../scss/breakpoints';
 
+.sprintContent {
+  border-left: 1px solid rgba(24, 28, 39, 0.1);
+
+  @media screen and (max-width: $mobile-max) {
+    position: relative;
+    width: 320px;
+    border-left: none;
+  }
+  @media screen and (min-width: $tablet) {
+    position: relative;
+    padding-left: 20px;
+    width: 512px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    width: 1026px;
+    padding-left: 70px;
+  }
+}
+
+.sprintDate {
+  margin-bottom: 20px;
+  font-size: 12px;
+  line-height: 1.25;
+  letter-spacing: 0.04em;
+  color: rgba(24, 28, 39, 0.6);
+  @media screen and (max-width: $mobile-max) {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    height: 70px;
+  }
+}
+
 .title {
   color: $text-dark;
   letter-spacing: 0.04em;
@@ -10,6 +44,7 @@
   line-height: 1.22;
   @media screen and (max-width: $mobile-max) {
     width: 260px;
+    height: 64px;
     font-size: 26px;
   }
   @media screen and (min-width: $tablet) {
@@ -24,30 +59,15 @@
   }
 }
 
-.sprintContent {
-  border-left: 1px solid rgba(24, 28, 39, 0.1);
-  @media screen and (max-width: $mobile-max) {
-    min-width: 320px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  @media screen and (min-width: $tablet) {
-    min-width: 512px;
-  }
-  @media screen and (min-width: $desktop) {
-    width: 1026px;
-  }
-}
-
 .sprintHeader {
   display: flex;
-  margin-bottom: 30px;
-  align-items: baseline;
+
   @media screen and (max-width: $tablet-max) {
-    padding-left: 20px;
+    align-items: flex-start;
   }
   @media screen and (min-width: $desktop) {
-    padding-left: 70px;
+    margin-bottom: 30px;
+    align-items: baseline;
   }
 }
 .btnChange {
@@ -65,7 +85,7 @@
     transform: scale(1.2);
   }
   @media screen and (min-width: $tablet) {
-    margin-right: 34px;
+    margin: 10px 34px 0 0;
   }
   @media screen and (min-width: $desktop) {
     margin-right: 230px;
@@ -81,6 +101,11 @@
   background: url(./plus.svg) no-repeat;
   box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
   border-radius: 25px;
+  @media screen and (max-width: $mobile-max) {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+  }
   @media screen and (min-width: $desktop) {
     &::after {
       content: 'Create a task';

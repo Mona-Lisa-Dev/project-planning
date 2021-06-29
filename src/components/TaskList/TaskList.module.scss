@@ -5,8 +5,14 @@
   display: flex;
   border-bottom: 1px solid rgba(24, 28, 39, 0.1);
   margin-bottom: 20px;
+  width: 100%;
+  @media screen and (max-width: $tablet-max) {
+    padding: 10px 0px 0px 20px;
+    margin: 0 0 20px -20px;
+  }
   @media screen and (min-width: $desktop) {
     padding: 10px 116px 10px 100px;
+    margin: 0 0 0 -70px;
   }
 }
 .findInput {
@@ -25,6 +31,20 @@
   padding: 2px 0 2px 5px;
   margin: 0 10px 0 0;
   outline: none;
+  @media screen and (max-width: $mobile-max) {
+    position: absolute;
+    top: 40px;
+    left: 30px;
+    width: 240px;
+    height: 40px;
+  }
+  @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
+    position: absolute;
+    top: 0;
+    right: 70px;
+    height: 20px;
+    width: 160px;
+  }
 }
 
 .buttonFind {
@@ -40,6 +60,17 @@
   &:focus {
     background: center url(./searchActive.svg) no-repeat;
     transform: scale(1.2);
+  }
+
+  @media screen and (max-width: $tablet-max) {
+    position: absolute;
+    top: 0;
+    right: 40px;
+  }
+  @media screen and (max-width: $mobile-max) {
+    position: absolute;
+    top: 45px;
+    left: 0;
   }
 }
 
@@ -66,13 +97,15 @@
   }
 }
 .taskList {
+  @media screen and (max-width: $mobile-max) {
+    display: block;
+  }
   @media screen and (min-width: $tablet) {
     display: flex;
     flex-wrap: wrap;
-    padding: 0px 40px 20px 20px;
   }
   @media screen and (min-width: $desktop) {
-    padding: 20px 86px 20px 70px;
+    padding: 20px 86px 20px 0;
   }
 }
 
@@ -80,7 +113,17 @@
   background: #ffffff;
   box-shadow: 0px 6px 26px rgba(0, 5, 97, 0.1);
   border-radius: 5px;
-  @media screen and (max-width: $tablet-max) {
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover {
+    transform: scale(1.02);
+  }
+  @media screen and (max-width: $mobile-max) {
+    width: 280px;
+    padding: 20px;
+    text-align: right;
+    margin-bottom: 20px;
+  }
+  @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
     width: 216px;
     margin-bottom: 20px;
     padding: 20px 10px 10px 20px;
@@ -109,8 +152,8 @@
   border-bottom: 1px solid rgba(24, 28, 39, 0.1);
   @media screen and (max-width: $tablet-max) {
     margin-bottom: 20px;
-    text-align: left;
-    padding: 20px 0 8px 20px;
+    text-align: start;
+    padding: 0 0 8px 0;
   }
   @media screen and (min-width: $desktop) {
     width: 170px;
@@ -131,6 +174,11 @@
     text-align: right;
     margin-bottom: 20px;
   }
+  @media screen and (max-width: $mobile-max) {
+    height: 18px;
+    font-size: 10px;
+    line-height: 1.2;
+  }
   @media screen and (min-width: $desktop) {
     width: 100px;
     margin-right: 90px;
@@ -144,6 +192,9 @@
     width: 90px;
     right: 70px;
   }
+  @media screen and (max-width: $mobile-max) {
+    right: 130px;
+  }
 }
 .totalTime::before {
   @media screen and (max-width: $tablet-max) {
@@ -153,10 +204,13 @@
     width: 90px;
     right: 70px;
   }
+  @media screen and (max-width: $mobile-max) {
+    right: 130px;
+  }
 }
 
-@media screen and (max-width: $tablet-max) {
-  .inputTimeBefore {
+.inputTimeBefore {
+  @media screen and (max-width: $tablet-max) {
     font-size: 14px;
     position: relative;
     width: 100%;
@@ -168,6 +222,13 @@
       text-align: left;
       width: 90px;
       right: 90px;
+    }
+  }
+  @media screen and (max-width: $mobile-max) {
+    &::before {
+      right: 150px;
+      font-size: 10px;
+      line-height: 1.2;
     }
   }
 }
@@ -185,6 +246,10 @@
     height: 34px;
     text-align: right;
     margin-right: 10px;
+  }
+  @media screen and (max-width: $mobile-max) {
+    height: 18px;
+    font-size: 14px;
   }
   @media screen and (min-width: $desktop) {
     width: 100px;

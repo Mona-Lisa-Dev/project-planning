@@ -36,6 +36,9 @@ const SprintPage = ({ title }) => {
   return (
     <>
       <div className={styles.sprintContent}>
+        <div className={styles.sprintDate}>
+          <p>current date</p>
+        </div>
         <div className={styles.sprintHeader}>
           <h1 className={styles.title}>{title}</h1>
           <button type="button" className={styles.btnChange}>
