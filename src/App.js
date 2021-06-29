@@ -45,6 +45,7 @@ const App = () => {
               component={RegisterPage}
               redirectTo={routes.projects}
             />
+
             <PrivateRoute
               path={routes.projects}
               restricted

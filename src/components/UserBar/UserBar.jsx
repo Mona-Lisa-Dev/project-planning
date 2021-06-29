@@ -1,3 +1,5 @@
+
+
 import { useDispatch, useSelector } from 'react-redux';
 
 // import { logout } from '../../redux/auth/auth-operations';
@@ -20,13 +22,6 @@ export default function UserBar() {
     <div className={styles.cont}>
       <p className={styles.user}>{name}</p>
       <button type="button" onClick={onLogout} className={styles.button}>
-        {/* <img
-          src={exit}
-          alt=""
-          width="18px"
-          height="18px"
-          className={styles.exit}
-        /> */}
         <svg
           className={styles.exit}
           width="18px"
