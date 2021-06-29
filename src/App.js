@@ -1,18 +1,16 @@
 import { Switch, Redirect } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
-// import { useState, useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
+import { lazy, Suspense, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Container from 'components/Container';
 import AppBar from 'components/AppBar';
 import PrivateRoute from 'components/PrivateRoute';
 import PublicRoute from 'components/PublicRoute';
+import authOperations from 'redux/auth/auth-operations';
+import { getIsAuthenticated } from 'redux/auth/auth-selectors';
 
 import routes from 'routes';
-
 import './scss/_main.scss';
-
-// import { getCurrentUser } from 'redux/auth/auth-operations';
 
 const LoginPage = lazy(
   () => import('./pages/LoginPage') /* webpackChunkName: "LoginPage" */,
@@ -21,15 +19,13 @@ const RegisterPage = lazy(() =>
   import('./pages/RegisterPage' /* webpackChunkName: "RegisterPage" */),
 );
 const ProjectsPage = lazy(() =>
-  import('./pages/ProjectsPage' /* webpackChunkName: "ProsectsPage" */),
+  import('./pages/ProjectsPage' /* webpackChunkName: "ProjectsPage" */),
 );
 
 const App = () => {
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(getCurrentUser());
-  // }, [dispatch]);  // Это на будущее
+  const isAuthorized = useSelector(getIsAuthenticated);
+  const dispatch = useDispatch();
+  useEffect(() => dispatch(authOperations.getCurrentUser()), [dispatch]);
 
   return (
     <>
@@ -55,7 +51,12 @@ const App = () => {
               component={ProjectsPage}
               redirectTo={routes.projects}
             />
-
+            <PublicRoute
+              path={routes.home}
+              restricted
+              component={isAuthorized ? ProjectsPage : RegisterPage}
+              redirectTo={routes.projects}
+            />
             <Redirect to={routes.home} />
           </Switch>
         </Suspense>
