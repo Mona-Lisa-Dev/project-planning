@@ -49,19 +49,12 @@ const App = () => {
               component={RegisterPage}
               redirectTo={routes.projects}
             />
-            <PublicRoute
+            <PrivateRoute
               path={routes.projects}
               restricted
               component={ProjectsPage}
               redirectTo={routes.projects}
             />
-            {/* Убрать потом блок над этим */}
-            {/* <PrivateRoute
-              path={routes.projects}
-              restricted
-              component={ProjectsPage}
-              redirectTo={routes.projects}
-            /> */}
 
             <Redirect to={routes.home} />
           </Switch>
