@@ -8,20 +8,23 @@ main {
   }
 
   @media screen and (min-width: $desktop) {
-    background-color: pink;
+    padding: 0 55px 0;
   }
 
   aside {
-    border-bottom: 1px solid rgba(24, 28, 39, 0.1);
-    padding: 0 20px 0 20px;
-
+    width: 100%;
     @media screen and (max-width: $mobile-max) {
+      padding: 0 20px;
       height: 37px;
+      border-bottom: 1px solid rgba(24, 28, 39, 0.1);
+    }
+
+    @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
+      padding: 0 20px 0 0;
+      width: 216px;
     }
 
     @media screen and (min-width: $tablet) {
-      padding: 0 20px 0 0;
-      width: 225px;
       border-right: 1px solid rgba(24, 28, 39, 0.1);
 
       div {
@@ -30,20 +33,22 @@ main {
     }
 
     @media screen and (min-width: $desktop) {
-      background-color: skyblue;
+      padding: 0 30px 0 0;
+      width: 200px;
     }
   }
 
   article {
-    padding: 30px 20px 30px 20px;
+    @media screen and (max-width: $mobile-max) {
+      padding: 30px 20px 30px 20px;
+    }
 
     @media screen and (min-width: $tablet) {
-      padding: 40px 0 0 20px;
+      padding: 40px 0 30px 20px;
     }
 
     @media screen and (min-width: $desktop) {
-      padding: 40px 0 0 70px;
-      background-color: lemonchiffon;
+      padding: 40px 0 40px 70px;
     }
 
     .headerWrap {
@@ -54,10 +59,6 @@ main {
         justify-content: space-between;
       }
 
-      @media screen and (min-width: $desktop) {
-        background-color: lightcoral;
-      }
-
       .contentWrap {
         @media screen and (min-width: $tablet) {
           width: 452px;
@@ -65,14 +66,12 @@ main {
 
         @media screen and (min-width: $desktop) {
           width: 400px;
-          background-color: lightpink;
         }
 
         .titleWrap {
           display: flex;
           align-items: baseline;
           margin: 0 0 20px;
-          // background-color: #519e84;
 
           h2 {
             margin-right: 20px;
@@ -123,9 +122,7 @@ main {
 
       // div
       .createSprintWrap {
-        // height: 55px;
-
-        @media screen and (min-width: $tablet) {
+        @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
           position: absolute;
           right: 35px;
         }
@@ -133,23 +130,29 @@ main {
         @media screen and (min-width: $desktop) {
           display: flex;
           align-items: center;
-          padding-right: 35px;
-          background-color: red;
+          padding-right: 34px;
+          height: 52px;
         }
 
         // Circle with plus
         .PlusButtonIcon {
-          height: 52px;
-          // margin-right: 15px;
           cursor: pointer;
+
+          @media screen and (min-width: $desktop) {
+            margin-right: 16px;
+          }
+        }
+
+        span {
+          @media screen and (min-width: $desktop) {
+            margin-bottom: 6px;
+          }
         }
       }
     }
 
     // ul
     .SprintList {
-      // height: 100%;
-
       @media screen and (min-width: $tablet) {
         display: flex;
         flex-wrap: wrap;
@@ -158,7 +161,6 @@ main {
 
       @media screen and (min-width: $desktop) {
         width: 870px;
-        background-color: #8db6a8;
       }
 
       // li
@@ -172,7 +174,7 @@ main {
           margin-bottom: 10px;
         }
 
-        @media screen and (min-width: $tablet) {
+        @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
           width: 216px;
           height: 255px;
 

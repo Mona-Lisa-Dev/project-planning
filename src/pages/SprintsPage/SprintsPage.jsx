@@ -10,17 +10,11 @@ import s from './SprintsPage.module.scss';
 const SprintsPage = () => {
   const [showModal, setShowModal] = useState(false);
 
-  // useMediaQuery
-  // const handleMaxWidth = width => {
-  //   return `(max-width:${width}px) `;
-  // };
   const handleMinWidth = width => {
     return `(min-width:${width}px) `;
   };
-  // const mobilePlusMax = useMediaQuery(handleMaxWidth(refs.mobilePlusMax));
-  // const mobilePlus = useMediaQuery(handleMinWidth(refs.mobilePlus));
+
   const tablet = useMediaQuery(handleMinWidth(refs.tablet));
-  // const desktopMax = useMediaQuery(handleMaxWidth(refs.desktopMax));
   const desktop = useMediaQuery(handleMinWidth(refs.desktop));
 
   const toggleModal = () => {
@@ -30,9 +24,7 @@ const SprintsPage = () => {
   return (
     <>
       <main>
-        <aside>
-          <div>SideBar component here</div>
-        </aside>
+        <aside></aside>
 
         <article>
           <div className={s.headerWrap}>
@@ -58,7 +50,7 @@ const SprintsPage = () => {
                     onClick={toggleModal}
                   />
                 )}
-                {desktop && 'Create a sprint'}
+                {desktop && <span>Create a sprint</span>}
               </div>
             )}
           </div>
