@@ -18,15 +18,14 @@ const TaskList = ({ tasks }) => {
 
       <ul className={styles.taskList}>
         {tasks.map(({ id, taskName, planTime, customTime = 0, totalTime }) => (
-          <li key={id} className={styles.taskItem}>
-            <TaskItem
-              id={id}
-              taskName={taskName}
-              planTime={planTime}
-              customTime={customTime}
-              totalTime={totalTime}
-            />
-          </li>
+          <TaskItem
+            key={id}
+            id={id}
+            taskName={taskName}
+            planTime={planTime}
+            customTime={customTime}
+            totalTime={totalTime}
+          />
         ))}
       </ul>
     </>
