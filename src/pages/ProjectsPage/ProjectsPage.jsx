@@ -1,13 +1,17 @@
-// import { useState } from 'react';
+import { useState } from 'react';
+
+import Modal from 'components/Modal';
+import CreateProject from 'components/CreateProject';
 
 import styles from './ProjectsPage.module.scss';
 
 const ProjectsPage = () => {
+  const [showModal, setShowModal] = useState(false);
   //   const [projects, setProjects] = useState(''); // Заготовка на будушее
 
-  const createProject = () => {
-    console.log('Project Created!');
-  };
+  const openModal = () => setShowModal(true);
+
+  const handleCloseModal = () => setShowModal(false);
 
   return (
     <>
@@ -20,10 +24,16 @@ const ProjectsPage = () => {
             type="button"
             name="Create"
             id="CreateButton"
-            onClick={createProject}
+            onClick={openModal}
           ></button>
           Create a project
         </label>
+
+        {showModal && (
+          <Modal onCloseModal={handleCloseModal}>
+            <CreateProject onClickCancel={handleCloseModal} />
+          </Modal>
+        )}
       </div>
       <ul className={styles.ProjectsList}>
         <li className={styles.ProjectsListItem}>1</li>
