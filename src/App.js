@@ -1,27 +1,28 @@
 import { Switch, Redirect } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
-
-// import { useState } from 'react';
-// import Modal from 'components/Modal';
-import Container from 'components/Container';
-// import LoginPage from 'pages/LoginPage';
-// import RegisterPage from 'pages/RegisterPage';
-import AppBar from 'components/AppBar';
-import './scss/_main.scss';
-
-import routes from 'routes';
-
+// import { useState, useEffect } from 'react';
 // import { useDispatch } from 'react-redux';
-// import { useEffect } from 'react';
+
+import Container from 'components/Container';
+import AppBar from 'components/AppBar';
 // import PrivateRoute from 'components/PrivateRoute';
 import PublicRoute from 'components/PublicRoute';
 
-// import routes from 'routes';
+import routes from 'routes';
+
+import './scss/_main.scss';
+
 // import { getCurrentUser } from 'redux/auth/auth-operations';
 
-// const LoginPage = lazy(() => import('./pages/LoginPage'));
-const RegisterPage = lazy(() => import('./pages/RegisterPage'));
-// const ProjectsPage = lazy(() => import('./pages/ProsectsPage'));
+const LoginPage = lazy(
+  () => import('./pages/LoginPage') /* webpackChunkName: "LoginPage" */,
+);
+const RegisterPage = lazy(() =>
+  import('./pages/RegisterPage' /* webpackChunkName: "RegisterPage" */),
+);
+// const ProjectsPage = lazy(() =>
+//   import('./pages/ProsectsPage' /* webpackChunkName: "ProsectsPage" */),
+// );
 
 const App = () => {
   // const dispatch = useDispatch();
@@ -36,12 +37,12 @@ const App = () => {
       <Container>
         <Suspense fallback={<p>This is spinner, trust me</p>}>
           <Switch>
-            {/* <PublicRoute
+            <PublicRoute
               path={routes.login}
               restricted
               component={LoginPage}
               redirectTo={routes.projects}
-            /> */}
+            />
             <PublicRoute
               path={routes.signup}
               restricted
@@ -56,19 +57,6 @@ const App = () => {
             /> */}
             <Redirect to={routes.home} />
           </Switch>
-
-          {/* <button type="button" onClick={toggleModal}>
-          Open modal
-        </button>
-        {showModal && (
-          <Modal onCloseModal={toggleModal}>
-            {window.innerWidth < 768 ? (
-              <img src={mobilePlug} alt="mobile plug" />
-            ) : (
-              <img src={deskPlug} alt="mobile plug" />
-            )}
-          </Modal>
-        )} */}
         </Suspense>
       </Container>
     </>

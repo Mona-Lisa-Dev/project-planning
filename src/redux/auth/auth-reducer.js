@@ -17,20 +17,18 @@ import {
 const initialUserState = { name: null, email: null };
 
 const user = createReducer(initialUserState, {
-  [signupSuccess]: (_, { payload }) => payload.user,
-  [loginSuccess]: (_, { payload }) => payload.user,
+  [signupSuccess]: (_, { payload }) => payload,
+  [loginSuccess]: (_, { payload }) => payload,
   [logoutSuccess]: () => initialUserState,
   [logoutError]: () => initialUserState,
 });
 
 const token = createReducer(null, {
-  [signupSuccess]: (_, { payload }) => payload.token,
   [loginSuccess]: (_, { payload }) => payload.token,
   [logoutSuccess]: () => null,
 });
 
 const isAuthorized = createReducer(false, {
-  [signupSuccess]: () => true,
   [loginSuccess]: () => true,
 
   [signupError]: () => false,

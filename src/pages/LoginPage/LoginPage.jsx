@@ -1,14 +1,14 @@
 import { useState } from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styles from './LoginPage.module.scss';
 
-// import authOperations from 'redux/auth/auth-operations';
+import authOperations from 'redux/auth/auth-operations';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleChange = event => {
     const { name, value } = event.currentTarget;
@@ -30,8 +30,8 @@ const LoginPage = () => {
   const handleFormSubmit = e => {
     e.preventDefault();
 
-    // const user = { email, password };
-    // dispatch(authOperations.logIn(user));
+    const user = { email, password };
+    dispatch(authOperations.login(user));
 
     reset();
   };
