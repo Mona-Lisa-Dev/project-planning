@@ -1,4 +1,3 @@
-import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // import { logout } from '../../redux/auth/auth-operations';
@@ -14,9 +13,8 @@ import styles from './UserBar.module.scss';
 export default function UserBar() {
   const dispatch = useDispatch();
   const name = useSelector(getUserName);
-  const onLogout = useCallback(() => {
-    dispatch(authOperations.logout);
-  }, [dispatch]);
+
+  const onLogout = () => dispatch(authOperations.logout());
 
   return (
     <div className={styles.cont}>

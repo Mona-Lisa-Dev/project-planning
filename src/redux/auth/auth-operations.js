@@ -9,6 +9,9 @@ import {
   logoutRequest,
   logoutSuccess,
   logoutError,
+  getCurrentUserRequest,
+  getCurrentUserSuccess,
+  getCurrentUserError,
 } from './auth-actions';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
@@ -69,9 +72,32 @@ const logout = () => async dispatch => {
   }
 };
 
+const getCurrentUser = () => async (dispatch, getState) => {
+  const {
+    auth: { token: persistedToken },
+  } = getState();
+
+  if (!persistedToken) return;
+
+  token.set(persistedToken);
+  dispatch(getCurrentUserRequest());
+
+  try {
+    const {
+      data: { data },
+    } = await axios.get('/users/current');
+    dispatch(getCurrentUserSuccess(data));
+
+    return data;
+  } catch (error) {
+    dispatch(getCurrentUserError(error.message));
+  }
+};
+
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
   signup,
   login,
   logout,
+  getCurrentUser,
 };
