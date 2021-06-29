@@ -1,9 +1,15 @@
 import { useState } from 'react';
 
+
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
+
+import { useDispatch } from 'react-redux';
+
 import styles from './RegisterPage.module.scss';
+
+import authOperations from 'redux/auth/auth-operations';
 
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
@@ -23,28 +29,34 @@ const RegisterPage = () => {
       .required('Required'),
   });
 
-  // const handleChange = event => {
-  //   const { name, value } = event.currentTarget;
 
-  //   switch (name) {
-  //     case 'email':
-  //       setEmail(value);
-  //       break;
+  const handleChange = event => {
+    const { name, value } = event.currentTarget;
 
-  //     case 'password':
-  //       setPassword(value);
-  //       break;
+    switch (name) {
+      case 'email':
+        setEmail(value);
+        break;
 
-  //     default:
-  //       return;
-  //   }
-  // };
+      case 'password':
+        setPassword(value);
+        break;
+
+      default:
+        return;
+    }
+  };
+
 
   const handleFormSubmit = event => {
     event.preventDefault();
 
     // const user = { email, password };
     // dispatch(authOperations.signUp(user));
+
+    const user = { email, password };
+    dispatch(authOperations.signup(user));
+
 
     reset();
   };

@@ -1,0 +1,57 @@
+@import '../../scss/breakpoints';
+
+.listWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 36px;
+}
+
+@media screen and (min-width: $mobile) and (max-width: $mobile-max) {
+  .listItem {
+    width: 135px;
+
+    &:not(:nth-child(2n)) {
+      margin-right: 10px;
+    }
+
+    &:not(:nth-last-child(-n + 2)) {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+@media screen and (min-width: $tablet) and (max-width: $tablet-max) {
+  .listWrapper {
+    padding-top: 30px;
+  }
+
+  .listItem {
+    width: 216px;
+
+    &:not(:nth-child(3n)) {
+      margin-right: 20px;
+    }
+
+    &:not(:nth-last-child(-n + 3)) {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+@media screen and (min-width: $desktop) {
+  .listWrapper {
+    padding-top: 30px;
+  }
+
+  .listItem {
+    width: 270px;
+
+    &:not(:nth-child(4n)) {
+      margin-right: 30px;
+    }
+
+    &:not(:nth-last-child(-n + 4)) {
+      margin-bottom: 30px;
+    }
+  }
+}

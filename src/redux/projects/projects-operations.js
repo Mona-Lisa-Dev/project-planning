@@ -10,12 +10,15 @@ import {
   deleteProjectRequest,
   deleteProjectSuccess,
   deleteProjectError,
-  updateProjectNameRequest,
-  updateProjectNameSuccess,
-  updateProjectNameError,
+  updateProjectRequest,
+  updateProjectSuccess,
+  updateProjectError,
   addParticipantRequest,
   addParticipantSuccess,
   addParticipantError,
+  deleteParticipantRequest,
+  deleteParticipantSuccess,
+  deleteParticipantError,
 } from './projects-actions';
 
 const getAllProjects = () => async dispatch => {
@@ -25,17 +28,15 @@ const getAllProjects = () => async dispatch => {
     const {
       data: { data },
     } = await axios.get('/projects');
-    dispatch(getAllProjectsSuccess(data));
+    dispatch(getAllProjectsSuccess(data.projects));
 
-    return data;
+    return data.projects;
   } catch (error) {
     dispatch(getAllProjectsError(error.message));
   }
 };
 
-const createProject = (name, description) => async dispatch => {
-  const project = { name, description };
-
+const createProject = project => async dispatch => {
   dispatch(createProjectRequest());
 
   try {
@@ -65,14 +66,49 @@ const deleteProject = projectId => async dispatch => {
   }
 };
 
-const updateProjectName = () => async dispatch => {
+const updateProject = (projectId, updatedProject) => async dispatch => {
+  dispatch(updateProjectRequest());
+
   try {
-  } catch (error) {}
+    const {
+      data: { data },
+    } = await axios.patch(`/projects/${projectId}/name`, updatedProject);
+    dispatch(updateProjectSuccess(data.project));
+
+    return data.project;
+  } catch (error) {
+    dispatch(updateProjectError(error.message));
+  }
 };
 
-const addParticipant = () => async dispatch => {
+const addParticipant = (projectId, updatedProject) => async dispatch => {
+  dispatch(addParticipantRequest());
+
   try {
-  } catch (error) {}
+    const {
+      data: { data },
+    } = await axios.patch(`/projects/${projectId}/participant`, updatedProject);
+    dispatch(addParticipantSuccess(data.project));
+
+    return data.project;
+  } catch (error) {
+    dispatch(addParticipantError(error.message));
+  }
+};
+
+const deleteParticipant = (projectId, email) => async dispatch => {
+  dispatch(deleteParticipantRequest());
+
+  try {
+    const {
+      data: { data },
+    } = await axios.delete(`/projects/${projectId}/participant`, email);
+    dispatch(deleteParticipantSuccess(data.project));
+
+    return data.project;
+  } catch (error) {
+    dispatch(deleteParticipantError(error.message));
+  }
 };
 
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
@@ -80,6 +116,7 @@ export default {
   getAllProjects,
   createProject,
   deleteProject,
-  updateProjectName,
+  updateProject,
   addParticipant,
+  deleteParticipant,
 };

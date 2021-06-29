@@ -1,42 +1,34 @@
 import { Switch, Redirect } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-// import { useState } from 'react';
-// import Modal from 'components/Modal';
 import Container from 'components/Container';
-// import LoginPage from 'pages/LoginPage';
-// import RegisterPage from 'pages/RegisterPage';
 import AppBar from 'components/AppBar';
-// import mobilePlug from 'components/Modal/mobile_plug.png';
-// import deskPlug from 'components/Modal/desk_plug.png';
-import './scss/_main.scss';
+import PrivateRoute from 'components/PrivateRoute';
+import PublicRoute from 'components/PublicRoute';
+import authOperations from 'redux/auth/auth-operations';
+import { getIsAuthenticated } from 'redux/auth/auth-selectors';
 
 import routes from 'routes';
+import './scss/_main.scss';
 
-// import { useDispatch } from 'react-redux';
-// import { useEffect } from 'react';
-// import PrivateRoute from 'components/PrivateRoute';
-import PublicRoute from 'components/PublicRoute';
-
-// import routes from 'routes';
-// import { getCurrentUser } from 'redux/auth/auth-operations';
-
-// const LoginPage = lazy(() => import('./pages/LoginPage'));
-const RegisterPage = lazy(() => import('./pages/RegisterPage'));
-// const ProjectsPage = lazy(() => import('./pages/ProsectsPage'));
+const LoginPage = lazy(
+  () => import('./pages/LoginPage') /* webpackChunkName: "LoginPage" */,
+);
+const RegisterPage = lazy(() =>
+  import('./pages/RegisterPage' /* webpackChunkName: "RegisterPage" */),
+);
+const ProjectsPage = lazy(() =>
+  import('./pages/ProjectsPage' /* webpackChunkName: "ProjectsPage" */),
+);
+const SprintsPage = lazy(() =>
+  import('./pages/SprintsPage' /* webpackChunkName: "SprintsPage" */),
+);
 
 const App = () => {
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(getCurrentUser());
-  // }, [dispatch]);  // Это на будущее
-
-  // const [showModal, setShowModal] = useState(false);
-
-  // const toggleModal = () => {
-  //   setShowModal(!showModal);
-  // };
+  const isAuthorized = useSelector(getIsAuthenticated);
+  const dispatch = useDispatch();
+  useEffect(() => dispatch(authOperations.getCurrentUser()), [dispatch]);
 
   return (
     <>
@@ -44,39 +36,36 @@ const App = () => {
       <Container>
         <Suspense fallback={<p>This is spinner, trust me</p>}>
           <Switch>
-            {/* <PublicRoute
+            <PublicRoute
               path={routes.login}
               restricted
               component={LoginPage}
               redirectTo={routes.projects}
-            /> */}
+            />
             <PublicRoute
               path={routes.signup}
               restricted
               component={RegisterPage}
               redirectTo={routes.projects}
             />
-            {/* <PrivateRoute
+
+            <PublicRoute path={routes.sprints} component={SprintsPage} />
+
+            <PrivateRoute
               path={routes.projects}
               restricted
               component={ProjectsPage}
               redirectTo={routes.projects}
-            /> */}
+            />
+            <PublicRoute
+              path={routes.home}
+              restricted
+              component={isAuthorized ? ProjectsPage : RegisterPage}
+              redirectTo={routes.projects}
+            />
+
             <Redirect to={routes.home} />
           </Switch>
-
-          {/* <button type="button" onClick={toggleModal}>
-          Open modal
-        </button>
-        {showModal && (
-          <Modal onCloseModal={toggleModal}>
-            {window.innerWidth < 768 ? (
-              <img src={mobilePlug} alt="mobile plug" />
-            ) : (
-              <img src={deskPlug} alt="mobile plug" />
-            )}
-          </Modal>
-        )} */}
         </Suspense>
       </Container>
     </>
