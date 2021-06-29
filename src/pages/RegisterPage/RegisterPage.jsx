@@ -1,35 +1,50 @@
 import { useState } from 'react';
 
+import { Formik } from 'formik';
+import * as yup from 'yup';
+
 import styles from './RegisterPage.module.scss';
 
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleChange = event => {
-    const { name, value } = event.currentTarget;
+  const validationSchema = yup.object().shape({
+    email: yup.string().email('Type correct email').required('Required'),
+    password: yup
+      .string()
+      .typeError('Must be a string')
+      .min(6, 'Wrong password')
+      // .matches('/^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{8,}$/', 'Wrong password')
+      .required('Required'),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref('password')], 'Passwords do not match')
+      .required('Required'),
+  });
 
-    switch (name) {
-      case 'email':
-        setEmail(value);
-        break;
+  // const handleChange = event => {
+  //   const { name, value } = event.currentTarget;
 
-      case 'password':
-        setPassword(value);
-        break;
+  //   switch (name) {
+  //     case 'email':
+  //       setEmail(value);
+  //       break;
 
-      default:
-        return;
-    }
-  };
+  //     case 'password':
+  //       setPassword(value);
+  //       break;
+
+  //     default:
+  //       return;
+  //   }
+  // };
 
   const handleFormSubmit = event => {
     event.preventDefault();
 
     // const user = { email, password };
     // dispatch(authOperations.signUp(user));
-
-    // setNeedVerify(true);
 
     reset();
   };
@@ -40,72 +55,112 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className={styles.backgroundMain}>
-      <div className={styles.registration}>
-        <div className={`${styles.general} ${styles.ellipse1}`}></div>
-        <div className={`${styles.general} ${styles.ellipse2}`}></div>
-        <div className={`${styles.general} ${styles.ellipse3}`}></div>
-        <div className={`${styles.general} ${styles.ellipse4}`}></div>
-        <div className={`${styles.general} ${styles.ellipse5}`}></div>
-        <div className={`${styles.general} ${styles.ellipse6}`}></div>
-        <div className={`${styles.general} ${styles.ellipse7}`}></div>
-        <div className={`${styles.general} ${styles.ellipse8}`}></div>
-        <div className={`${styles.general} ${styles.ellipse9}`}></div>
-        <div className={`${styles.general} ${styles.ellipse10}`}></div>
-      </div>
-      <form
-        onSubmit={handleFormSubmit}
-        className={styles.form}
-        autoComplete="off"
+    <div>
+      <Formik
+        initialValues={{
+          email: '',
+          password: '',
+        }}
+        validateOnBlur
+        onSubmit={(values, { reset }) => {
+          handleFormSubmit({ email: values.email, password: values.password });
+          reset();
+        }}
+        validationSchema={validationSchema}
       >
-        <h1 className={styles.title}>Registration</h1>
-        <label className={styles.labelForm}>
-          <input
-            className={styles.inputForm}
-            placeholder=" "
-            type={'email'}
-            name={'email'}
-            onChange={handleChange}
-            value={email}
-          />
-          <span className={styles.nameInput}>E-mail</span>
-        </label>
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          isValid,
+          handleSubmit,
+          dirty,
+        }) => (
+          <div className={styles.backgroundMain}>
+            <div className={styles.registration}>
+              <div className={`${styles.general} ${styles.ellipse1}`}></div>
+              <div className={`${styles.general} ${styles.ellipse2}`}></div>
+              <div className={`${styles.general} ${styles.ellipse3}`}></div>
+              <div className={`${styles.general} ${styles.ellipse4}`}></div>
+              <div className={`${styles.general} ${styles.ellipse5}`}></div>
+              <div className={`${styles.general} ${styles.ellipse6}`}></div>
+              <div className={`${styles.general} ${styles.ellipse7}`}></div>
+              <div className={`${styles.general} ${styles.ellipse8}`}></div>
+              <div className={`${styles.general} ${styles.ellipse9}`}></div>
+              <div className={`${styles.general} ${styles.ellipse10}`}></div>
+            </div>
+            <form
+              onSubmit={handleFormSubmit}
+              className={styles.form}
+              autoComplete="off"
+            >
+              <h1 className={styles.title}>Enter</h1>
+              <label className={styles.labelForm}>
+                <input
+                  onBlur={handleBlur}
+                  className={styles.inputForm}
+                  placeholder=" "
+                  type={'email'}
+                  name={'email'}
+                  onChange={handleChange}
+                  value={values.email}
+                />
+                <span className={styles.nameInput}>E-mail</span>
+                {touched.email && errors.email && (
+                  <p className={styles.error}>{errors.email}</p>
+                )}
+              </label>
 
-        <label className={styles.labelForm}>
-          <input
-            className={styles.inputForm}
-            placeholder=" "
-            type={'password'}
-            name={'password'}
-            onChange={handleChange}
-            value={password}
-          />
-          <span className={styles.nameInput}>Password</span>
-        </label>
-
-        <label className={styles.labelForm}>
-          <input
-            className={styles.inputForm}
-            placeholder=" "
-            type={'password'}
-            name={'confirmPassword'}
-            onChange={handleChange}
-            pattern="^[a-z0-9_-]{7,18}$"
-            // value={confirmPassword}
-          />
-          <span className={styles.nameInput}>Repeat password</span>
-        </label>
-
-        <button className={styles.btnReg} type={'submit'}>
-          Register
-        </button>
-        <div className={styles.login}>
-          <p className={styles.question}> Do you have an account?</p>
-          <a className={styles.auth} href="users/login">
-            Log in
-          </a>
-        </div>
-      </form>
+              <label className={styles.labelForm}>
+                <input
+                  onBlur={handleBlur}
+                  className={styles.inputForm}
+                  placeholder=" "
+                  type={'password'}
+                  name={'password'}
+                  onChange={handleChange}
+                  value={values.password}
+                />
+                <span className={styles.nameInput}>Password</span>
+                {touched.password && errors.password && (
+                  <p className={styles.error}>{errors.password}</p>
+                )}
+              </label>
+              <label className={styles.labelForm}>
+                <input
+                  onBlur={handleBlur}
+                  className={styles.inputForm}
+                  placeholder=" "
+                  type={'password'}
+                  name={'confirmPassword'}
+                  onChange={handleChange}
+                  value={values.confirmPassword}
+                />
+                <span className={styles.nameInput}>Password</span>
+                {touched.confirmPassword && errors.confirmPassword && (
+                  <p className={styles.error}>{errors.confirmPassword}</p>
+                )}
+              </label>
+              <button
+                disabled={!isValid || !dirty}
+                onClick={handleSubmit}
+                className={styles.btnLog}
+                type={'submit'}
+              >
+                Enter
+              </button>
+              <div className={styles.login}>
+                <p className={styles.question}> No account? </p>
+                <a className={styles.auth} href="/users/signup">
+                  Register
+                </a>
+              </div>
+            </form>
+          </div>
+        )}
+      </Formik>
     </div>
   );
 };
