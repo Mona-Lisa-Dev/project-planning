@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useMediaQuery } from '@material-ui/core';
+import { refs } from './refs';
 import { ReactComponent as EditIcon } from './svg/edit_icon.svg';
 import { ReactComponent as AddGroupIcon } from './svg/add_group_icon.svg';
 import { ReactComponent as PlusButtonIcon } from './svg/plus_button_icon.svg';
@@ -8,6 +10,19 @@ import s from './SprintsPage.module.scss';
 const SprintsPage = () => {
   const [showModal, setShowModal] = useState(false);
 
+  // useMediaQuery
+  // const handleMaxWidth = width => {
+  //   return `(max-width:${width}px) `;
+  // };
+  const handleMinWidth = width => {
+    return `(min-width:${width}px) `;
+  };
+  // const mobilePlusMax = useMediaQuery(handleMaxWidth(refs.mobilePlusMax));
+  // const mobilePlus = useMediaQuery(handleMinWidth(refs.mobilePlus));
+  const tablet = useMediaQuery(handleMinWidth(refs.tablet));
+  // const desktopMax = useMediaQuery(handleMaxWidth(refs.desktopMax));
+  const desktop = useMediaQuery(handleMinWidth(refs.desktop));
+
   const toggleModal = () => {
     setShowModal(!showModal);
   };
@@ -16,9 +31,7 @@ const SprintsPage = () => {
     <>
       <main>
         <aside>
-          <button type="button" onClick={toggleModal}>
-            Open modal
-          </button>
+          <div>SideBar component here</div>
         </aside>
 
         <article>
@@ -34,18 +47,25 @@ const SprintsPage = () => {
               </p>
               <div className={s.addWrap}>
                 <AddGroupIcon className={s.AddGroupIcon} />
-                <a href="/">Add people</a>
+                <span onClick={toggleModal}>Add people</span>
               </div>
             </div>
-            <div className={s.createSprint}>
-              <PlusButtonIcon
-                className={s.PlusButtonIcon}
-                onClick={toggleModal}
-              />
-              Create a sprint
-            </div>
+            {tablet && (
+              <div className={s.createSprintWrap}>
+                {tablet && (
+                  <PlusButtonIcon
+                    className={s.PlusButtonIcon}
+                    onClick={toggleModal}
+                  />
+                )}
+                {desktop && 'Create a sprint'}
+              </div>
+            )}
           </div>
           <ul className={s.SprintList}>
+            <li className={s.SprintItem}></li>
+            <li className={s.SprintItem}></li>
+            <li className={s.SprintItem}></li>
             <li className={s.SprintItem}></li>
             <li className={s.SprintItem}></li>
             <li className={s.SprintItem}></li>
