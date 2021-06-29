@@ -4,6 +4,7 @@ import AppBar from 'components/AppBar';
 import './scss/_main.scss';
 // import PrivateRoute from 'components/PrivateRoute';
 // import PublicRoute from 'components/PublicRoute';
+import Diagram from 'components/Diagram';
 
 // import routes from 'routes';
 
@@ -12,6 +13,7 @@ const App = () => {
     <Container>
       <AppBar />
       <LoginPage />
+      <Diagram />
     </Container>
   );
 };
