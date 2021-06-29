@@ -18,10 +18,6 @@ export default function UserBar() {
     dispatch(authOperations.logout);
   }, [dispatch]);
 
-  // const onLogout = () => {
-  //   console.log('Dont click on me!');
-  // };
-
   return (
     <div className={styles.cont}>
       <p className={styles.user}>{name}</p>
