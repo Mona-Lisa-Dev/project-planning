@@ -1,0 +1,158 @@
+@import '../../scss/vars';
+@import '../../scss/breakpoints';
+
+.ProjectsHeaderBar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ProjectsUtilDiv {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  font-family: $main-font;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.21;
+}
+
+.ProjectsList {
+  display: flex;
+  // flex-wrap: wrap;
+}
+
+// .ProjectsListItem {
+//   width: 270px;
+//   height: 270px;
+//   // &:not(:nth-child(4n)) {
+//   //   margin-right: 30px;
+//   // }
+// }
+
+.ProjectsCreateButton {
+  width: 44px;
+  height: 44px;
+
+  margin-right: 20px;
+
+  background: $main-orange;
+  border-radius: 25px;
+  background-image: url(./images/PlusButton.svg);
+  border: none;
+  cursor: pointer;
+  transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  &:hover {
+    outline: none;
+    box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+    transform: scale(1.15);
+  }
+  &:focus {
+    outline: none;
+    box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+    transform: scale(1.15);
+  }
+}
+
+.ProjectsTitle {
+  font-family: $main-font;
+  font-style: normal;
+  font-weight: 500;
+}
+
+// ======================Modile===================
+@media screen and (max-width: $mobile-max) {
+  .ProjectsHeaderBar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0px 36px 0px;
+    position: relative;
+  }
+
+  .ProjectsUtilDiv {
+    font-size: 0px;
+  }
+
+  .ProjectsCreateButton {
+    position: absolute;
+    // bottom: 20px;
+    top: 524px;
+    right: 0px;
+    margin: 0px;
+  }
+
+  // .ProjectsList {
+  //   display: flex;
+  // }
+
+  // .ProjectsListItem {
+  //   width: calc((100%-10px) / 2);
+  //   margin-right: 10px;
+
+  //   &:nth-child(2n) {
+  //     margin-right: 0px;
+  //   }
+  // }
+
+  .ProjectsTitle {
+    font-family: $main-font;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.21;
+  }
+}
+
+//============Tablet==========================================
+
+@media screen and (min-width: $tablet) {
+  .ProjectsHeaderBar {
+    padding: 40px 0px 30px 0px;
+  }
+
+  // .ProjectsList {
+  //   display: flex;
+  // }
+
+  // .ProjectsListItem {
+  //   width: calc((100%-60px) / 4);
+  //   &:not(:nth-child(4n)) {
+  //     margin-right: 30px;
+  //   }
+  // }
+
+  .ProjectsTitle {
+    font-size: 36px;
+    line-height: 1.21;
+  }
+}
+
+//============================Desktop===============================
+
+@media screen and (min-width: $desktop) {
+  .ProjectsHeaderBar {
+    padding: 40px 0px 30px 0px;
+  }
+
+  // .ProjectsList {
+  //   display: flex;
+  // }
+
+  // .ProjectsListItem {
+  //   width: calc((100%-60px) / 4);
+  //   &:not(:nth-child(4n)) {
+  //     margin-right: 30px;
+  //   }
+  // }
+
+  .ProjectsCreateButton {
+    margin-right: 20px;
+  }
+
+  .ProjectsTitle {
+    font-size: 36px;
+    line-height: 1.21;
+  }
+}

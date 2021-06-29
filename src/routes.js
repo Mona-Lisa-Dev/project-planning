@@ -1,7 +1,7 @@
 const routes = {
   home: '/',
-  projects: '/projects',
   sprints: '/projects/:projectId',
+  projects: '/projects',
   signup: '/register',
   login: '/login',
 };
