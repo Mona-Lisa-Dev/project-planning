@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styles from './TaskList.module.scss';
-import ButtonDelete from '../ButtonDelete';
+import TaskItem from '../TaskItem';
 
 const TaskList = ({ tasks }) => {
   return (
@@ -15,21 +15,17 @@ const TaskList = ({ tasks }) => {
         <input className={styles.findInputActive} type="text"></input>
         <button type="button" className={styles.buttonFind}></button>
       </div>
+
       <ul className={styles.taskList}>
         {tasks.map(({ id, taskName, planTime, customTime = 0, totalTime }) => (
           <li key={id} className={styles.taskItem}>
-            <p className={styles.taskName}> {taskName} </p>
-            <p className={styles.planTime}> {planTime} </p>
-            <div className={styles.inputTimeBefore}>
-              <input
-                type="text"
-                value={customTime}
-                className={styles.inputTime}
-              />
-            </div>
-
-            <p className={styles.totalTime}> {totalTime} </p>
-            <ButtonDelete id={id} />
+            <TaskItem
+              id={id}
+              taskName={taskName}
+              planTime={planTime}
+              customTime={customTime}
+              totalTime={totalTime}
+            />
           </li>
         ))}
       </ul>
