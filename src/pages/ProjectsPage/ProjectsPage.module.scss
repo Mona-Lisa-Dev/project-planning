@@ -1,0 +1,48 @@
+@import '../../scss/vars';
+@import '../../scss/breakpoints';
+
+.ProjectsHeaderBar {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 0px 30px 0px;
+}
+
+.ProjectsUtilDiv {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  font-family: $main-font;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.21;
+}
+
+.ProjectsList {
+  display: flex;
+}
+
+.ProjectsListItem {
+  width: calc((100%-60px) / 4);
+  &:not(:nth-child(4n)) {
+    margin-right: 30px;
+  }
+}
+
+.ProjectsCreateButton {
+  width: 44px;
+  height: 44px;
+  margin-right: 20px;
+  background: $main-orange;
+  border-radius: 25px;
+  background-image: url(./images/PlusButton.svg);
+  border: none;
+  cursor: pointer;
+}
+
+.ProjectsTitle {
+  font-family: $main-font;
+  font-style: normal;
+  font-weight: 500;
+}

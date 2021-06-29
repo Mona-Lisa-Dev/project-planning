@@ -5,7 +5,7 @@ import { lazy, Suspense } from 'react';
 
 import Container from 'components/Container';
 import AppBar from 'components/AppBar';
-// import PrivateRoute from 'components/PrivateRoute';
+import PrivateRoute from 'components/PrivateRoute';
 import PublicRoute from 'components/PublicRoute';
 
 import routes from 'routes';
@@ -20,9 +20,9 @@ const LoginPage = lazy(
 const RegisterPage = lazy(() =>
   import('./pages/RegisterPage' /* webpackChunkName: "RegisterPage" */),
 );
-// const ProjectsPage = lazy(() =>
-//   import('./pages/ProsectsPage' /* webpackChunkName: "ProsectsPage" */),
-// );
+const ProjectsPage = lazy(() =>
+  import('./pages/ProjectsPage' /* webpackChunkName: "ProsectsPage" */),
+);
 
 const App = () => {
   // const dispatch = useDispatch();
@@ -49,12 +49,20 @@ const App = () => {
               component={RegisterPage}
               redirectTo={routes.projects}
             />
+            <PublicRoute
+              path={routes.projects}
+              restricted
+              component={ProjectsPage}
+              redirectTo={routes.projects}
+            />
+            {/* Убрать потом блок над этим */}
             {/* <PrivateRoute
               path={routes.projects}
               restricted
               component={ProjectsPage}
               redirectTo={routes.projects}
             /> */}
+
             <Redirect to={routes.home} />
           </Switch>
         </Suspense>
