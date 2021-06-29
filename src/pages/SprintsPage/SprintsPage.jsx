@@ -10,11 +10,16 @@ import s from './SprintsPage.module.scss';
 const SprintsPage = () => {
   const [showModal, setShowModal] = useState(false);
 
+  const handleMaxWidth = width => {
+    return `(max-width:${width}px) `;
+  };
+
   const handleMinWidth = width => {
     return `(min-width:${width}px) `;
   };
 
   const tablet = useMediaQuery(handleMinWidth(refs.tablet));
+  const tabletMax = useMediaQuery(handleMaxWidth(refs.tabletMax));
   const desktop = useMediaQuery(handleMinWidth(refs.desktop));
 
   const toggleModal = () => {
@@ -42,6 +47,12 @@ const SprintsPage = () => {
                 <span onClick={toggleModal}>Add people</span>
               </div>
             </div>
+            {tabletMax && (
+              <PlusButtonIcon
+                className={s.PlusButtonIconFixed}
+                onClick={toggleModal}
+              />
+            )}
             {tablet && (
               <div className={s.createSprintWrap}>
                 {tablet && (
@@ -53,6 +64,18 @@ const SprintsPage = () => {
                 {desktop && <span>Create a sprint</span>}
               </div>
             )}
+
+            {/* {tablet && (
+              <div className={s.createSprintWrap}>
+                {tablet && (
+                  <PlusButtonIcon
+                    className={s.PlusButtonIcon}
+                    onClick={toggleModal}
+                  />
+                )}
+                {desktop && <span>Create a sprint</span>}
+              </div>
+            )} */}
           </div>
           <ul className={s.SprintList}>
             <li className={s.SprintItem}></li>

@@ -36,8 +36,8 @@ const App = () => {
 
   return (
     <>
+      <AppBar />
       <Container>
-        <AppBar />
         <Suspense fallback={<p>This is spinner, trust me</p>}>
           <Switch>
             <PublicRoute

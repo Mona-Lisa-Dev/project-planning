@@ -2,9 +2,16 @@
 @import '../../scss/vars';
 
 main {
+  margin-left: auto;
+  margin-right: auto;
+
   @media screen and (min-width: $tablet) {
-    padding: 0 40px 0;
     display: flex;
+    padding: 0 40px 0;
+
+    @media screen and (max-width: $tablet-max) {
+      width: $tablet;
+    }
   }
 
   @media screen and (min-width: $desktop) {
@@ -12,7 +19,7 @@ main {
   }
 
   aside {
-    width: 100%;
+    // width: 100%;
     @media screen and (max-width: $mobile-max) {
       padding: 0 20px;
       height: 37px;
@@ -26,10 +33,6 @@ main {
 
     @media screen and (min-width: $tablet) {
       border-right: 1px solid rgba(24, 28, 39, 0.1);
-
-      div {
-        background-color: #fff;
-      }
     }
 
     @media screen and (min-width: $desktop) {
@@ -41,9 +44,13 @@ main {
   article {
     @media screen and (max-width: $mobile-max) {
       padding: 30px 20px 30px 20px;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 414px;
     }
 
     @media screen and (min-width: $tablet) {
+      position: relative;
       padding: 40px 0 30px 20px;
     }
 
@@ -124,7 +131,7 @@ main {
       .createSprintWrap {
         @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
           position: absolute;
-          right: 35px;
+          right: 0px;
         }
 
         @media screen and (min-width: $desktop) {
@@ -134,7 +141,7 @@ main {
           height: 52px;
         }
 
-        // Circle with plus
+        // Circle with plus ("button")
         .PlusButtonIcon {
           cursor: pointer;
 
@@ -202,6 +209,13 @@ main {
       }
     }
   }
+}
+
+// Circle with plus ("button" Fixed)
+.PlusButtonIconFixed {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
 }
 
 .modalPlug {
