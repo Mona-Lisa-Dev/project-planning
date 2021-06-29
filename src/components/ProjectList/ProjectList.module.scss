@@ -8,7 +8,7 @@
 
 @media screen and (min-width: $mobile) and (max-width: $mobile-max) {
   .listItem {
-    width: calc((100% - 10px) / 2);
+    width: 135px;
 
     &:not(:nth-child(2n)) {
       margin-right: 10px;
@@ -26,7 +26,7 @@
   }
 
   .listItem {
-    width: calc((100% - 40px) / 3);
+    width: 216px;
 
     &:not(:nth-child(3n)) {
       margin-right: 20px;
@@ -44,7 +44,7 @@
   }
 
   .listItem {
-    width: calc((100% - 90px) / 4);
+    width: 270px;
 
     &:not(:nth-child(4n)) {
       margin-right: 30px;

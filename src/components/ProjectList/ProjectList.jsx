@@ -1,4 +1,4 @@
-// import ProjectItem from '../ProjectItem';
+import ProjectItem from '../ProjectItem';
 import PropTypes from 'prop-types';
 import styles from './ProjectList.module.scss';
 
@@ -7,8 +7,7 @@ const ProjectList = ({ projects }) => {
     <ul className={styles.listWrapper}>
       {projects.map(project => (
         <li key={project.id} className={styles.listItem}>
-          {project.name}
-          {/* <ProjectItem>{project}</ProjectItem> */}
+          <ProjectItem project={project}></ProjectItem>
         </li>
       ))}
     </ul>
