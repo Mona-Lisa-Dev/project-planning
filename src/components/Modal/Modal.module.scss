@@ -1,0 +1,56 @@
+@import '../../scss/vars';
+@import '../../scss/breakpoints';
+
+.backdrop {
+  position: fixed;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 60px);
+  background-color: $form-background;
+
+  @media screen and (max-width: $mobile-max) {
+    top: 61px;
+  }
+
+  @media screen and (min-width: $tablet) {
+    top: 0;
+    height: 100vh;
+    background-color: $modalBg;
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+
+    padding: 63px 20px 20px;
+    height: 100%;
+    background-color: $form-background;
+
+    @media screen and (max-width: $mobile-max) {
+      margin: 0 auto;
+      max-width: 320px;
+    }
+
+    @media screen and (min-width: $tablet) {
+      margin-left: auto;
+      padding: 120px 40px 40px;
+      width: 512px;
+    }
+
+    @media screen and (min-width: $desktop) {
+      padding: 120px 50px 40px;
+      // max-width: 570px;
+      width: 530px;
+      // border-radius: 5px;
+      box-shadow: $modalShadow;
+    }
+
+    .modalPlug {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      background-color: pink;
+    }
+  }
+}

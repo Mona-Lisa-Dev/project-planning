@@ -1,11 +1,18 @@
 @import '../../scss/vars';
 @import '../../scss/breakpoints';
 
-.wrapper {
-  color: #181c27;
+.registration {
+  color: $main-background;
 }
 
 .title {
+  font-family: $main-font;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 1.22;
+  letter-spacing: 0.04em;
+  color: $text-dark;
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 30px;
@@ -15,13 +22,17 @@
 .form {
   margin-left: auto;
   margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
   width: 100%;
-  background-color: #fafafa;
-  box-shadow: 0px 6px 26px rgba(0, 5, 97, 0.1);
+  background-color: $form-reg-background;
+  box-shadow: $main-shadow;
   border-radius: 5px;
 }
 
 .labelForm {
+  font-family: $main-font;
+  color: $text-light;
   position: relative;
   display: block;
   margin-bottom: 30px;
@@ -29,6 +40,7 @@
 }
 
 .nameInput {
+  font-family: $main-font;
   position: absolute;
   left: 5px;
   transform: translateY(9px);
@@ -42,31 +54,31 @@
 }
 
 .inputForm {
+  // color: #ff6b08;
   padding: 10px;
   width: 100%;
   outline: none;
   border-style: none;
-  border-bottom: 1px solid #181c27;
-  background: $form-reg-background;
+  border-bottom: 1px solid $text-dark;
 }
 
 .inputForm:invalid {
   margin-bottom: 5px;
-  color: #ff2c0c;
-  border-bottom: 1px solid #ff2c0c;
+  color: $form-input-error;
+  border-bottom: 1px solid $form-input-error;
 }
 
 .inputForm:focus {
-  border-color: #441e04;
-  box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+  border-color: $main-orange;
+  box-shadow: 0px 3px 4px $main-orange;
 }
 
 .inputForm:not(:placeholder-shown) + .nameInput {
   transform: translateY(-8px);
   font-size: 12px;
 }
-
 .error {
+  font-family: $main-font;
   padding-left: 8px;
   font-weight: 400;
   font-size: 12px;
@@ -82,14 +94,15 @@
 .auth {
   padding-left: 5px;
   text-decoration: underline;
-  color: #181c27;
+  color: $text-dark;
 }
 
 .auth:visited {
-  color: #181c27;
+  color: $text-dark;
 }
 
-.btnLog {
+.btnReg {
+  font-family: $main-font;
   margin-bottom: 11px;
   margin-top: 10px;
   cursor: pointer;
@@ -99,21 +112,21 @@
   vertical-align: middle;
   font-weight: 500;
   font-size: 18px;
-  color: #ffffff;
-  background-color: rgba(255, 107, 8, 0.3);
+  color: $text-white;
+  background: $main-orange;
   border: none;
   border-radius: 25px;
 }
 
-.btnLog:enabled {
-  background-color: #ff6b08;
+.btnReg:enabled {
+  background-color: $main-orange;
   box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
   transition: all 300ms ease;
 }
-.btnLog:enabled:hover {
-  color: #ff6b08;
+.btnReg:enabled:hover {
+  color: $main-orange;
   font-weight: 800;
-  background-color: #ffffff;
+  background-color: $text-white;
   box-shadow: 0px 4px 10px 4px rgba(255, 107, 8, 0.3);
 }
 
@@ -127,24 +140,33 @@
   color: $text-dark;
 }
 
-@media screen and (min-width: 320px) {
+@media screen and (min-width: $mobile) {
   .general {
     display: none;
   }
 
   .title {
-    width: 174px;
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: 500;
     font-size: 26px;
+    line-height: 1.23;
+    letter-spacing: 0.04em;
+    color: $text-dark;
+    width: 174px;
+    height: 32px;
+    font-size: 26px;
+    margin-bottom: 53px;
   }
+
   .form {
     padding: 47px 20px;
   }
-
-  .headline {
+  .nameInput {
     font-size: 16px;
   }
 
-  .input {
+  .inputForm {
     font-size: 16px;
   }
 }
@@ -158,7 +180,7 @@
   }
 
   .ellipse1 {
-    background-color: #ff6b08;
+    background-color: $main-orange;
     width: 78px;
     height: 78px;
     top: calc(113px - 80px);
@@ -166,23 +188,22 @@
   }
 
   .ellipse2 {
-    background-color: #ff6b08;
+    background-color: $main-orange;
     width: 26px;
     height: 26px;
     top: calc(139px - 80px);
-    left: 799px;
+    left: 800px;
   }
 
   .ellipse3 {
-    background-color: white;
+    background-color: $text-white;
     width: 431px;
     height: 439px;
     top: calc(209px - 80px);
     left: 669px;
   }
-
   .ellipse4 {
-    background-color: #ff6b08;
+    background-color: $main-orange;
     width: 387px;
     height: 387px;
     top: calc(243px - 80px);
@@ -190,7 +211,7 @@
   }
 
   .ellipse5 {
-    background-color: white;
+    background-color: $text-white;
     width: 314px;
     height: 320px;
     top: calc(459px - 80px);
@@ -199,7 +220,7 @@
   }
 
   .ellipse6 {
-    background-color: #ff6b08;
+    background-color: $main-orange;
     width: 282px;
     height: 282px;
     top: calc(463px - 80px);
@@ -207,7 +228,7 @@
   }
 
   .ellipse7 {
-    background-color: #ff6b08;
+    background-color: $main-orange;
     width: 252px;
     height: 252px;
     top: calc(526px - 80px);
@@ -215,7 +236,7 @@
   }
 
   .ellipse8 {
-    background-color: white;
+    background-color: $text-white;
     width: 298px;
     height: 298px;
     top: calc(517px - 80px);
@@ -224,7 +245,7 @@
   }
 
   .ellipse9 {
-    background-color: white;
+    background-color: $text-white;
     width: 118px;
     height: 118px;
     top: calc(377px - 80px);
@@ -232,7 +253,7 @@
   }
 
   .ellipse10 {
-    background-color: white;
+    background-color: $text-white;
     width: 48px;
     height: 48px;
     top: calc(250px - 80px);
@@ -240,25 +261,31 @@
   }
 
   .title {
-    width: 106px;
+    width: 241px;
     font-size: 36px;
+    margin-bottom: 53px;
   }
+
   .form {
-    margin-top: 103px;
+    margin-top: 114px;
     width: 570px;
     padding: 60px 70px;
   }
 
-  .headline {
+  .nameInput {
     font-size: 18px;
   }
 
-  .input {
+  .inputForm {
     font-size: 18px;
   }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: $desktop) {
+  .form {
+    margin-top: 56px;
+    padding: 60px 70px;
+  }
   .ellipse1 {
     top: calc(103px - 80px);
     left: 877px;
@@ -307,10 +334,5 @@
   .ellipse10 {
     top: calc(240px - 80px);
     left: 230px;
-  }
-
-  .form {
-    margin-top: 93px;
-    padding: 60px 70px;
   }
 }
