@@ -36,9 +36,7 @@ const getAllProjects = () => async dispatch => {
   }
 };
 
-const createProject = (name, description) => async dispatch => {
-  const project = { name, description };
-
+const createProject = project => async dispatch => {
   dispatch(createProjectRequest());
 
   try {

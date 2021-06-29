@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
+
+import projectsOperations from 'redux/projects/projects-operations';
+
 import styles from './CreateProject.module.scss';
 
-const CreateProject = () => {
+const CreateProject = ({ onClickCancel }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [projects, setProjects] = useState([]);
   const [emptyInput, setEmptyInput] = useState(false);
+
+  const dispatch = useDispatch();
 
   const handleNameChange = event => {
     setName(event.target.value);
@@ -24,14 +27,11 @@ const CreateProject = () => {
       return;
     }
     const newProject = {
-      id: uuidv4(),
       name,
       description,
     };
 
-    setProjects(prevState => [newProject, ...prevState]);
-
-    // dispatch(addProject({ project, description }));
+    dispatch(projectsOperations.createProject(newProject));
 
     setName('');
     setDescription('');
@@ -44,8 +44,8 @@ const CreateProject = () => {
       <form onSubmit={handleSubmit} autoComplete="off" className={styles.form}>
         <label>
           <input
-            id="add"
-            value={setName}
+            value={name}
+            name="name"
             type="text"
             placeholder={emptyInput ? 'Project name' : 'Project name'}
             className={emptyInput ? styles.empty_input : styles.input}
@@ -55,21 +55,27 @@ const CreateProject = () => {
         <label>
           <input
             id="add"
-            value={setDescription}
+            value={description}
+            name="description"
             type="text"
             placeholder={emptyInput ? 'Description' : 'Description'}
             className={emptyInput ? styles.empty_input : styles.input}
             onChange={handleDescriptionChange}
           />
         </label>
-      </form>
 
-      <button form="add" type="submit" className={styles.ready_btn}>
-        Ready
-      </button>
-      <button form="add" type="button" className={styles.cancel_btn}>
-        Cancel
-      </button>
+        <button type="submit" className={styles.ready_btn}>
+          Ready
+        </button>
+
+        <button
+          type="button"
+          className={styles.cancel_btn}
+          onClick={onClickCancel}
+        >
+          Cancel
+        </button>
+      </form>
     </div>
   );
 };
