@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // import { logout } from '../../redux/auth/auth-operations';
@@ -14,21 +14,12 @@ import styles from './UserBar.module.scss';
 export default function UserBar() {
   const dispatch = useDispatch();
   const name = useSelector(getUserName);
-  const onLogout = useCallback(() => {
-    dispatch(authOperations.logout);
-  }, [dispatch]);
+  const onLogout = () => dispatch(authOperations.logout());
 
   return (
     <div className={styles.cont}>
       <p className={styles.user}>{name}</p>
       <button type="button" onClick={onLogout} className={styles.button}>
-        {/* <img
-          src={exit}
-          alt=""
-          width="18px"
-          height="18px"
-          className={styles.exit}
-        /> */}
         <svg
           className={styles.exit}
           width="18px"
