@@ -42,6 +42,10 @@ const isAuthorized = createReducer(false, {
   [logoutRequest]: () => false,
 });
 
+const isSignup = createReducer(false, {
+  [signupSuccess]: () => true,
+});
+
 const isLoading = createReducer(false, {
   [signupRequest]: () => true,
   [signupSuccess]: () => false,
@@ -85,6 +89,7 @@ export default combineReducers({
   user,
   token,
   isAuthorized,
+  isSignup,
   isLoading,
   error,
   errorSignup,

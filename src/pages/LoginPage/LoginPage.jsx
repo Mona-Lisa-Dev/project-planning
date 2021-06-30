@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import styles from './LoginPage.module.scss';
-
 import authOperations from 'redux/auth/auth-operations';
+
+import styles from './LoginPage.module.scss';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -29,10 +29,8 @@ const LoginPage = () => {
 
   const handleFormSubmit = e => {
     e.preventDefault();
-
     const user = { email, password };
     dispatch(authOperations.login(user));
-
     reset();
   };
 
@@ -54,6 +52,7 @@ const LoginPage = () => {
         <div className={`${styles.general} ${styles.ellipse9}`}></div>
         <div className={`${styles.general} ${styles.ellipse10}`}></div>
       </div>
+
       <form
         onSubmit={handleFormSubmit}
         className={styles.form}
@@ -64,35 +63,33 @@ const LoginPage = () => {
           <input
             className={styles.inputForm}
             placeholder=" "
-            type={'email'}
-            name={'email'}
+            type="email"
+            name="email"
             onChange={handleChange}
             value={email}
           />
           <span className={styles.nameInput}>E-mail</span>
         </label>
-        {/* {emailDirty && emailError && <span>{emailError}</span>} */}
+
         <label className={styles.labelForm}>
           <input
             className={styles.inputForm}
             placeholder=" "
-            type={'password'}
-            name={'password'}
+            type="password"
+            name="password"
             onChange={handleChange}
             values={password}
           />
           <span className={styles.nameInput}>Password</span>
         </label>
-        <button
-          className={styles.btnLog}
-          // onClick={handleSubmit}
-          type={'submit'}
-        >
+
+        <button className={styles.btnLog} type="submit">
           Enter
         </button>
+
         <div className={styles.login}>
           <p className={styles.question}> No account? </p>
-          <a className={styles.auth} href="/users/signup">
+          <a className={styles.auth} href="/register">
             Register
           </a>
         </div>
@@ -100,5 +97,4 @@ const LoginPage = () => {
     </div>
   );
 };
-
 export default LoginPage;

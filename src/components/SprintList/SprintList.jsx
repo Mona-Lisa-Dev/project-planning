@@ -1,4 +1,4 @@
-// import SprintItem from '../SprintItem';
+import SprintItem from '../SprintItem';
 import PropTypes from 'prop-types';
 import styles from './SprintList.module.scss';
 
@@ -7,7 +7,7 @@ const SprintList = ({ sprints }) => {
     <ul className={styles.listWrapper}>
       {sprints.map(sprint => (
         <li key={sprint.id} className={styles.listItem}>
-          {/* <SprintItem>{sprint}</SprintItem> */}
+          <SprintItem sprint={sprint} />
         </li>
       ))}
     </ul>

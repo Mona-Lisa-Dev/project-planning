@@ -2,24 +2,23 @@
 
 .listWrapper {
   padding-top: 30px;
+  width: $mobile;
 }
 
 @media screen and (min-width: $mobile) and (max-width: $mobile-max) {
   .listItem:not(:last-child) {
-    width: 280px;
     margin-bottom: 10px;
   }
 }
 
 @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
   .listWrapper {
+    width: $tablet;
     display: flex;
     flex-wrap: wrap;
   }
 
   .listItem {
-    width: calc((100% - 20px) / 2);
-
     &:not(:nth-child(2n)) {
       margin-right: 20px;
     }
@@ -32,6 +31,7 @@
 
 @media screen and (min-width: $desktop) {
   .listWrapper {
+    width: $desktop;
     display: flex;
     flex-wrap: wrap;
     padding-left: 70px;
@@ -39,8 +39,6 @@
   }
 
   .listItem {
-    width: calc((100% - 60px) / 3);
-
     &:not(:nth-child(3n)) {
       margin-right: 30px;
     }

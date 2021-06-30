@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import styles from './RegisterPage.module.scss';
 
 import authOperations from 'redux/auth/auth-operations';
+import styles from './RegisterPage.module.scss';
 
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
@@ -55,6 +55,7 @@ const RegisterPage = () => {
         <div className={`${styles.general} ${styles.ellipse9}`}></div>
         <div className={`${styles.general} ${styles.ellipse10}`}></div>
       </div>
+
       <form
         onSubmit={handleFormSubmit}
         className={styles.form}
@@ -101,9 +102,10 @@ const RegisterPage = () => {
         <button className={styles.btnReg} type={'submit'}>
           Register
         </button>
+
         <div className={styles.login}>
           <p className={styles.question}> Do you have an account?</p>
-          <a className={styles.auth} href="users/login">
+          <a className={styles.auth} href="/login">
             Log in
           </a>
         </div>
