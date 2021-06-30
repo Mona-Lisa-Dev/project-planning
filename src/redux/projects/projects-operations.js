@@ -55,12 +55,8 @@ const deleteProject = projectId => async dispatch => {
   dispatch(deleteProjectRequest());
 
   try {
-    const {
-      data: { data },
-    } = await axios.delete(`/projects/${projectId}`);
+    await axios.delete(`/projects/${projectId}`);
     dispatch(deleteProjectSuccess(projectId));
-
-    return data.projects;
   } catch (error) {
     dispatch(deleteProjectError(error.message));
   }

@@ -90,7 +90,7 @@ const App = () => {
                 isAuthorized ? (
                   <Redirect to={routes.projects} />
                 ) : (
-                  <Redirect to={routes.login} />
+                  <Redirect to={routes.signup} />
                 )
               }
             />

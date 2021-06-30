@@ -1,11 +1,11 @@
 import styles from './ButtonDelete.module.scss';
 
-const ButtonDelete = ({ handleClick, id }) => {
+const ButtonDelete = ({ handleClick }) => {
   return (
     <button
       type="button"
       className={styles.btnDelete}
-      onClick={() => handleClick(id)}
+      onClick={() => handleClick()}
     ></button>
   );
 };
