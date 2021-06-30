@@ -32,6 +32,7 @@ const CreateProject = ({ onClickCancel }) => {
     };
 
     dispatch(projectsOperations.createProject(newProject));
+    onClickCancel();
 
     setName('');
     setDescription('');
