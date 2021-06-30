@@ -93,7 +93,7 @@ const RegisterPage = () => {
             type={'password'}
             name={'confirmPassword'}
             onChange={handleChange}
-            pattern="^[a-z0-9_-]{7,18}$"
+            // pattern="^[a-z0-9_-]{7,18}$"
             // value={confirmPassword}
           />
           <span className={styles.nameInput}>Repeat password</span>
