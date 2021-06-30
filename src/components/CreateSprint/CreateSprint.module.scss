@@ -1,6 +1,8 @@
 @import '../../scss/vars';
 
 .CreateSprintWrap {
+  width: 100%;
+
   h3 {
     margin-bottom: 10px;
     text-align: center;
@@ -8,13 +10,59 @@
     font-size: 26px;
   }
 
-  width: 100%;
+  & > input {
+    background-color: cornflowerblue;
+  }
+
   .dataWrap {
-    // width: 280px;
     margin-bottom: 40px;
     color: pink;
   }
 
+  // Checkbox
+  .visuallyHidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+
+    &:focus + .checkboxIcon {
+      border: 1px solid #d1d2d4;
+    }
+  }
+
+  .visuallyHidden:checked + .checkboxIcon .orangeCircle {
+    border-color: transparent;
+    background-color: #ff6b08;
+    background-size: contain;
+    background-origin: border-box;
+  }
+
+  .checkboxIcon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 34px;
+    height: 34px;
+    margin-right: 10px;
+    border: 1px solid #d1d2d4;
+    border-radius: 50%;
+    cursor: pointer;
+
+    .orangeCircle {
+      display: block;
+      width: 16px;
+      height: 16px;
+      border-color: transparent;
+      border-radius: 50%;
+    }
+  }
+
+  // Button (submit)
   .formBtn {
     display: block;
     margin: 0 auto;

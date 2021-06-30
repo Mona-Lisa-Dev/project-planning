@@ -14,6 +14,10 @@ const useStyles = makeStyles({
   root: {
     '& .MuiFormControl-root': {
       width: '100%',
+
+      '& div': {
+        backgroundColor: 'red',
+      },
     },
 
     // Lable
@@ -110,12 +114,16 @@ const CreateSprint = () => {
 
         <label>
           <input
+            className={s.visuallyHidden}
             type="checkbox"
             name="previousDays"
             checked={previousDays}
             onChange={handlePeviousDaysChange}
           />
-          Previous Days
+          <span className={s.checkboxIcon}>
+            <span className={s.orangeCircle} />
+          </span>
+          <span className={s.checkboxLabel}>Previous Days</span>
         </label>
 
         <div className={s.dataWrap}>
