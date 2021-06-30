@@ -14,7 +14,6 @@ const useStyles = makeStyles({
   root: {
     '& .MuiFormControl-root': {
       width: '100%',
-      // backgroundColor: 'red',
     },
 
     // Lable
@@ -23,7 +22,6 @@ const useStyles = makeStyles({
     },
 
     '& label.Mui-focused': {
-      // fontFamily: ['Montserrat', 'sans-serif'],
       color: '#ff6b08',
     },
 
@@ -55,49 +53,123 @@ const useStyles = makeStyles({
     },
   },
 });
-// const useStyles = makeStyles({
-//   root: {
-//     '& > *': {
-//       // margin: theme.spacing(1),
-//       margin: '40',
-//       width: '280',
-//     },
-//   },
-// });
 
 const CreateSprint = () => {
+  const [sprintName, setSprintName] = useState('');
+  const [previousDays, setPreviousDays] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [duration, setDuration] = useState('');
   const classes = useStyles();
 
+  // Input - Date
   const handleDateChange = date => {
     setSelectedDate(date);
   };
 
+  // Input - sprintName and duration
+  const handleInputForm = e => {
+    const { name, value } = e.target;
+    name === 'sprintName' ? setSprintName(value) : setDuration(value);
+  };
+
+  // Checkbox
+  const handlePeviousDaysChange = e => {
+    setPreviousDays(e.currentTarget.checked);
+  };
+
+  // New sprint
+  const createNewSprint = e => {
+    e.preventDefault();
+
+    console.log('sprintName', sprintName);
+    console.log('selectedDate', selectedDate);
+    console.log('duration', duration);
+
+    setSprintName('');
+    setSelectedDate(new Date());
+    setDuration('');
+  };
+
   return (
     <div className={s.CreateSprintWrap}>
-      <form className={classes.root} noValidate autoComplete="off">
-        <TextField id="standard-basic" label="Standard" />
+      <h3>Creating a sprint</h3>
+      <form
+        className={classes.root}
+        noValidate
+        autoComplete="off"
+        onSubmit={createNewSprint}
+      >
+        <TextField
+          id="standard-basic"
+          label="The name of the sprint"
+          type="text"
+          name="sprintName"
+          value={sprintName}
+          onChange={handleInputForm}
+        />
+
+        <label>
+          <input
+            type="checkbox"
+            name="previousDays"
+            checked={previousDays}
+            onChange={handlePeviousDaysChange}
+          />
+          Previous Days
+        </label>
 
         <div className={s.dataWrap}>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <Grid container justify="space-around">
-              <KeyboardDatePicker
-                disableToolbar
-                variant="inline"
-                minDate={new Date()}
-                format="dd MMM"
-                margin="normal"
-                id="date-picker-inline"
-                label="End date"
-                value={selectedDate}
-                onChange={handleDateChange}
-                KeyboardButtonProps={{
-                  'aria-label': 'change date',
-                }}
-              />
+              {previousDays ? (
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="inline"
+                  format="dd MMM"
+                  margin="normal"
+                  id="date-picker-inline"
+                  label="End date"
+                  type="text"
+                  name="date"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }}
+                />
+              ) : (
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="inline"
+                  minDate={new Date()}
+                  format="dd MMM"
+                  margin="normal"
+                  id="date-picker-inline"
+                  label="End date"
+                  type="text"
+                  name="date"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }}
+                />
+              )}
             </Grid>
           </MuiPickersUtilsProvider>
+
+          <TextField
+            id="standard-basic"
+            label="Duration"
+            type="text"
+            name="duration"
+            value={duration}
+            onChange={handleInputForm}
+          />
         </div>
+        <button className={s.formBtn} type="submit">
+          Ready
+        </button>
       </form>
     </div>
   );
