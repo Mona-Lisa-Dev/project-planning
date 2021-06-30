@@ -12,19 +12,12 @@ export default function AppBar() {
   const isAuthorized = useSelector(getIsAuthenticated);
 
   return (
-    <header className={styles.header}>
+    <header className={styles.Header}>
       <NavLink to={isAuthorized ? routes.projects : routes.signup}>
-        <img src={result} alt="companyLogo" className={styles.logo} />
+        <img src={result} alt="companyLogo" className={styles.Logo} />
       </NavLink>
 
-      {/* {isAuthenticated && (
-        <NavLink to={routes.projects}>
-          <img src={result} alt="companyLogo" className={styles.logo} />
-        </NavLink> // заготовка под публичные и приватные роуты, на сайте примера залогиненого юзера ведёт на проекты не залогиненого на регистер
-      )} */}
-
       {isAuthorized && <UserBar />}
-      {/* Cделать потом  юзер бар только ис аутефинкейтед */}
     </header>
   );
 }
