@@ -5,6 +5,7 @@ import { ReactComponent as EditIcon } from './svg/edit_icon.svg';
 import { ReactComponent as AddGroupIcon } from './svg/add_group_icon.svg';
 import { ReactComponent as PlusButtonIcon } from './svg/plus_button_icon.svg';
 import Modal from 'components/Modal';
+import CreateSprint from 'components/CreateSprint';
 import s from './SprintsPage.module.scss';
 
 const SprintsPage = () => {
@@ -64,19 +65,8 @@ const SprintsPage = () => {
                 {desktop && <span>Create a sprint</span>}
               </div>
             )}
-
-            {/* {tablet && (
-              <div className={s.createSprintWrap}>
-                {tablet && (
-                  <PlusButtonIcon
-                    className={s.PlusButtonIcon}
-                    onClick={toggleModal}
-                  />
-                )}
-                {desktop && <span>Create a sprint</span>}
-              </div>
-            )} */}
           </div>
+
           <ul className={s.SprintList}>
             <li className={s.SprintItem}></li>
             <li className={s.SprintItem}></li>
@@ -91,9 +81,7 @@ const SprintsPage = () => {
 
       {showModal && (
         <Modal onCloseModal={toggleModal}>
-          <div className={s.modalPlug}>
-            <h2>Modal content</h2>
-          </div>
+          <CreateSprint />
         </Modal>
       )}
     </>
