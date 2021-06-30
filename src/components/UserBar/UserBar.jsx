@@ -1,7 +1,8 @@
+import Spinner from 'components/Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 
 import authOperations from 'redux/auth/auth-operations';
-import { getUserEmail } from 'redux/auth/auth-selectors';
+import { getUserEmail, getLoadingUser } from 'redux/auth/auth-selectors';
 
 // import exit from './images/exitIcon.svg';
 import styles from './UserBar.module.scss';
@@ -9,6 +10,7 @@ import styles from './UserBar.module.scss';
 export default function UserBar() {
   const dispatch = useDispatch();
   const email = useSelector(getUserEmail);
+  const loading = useSelector(getLoadingUser);
 
   const onLogout = () => dispatch(authOperations.logout());
 
@@ -32,6 +34,7 @@ export default function UserBar() {
         </svg>
         Log Out
       </button>
+      {loading && <Spinner />}
     </div>
   );
 }
