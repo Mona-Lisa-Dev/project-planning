@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import Modal from 'components/Modal';
 import CreateProject from 'components/CreateProject';
+import ProjectList from 'components/ProjectList';
 
 import styles from './ProjectsPage.module.scss';
 
@@ -15,6 +16,7 @@ const ProjectsPage = () => {
 
   return (
     <>
+      {/* <div className={styles.Container}> */}
       <div className={styles.ProjectsHeaderBar}>
         <h1 className={styles.ProjectsTitle}>Projects</h1>
 
@@ -35,12 +37,8 @@ const ProjectsPage = () => {
           </Modal>
         )}
       </div>
-      <ul className={styles.ProjectsList}>
-        <li className={styles.ProjectsListItem}>1</li>
-        <li className={styles.ProjectsListItem}>2</li>
-        <li className={styles.ProjectsListItem}>3</li>
-        <li className={styles.ProjectsListItem}>4</li>
-      </ul>
+      {/* </div> */}
+      {/* <ProjectList /> */}
     </>
   );
 };

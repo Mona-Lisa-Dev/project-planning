@@ -12,6 +12,9 @@ import { getIsAuthenticated, getIsSignup } from 'redux/auth/auth-selectors';
 import routes from 'routes';
 import './scss/_main.scss';
 
+// import PrivateRoute from 'components/PrivateRoute';
+// import PublicRoute from 'components/PublicRoute';
+// import Diagram from 'components/Diagram';
 const LoginPage = lazy(
   () => import('./pages/LoginPage') /* webpackChunkName: "LoginPage" */,
 );
@@ -35,6 +38,7 @@ const App = () => {
   return (
     <>
       <AppBar />
+
       <Container>
         <Suspense fallback={<p>This is spinner, trust me</p>}>
           <Switch>

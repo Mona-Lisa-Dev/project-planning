@@ -1,7 +1,7 @@
 @import '../../scss/vars';
 @import '../../scss/breakpoints';
 
-.header {
+.Header {
   display: flex;
   align-items: center;
 
@@ -10,7 +10,7 @@
   border-bottom: $main-border;
 }
 
-.logo {
+.Logo {
   //   padding-left: 20px;
   width: 100px;
   height: 30px;
@@ -23,11 +23,11 @@
 
 // ======================Mobile===================
 @media screen and (max-width: $mobile-max) {
-  .header {
+  .Header {
     padding: 15px 20px;
   }
 
-  .logo {
+  .Logo {
     width: 100px;
     height: 30px;
     // margin: 0px 51px 0px 20px;
@@ -37,11 +37,11 @@
 //============Tablet==========================================
 
 @media screen and (min-width: $tablet) {
-  .header {
+  .Header {
     padding: 19px 40px;
   }
 
-  .logo {
+  .Logo {
     width: 140px;
     height: 42px;
     // margin: 0px 303px 0px 40px;
@@ -51,11 +51,11 @@
 //============================Desktop===============================
 
 @media screen and (min-width: $desktop) {
-  .header {
+  .Header {
     padding: 19px 55px;
   }
 
-  .logo {
+  .Logo {
     width: 140px;
     height: 42px;
     // margin: 0px 785px 0px 55px;
