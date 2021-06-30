@@ -1,18 +1,13 @@
 @import '../../scss/breakpoints';
 
 .Container {
-  padding: 0 20px 20px;
-  margin-left: auto;
-  margin-right: auto;
-  min-height: 100vh;
-
   @media screen and (min-width: $tablet) {
-    padding: 0 40px 40px;
     min-width: $tablet;
   }
 
   @media screen and (min-width: $desktop) {
-    padding: 0 55px 55px;
+    margin-left: auto;
+    margin-right: auto;
     width: $desktop;
   }
 }

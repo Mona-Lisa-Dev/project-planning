@@ -1,0 +1,81 @@
+@import '../../scss/vars';
+@import '../../scss/breakpoints';
+
+.item_one {
+  background: $text-white;
+  box-shadow: $main-shadow;
+  border-radius: 5px;
+  padding: 18px 30px 40px;
+  @media screen and (max-width: $mobile-max) {
+    width: 280px;
+    height: 170px;
+  }
+  @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
+    width: 216px;
+    height: 255px;
+  }
+  @media screen and (min-width: $desktop) {
+    width: 270px;
+    height: 224px;
+  }
+}
+.item_header {
+  margin-bottom: 28px;
+  font-family: $main-font;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.22;
+  letter-spacing: 0.04em;
+  color: $text-dark;
+  @media screen and (max-width: $mobile-max) {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+}
+
+.item_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 28px;
+  @media screen and (max-width: $mobile-max) {
+    margin-top: 20px;
+  }
+}
+
+.item_description {
+  font-family: $main-font;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.21;
+  letter-spacing: 0.01em;
+  color: $sprint-card-description;
+  @media screen and (max-width: $mobile-max) {
+    font-size: 10px;
+    line-height: 1.2;
+  }
+}
+
+.item_description:not(:last-child) {
+  margin-bottom: 20px;
+  @media screen and (max-width: $mobile-max) {
+    margin-bottom: 10px;
+  }
+}
+
+.item_left {
+  float: left;
+}
+
+.item_right {
+  float: right;
+}
+
+.btnSprint {
+  display: block;
+  margin-top: 14px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}

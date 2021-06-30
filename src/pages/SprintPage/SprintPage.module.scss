@@ -1,0 +1,122 @@
+@import '../../scss/vars';
+@import '../../scss/breakpoints';
+
+.sprintContent {
+  border-left: 1px solid rgba(24, 28, 39, 0.1);
+
+  @media screen and (max-width: $mobile-max) {
+    position: relative;
+    width: 320px;
+    border-left: none;
+  }
+  @media screen and (min-width: $tablet) {
+    position: relative;
+    padding-top: 20px;
+    padding-left: 20px;
+    width: 512px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    width: 1026px;
+    padding-left: 70px;
+  }
+}
+
+.sprintDate {
+  margin-bottom: 20px;
+  font-size: 12px;
+  line-height: 1.25;
+  letter-spacing: 0.04em;
+  color: rgba(24, 28, 39, 0.6);
+  @media screen and (max-width: $mobile-max) {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    height: 70px;
+  }
+}
+
+.title {
+  color: $text-dark;
+  letter-spacing: 0.04em;
+  font-family: $main-font;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.22;
+  @media screen and (max-width: $mobile-max) {
+    width: 260px;
+    height: 64px;
+    font-size: 26px;
+  }
+  @media screen and (min-width: $tablet) {
+    margin-right: 20px;
+    width: 334px;
+    height: 88px;
+    font-size: 36px;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-right: 40px;
+    height: 75px;
+  }
+}
+
+.sprintHeader {
+  display: flex;
+
+  @media screen and (max-width: $tablet-max) {
+    align-items: flex-start;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-bottom: 30px;
+    align-items: baseline;
+  }
+}
+.btnChange {
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  width: 20px;
+  height: 20px;
+  background-color: #a6a6a6;
+  background: url(./btnChange.svg) no-repeat;
+  transition: all 0.25s linear;
+  &:hover,
+  &:focus {
+    background: url(./btnChangeActive.svg) no-repeat;
+    transform: scale(1.2);
+  }
+  @media screen and (min-width: $tablet) {
+    margin: 10px 34px 0 0;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-right: 230px;
+  }
+}
+
+.btnCreateTask {
+  position: relative;
+  cursor: pointer;
+  border: none;
+  width: 44px;
+  height: 44px;
+  background: url(./plus.svg) no-repeat;
+  box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+  border-radius: 25px;
+  @media screen and (max-width: $mobile-max) {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+  }
+  @media screen and (min-width: $desktop) {
+    &::after {
+      content: 'Create a task';
+      position: absolute;
+      width: 185px;
+      font-size: 18px;
+      line-height: 1.22;
+      letter-spacing: 0.04em;
+      left: 20px;
+      top: 10px;
+    }
+  }
+}

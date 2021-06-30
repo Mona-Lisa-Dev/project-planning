@@ -1,0 +1,72 @@
+@import '../../scss/vars';
+@import '../../scss/breakpoints';
+
+.itemWrapper {
+  background: $project-purple;
+  border-radius: 5px;
+  padding: 10px;
+  word-wrap: break-word;
+
+  &:hover {
+    .itemDescription {
+      visibility: visible;
+    }
+  }
+
+  @media screen and (max-width: $mobile-max) {
+    width: 135px;
+    height: 136px;
+  }
+
+  @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
+    width: 216px;
+    height: 216px;
+    padding: 20px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    width: 270px;
+    height: 270px;
+    padding: 30px;
+  }
+}
+
+.itemTitle {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: 0.04em;
+  color: $text-white;
+  margin-bottom: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @media screen and (min-width: $tablet) {
+    font-size: 26px;
+    line-height: 1.23;
+    margin-bottom: 10px;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-bottom: 20px;
+  }
+}
+
+.itemDescription {
+  visibility: hidden;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 1.2;
+  color: $text-white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @media screen and (min-width: $tablet) {
+    font-size: 14px;
+    line-height: 1.21;
+    letter-spacing: 0.04em;
+  }
+}
