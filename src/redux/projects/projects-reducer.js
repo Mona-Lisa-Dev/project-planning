@@ -67,6 +67,8 @@ const error = createReducer(null, {
   [deleteProjectRequest]: () => null,
   [updateProjectError]: (_, { payload }) => payload,
   [updateProjectRequest]: () => null,
+  [addParticipantError]: (_, { payload }) => payload,
+  [addParticipantRequest]: () => null,
   [deleteParticipantError]: (_, { payload }) => payload,
   [deleteParticipantRequest]: () => null,
 });
