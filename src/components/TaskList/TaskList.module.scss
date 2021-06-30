@@ -11,9 +11,12 @@
     margin: 0 0 20px -20px;
   }
   @media screen and (min-width: $desktop) {
-    padding: 10px 116px 10px 100px;
+    padding: 10px 10px 10px 100px;
     margin: 0 0 0 -70px;
   }
+}
+.searchForm {
+  display: flex;
 }
 .findInput {
   display: none;
@@ -34,7 +37,7 @@
   @media screen and (max-width: $mobile-max) {
     position: absolute;
     top: 40px;
-    left: 30px;
+    left: 50px;
     width: 240px;
     height: 40px;
   }
@@ -70,7 +73,7 @@
   @media screen and (max-width: $mobile-max) {
     position: absolute;
     top: 45px;
-    left: 0;
+    left: 20px;
   }
 }
 

@@ -20,11 +20,11 @@ import {
 const initialUserState = { name: null, email: null };
 
 const user = createReducer(initialUserState, {
-  [signupSuccess]: (_, { payload }) => payload,
-  [loginSuccess]: (_, { payload }) => payload,
+  [signupSuccess]: (_, { payload }) => payload.user,
+  [loginSuccess]: (_, { payload }) => payload.user,
   [logoutSuccess]: () => initialUserState,
   [logoutError]: () => initialUserState,
-  [getCurrentUserSuccess]: (_, { payload }) => payload,
+  [getCurrentUserSuccess]: (_, { payload }) => payload.user,
 });
 
 const token = createReducer(null, {

@@ -25,7 +25,7 @@ import {
 import { logoutSuccess } from 'redux/auth/auth-actions';
 
 const projectItems = createReducer([], {
-  [getAllProjectsRequest]: (_, { payload }) => payload,
+  [getAllProjectsSuccess]: (_, { payload }) => payload,
   [createProjectSuccess]: (state, { payload }) => [...state, payload],
   [deleteProjectSuccess]: (state, { payload }) =>
     state.filter(({ id }) => id !== payload),
