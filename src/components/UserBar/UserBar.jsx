@@ -1,13 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-// import { logout } from '../../redux/auth/auth-operations';
-
 import authOperations from 'redux/auth/auth-operations';
-
 import { getUserName } from 'redux/auth/auth-selectors';
 
 // import exit from './images/exitIcon.svg';
-
 import styles from './UserBar.module.scss';
 
 export default function UserBar() {
@@ -19,6 +15,7 @@ export default function UserBar() {
   return (
     <div className={styles.cont}>
       <p className={styles.user}>{name}</p>
+
       <button type="button" onClick={onLogout} className={styles.button}>
         <svg
           className={styles.exit}

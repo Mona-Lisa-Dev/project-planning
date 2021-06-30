@@ -13,7 +13,7 @@ export default function AppBar() {
 
   return (
     <header className={styles.header}>
-      <NavLink to={routes.signup}>
+      <NavLink to={isAuthorized ? routes.projects : routes.signup}>
         <img src={result} alt="companyLogo" className={styles.logo} />
       </NavLink>
 
