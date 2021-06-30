@@ -4,6 +4,7 @@ import { refs } from './refs';
 import { ReactComponent as EditIcon } from './svg/edit_icon.svg';
 import { ReactComponent as AddGroupIcon } from './svg/add_group_icon.svg';
 import { ReactComponent as PlusButtonIcon } from './svg/plus_button_icon.svg';
+import SideBar from 'components/SideBar';
 import Modal from 'components/Modal';
 import CreateSprint from 'components/CreateSprint';
 import s from './SprintsPage.module.scss';
@@ -30,7 +31,13 @@ const SprintsPage = () => {
   return (
     <>
       <main>
-        <aside></aside>
+        <aside>
+          <SideBar>
+            <div className={s.sideBarPlug}>
+              <p>SideBar content</p>
+            </div>
+          </SideBar>
+        </aside>
 
         <article>
           <div className={s.headerWrap}>
