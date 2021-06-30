@@ -216,6 +216,7 @@ main {
   position: fixed;
   right: 20px;
   bottom: 20px;
+  cursor: pointer;
 }
 
 .modalPlug {
@@ -223,5 +224,13 @@ main {
   justify-content: center;
   align-items: center;
   width: 100%;
+  background-color: pink;
+}
+
+.sideBarPlug {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 37px;
   background-color: pink;
 }

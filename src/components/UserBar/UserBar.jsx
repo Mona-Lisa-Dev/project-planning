@@ -1,24 +1,24 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import authOperations from 'redux/auth/auth-operations';
-import { getUserName } from 'redux/auth/auth-selectors';
+import { getUserEmail } from 'redux/auth/auth-selectors';
 
 // import exit from './images/exitIcon.svg';
 import styles from './UserBar.module.scss';
 
 export default function UserBar() {
   const dispatch = useDispatch();
-  const name = useSelector(getUserName);
+  const email = useSelector(getUserEmail);
 
   const onLogout = () => dispatch(authOperations.logout());
 
   return (
-    <div className={styles.cont}>
-      <p className={styles.user}>{name}</p>
+    <div className={styles.Cont}>
+      <p className={styles.User}>{email}</p>
 
-      <button type="button" onClick={onLogout} className={styles.button}>
+      <button type="button" onClick={onLogout} className={styles.Button}>
         <svg
-          className={styles.exit}
+          className={styles.Exit}
           width="18px"
           height="18px"
           viewBox="0 0 18 18"

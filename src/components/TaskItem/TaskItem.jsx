@@ -2,13 +2,19 @@ import { useState, useEffect } from 'react';
 import styles from './TaskItem.module.scss';
 import ButtonDelete from '../ButtonDelete';
 
-const TaskItem = ({ id, taskName, planTime, customTime, totalTime }) => {
+const TaskItem = ({
+  id,
+  taskName,
+  planTime,
+  customTime = 0,
+  totalTime = 0,
+}) => {
   const [queryCustomTime, setQueryCustomTime] = useState(Number(customTime));
   const [queryTotalTime, setQueryTotalTime] = useState(Number(totalTime));
 
   const handleInputChange = e => {
     setQueryCustomTime(e.target.value);
-    setQueryTotalTime(queryTotalTime + Number(e.target.value));
+    setQueryTotalTime(Number(totalTime) + Number(e.target.value));
   };
 
   //TODO функция отправляет запрос на бэк для сохранения часов
