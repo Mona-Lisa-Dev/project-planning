@@ -15,7 +15,7 @@ const ProjectsPage = () => {
   useEffect(() => dispatch(projectsOperations.getAllProjects()), [dispatch]);
 
   const openModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
+  const handleCloseModal = () => setShowModal(!showModal);
 
   return (
     <>
