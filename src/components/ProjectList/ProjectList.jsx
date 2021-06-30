@@ -1,8 +1,12 @@
+import { useSelector } from 'react-redux';
+
+import { getProjects } from 'redux/projects/projects-selectors';
 import ProjectItem from '../ProjectItem';
-import PropTypes from 'prop-types';
 import styles from './ProjectList.module.scss';
 
-const ProjectList = ({ projects }) => {
+const ProjectList = () => {
+  const projects = useSelector(getProjects);
+
   return (
     <ul className={styles.listWrapper}>
       {projects.map(project => (
@@ -15,7 +19,3 @@ const ProjectList = ({ projects }) => {
 };
 
 export default ProjectList;
-
-ProjectList.propTypes = {
-  sprints: PropTypes.array.isRequired,
-};

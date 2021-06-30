@@ -1,17 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import Modal from 'components/Modal';
 import CreateProject from 'components/CreateProject';
 import ProjectList from 'components/ProjectList';
+import projectsOperations from 'redux/projects/projects-operations';
 
 import styles from './ProjectsPage.module.scss';
 
 const ProjectsPage = () => {
   const [showModal, setShowModal] = useState(false);
-  //   const [projects, setProjects] = useState(''); // Заготовка на будушее
+
+  const dispatch = useDispatch();
+  useEffect(() => dispatch(projectsOperations.getAllProjects()), [dispatch]);
 
   const openModal = () => setShowModal(true);
-
   const handleCloseModal = () => setShowModal(false);
 
   return (
@@ -38,7 +41,7 @@ const ProjectsPage = () => {
         )}
       </div>
       {/* </div> */}
-      {/* <ProjectList /> */}
+      <ProjectList />
     </>
   );
 };
