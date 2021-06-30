@@ -4,6 +4,7 @@ import { refs } from './refs';
 import { ReactComponent as EditIcon } from './svg/edit_icon.svg';
 import { ReactComponent as AddGroupIcon } from './svg/add_group_icon.svg';
 import { ReactComponent as PlusButtonIcon } from './svg/plus_button_icon.svg';
+import SideBar from 'components/SideBar';
 import Modal from 'components/Modal';
 import s from './SprintsPage.module.scss';
 
@@ -29,7 +30,13 @@ const SprintsPage = () => {
   return (
     <>
       <main>
-        <aside></aside>
+        <aside>
+          <SideBar>
+            <div className={s.sideBarPlug}>
+              <p>SideBar content</p>
+            </div>
+          </SideBar>
+        </aside>
 
         <article>
           <div className={s.headerWrap}>
@@ -64,19 +71,8 @@ const SprintsPage = () => {
                 {desktop && <span>Create a sprint</span>}
               </div>
             )}
-
-            {/* {tablet && (
-              <div className={s.createSprintWrap}>
-                {tablet && (
-                  <PlusButtonIcon
-                    className={s.PlusButtonIcon}
-                    onClick={toggleModal}
-                  />
-                )}
-                {desktop && <span>Create a sprint</span>}
-              </div>
-            )} */}
           </div>
+
           <ul className={s.SprintList}>
             <li className={s.SprintItem}></li>
             <li className={s.SprintItem}></li>
