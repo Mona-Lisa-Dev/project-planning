@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Container from 'components/Container';
 import AppBar from 'components/AppBar';
-import PrivateRoute from 'components/PrivateRoute';
+// To discomment!!!
+// import PrivateRoute from 'components/PrivateRoute';
 import PublicRoute from 'components/PublicRoute';
 import authOperations from 'redux/auth/auth-operations';
 import { getIsAuthenticated, getIsSignup } from 'redux/auth/auth-selectors';
@@ -21,9 +22,12 @@ const LoginPage = lazy(
 const RegisterPage = lazy(() =>
   import('./pages/RegisterPage' /* webpackChunkName: "RegisterPage" */),
 );
-const ProjectsPage = lazy(() =>
-  import('./pages/ProjectsPage' /* webpackChunkName: "ProjectsPage" */),
-);
+
+// To discomment!!!
+// const ProjectsPage = lazy(() =>
+//   import('./pages/ProjectsPage' /* webpackChunkName: "ProjectsPage" */),
+// );
+
 const SprintsPage = lazy(() =>
   import('./pages/SprintsPage' /* webpackChunkName: "SprintsPage" */),
 );
@@ -62,7 +66,6 @@ const App = () => {
                 )
               }
             />
-
             {/* <PrivateRoute
               path={routes.sprints}
               restricted
@@ -70,7 +73,8 @@ const App = () => {
               redirectTo={routes.login}
             /> */}
 
-            <Route
+            {/* To discomment!!! */}
+            {/* <Route
               path={routes.sprints}
               restricted
               render={props =>
@@ -82,21 +86,26 @@ const App = () => {
               }
               // component={SprintsPage}
               // redirectTo={routes.login}
-            />
+            /> */}
 
-            <PrivateRoute
+            <Route path={routes.sprints} component={SprintsPage} />
+
+            {/* To discomment!!! */}
+            {/* <PrivateRoute
               path={routes.projects}
               restricted
               component={ProjectsPage}
               redirectTo={routes.login}
-            />
+            /> */}
             {/* <PublicRoute
               path={routes.home}
               restricted
               component={isAuthorized ? ProjectsPage : RegisterPage}
               redirectTo={routes.projects}
             /> */}
-            <Route
+
+            {/* To discomment!!! */}
+            {/* <Route
               path={routes.home}
               restricted
               render={props =>
@@ -106,8 +115,7 @@ const App = () => {
                   <Redirect to={routes.signup} />
                 )
               }
-            />
-
+            /> */}
             <Redirect to={routes.home} />
           </Switch>
         </Suspense>

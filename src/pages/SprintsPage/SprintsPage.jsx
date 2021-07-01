@@ -14,6 +14,7 @@ import CreateSprint from 'components/CreateSprint';
 import SprintList from 'components/SprintList';
 import AddPeopleForm from 'components/AddPeopleForm';
 import {
+  // To discomment!!!
   getProjects,
   getCurrentProject,
 } from 'redux/projects/projects-selectors';
@@ -37,6 +38,7 @@ const SprintsPage = props => {
     dispatch(projectsOperations.getProjectById(projectId));
   }, [dispatch, projectId]);
 
+  // ======= useMediaQuery =======
   const handleMaxWidth = width => {
     return `(max-width:${width}px) `;
   };
@@ -48,6 +50,7 @@ const SprintsPage = props => {
   const tablet = useMediaQuery(handleMinWidth(refs.tablet));
   const tabletMax = useMediaQuery(handleMaxWidth(refs.tabletMax));
   const desktop = useMediaQuery(handleMinWidth(refs.desktop));
+  // ======= End useMediaQuery =======
 
   // const toggleModal = () => {
   //   setShowModal(!showModal);
@@ -65,21 +68,19 @@ const SprintsPage = props => {
       <main>
         <aside>
           <SideBar>
-            <div className={s.sideBarPlug}>
-              <ul>
-                {projects.map(project => (
-                  <li key={project.id}>
-                    <Link
-                      to={{
-                        pathname: `/projects/${project.id}`,
-                      }}
-                    >
-                      <h3>{project.name}</h3>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <ul>
+              {projects.map(project => (
+                <li key={project.id}>
+                  <Link
+                    to={{
+                      pathname: `/projects/${project.id}`,
+                    }}
+                  >
+                    <h3>{project.name}</h3>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </SideBar>
         </aside>
 
@@ -87,10 +88,13 @@ const SprintsPage = props => {
           <div className={s.headerWrap}>
             <div className={s.contentWrap}>
               <div className={s.titleWrap}>
-                <h2>{currentProject?.name}</h2>
+                <h2>{currentProject?.name || 'Project 1'}</h2>
                 <EditIcon className={s.EditIcon} />
               </div>
-              <p>{currentProject?.description}</p>
+              <p>
+                {currentProject?.description ||
+                  'Short description of the project, if it exist, it is posted here. The width of the text block'}
+              </p>
               <div className={s.addWrap}>
                 <AddGroupIcon className={s.AddGroupIcon} />
                 <span onClick={openModalAddPeople}>Add people</span>
@@ -116,6 +120,15 @@ const SprintsPage = props => {
           </div>
 
           <SprintList currentProject={currentProject} />
+          {/* <ul className={s.SprintList}>
+            <li className={s.SprintItem}></li>
+            <li className={s.SprintItem}></li>
+            <li className={s.SprintItem}></li>
+            <li className={s.SprintItem}></li>
+            <li className={s.SprintItem}></li>
+            <li className={s.SprintItem}></li>
+            <li className={s.SprintItem}></li>
+          </ul> */}
         </article>
       </main>
 
