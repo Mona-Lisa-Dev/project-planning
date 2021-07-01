@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { getProjects } from 'redux/projects/projects-selectors';
-import { Link } from 'react-router-dom';
 import ProjectItem from '../ProjectItem';
 import styles from './ProjectList.module.scss';
 

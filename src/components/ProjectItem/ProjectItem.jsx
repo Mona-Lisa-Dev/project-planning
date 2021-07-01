@@ -1,5 +1,7 @@
 // import PropTypes from 'prop-types';
+
 import { useDispatch, useSelector } from 'react-redux';
+
 import ButtonDelete from '../ButtonDelete';
 import projectsOperations from 'redux/projects/projects-operations';
 
