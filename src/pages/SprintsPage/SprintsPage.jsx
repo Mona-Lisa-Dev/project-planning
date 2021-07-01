@@ -10,6 +10,7 @@ import { ReactComponent as PlusButtonIcon } from './svg/plus_button_icon.svg';
 
 import SideBar from 'components/SideBar';
 import Modal from 'components/Modal';
+import CreateSprint from 'components/CreateSprint';
 import SprintList from 'components/SprintList';
 import AddPeopleForm from 'components/AddPeopleForm';
 import {
@@ -115,16 +116,6 @@ const SprintsPage = props => {
           </div>
 
           <SprintList currentProject={currentProject} />
-
-          {/* <ul className={s.SprintList}>
-            <li className={s.SprintItem}></li>
-            <li className={s.SprintItem}></li>
-            <li className={s.SprintItem}></li>
-            <li className={s.SprintItem}></li>
-            <li className={s.SprintItem}></li>
-            <li className={s.SprintItem}></li>
-            <li className={s.SprintItem}></li>
-          </ul> */}
         </article>
       </main>
 
@@ -134,13 +125,11 @@ const SprintsPage = props => {
         </Modal>
       )}
 
-      {/* {showModal && (
-        <Modal onCloseModal={toggleModal}>
-          <div className={s.modalPlug}>
-            <h2>Modal content</h2>
-          </div>
+      {showModalCreateSprint && (
+        <Modal onCloseModal={handleCloseModal}>
+          <CreateSprint onClickCancel={handleCloseModal} />
         </Modal>
-      )} */}
+      )}
     </>
   );
 };
