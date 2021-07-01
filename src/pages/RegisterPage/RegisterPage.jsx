@@ -168,7 +168,6 @@ const RegisterPage = () => {
             name={'confirmPassword'}
             onChange={handleChange}
             onBlur={blurHandler}
-            // pattern="^[a-z0-9_-]{7,18}$"
             value={confirmPassword}
             required
           />
