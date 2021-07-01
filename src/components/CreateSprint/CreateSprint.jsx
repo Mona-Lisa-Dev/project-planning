@@ -12,24 +12,65 @@ import s from './CreateSprint.module.scss';
 
 const useStyles = makeStyles({
   root: {
+    '& .MuiGrid-container': {
+      // backgroundColor: 'red',
+      marginRight: 30,
+    },
+
     '& .MuiFormControl-root': {
+      margin: 0,
       width: '100%',
 
-      '& div': {
-        backgroundColor: 'red',
-      },
+      // '& div': {
+      //   backgroundColor: 'red',
+      // },
+
+      // '&.MuiTextField-root:first-child': {
+      //   backgroundColor: 'red',
+      //   // marginBottom: 40,
+      //   // [`@media (min-width: ${768}px)`]: {
+      //   //   marginBottom: 53,
+      //   // },
+      // },
     },
 
     // Lable
     '& label': {
       fontFamily: ['Montserrat', 'sans-serif'],
-    },
+      fontWeight: 400,
+      letterSpacing: '0.04em',
+      color: 'rgba(24, 28, 39, 0.6)',
 
-    '& label.Mui-focused': {
-      color: '#ff6b08',
+      '&.MuiFormLabel-root': {
+        // paddingLeft: 0,
+        paddingLeft: 7,
+        color: 'rgba(24, 28, 39, 0.6)',
+        fontSize: 16,
+
+        [`@media (min-width: ${768}px)`]: {
+          fontSize: 18,
+        },
+
+        '&.MuiFormLabel-root.MuiInputLabel-shrink': {
+          fontSize: '1.2rem',
+          paddingLeft: 0,
+        },
+
+        // '&.MuiFormLabel-root.MuiFormLabel-filled': {
+        //   fontSize: 30,
+        // },
+      },
+
+      // '&.Mui-focused': {
+      //   paddingLeft: 0,
+      //   fontSize: '1rem',
+      //   color: 'green',
+      //   // color: '#ff6b08',
+      // },
     },
 
     '& input': {
+      paddingLeft: 7,
       fontFamily: ['Montserrat', 'sans-serif'],
       fontSize: 18,
       color: '#181C27',
@@ -43,6 +84,15 @@ const useStyles = makeStyles({
     '& .MuiInput-underline:after': {
       borderBottomColor: '#ff6b08',
     },
+
+    '& .MuiInput-underline:before': {
+      borderBottomColor: 'rgba(24, 28, 39, 0.2)',
+    },
+
+    '& .MuiInput-underline:hover:before': {
+      borderBottom: '1px solid rgba(24, 28, 39, 0.2)',
+    },
+
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
         borderColor: 'blue',
@@ -103,16 +153,18 @@ const CreateSprint = () => {
         autoComplete="off"
         onSubmit={createNewSprint}
       >
-        <TextField
-          id="standard-basic"
-          label="The name of the sprint"
-          type="text"
-          name="sprintName"
-          value={sprintName}
-          onChange={handleInputForm}
-        />
+        <div className={s.nameTextFieldWrap}>
+          <TextField
+            id="standard-basic"
+            label="The name of the sprint"
+            type="text"
+            name="sprintName"
+            value={sprintName}
+            onChange={handleInputForm}
+          />
+        </div>
 
-        <label>
+        <label className={s.checkboxLabel}>
           <input
             className={s.visuallyHidden}
             type="checkbox"
@@ -127,57 +179,63 @@ const CreateSprint = () => {
         </label>
 
         <div className={s.dataWrap}>
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <Grid container justify="space-around">
-              {previousDays ? (
-                <KeyboardDatePicker
-                  disableToolbar
-                  variant="inline"
-                  format="dd MMM"
-                  margin="normal"
-                  id="date-picker-inline"
-                  label="End date"
-                  type="text"
-                  name="date"
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                  }}
-                />
-              ) : (
-                <KeyboardDatePicker
-                  disableToolbar
-                  variant="inline"
-                  minDate={new Date()}
-                  format="dd MMM"
-                  margin="normal"
-                  id="date-picker-inline"
-                  label="End date"
-                  type="text"
-                  name="date"
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                  }}
-                />
-              )}
-            </Grid>
-          </MuiPickersUtilsProvider>
+          <div className={s.KeyboardDatePickerWrap}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <Grid container justify="space-around">
+                {previousDays ? (
+                  <KeyboardDatePicker
+                    disableToolbar
+                    variant="inline"
+                    format="dd MMM"
+                    margin="normal"
+                    id="date-picker-inline"
+                    label="End date"
+                    type="text"
+                    name="date"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                    KeyboardButtonProps={{
+                      'aria-label': 'change date',
+                    }}
+                  />
+                ) : (
+                  <KeyboardDatePicker
+                    disableToolbar
+                    variant="inline"
+                    minDate={new Date()}
+                    format="dd MMM"
+                    margin="normal"
+                    id="date-picker-inline"
+                    label="End date"
+                    type="text"
+                    name="date"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                    KeyboardButtonProps={{
+                      'aria-label': 'change date',
+                    }}
+                  />
+                )}
+              </Grid>
+            </MuiPickersUtilsProvider>
+          </div>
 
-          <TextField
-            id="standard-basic"
-            label="Duration"
-            type="text"
-            name="duration"
-            value={duration}
-            onChange={handleInputForm}
-          />
+          <div className={s.durationTextFieldWrap}>
+            <TextField
+              id="standard-basic"
+              label="Duration"
+              type="text"
+              name="duration"
+              value={duration}
+              onChange={handleInputForm}
+            />
+          </div>
         </div>
         <button className={s.formBtn} type="submit">
           Ready
         </button>
+
+        <span className={s.cancelBtn}>Cancel</span>
       </form>
     </div>
   );
