@@ -52,7 +52,7 @@ const CreateProject = ({ onClickCancel }) => {
             value={name}
             name="name"
             type="text"
-            placeholder={emptyInput ? 'Project name' : 'Project name'}
+            placeholder={emptyInput ? 'Enter project name' : 'Project name'}
             className={emptyInput ? styles.empty_input : styles.input}
             onChange={handleNameChange}
           />
