@@ -19,6 +19,9 @@ import {
   deleteParticipantRequest,
   deleteParticipantSuccess,
   deleteParticipantError,
+  getProjectByIdRequest,
+  getProjectByIdSuccess,
+  getProjectByIdError,
 } from './projects-actions';
 
 const getAllProjects = () => async dispatch => {
@@ -33,6 +36,21 @@ const getAllProjects = () => async dispatch => {
     return data.projects;
   } catch (error) {
     dispatch(getAllProjectsError(error.message));
+  }
+};
+
+const getProjectById = projectId => async dispatch => {
+  dispatch(getProjectByIdRequest());
+
+  try {
+    const {
+      data: { data },
+    } = await axios.get(`/projects/${projectId}`);
+    dispatch(getProjectByIdSuccess(data.project));
+
+    return data.project;
+  } catch (error) {
+    dispatch(getProjectByIdError(error.message));
   }
 };
 
@@ -110,6 +128,7 @@ const deleteParticipant = (projectId, email) => async dispatch => {
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
   getAllProjects,
+  getProjectById,
   createProject,
   deleteProject,
   updateProject,

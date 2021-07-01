@@ -1,5 +1,12 @@
+
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import Spinner from 'components/Loader/Loader';
+import { useDispatch, useSelector } from 'react-redux';
+import authOperations from 'redux/auth/auth-operations';
+
+import { getLoadingUser } from 'redux/auth/auth-selectors';
+
+
 import styles from './LoginPage.module.scss';
 
 import authOperations from 'redux/auth/auth-operations';
@@ -7,11 +14,15 @@ import authOperations from 'redux/auth/auth-operations';
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const [emailDirty, setEmailDirty] = useState(false);
   const [passwordDirty, setPasswordDirty] = useState(false);
   const [emailError, setEmailError] = useState('Empty field');
   const [passwordError, setPasswordError] = useState('Empty field');
   const [validForm, setValidForm] = useState(false);
+
+  const loading = useSelector(getLoadingUser);
+
 
   const dispatch = useDispatch();
 
@@ -138,6 +149,10 @@ const LoginPage = () => {
         <button className={styles.btnLog} type={'submit'} disabled={!validForm}>
           Enter
         </button>
+
+
+        {loading && <Spinner />}
+
         <div className={styles.login}>
           <p className={styles.question}> No account? </p>
           <a className={styles.auth} href="/users/signup">

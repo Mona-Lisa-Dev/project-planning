@@ -12,6 +12,7 @@
   background-color: $form-background;
   color: $text-dark;
   border: $form-input-border;
+  border: none;
   // @media screen and (max-width: $mobile-max) {
   // padding: 63px 20px 0 20px;
   // width: 320px;
@@ -26,10 +27,14 @@
   // width: 530px;
   // }
 }
+
 .title {
+  font-family: $main-font;
   text-align: center;
   font-weight: 500;
+  line-height: 1.21;
 }
+
 .input,
 .empty_input {
   margin: 50px 0 30px 0;
@@ -53,8 +58,15 @@
   }
 }
 .ready_btn {
+  margin: 0 auto;
   margin-top: 40px;
   margin-bottom: 20px;
+  width: 148px;
+  height: 44px;
+
+  outline: none;
+  border: none;
+
   color: $text-white;
   background-color: $main-orange;
   border-radius: 25px;
@@ -67,6 +79,8 @@
 }
 .cancel_btn {
   color: $text-light;
+  outline: none;
+  border: none;
   background-color: transparent;
   text-decoration: underline;
   &:hover,
@@ -78,4 +92,27 @@
 .text {
   margin-bottom: 20px;
   color: $text-light;
+}
+
+// ======================Modile===================
+@media screen and (max-width: $mobile-max) {
+  .title {
+    font-size: 26px;
+  }
+}
+
+//============Tablet==========================================
+
+@media screen and (min-width: $tablet) {
+  .title {
+    font-size: 36px;
+  }
+}
+
+//============================Desktop===============================
+
+@media screen and (min-width: $desktop) {
+  .title {
+    font-size: 36px;
+  }
 }

@@ -49,3 +49,11 @@ export const deleteParticipantSuccess = createAction(
 export const deleteParticipantError = createAction(
   'projects/deleteParticipantError',
 );
+
+export const getProjectByIdRequest = createAction(
+  'projects/getProjectByIdRequest',
+);
+export const getProjectByIdSuccess = createAction(
+  'projects/getProjectByIdSuccess',
+);
+export const getProjectByIdError = createAction('projects/getProjectByIdError');
