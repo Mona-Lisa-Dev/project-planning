@@ -41,6 +41,24 @@ main {
       padding: 0 30px 0 0;
       width: 200px;
     }
+
+    .CreateNewProjectWrap {
+      padding: 30px 0;
+      text-align: center;
+
+      .CreateNewProject {
+        width: 44px;
+        height: 44px;
+        margin-bottom: 11px;
+        cursor: pointer;
+      }
+      & > span {
+        display: block;
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: 0.04em;
+      }
+    }
   }
 
   article {
@@ -144,7 +162,7 @@ main {
         }
 
         // Circle with plus ("button")
-        .PlusButtonIcon {
+        .CreateNewSprint {
           cursor: pointer;
 
           @media screen and (min-width: $desktop) {
@@ -163,7 +181,7 @@ main {
 }
 
 // Circle with plus ("button" Fixed)
-.PlusButtonIconFixed {
+.CreateNewSprintFixed {
   position: fixed;
   right: 20px;
   bottom: 20px;
