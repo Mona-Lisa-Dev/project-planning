@@ -1,7 +1,7 @@
 export const getIsAuthenticated = state => state.auth.isAuthorized;
 export const getIsSignup = state => state.auth.isSignup;
 
-export const getUserName = state => state.auth.user.name;
+export const getUserEmail = state => state.auth.user.email;
 
 export const getLoadingUser = state => state.auth.loading;
 

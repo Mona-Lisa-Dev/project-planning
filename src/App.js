@@ -1,4 +1,4 @@
-import { Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { lazy, Suspense, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -7,11 +7,14 @@ import AppBar from 'components/AppBar';
 import PrivateRoute from 'components/PrivateRoute';
 import PublicRoute from 'components/PublicRoute';
 import authOperations from 'redux/auth/auth-operations';
-import { getIsAuthenticated } from 'redux/auth/auth-selectors';
+import { getIsAuthenticated, getIsSignup } from 'redux/auth/auth-selectors';
 
 import routes from 'routes';
 import './scss/_main.scss';
+import Spinner from 'components/Loader/Loader';
 
+// import Diagram from 'components/Diagram';
+// import Spinner from 'components/Loader';
 const LoginPage = lazy(
   () => import('./pages/LoginPage') /* webpackChunkName: "LoginPage" */,
 );
@@ -21,20 +24,24 @@ const RegisterPage = lazy(() =>
 const ProjectsPage = lazy(() =>
   import('./pages/ProjectsPage' /* webpackChunkName: "ProjectsPage" */),
 );
-// const SprintsPage = lazy(() =>
-//   import('./pages/SprintsPage' /* webpackChunkName: "SprintsPage" */),
-// );
+const SprintsPage = lazy(() =>
+  import('./pages/SprintsPage' /* webpackChunkName: "SprintsPage" */),
+);
 
 const App = () => {
   const isAuthorized = useSelector(getIsAuthenticated);
+  const isSignup = useSelector(getIsSignup);
+
   const dispatch = useDispatch();
   useEffect(() => dispatch(authOperations.getCurrentUser()), [dispatch]);
 
   return (
     <>
       <AppBar />
+      {/* <Spinner /> */}
+
       <Container>
-        <Suspense fallback={<p>This is spinner, trust me</p>}>
+        <Suspense fallback={<Spinner />}>
           <Switch>
             <PublicRoute
               path={routes.login}
@@ -42,26 +49,63 @@ const App = () => {
               component={LoginPage}
               redirectTo={routes.projects}
             />
-            <PublicRoute
+            <Route
               path={routes.signup}
               restricted
-              component={RegisterPage}
-              redirectTo={routes.projects}
+              render={props =>
+                isAuthorized ? (
+                  routes.projects
+                ) : isSignup ? (
+                  <Redirect to={routes.login} />
+                ) : (
+                  <RegisterPage />
+                )
+              }
             />
 
-            {/* <PublicRoute path={routes.sprints} component={SprintsPage} /> */}
+            {/* <PrivateRoute
+              path={routes.sprints}
+              restricted
+              component={SprintsPage}
+              redirectTo={routes.login}
+            /> */}
+
+            <Route
+              path={routes.sprints}
+              restricted
+              render={props =>
+                isAuthorized ? (
+                  <SprintsPage {...props} />
+                ) : (
+                  <Redirect to={routes.login} />
+                )
+              }
+              // component={SprintsPage}
+              // redirectTo={routes.login}
+            />
 
             <PrivateRoute
               path={routes.projects}
               restricted
               component={ProjectsPage}
-              redirectTo={routes.projects}
+              redirectTo={routes.login}
             />
-            <PublicRoute
+            {/* <PublicRoute
               path={routes.home}
               restricted
               component={isAuthorized ? ProjectsPage : RegisterPage}
               redirectTo={routes.projects}
+            /> */}
+            <Route
+              path={routes.home}
+              restricted
+              render={props =>
+                isAuthorized ? (
+                  <Redirect to={routes.projects} />
+                ) : (
+                  <Redirect to={routes.signup} />
+                )
+              }
             />
 
             <Redirect to={routes.home} />
