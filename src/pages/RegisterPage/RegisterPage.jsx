@@ -1,12 +1,17 @@
+import Spinner from 'components/Loader/Loader';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import authOperations from 'redux/auth/auth-operations';
+
+import { getLoadingUser } from 'redux/auth/auth-selectors';
+
 import styles from './RegisterPage.module.scss';
 
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const loading = useSelector(getLoadingUser);
 
   const dispatch = useDispatch();
 
@@ -102,6 +107,8 @@ const RegisterPage = () => {
         <button className={styles.btnReg} type={'submit'}>
           Register
         </button>
+
+        {loading && <Spinner />}
 
         <div className={styles.login}>
           <p className={styles.question}> Do you have an account?</p>

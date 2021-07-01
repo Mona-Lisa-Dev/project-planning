@@ -11,10 +11,10 @@ import { getIsAuthenticated, getIsSignup } from 'redux/auth/auth-selectors';
 
 import routes from 'routes';
 import './scss/_main.scss';
+import Spinner from 'components/Loader/Loader';
 
-// import PrivateRoute from 'components/PrivateRoute';
-// import PublicRoute from 'components/PublicRoute';
 // import Diagram from 'components/Diagram';
+// import Spinner from 'components/Loader';
 const LoginPage = lazy(
   () => import('./pages/LoginPage') /* webpackChunkName: "LoginPage" */,
 );
@@ -24,9 +24,9 @@ const RegisterPage = lazy(() =>
 const ProjectsPage = lazy(() =>
   import('./pages/ProjectsPage' /* webpackChunkName: "ProjectsPage" */),
 );
-// const SprintsPage = lazy(() =>
-//   import('./pages/SprintsPage' /* webpackChunkName: "SprintsPage" */),
-// );
+const SprintsPage = lazy(() =>
+  import('./pages/SprintsPage' /* webpackChunkName: "SprintsPage" */),
+);
 
 const App = () => {
   const isAuthorized = useSelector(getIsAuthenticated);
@@ -38,9 +38,10 @@ const App = () => {
   return (
     <>
       <AppBar />
+      {/* <Spinner /> */}
 
       <Container>
-        <Suspense fallback={<p>This is spinner, trust me</p>}>
+        <Suspense fallback={<Spinner />}>
           <Switch>
             <PublicRoute
               path={routes.login}
@@ -62,14 +63,26 @@ const App = () => {
               }
             />
 
-            {/* <PublicRoute
-              path={routes.signup}
+            {/* <PrivateRoute
+              path={routes.sprints}
               restricted
-              component={RegisterPage}
+              component={SprintsPage}
               redirectTo={routes.login}
             /> */}
 
-            {/* <PublicRoute path={routes.sprints} component={SprintsPage} /> */}
+            <Route
+              path={routes.sprints}
+              restricted
+              render={props =>
+                isAuthorized ? (
+                  <SprintsPage {...props} />
+                ) : (
+                  <Redirect to={routes.login} />
+                )
+              }
+              // component={SprintsPage}
+              // redirectTo={routes.login}
+            />
 
             <PrivateRoute
               path={routes.projects}

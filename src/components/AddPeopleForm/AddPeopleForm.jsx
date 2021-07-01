@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import s from './AddPeopleForm.module.scss';
 import PeopleList from 'components/PeopleList';
 
-const AddPeopleForm = () => {
+const AddPeopleForm = ({ onClickCancel }) => {
   const [email, setEmail] = useState('');
   const [users, setUsers] = useState([]);
   const [emptyInput, setEmptyInput] = useState(false);
@@ -76,7 +76,12 @@ const AddPeopleForm = () => {
         Ready
       </button>
       {/* закрытие реализуется на модалке */}
-      <button form="add" type="button" className={s.cancel_btn}>
+      <button
+        form="add"
+        type="button"
+        onClick={onClickCancel}
+        className={s.cancel_btn}
+      >
         Cancel
       </button>
     </div>
