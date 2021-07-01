@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styles from './LoginPage.module.scss';
 
@@ -7,8 +7,21 @@ import authOperations from 'redux/auth/auth-operations';
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [emailDirty, setEmailDirty] = useState(false);
+  const [passwordDirty, setPasswordDirty] = useState(false);
+  const [emailError, setEmailError] = useState('Empty field');
+  const [passwordError, setPasswordError] = useState('Empty field');
+  const [validForm, setValidForm] = useState(false);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (emailError || passwordError) {
+      setValidForm(false);
+    } else {
+      setValidForm(true);
+    }
+  }, [emailError, passwordError]);
 
   const handleChange = event => {
     const { name, value } = event.currentTarget;
@@ -16,10 +29,25 @@ const LoginPage = () => {
     switch (name) {
       case 'email':
         setEmail(value);
+        const re =
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (!re.test(String(email).toLowerCase())) {
+          setEmailError('Error');
+        } else {
+          setEmailError('');
+        }
         break;
 
       case 'password':
         setPassword(value);
+        if (
+          event.currentTarget.value.length < 3 ||
+          event.currentTarget.value.length > 8
+        ) {
+          setPasswordError('Wrong password');
+        } else {
+          setPasswordError('');
+        }
         break;
 
       default:
@@ -38,6 +66,21 @@ const LoginPage = () => {
 
   const reset = () => {
     setPassword('');
+  };
+
+  const blurHandler = event => {
+    switch (event.currentTarget.name) {
+      case 'email':
+        setEmailDirty(true);
+        break;
+
+      case 'password':
+        setPasswordDirty(true);
+        break;
+
+      default:
+        return;
+    }
   };
 
   return (
@@ -67,11 +110,15 @@ const LoginPage = () => {
             type={'email'}
             name={'email'}
             onChange={handleChange}
+            onBlur={blurHandler}
             value={email}
+            required
           />
           <span className={styles.nameInput}>E-mail</span>
+          {emailDirty && emailError && (
+            <p className={styles.error}>{emailError}</p>
+          )}
         </label>
-        {/* {emailDirty && emailError && <span>{emailError}</span>} */}
         <label className={styles.labelForm}>
           <input
             className={styles.inputForm}
@@ -79,15 +126,16 @@ const LoginPage = () => {
             type={'password'}
             name={'password'}
             onChange={handleChange}
+            onBlur={blurHandler}
             values={password}
+            required
           />
           <span className={styles.nameInput}>Password</span>
+          {passwordDirty && passwordError && (
+            <p className={styles.error}>{passwordError}</p>
+          )}
         </label>
-        <button
-          className={styles.btnLog}
-          // onClick={handleSubmit}
-          type={'submit'}
-        >
+        <button className={styles.btnLog} type={'submit'} disabled={!validForm}>
           Enter
         </button>
         <div className={styles.login}>
