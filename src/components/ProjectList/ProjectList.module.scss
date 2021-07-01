@@ -2,10 +2,9 @@
 @import '../../scss/vars';
 
 .listWrapper {
-  width: $mobile;
+  width: 282px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: left;
   margin: 0 auto;
 }
 
@@ -70,7 +69,7 @@
 
 @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
   .listWrapper {
-    width: $tablet;
+    width: 688px;
   }
 
   .listItem {
@@ -87,7 +86,7 @@
 
 @media screen and (min-width: $desktop) {
   .listWrapper {
-    width: $desktop;
+    width: 1170px;
   }
 
   .listItem {
