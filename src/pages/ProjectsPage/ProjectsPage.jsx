@@ -19,7 +19,6 @@ const ProjectsPage = () => {
 
   return (
     <>
-      {/* <div className={styles.Container}> */}
       <div className={styles.ProjectsHeaderBar}>
         <h1 className={styles.ProjectsTitle}>Projects</h1>
 
@@ -40,7 +39,6 @@ const ProjectsPage = () => {
           </Modal>
         )}
       </div>
-      {/* </div> */}
       <ProjectList />
     </>
   );
