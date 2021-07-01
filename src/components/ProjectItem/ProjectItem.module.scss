@@ -2,7 +2,6 @@
 @import '../../scss/breakpoints';
 
 .itemWrapper {
-  background: $project-purple;
   border-radius: 5px;
   padding: 10px;
   word-wrap: break-word;
@@ -15,18 +14,15 @@
 
   @media screen and (max-width: $mobile-max) {
     width: 135px;
-    height: 136px;
   }
 
   @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
     width: 216px;
-    height: 216px;
     padding: 20px;
   }
 
   @media screen and (min-width: $desktop) {
     width: 270px;
-    height: 270px;
     padding: 30px;
   }
 }
