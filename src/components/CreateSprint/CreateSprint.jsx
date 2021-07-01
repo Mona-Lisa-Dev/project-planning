@@ -1,6 +1,9 @@
 import 'date-fns';
 import { useState } from 'react';
+// import { withStyles } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/styles';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -13,7 +16,6 @@ import s from './CreateSprint.module.scss';
 const useStyles = makeStyles({
   root: {
     '& .MuiGrid-container': {
-      // backgroundColor: 'red',
       marginRight: 30,
     },
 
@@ -93,16 +95,141 @@ const useStyles = makeStyles({
       borderBottom: '1px solid rgba(24, 28, 39, 0.2)',
     },
 
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: 'blue',
+    // '& .MuiOutlinedInput-root': {
+    //   '& fieldset': {
+    //     borderColor: 'blue',
+    //   },
+    //   '&:hover fieldset': {
+    //     borderColor: 'yellow',
+    //   },
+    //   '&.Mui-focused fieldset': {
+    //     borderColor: 'skyblue',
+    //     backgroundColor: 'green',
+    //   },
+    // },
+  },
+});
+
+// Calendar
+const materialTheme = createMuiTheme({
+  overrides: {
+    MuiPaper: {
+      root: {
+        backgroundColor: 'rgba(255, 255, 255, 0.7)',
+
+        backdropFilter: 'blur(24px)',
+        '&.MuiPaper-elevation8': {
+          borderRadius: 20,
+        },
       },
-      '&:hover fieldset': {
-        borderColor: 'yellow',
+    },
+
+    MuiPopover: {
+      paper: {
+        minWidth: 280,
       },
-      '&.Mui-focused fieldset': {
-        borderColor: 'skyblue',
-        backgroundColor: 'green',
+    },
+
+    MuiPickersBasePicker: {
+      container: {
+        borderRadius: 20,
+      },
+
+      pickerView: {
+        maxWidth: '100%',
+        minWidth: 'auto',
+        minHeight: 'auto',
+      },
+    },
+
+    MuiPickersToolbar: {
+      toolbar: {
+        backgroundColor: '#8bc34a',
+      },
+    },
+
+    // Header
+    MuiPickersCalendarHeader: {
+      switchHeader: {
+        marginTop: 0,
+        marginBottom: 0,
+        height: 40,
+        backgroundColor: 'white',
+        borderRadius: '20px 20px 0px 0px',
+
+        '& p': {
+          fontFamily: ['Montserrat', 'sans-serif'],
+          fontSize: 18,
+          fontWeight: 500,
+          color: '#1B1C20',
+        },
+      },
+
+      // Arrows
+      iconButton: {
+        backgroundColor: 'transparent',
+
+        '&:hover': {
+          backgroundColor: 'transparent',
+        },
+      },
+
+      // Days Header
+      daysHeader: {
+        padding: '23px 7px',
+      },
+
+      // Days
+      dayLabel: {
+        fontFamily: ['Montserrat', 'sans-serif'],
+        fontWeight: 600,
+        fontSize: 12,
+        textTransform: 'uppercase',
+        color: '#FF6B08',
+      },
+    },
+
+    MuiPickersCalendar: {
+      transitionContainer: {
+        marginTop: 0,
+      },
+
+      week: {
+        marginBottom: 6,
+      },
+    },
+
+    // Day selected
+    MuiPickersDay: {
+      day: {
+        width: 32,
+        height: 32,
+        marginLeft: 3,
+        marginRight: 3,
+      },
+
+      daySelected: {
+        backgroundColor: '#FF6B08',
+
+        '&:hover': {
+          backgroundColor: '#FF6B08',
+        },
+
+        '& p': {
+          color: 'white',
+        },
+      },
+    },
+
+    // Day number
+    MuiIconButton: {
+      label: {
+        '& p': {
+          fontFamily: ['Montserrat', 'sans-serif'],
+          fontWeight: 400,
+          fontSize: 14,
+          color: '#181C27',
+        },
       },
     },
   },
@@ -114,6 +241,7 @@ const CreateSprint = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [duration, setDuration] = useState('');
   const classes = useStyles();
+  // const DataPicker = styles();
 
   // Input - Date
   const handleDateChange = date => {
@@ -181,42 +309,45 @@ const CreateSprint = () => {
         <div className={s.dataWrap}>
           <div className={s.KeyboardDatePickerWrap}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <Grid container justify="space-around">
-                {previousDays ? (
-                  <KeyboardDatePicker
-                    disableToolbar
-                    variant="inline"
-                    format="dd MMM"
-                    margin="normal"
-                    id="date-picker-inline"
-                    label="End date"
-                    type="text"
-                    name="date"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                      'aria-label': 'change date',
-                    }}
-                  />
-                ) : (
-                  <KeyboardDatePicker
-                    disableToolbar
-                    variant="inline"
-                    minDate={new Date()}
-                    format="dd MMM"
-                    margin="normal"
-                    id="date-picker-inline"
-                    label="End date"
-                    type="text"
-                    name="date"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                      'aria-label': 'change date',
-                    }}
-                  />
-                )}
-              </Grid>
+              <ThemeProvider theme={materialTheme}>
+                <Grid container justify="space-around">
+                  {previousDays ? (
+                    <KeyboardDatePicker
+                      // className={DataPicker}
+                      disableToolbar
+                      variant="inline"
+                      format="dd MMM"
+                      margin="normal"
+                      id="date-picker-inline"
+                      label="End date"
+                      type="text"
+                      name="date"
+                      value={selectedDate}
+                      onChange={handleDateChange}
+                      KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                      }}
+                    />
+                  ) : (
+                    <KeyboardDatePicker
+                      disableToolbar
+                      variant="inline"
+                      minDate={new Date()}
+                      format="dd MMM"
+                      margin="normal"
+                      id="date-picker-inline"
+                      label="End date"
+                      type="text"
+                      name="date"
+                      value={selectedDate}
+                      onChange={handleDateChange}
+                      KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                      }}
+                    />
+                  )}
+                </Grid>
+              </ThemeProvider>
             </MuiPickersUtilsProvider>
           </div>
 
@@ -235,7 +366,9 @@ const CreateSprint = () => {
           Ready
         </button>
 
-        <span className={s.cancelBtn}>Cancel</span>
+        <div className={s.cancelBtnWrap}>
+          <span className={s.cancelBtn}>Cancel</span>
+        </div>
       </form>
     </div>
   );
