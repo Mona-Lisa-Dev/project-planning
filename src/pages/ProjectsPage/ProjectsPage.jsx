@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from 'components/Modal';
 import CreateProject from 'components/CreateProject';
 import ProjectList from 'components/ProjectList';
 import projectsOperations from 'redux/projects/projects-operations';
 
+import { getLoadingProjects } from 'redux/projects/projects-selectors';
+
 import styles from './ProjectsPage.module.scss';
+import Spinner from 'components/Loader/Loader';
 
 const ProjectsPage = () => {
   const [showModal, setShowModal] = useState(false);
+  const loading = useSelector(getLoadingProjects);
 
   const dispatch = useDispatch();
   useEffect(() => dispatch(projectsOperations.getAllProjects()), [dispatch]);
@@ -19,9 +23,10 @@ const ProjectsPage = () => {
 
   return (
     <>
-      {/* <div className={styles.Container}> */}
       <div className={styles.ProjectsHeaderBar}>
         <h1 className={styles.ProjectsTitle}>Projects</h1>
+
+        {loading && <Spinner />}
 
         <label htmlFor="CreateButton" className={styles.ProjectsUtilDiv}>
           <button
@@ -40,7 +45,6 @@ const ProjectsPage = () => {
           </Modal>
         )}
       </div>
-      {/* </div> */}
       <ProjectList />
     </>
   );

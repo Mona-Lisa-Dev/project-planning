@@ -1,7 +1,10 @@
+import Spinner from 'components/Loader/Loader';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import projectsOperations from 'redux/projects/projects-operations';
+
+import { getLoadingProjects } from 'redux/projects/projects-selectors';
 
 import styles from './CreateProject.module.scss';
 
@@ -9,6 +12,7 @@ const CreateProject = ({ onClickCancel }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [emptyInput, setEmptyInput] = useState(false);
+  const loading = useSelector(getLoadingProjects);
 
   const dispatch = useDispatch();
 
@@ -48,7 +52,7 @@ const CreateProject = ({ onClickCancel }) => {
             value={name}
             name="name"
             type="text"
-            placeholder={emptyInput ? 'Project name' : 'Project name'}
+            placeholder={emptyInput ? 'Enter project name' : 'Project name'}
             className={emptyInput ? styles.empty_input : styles.input}
             onChange={handleNameChange}
           />
@@ -64,6 +68,8 @@ const CreateProject = ({ onClickCancel }) => {
             onChange={handleDescriptionChange}
           />
         </label>
+
+        {loading && <Spinner />}
 
         <button type="submit" className={styles.ready_btn}>
           Ready
