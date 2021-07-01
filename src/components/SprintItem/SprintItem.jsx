@@ -27,7 +27,9 @@ const SprintItem = ({ currentProject, sprint }) => {
             <p className={styles.item_description}>{sprint.duration}</p>
           </div>
         </div>
-        <ButtonDelete handleClick={handleClick} />
+        <div className={styles.btnDelSprint}>
+          <ButtonDelete handleClick={handleClick} />
+        </div>
       </div>
     </>
   );
