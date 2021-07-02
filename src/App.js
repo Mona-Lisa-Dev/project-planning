@@ -14,7 +14,11 @@ import './scss/_main.scss';
 import Spinner from 'components/Loader/Loader';
 
 // import Diagram from 'components/Diagram';
+
+// import DiagramModal from 'components/Diagram/DiagramModal';
+
 // import Spinner from 'components/Loader';
+
 const LoginPage = lazy(
   () => import('./pages/LoginPage') /* webpackChunkName: "LoginPage" */,
 );
