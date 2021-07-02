@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import { getProjects } from 'redux/projects/projects-selectors';
 import ProjectItem from '../ProjectItem';
@@ -12,13 +11,7 @@ const ProjectList = () => {
     <ul className={styles.listWrapper}>
       {projects.map(project => (
         <li key={project.id} className={styles.listItem}>
-          <Link
-            to={{
-              pathname: `/projects/${project.id}`,
-            }}
-          >
-            <ProjectItem project={project}></ProjectItem>
-          </Link>
+          <ProjectItem project={project}></ProjectItem>
         </li>
       ))}
     </ul>

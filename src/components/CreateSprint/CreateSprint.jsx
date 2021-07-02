@@ -269,9 +269,9 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
   const createNewSprint = e => {
     e.preventDefault();
 
-    console.log('sprintName', sprintName);
-    console.log('selectedDate', selectedDate);
-    console.log('duration', duration);
+    // console.log('sprintName', sprintName);
+    // console.log('selectedDate', selectedDate);
+    // console.log('duration', duration);
 
     const newSprint = {
       name: sprintName,
