@@ -137,9 +137,9 @@ const deleteParticipant =
       const {
         data: { data },
       } = await axios.post(`/projects/${projectId}/participant`, { email });
-      dispatch(deleteParticipantSuccess(data.project.psrticipants));
+      dispatch(deleteParticipantSuccess(data.project.participants));
 
-      return data.project.psrticipants;
+      return data.project.participants;
     } catch (error) {
       dispatch(deleteParticipantError(error.message));
     }
