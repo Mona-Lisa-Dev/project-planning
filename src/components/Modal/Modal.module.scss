@@ -10,6 +10,7 @@
 
   @media screen and (max-width: $mobile-max) {
     top: 61px;
+    z-index: 3;
   }
 
   @media screen and (min-width: $tablet) {
@@ -21,10 +22,17 @@
   .content {
     display: flex;
     justify-content: center;
-
-    padding: 63px 20px 20px;
+    padding: 63px 20px 0;
     height: 100%;
     background-color: $primaryWhiteColor;
+    overflow-y: scroll;
+
+    // Hides Modal scrollbar
+    -ms-overflow-style: none; // IE and Edge
+    scrollbar-width: none; // Firefox
+    &::-webkit-scrollbar {
+      display: none; // Chrome, Safari,Opera
+    }
 
     @media screen and (max-width: $mobile-max) {
       margin: 0 auto;
@@ -41,6 +49,16 @@
       padding: 120px 50px 40px;
       width: 530px;
       box-shadow: $primaryShadow;
+    }
+
+    .CloseModalBtn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 9px;
+      width: 44px;
+      height: 44px;
+      cursor: pointer;
     }
   }
 }

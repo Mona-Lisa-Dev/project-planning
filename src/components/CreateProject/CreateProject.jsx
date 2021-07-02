@@ -47,26 +47,28 @@ const CreateProject = ({ onClickCancel }) => {
     <div className={styles.form}>
       <h2 className={styles.title}>Creating a project</h2>
       <form onSubmit={handleSubmit} autoComplete="off" className={styles.form}>
-        <label>
+        <label className={styles.labelForm}>
           <input
             value={name}
             name="name"
             type="text"
-            placeholder={emptyInput ? 'Enter project name' : 'Project name'}
-            className={emptyInput ? styles.empty_input : styles.input}
+            placeholder=" "
+            className={emptyInput ? styles.empty_input : styles.input_name}
             onChange={handleNameChange}
           />
+          <span className={styles.nameInput}>Project name</span>
         </label>
-        <label>
+        <label className={styles.labelForm}>
           <input
             id="add"
             value={description}
             name="description"
             type="text"
-            placeholder={emptyInput ? 'Description' : 'Description'}
+            placeholder=" "
             className={emptyInput ? styles.empty_input : styles.input}
             onChange={handleDescriptionChange}
           />
+          <span className={styles.nameInput}>Descirption</span>
         </label>
 
         {loading && <Spinner />}

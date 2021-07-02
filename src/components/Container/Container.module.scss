@@ -1,6 +1,10 @@
 @import '../../scss/breakpoints';
 
 .Container {
+  @media screen and (max-width: $mobile-max) {
+    padding-top: 60px;
+  }
+
   @media screen and (min-width: $tablet) {
     min-width: $tablet;
   }
