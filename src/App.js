@@ -15,7 +15,7 @@ import Spinner from 'components/Loader/Loader';
 
 // import Diagram from 'components/Diagram';
 
-// import DiagramModal from 'components/Diagram/DiagramModal';
+import DiagramModal from 'components/Diagram/DiagramModal';
 
 const LoginPage = lazy(
   () => import('./pages/LoginPage') /* webpackChunkName: "LoginPage" */,
@@ -40,6 +40,7 @@ const App = () => {
   return (
     <>
       <AppBar />
+      <DiagramModal />
 
       <Container>
         <Suspense fallback={<Spinner />}>

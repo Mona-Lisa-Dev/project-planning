@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
+import { useMediaQuery } from '@material-ui/core';
 
+import PropTypes from 'prop-types';
+import { refs } from './refs';
 import Diagram from './Diagram';
 import ButtonClose from 'components/ButtonClose';
 import s from './Diagram.module.scss';
@@ -27,11 +29,24 @@ const DiagramModal = ({ onCloseModal }) => {
   // Close by click on btn
   const handleCloseByButton = () => onCloseModal();
 
+  // ------- useMediaQuery -------
+  const handleMaxWidth = width => {
+    return `(max-width:${width}px) `;
+  };
+  const handleMinWidth = width => {
+    return `(min-width:${width}px) `;
+  };
+  const tabletMin = useMediaQuery(handleMinWidth(refs.tabletMin));
+  const mobileMax = useMediaQuery(handleMaxWidth(refs.mobileMax));
+  // const desktop = useMediaQuery(handleMinWidth(refs.desktop));
+  // ----- End useMediaQuery -----
+
   return createPortal(
     <div className={s.backdrop} onClick={handleCloseByBackdrop}>
       <div className={s.content}>
         <ButtonClose onClose={handleCloseByButton} />
-        <Diagram />
+        {mobileMax && <p className={s.contentText}>Rotate your device</p>}
+        {tabletMin && <Diagram />}
       </div>
     </div>,
     modalRoot,
