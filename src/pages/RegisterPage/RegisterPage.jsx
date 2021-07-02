@@ -1,11 +1,9 @@
-
 import {
   useState,
   // useEffect
 } from 'react';
 import Spinner from 'components/Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
-
 
 import authOperations from 'redux/auth/auth-operations';
 
@@ -29,7 +27,6 @@ const RegisterPage = () => {
   // const [validForm, setValidForm] = useState(false);
 
   const loading = useSelector(getLoadingUser);
-
 
   const dispatch = useDispatch();
 
@@ -84,7 +81,7 @@ const RegisterPage = () => {
   const handleFormSubmit = event => {
     event.preventDefault();
 
-    const user = { email, password, confirmPassword };
+    const user = { email, password };
     dispatch(authOperations.signup(user));
 
     reset();

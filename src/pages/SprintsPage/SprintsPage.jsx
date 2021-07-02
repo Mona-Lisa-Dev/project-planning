@@ -67,7 +67,7 @@ const SprintsPage = props => {
       <main>
         <aside>
           <SideBar>
-            <ShowProjects />
+//             <ShowProjects />
 
             <ul>
               {projects.map(project => (
@@ -100,15 +100,12 @@ const SprintsPage = props => {
             <div className={s.contentWrap}>
               <div className={s.titleWrap}>
                 <h2>{currentProject?.name}</h2>
-                {/* <h2>Project 1</h2> */}
+
                 <EditIcon className={s.EditIcon} />
               </div>
 
               <p>{currentProject?.description}</p>
-              {/* <p>
-                Short description of the project, if it exist, it is posted
-                here. The width of the text block
-              </p> */}
+
 
               <div className={s.addWrap}>
                 <AddGroupIcon className={s.AddGroupIcon} />
