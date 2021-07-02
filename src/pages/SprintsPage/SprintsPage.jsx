@@ -10,6 +10,7 @@ import { ReactComponent as CreateNewSprint } from './svg/plus_button_icon.svg';
 import { ReactComponent as CreateNewProject } from './svg/plus_button_icon_two.svg';
 
 import SideBar from 'components/SideBar';
+import ShowProjects from 'components/ShowProjects';
 import Modal from 'components/Modal';
 import CreateSprint from 'components/CreateSprint';
 import SprintList from 'components/SprintList';
@@ -66,6 +67,8 @@ const SprintsPage = props => {
       <main>
         <aside>
           <SideBar>
+            <ShowProjects />
+
             <ul>
               {projects.map(project => (
                 <li key={project.id}>

@@ -1,0 +1,23 @@
+@import '../../scss/breakpoints';
+@import '../../scss/vars';
+
+.showProjectsLink {
+  display: flex;
+  align-items: center;
+  height: 37px;
+  color: #181c27;
+
+  @media screen and (min-width: $tablet) {
+    height: 55px;
+  }
+
+  .Arrow {
+    margin-right: 20px;
+  }
+
+  & > span {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+  }
+}

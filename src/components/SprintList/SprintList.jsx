@@ -1,13 +1,13 @@
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import SprintItem from '../SprintItem';
-// import { getSprints } from 'redux/sprints/sprints-selectors';
+import { getSprints } from 'redux/sprints/sprints-selectors';
 import styles from './SprintList.module.scss';
 
 // Delete it later
-import sprints from './alternativeSprints.json';
+// import sprints from './alternativeSprints.json';
 
 const SprintList = ({ currentProject }) => {
-  // const sprints = useSelector(getSprints);
+  const sprints = useSelector(getSprints);
 
   return (
     <ul className={styles.listWrapper}>
