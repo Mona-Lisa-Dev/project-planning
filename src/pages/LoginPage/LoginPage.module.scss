@@ -103,11 +103,13 @@
 }
 
 .btnLog {
-  margin-bottom: 11px;
-  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  padding: 11px 44px;
   cursor: pointer;
-  width: 100%;
-  height: 45px;
+  margin: 0 auto 20px;
+  width: 141px;
+  height: 44px;
   text-align: center;
   vertical-align: middle;
   font-weight: 500;
@@ -116,6 +118,15 @@
   background-color: rgba(255, 107, 8, 0.3);
   border: none;
   border-radius: 25px;
+  display: flex;
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1, 22;
+  text-align: center;
+  letter-spacing: 0.04em;
+  transition: all 0.25s linear;
 }
 
 .btnLog:enabled {
@@ -140,7 +151,7 @@
   color: $text-dark;
 }
 
-@media screen and (min-width: 320px) {
+@media screen and (min-width: $mobile) {
   .general {
     display: none;
   }
@@ -153,7 +164,7 @@
     padding: 47px 20px;
   }
 
-  .headline {
+  .nameInput {
     font-size: 16px;
   }
 
@@ -161,8 +172,16 @@
     font-size: 16px;
   }
 }
+@media screen and (max-width: $mobile-max) {
+  .general {
+    display: block;
+    position: fixed;
+    border-radius: 50%;
+    z-index: -1;
+  }
+}
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: $tablet) {
   .general {
     display: block;
     position: fixed;
@@ -262,7 +281,7 @@
     padding: 60px 70px;
   }
 
-  .headline {
+  .nameInput {
     font-size: 18px;
   }
 
@@ -271,7 +290,7 @@
   }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: $desktop) {
   .ellipse1 {
     top: calc(103px - 80px);
     left: 877px;

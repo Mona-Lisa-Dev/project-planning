@@ -1,11 +1,6 @@
-
-import {
-  useState,
-  // useEffect
-} from 'react';
+import { useState, useEffect } from 'react';
 import Spinner from 'components/Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
-
 
 import authOperations from 'redux/auth/auth-operations';
 
@@ -20,26 +15,25 @@ const RegisterPage = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [emailDirty, setEmailDirty] = useState(false);
   const [passwordDirty, setPasswordDirty] = useState(false);
-  const [emailError, setEmailError] = useState('Empty field');
-  const [passwordError, setPasswordError] = useState('Empty field');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] =
     useState('Empty field');
   const [confirmPasswordDirty, setConfirmPasswordDirty] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
-  // const [validForm, setValidForm] = useState(false);
+  const [validForm, setValidForm] = useState(false);
 
   const loading = useSelector(getLoadingUser);
 
-
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (emailError || passwordError || validPassword || confirmPasswordError) {
-  //     setValidForm(false);
-  //   } else {
-  //     setValidForm(true);
-  //   }
-  // }, [emailError, passwordError, validPassword, confirmPasswordError]);
+  useEffect(() => {
+    if (emailError || passwordError || confirmPasswordError || !validPassword) {
+      setValidForm(false);
+      return;
+    }
+    setValidForm(true);
+  }, [emailError, passwordError, validPassword, confirmPasswordError]);
 
   const handleChange = event => {
     const { name, value } = event.currentTarget;
@@ -50,7 +44,7 @@ const RegisterPage = () => {
         const re =
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!re.test(String(email).toLowerCase())) {
-          setEmailError('Enter correct email');
+          setEmailError('');
         } else {
           setEmailError('');
         }
@@ -70,9 +64,12 @@ const RegisterPage = () => {
 
       case 'confirmPassword':
         setConfirmPassword(value);
-        if (confirmPassword !== password) {
-          setValidPassword(true);
+        if (value !== password) {
+          setValidPassword(false);
           setConfirmPasswordError('Passwords do not match');
+        } else {
+          setValidPassword(true);
+          setConfirmPasswordError('');
         }
         break;
 
@@ -187,11 +184,7 @@ const RegisterPage = () => {
           )}
         </label>
 
-        <button
-          // disabled={!validForm}
-          className={styles.btnReg}
-          type={'submit'}
-        >
+        <button disabled={!validForm} className={styles.btnReg} type={'submit'}>
           Register
         </button>
 
