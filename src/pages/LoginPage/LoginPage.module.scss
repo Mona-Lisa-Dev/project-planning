@@ -1,9 +1,6 @@
 @import '../../scss/vars';
 @import '../../scss/breakpoints';
-
-.wrapper {
-  color: #181c27;
-}
+@import '../../scss/base';
 
 .title {
   margin-left: auto;
@@ -26,6 +23,7 @@
   display: block;
   margin-bottom: 30px;
   font-weight: 600;
+  color: rgba(24, 28, 39, 0.6);
 }
 
 .nameInput {
@@ -95,11 +93,11 @@
 .auth {
   padding-left: 5px;
   text-decoration: underline;
-  color: #181c27;
+  color: rgba(24, 28, 39, 0.6);
 }
 
 .auth:visited {
-  color: #181c27;
+  color: rgba(24, 28, 39, 0.6);
 }
 
 .btnLog {
@@ -148,7 +146,7 @@
   font-size: 12px;
   line-height: 1.22;
   letter-spacing: 0.04em;
-  color: $text-dark;
+  color: rgba(24, 28, 39, 0.6);
 }
 
 @media screen and (min-width: $mobile) {

@@ -13,8 +13,8 @@ const LoginPage = () => {
 
   const [emailDirty, setEmailDirty] = useState(false);
   const [passwordDirty, setPasswordDirty] = useState(false);
-  const [emailError, setEmailError] = useState('Empty field');
-  const [passwordError, setPasswordError] = useState('Empty field');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('Wrong password');
   const [validForm, setValidForm] = useState(false);
 
   const loading = useSelector(getLoadingUser);
@@ -38,7 +38,7 @@ const LoginPage = () => {
         const re =
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!re.test(String(email).toLowerCase())) {
-          setEmailError('Error');
+          setEmailError('');
         } else {
           setEmailError('');
         }
