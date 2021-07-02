@@ -14,7 +14,9 @@ import './scss/_main.scss';
 import Spinner from 'components/Loader/Loader';
 
 // import Diagram from 'components/Diagram';
-// import Spinner from 'components/Loader';
+
+// import DiagramModal from 'components/Diagram/DiagramModal';
+
 const LoginPage = lazy(
   () => import('./pages/LoginPage') /* webpackChunkName: "LoginPage" */,
 );
@@ -38,7 +40,6 @@ const App = () => {
   return (
     <>
       <AppBar />
-      {/* <Spinner /> */}
 
       <Container>
         <Suspense fallback={<Spinner />}>
@@ -84,6 +85,8 @@ const App = () => {
               // redirectTo={routes.login}
             /> */}
 
+            {/* <Route path={routes.sprints} component={SprintsPage} /> */}
+
             <PrivateRoute
               path={routes.projects}
               restricted
@@ -96,6 +99,7 @@ const App = () => {
               component={isAuthorized ? ProjectsPage : RegisterPage}
               redirectTo={routes.projects}
             /> */}
+
             <Route
               path={routes.home}
               restricted
@@ -107,7 +111,6 @@ const App = () => {
                 )
               }
             />
-
             <Redirect to={routes.home} />
           </Switch>
         </Suspense>

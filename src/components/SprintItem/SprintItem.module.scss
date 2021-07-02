@@ -1,96 +1,64 @@
 @import '../../scss/vars';
 @import '../../scss/breakpoints';
 
-.item_one {
-  background: $text-white;
-  box-shadow: $main-shadow;
-  border-radius: 5px;
+.itemWrap {
+  position: relative;
+  height: 100%;
+  padding: 20px 20px 20px;
 
-  &:hover {
-    cursor: pointer;
-  }
-
-  @media screen and (max-width: $mobile-max) {
-    padding: 20px 20px 10px;
-    width: 280px;
-    height: 170px;
-  }
-  @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
-    padding: 18px 20px 10px;
-    width: 216px;
-    height: 255px;
-  }
   @media screen and (min-width: $desktop) {
-    padding: 18px 30px 10px;
-    width: 270px;
-    height: 224px;
+    padding: 20px 30px 30px;
   }
-}
-.item_header {
-  margin-bottom: 28px;
-  font-family: $main-font;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 1.22;
-  letter-spacing: 0.04em;
-  color: $text-dark;
-  @media screen and (max-width: $mobile-max) {
+
+  h3 {
+    margin-bottom: 20px;
+    font-weight: 500;
     font-size: 16px;
-    line-height: 1.25;
-  }
-}
+    letter-spacing: 0.04em;
 
-.item_info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 28px;
-  @media screen and (max-width: $mobile-max) {
-    margin-top: 20px;
-  }
-}
+    // ...
 
-.item_description {
-  font-family: $main-font;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 1.21;
-  letter-spacing: 0.01em;
-  color: $sprint-card-description;
-  @media screen and (max-width: $mobile-max) {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    @media screen and (min-width: $tablet) {
+      margin-bottom: 30px;
+      font-size: 18px;
+    }
+
+    @media screen and (min-width: $desktop) {
+      margin-bottom: 25px;
+    }
+  }
+
+  li {
+    display: flex;
+    justify-content: space-between;
     font-size: 10px;
-    line-height: 1.2;
+    font-weight: 400;
+
+    @media screen and (min-width: $tablet) {
+      font-size: 14px;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+
+      @media screen and (min-width: $tablet) {
+        margin-bottom: 25px;
+      }
+
+      @media screen and (min-width: $desktop) {
+        margin-bottom: 20px;
+      }
+    }
   }
-}
 
-.item_description:not(:last-child) {
-  margin-bottom: 20px;
-  @media screen and (max-width: $mobile-max) {
-    margin-bottom: 10px;
-  }
-}
-
-.item_left {
-  float: left;
-}
-
-.item_right {
-  float: right;
-}
-
-.btnDelSprint {
-  display: block;
-  margin-top: 14px;
-  // margin-right: 10px;
-  margin-left: 240px;
-  padding-right: 0px;
-
-  @media screen and (max-width: $mobile-max) {
-    margin-left: 250px;
-  }
-  @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
-    margin-left: 186px;
+  button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
   }
 }

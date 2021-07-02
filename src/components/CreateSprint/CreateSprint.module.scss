@@ -18,10 +18,6 @@
     }
   }
 
-  // & > input {
-  //   background-color: cornflowerblue;
-  // }
-
   .nameTextFieldWrap {
     margin-bottom: 40px;
 
@@ -119,6 +115,7 @@
   .cancelBtnWrap {
     display: flex;
     justify-content: center;
+    padding-bottom: 40px;
 
     .cancelBtn {
       font-weight: 400;

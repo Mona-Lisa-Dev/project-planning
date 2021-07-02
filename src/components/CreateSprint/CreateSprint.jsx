@@ -269,9 +269,9 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
   const createNewSprint = e => {
     e.preventDefault();
 
-    console.log('sprintName', sprintName);
-    console.log('selectedDate', selectedDate);
-    console.log('duration', duration);
+    // console.log('sprintName', sprintName);
+    // console.log('selectedDate', selectedDate);
+    // console.log('duration', duration);
 
     const newSprint = {
       name: sprintName,
@@ -382,7 +382,9 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
         </button>
 
         <div className={s.cancelBtnWrap}>
-          <span className={s.cancelBtn}>Cancel</span>
+          <span onClick={onClickCancel} className={s.cancelBtn}>
+            Cancel
+          </span>
         </div>
       </form>
     </div>

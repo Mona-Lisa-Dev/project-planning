@@ -22,6 +22,9 @@ import {
   getProjectByIdRequest,
   getProjectByIdSuccess,
   getProjectByIdError,
+  getAllParticipantsRequest,
+  getAllParticipantsSuccess,
+  getAllParticipantsError,
 } from './projects-actions';
 
 const getAllProjects = () => async dispatch => {
@@ -102,28 +105,45 @@ const addParticipant = (projectId, email) => async dispatch => {
     const {
       data: { data },
     } = await axios.patch(`/projects/${projectId}/participant`, email);
-    dispatch(addParticipantSuccess(data.project));
+    dispatch(addParticipantSuccess(data.project.participants));
 
-    return data.project;
+    return data.project.participants;
   } catch (error) {
     dispatch(addParticipantError(error.message));
   }
 };
 
-const deleteParticipant = (projectId, email) => async dispatch => {
-  dispatch(deleteParticipantRequest());
+const getAllParticipants = projectId => async dispatch => {
+  dispatch(getAllParticipantsRequest());
 
   try {
     const {
       data: { data },
-    } = await axios.delete(`/projects/${projectId}/participant`, email);
-    dispatch(deleteParticipantSuccess(data.project));
+    } = await axios.get(`/projects/${projectId}/participant`);
+    dispatch(getAllParticipantsSuccess(data));
 
-    return data.project;
+    return data;
   } catch (error) {
-    dispatch(deleteParticipantError(error.message));
+    dispatch(getAllParticipantsError(error.message));
   }
 };
+
+const deleteParticipant =
+  (projectId, { email }) =>
+  async dispatch => {
+    dispatch(deleteParticipantRequest());
+
+    try {
+      const {
+        data: { data },
+      } = await axios.post(`/projects/${projectId}/participant`, { email });
+      dispatch(deleteParticipantSuccess(data.project.psrticipants));
+
+      return data.project.psrticipants;
+    } catch (error) {
+      dispatch(deleteParticipantError(error.message));
+    }
+  };
 
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
@@ -134,4 +154,5 @@ export default {
   updateProject,
   addParticipant,
   deleteParticipant,
+  getAllParticipants,
 };

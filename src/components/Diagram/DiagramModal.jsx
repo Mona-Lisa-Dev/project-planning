@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import { ReactComponent as CloseModalBtn } from './closeModalBtn.svg';
-import s from './Modal.module.scss';
+
+import Diagram from './Diagram';
+import ButtonClose from 'components/ButtonClose';
+import s from './Diagram.module.scss';
 
 const modalRoot = document.querySelector('#modal-root');
 
-const Modal = ({ onCloseModal, children }) => {
+const DiagramModal = ({ onCloseModal }) => {
   useEffect(() => {
     window.addEventListener('keydown', handleCloseByEsc);
 
@@ -22,20 +24,22 @@ const Modal = ({ onCloseModal, children }) => {
   // Close by ESC
   const handleCloseByEsc = e => e.code === 'Escape' && onCloseModal();
 
+  // Close by click on btn
+  const handleCloseByButton = () => onCloseModal();
+
   return createPortal(
     <div className={s.backdrop} onClick={handleCloseByBackdrop}>
       <div className={s.content}>
-        {children}
-        <CloseModalBtn className={s.CloseModalBtn} onClick={onCloseModal} />
+        <ButtonClose onClose={handleCloseByButton} />
+        <Diagram />
       </div>
     </div>,
     modalRoot,
   );
 };
 
-Modal.propTypes = {
+DiagramModal.propTypes = {
   onCloseModal: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
 };
 
-export default Modal;
+export default DiagramModal;

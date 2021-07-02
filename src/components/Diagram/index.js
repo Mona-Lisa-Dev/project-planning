@@ -1,1 +1,1 @@
-export { default } from './Diagram';
+export { default } from './DiagramModal';
