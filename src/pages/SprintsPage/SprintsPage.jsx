@@ -127,7 +127,10 @@ const SprintsPage = props => {
 
       {showModalCreateSprint && (
         <Modal onCloseModal={handleCloseModal}>
-          <CreateSprint onClickCancel={handleCloseModal} />
+          <CreateSprint
+            onClickCancel={handleCloseModal}
+            projectId={projectId}
+          />
         </Modal>
       )}
     </>

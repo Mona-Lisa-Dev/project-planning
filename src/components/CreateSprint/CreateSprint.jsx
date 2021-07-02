@@ -239,7 +239,7 @@ const materialTheme = createMuiTheme({
   },
 });
 
-const CreateSprint = ({ onClickCancel }) => {
+const CreateSprint = ({ onClickCancel, projectId }) => {
   const [sprintName, setSprintName] = useState('');
   const [previousDays, setPreviousDays] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -274,12 +274,12 @@ const CreateSprint = ({ onClickCancel }) => {
     console.log('duration', duration);
 
     const newSprint = {
-      sprintName,
-      selectedDate,
+      name: sprintName,
+      startDate: selectedDate,
       duration,
     };
 
-    dispatch(sprintsOperations.createSprint(newSprint));
+    dispatch(sprintsOperations.createSprint(projectId, newSprint));
     onClickCancel();
 
     setSprintName('');
