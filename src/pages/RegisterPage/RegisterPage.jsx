@@ -1,6 +1,11 @@
+
+import {
+  useState,
+  // useEffect
+} from 'react';
 import Spinner from 'components/Loader/Loader';
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 
 import authOperations from 'redux/auth/auth-operations';
 
@@ -11,9 +16,30 @@ import styles from './RegisterPage.module.scss';
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [emailDirty, setEmailDirty] = useState(false);
+  const [passwordDirty, setPasswordDirty] = useState(false);
+  const [emailError, setEmailError] = useState('Empty field');
+  const [passwordError, setPasswordError] = useState('Empty field');
+  const [confirmPasswordError, setConfirmPasswordError] =
+    useState('Empty field');
+  const [confirmPasswordDirty, setConfirmPasswordDirty] = useState(false);
+  const [validPassword, setValidPassword] = useState(false);
+  // const [validForm, setValidForm] = useState(false);
+
   const loading = useSelector(getLoadingUser);
 
+
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   if (emailError || passwordError || validPassword || confirmPasswordError) {
+  //     setValidForm(false);
+  //   } else {
+  //     setValidForm(true);
+  //   }
+  // }, [emailError, passwordError, validPassword, confirmPasswordError]);
 
   const handleChange = event => {
     const { name, value } = event.currentTarget;
@@ -21,10 +47,33 @@ const RegisterPage = () => {
     switch (name) {
       case 'email':
         setEmail(value);
+        const re =
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (!re.test(String(email).toLowerCase())) {
+          setEmailError('Enter correct email');
+        } else {
+          setEmailError('');
+        }
         break;
 
       case 'password':
         setPassword(value);
+        if (
+          event.currentTarget.value.length < 3 ||
+          event.currentTarget.value.length > 8
+        ) {
+          setPasswordError('Wrong password');
+        } else {
+          setPasswordError('');
+        }
+        break;
+
+      case 'confirmPassword':
+        setConfirmPassword(value);
+        if (confirmPassword !== password) {
+          setValidPassword(true);
+          setConfirmPasswordError('Passwords do not match');
+        }
         break;
 
       default:
@@ -35,7 +84,7 @@ const RegisterPage = () => {
   const handleFormSubmit = event => {
     event.preventDefault();
 
-    const user = { email, password };
+    const user = { email, password, confirmPassword };
     dispatch(authOperations.signup(user));
 
     reset();
@@ -44,6 +93,26 @@ const RegisterPage = () => {
   const reset = () => {
     setEmail('');
     setPassword('');
+    setConfirmPassword('');
+  };
+
+  const blurHandler = event => {
+    switch (event.currentTarget.name) {
+      case 'email':
+        setEmailDirty(true);
+        break;
+
+      case 'password':
+        setPasswordDirty(true);
+        break;
+
+      case 'confirmPassword':
+        setConfirmPasswordDirty(true);
+        break;
+
+      default:
+        return;
+    }
   };
 
   return (
@@ -74,9 +143,14 @@ const RegisterPage = () => {
             type={'email'}
             name={'email'}
             onChange={handleChange}
+            onBlur={blurHandler}
             value={email}
+            required
           />
           <span className={styles.nameInput}>E-mail</span>
+          {emailDirty && emailError && (
+            <p className={styles.error}>{emailError}</p>
+          )}
         </label>
 
         <label className={styles.labelForm}>
@@ -86,9 +160,14 @@ const RegisterPage = () => {
             type={'password'}
             name={'password'}
             onChange={handleChange}
+            onBlur={blurHandler}
             value={password}
+            required
           />
           <span className={styles.nameInput}>Password</span>
+          {passwordDirty && passwordError && (
+            <p className={styles.error}>{passwordError}</p>
+          )}
         </label>
 
         <label className={styles.labelForm}>
@@ -98,13 +177,21 @@ const RegisterPage = () => {
             type={'password'}
             name={'confirmPassword'}
             onChange={handleChange}
-            pattern="^[a-z0-9_-]{7,18}$"
-            // value={confirmPassword}
+            onBlur={blurHandler}
+            value={confirmPassword}
+            required
           />
           <span className={styles.nameInput}>Repeat password</span>
+          {confirmPasswordDirty && confirmPasswordError && validPassword && (
+            <p className={styles.error}>{confirmPasswordError}</p>
+          )}
         </label>
 
-        <button className={styles.btnReg} type={'submit'}>
+        <button
+          // disabled={!validForm}
+          className={styles.btnReg}
+          type={'submit'}
+        >
           Register
         </button>
 

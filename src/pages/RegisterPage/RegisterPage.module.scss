@@ -65,7 +65,7 @@
 .inputForm:invalid {
   margin-bottom: 5px;
   color: $form-input-error;
-  border-bottom: 1px solid $form-input-error;
+  border-bottom: 1px solid $form-input-border;
 }
 
 .inputForm:focus {
