@@ -26,7 +26,6 @@ const RegisterPage = lazy(() =>
 const ProjectsPage = lazy(() =>
   import('./pages/ProjectsPage' /* webpackChunkName: "ProjectsPage" */),
 );
-
 const SprintsPage = lazy(() =>
   import('./pages/SprintsPage' /* webpackChunkName: "SprintsPage" */),
 );

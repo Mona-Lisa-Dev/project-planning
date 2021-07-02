@@ -1,6 +1,11 @@
 @import '../../scss/vars';
 @import '../../scss/breakpoints';
 
+.labelForm {
+  font-family: $main-font;
+  position: relative;
+}
+
 .form {
   // position: absolute;
   // top: 0;
@@ -33,33 +38,126 @@
   text-align: center;
   font-weight: 500;
   line-height: 1.21;
+  font-size: 36px;
+  margin-bottom: 50px;
+  @media screen and (max-width: $mobile-max) {
+    margin-bottom: 30px;
+    font-size: 26px;
+  }
 }
 
 .input,
 .empty_input {
-  margin: 50px 0 30px 0;
+  margin-bottom: 60px;
+  width: 100%;
+  height: 30px;
+  border: none;
+
+  border-bottom: $form-input-border;
+
+  outline: 0;
+
+  font-size: 18px;
+  // &::placeholder {
+  //   margin-bottom: 9px;
+  //   color: $text-light;
+  //   font-size: 16px;
+  // }
+
+  &:hover {
+    border-color: $main-orange;
+    outline: 0;
+  }
+
+  &:focus-within {
+    border-color: $main-orange;
+    outline: 0;
+  }
+
+  @media screen and (max-width: $mobile-max) {
+    margin-bottom: 40px;
+    font-size: 16px;
+  }
+}
+
+.input_name {
+  margin-bottom: 50px;
   width: 100%;
   height: 30px;
   border: none;
   border-bottom: $form-input-border;
-  &::placeholder {
-    margin-bottom: 9px;
-    color: $text-light;
-    font-size: 16px;
+
+  &:hover {
+    border-color: $main-orange;
+    outline: 0;
   }
+  &:focus-within {
+    border-color: $main-orange;
+    outline: 0;
+  }
+
+  // &::placeholder {
+  //   margin-bottom: 9px;
+  //   color: $text-light;
+  //   font-size: 16px;
+  // }
   @media screen and (max-width: $mobile-max) {
-    margin: 30px 0 58px 0;
+    margin-bottom: 58px;
   }
 }
+
 .empty_input {
   border-bottom: 1px solid $form-input-error;
   &::placeholder {
     color: $form-input-error;
   }
 }
+
+.nameInput {
+  color: $text-light;
+  font-size: 16px;
+  position: absolute;
+  left: 5px;
+  // top: 26px;
+  transform: translateY(9px);
+  transition: transform 250ms linear;
+  font-weight: normal;
+}
+
+.descriptionInput {
+  // margin-bottom: 9px;
+  color: $text-light;
+  font-size: 16px;
+  position: absolute;
+  left: 50px;
+  // transform: translateY(9px);
+  transition: transform 250ms linear;
+  font-weight: normal;
+}
+
+.empty_input:not(:placeholder-shown) + .nameInput {
+  transform: translateY(-18px);
+  font-size: 12px;
+}
+
+.input_name:not(:placeholder-shown) + .nameInput {
+  transform: translateY(-18px);
+  font-size: 12px;
+}
+
+.input:not(:placeholder-shown) + .nameInput {
+  transform: translateY(-18px);
+  font-size: 12px;
+}
+
+.labelForm:focus-within > .nameInput {
+  transform: translateY(-18px);
+  font-size: 12px;
+}
+
 .ready_btn {
   margin: 0 auto;
-  margin-top: 40px;
+  // margin-top: 40px;
   margin-bottom: 20px;
   width: 148px;
   height: 44px;
@@ -92,27 +190,4 @@
 .text {
   margin-bottom: 20px;
   color: $text-light;
-}
-
-// ======================Modile===================
-@media screen and (max-width: $mobile-max) {
-  .title {
-    font-size: 26px;
-  }
-}
-
-//============Tablet==========================================
-
-@media screen and (min-width: $tablet) {
-  .title {
-    font-size: 36px;
-  }
-}
-
-//============================Desktop===============================
-
-@media screen and (min-width: $desktop) {
-  .title {
-    font-size: 36px;
-  }
 }

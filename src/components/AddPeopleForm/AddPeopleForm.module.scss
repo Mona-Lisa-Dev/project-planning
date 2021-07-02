@@ -89,3 +89,12 @@
   margin-bottom: 20px;
   color: $text-light;
 }
+
+.participant {
+  display: flex;
+
+  .deleteButton {
+    border: none;
+    background-color: transparent;
+  }
+}

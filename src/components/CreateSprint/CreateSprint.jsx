@@ -382,7 +382,9 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
         </button>
 
         <div className={s.cancelBtnWrap}>
-          <span className={s.cancelBtn}>Cancel</span>
+          <span onClick={onClickCancel} className={s.cancelBtn}>
+            Cancel
+          </span>
         </div>
       </form>
     </div>
