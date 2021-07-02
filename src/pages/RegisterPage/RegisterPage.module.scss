@@ -1,5 +1,6 @@
 @import '../../scss/vars';
 @import '../../scss/breakpoints';
+@import '../../scss/base';
 
 .registration {
   color: $main-background;
@@ -32,11 +33,11 @@
 
 .labelForm {
   font-family: $main-font;
-  color: $text-light;
   position: relative;
   display: block;
   margin-bottom: 30px;
   font-weight: 600;
+  color: rgba(24, 28, 39, 0.6);
 }
 
 .nameInput {
@@ -54,12 +55,12 @@
 }
 
 .inputForm {
-  // color: #ff6b08;
   padding: 10px;
   width: 100%;
   outline: none;
   border-style: none;
   border-bottom: 1px solid $text-dark;
+  background-color: $form-reg-background;
 }
 
 .inputForm:invalid {
@@ -94,11 +95,11 @@
 .auth {
   padding-left: 5px;
   text-decoration: underline;
-  color: $text-dark;
+  color: rgba(24, 28, 39, 0.6);
 }
 
 .auth:visited {
-  color: $text-dark;
+  color: rgba(24, 28, 39, 0.6);
 }
 
 .btnReg {
@@ -144,7 +145,7 @@
   font-size: 12px;
   line-height: 1.22;
   letter-spacing: 0.04em;
-  color: $text-dark;
+  color: rgba(24, 28, 39, 0.6);
 }
 
 @media screen and (min-width: $mobile) {
