@@ -43,26 +43,3 @@ export default SprintItem;
 //   endDate: PropTypes.string.isRequired,
 //   duration: PropTypes.number.isRequired,
 // };
-
-/*
-<>
-  <div className={styles.item_one}>
-    <h3 className={styles.item_header}>{sprint.name}</h3>
-    <div className={styles.item_info}>
-      <div className={styles.item_left}>
-        <p className={styles.item_description}>Дата початку</p>
-        <p className={styles.item_description}>Дата закінчення</p>
-        <p className={styles.item_description}>Тривалість</p>
-      </div>
-      <div className={styles.item_right}>
-        <p className={styles.item_description}>{sprint.startDate}</p>
-        <p className={styles.item_description}>{sprint.endDate}</p>
-        <p className={styles.item_description}>{sprint.duration}</p>
-      </div>
-    </div>
-    <div className={styles.btnDelSprint}>
-      <ButtonDelete handleClick={handleClick} />
-    </div>
-  </div>
-</>
-*/

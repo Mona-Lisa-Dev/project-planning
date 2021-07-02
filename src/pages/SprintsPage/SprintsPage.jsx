@@ -27,12 +27,6 @@ const SprintsPage = props => {
   const [showModal, setShowModal] = useState(false);
   const [el, setEl] = useState('');
 
-  const toggleModal = el => {
-    setEl(el);
-    setShowModal(!showModal);
-    console.log('name', el);
-  };
-
   const { projectId } = props.match.params;
   const dispatch = useDispatch();
 
@@ -44,7 +38,18 @@ const SprintsPage = props => {
     dispatch(projectsOperations.getProjectById(projectId));
   }, [dispatch, projectId]);
 
-  // ======= useMediaQuery =======
+  // ----------- Modal -----------
+  useEffect(() => {
+    const body = document.querySelector('body');
+    body.style.overflow = showModal ? 'hidden' : 'auto';
+  }, [showModal]);
+
+  const toggleModal = el => {
+    setEl(el);
+    setShowModal(!showModal);
+  }; // -------- End Modal --------
+
+  // ------- useMediaQuery -------
   const handleMaxWidth = width => {
     return `(max-width:${width}px) `;
   };
@@ -54,7 +59,7 @@ const SprintsPage = props => {
   const tablet = useMediaQuery(handleMinWidth(refs.tablet));
   const tabletMax = useMediaQuery(handleMaxWidth(refs.tabletMax));
   const desktop = useMediaQuery(handleMinWidth(refs.desktop));
-  // ======= End useMediaQuery =======
+  // ----- End useMediaQuery -----
 
   return (
     <>
@@ -91,14 +96,16 @@ const SprintsPage = props => {
           <div className={s.headerWrap}>
             <div className={s.contentWrap}>
               <div className={s.titleWrap}>
-                <h2>{currentProject?.name || 'Project 1'}</h2>
+                <h2>{currentProject?.name}</h2>
+                {/* <h2>Project 1</h2> */}
                 <EditIcon className={s.EditIcon} />
               </div>
 
-              <p>
-                {currentProject?.description ||
-                  'Short description of the project, if it exist, it is posted here. The width of the text block'}
-              </p>
+              <p>{currentProject?.description}</p>
+              {/* <p>
+                Short description of the project, if it exist, it is posted
+                here. The width of the text block
+              </p> */}
 
               <div className={s.addWrap}>
                 <AddGroupIcon className={s.AddGroupIcon} />
@@ -145,33 +152,3 @@ const SprintsPage = props => {
 };
 
 export default SprintsPage;
-
-/*
-const [showModalAddPeople, setShowModalAddPeople] = useState(false);
-const [showModalCreateSprint, setShowModalCreateSprint] = useState(false);
-
-
-const openModalAddPeople = () => setShowModalAddPeople(true);
-const openModalCreateSprint = () => setShowModalCreateSprint(true);
-const handleCloseModal = () => {
-  setShowModalAddPeople(false);
-  setShowModalCreateSprint(false);
-};
-
-<span onClick={openModalAddPeople}>Add people</span>
-
-onClick={openModalCreateSprint}
-onClick={openModalCreateSprint}
-
-{showModalAddPeople && (
-  <Modal onCloseModal={handleCloseModal}>
-    <AddPeopleForm onClickCancel={handleCloseModal} />
-  </Modal>
-)}
-
-{showModalCreateSprint && (
-  <Modal onCloseModal={handleCloseModal}>
-    <CreateSprint onClickCancel={handleCloseModal} />
-  </Modal>
-)} 
-*/
