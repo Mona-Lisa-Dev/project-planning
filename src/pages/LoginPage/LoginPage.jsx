@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import Spinner from 'components/Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,10 +5,7 @@ import authOperations from 'redux/auth/auth-operations';
 
 import { getLoadingUser } from 'redux/auth/auth-selectors';
 
-
 import styles from './LoginPage.module.scss';
-
-import authOperations from 'redux/auth/auth-operations';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -22,7 +18,6 @@ const LoginPage = () => {
   const [validForm, setValidForm] = useState(false);
 
   const loading = useSelector(getLoadingUser);
-
 
   const dispatch = useDispatch();
 
@@ -149,7 +144,6 @@ const LoginPage = () => {
         <button className={styles.btnLog} type={'submit'} disabled={!validForm}>
           Enter
         </button>
-
 
         {loading && <Spinner />}
 
