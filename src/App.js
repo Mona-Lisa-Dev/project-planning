@@ -40,7 +40,7 @@ const App = () => {
   return (
     <>
       <AppBar />
-      <DiagramModal />
+      {/* <DiagramModal /> */}
 
       <Container>
         <Suspense fallback={<Spinner />}>
