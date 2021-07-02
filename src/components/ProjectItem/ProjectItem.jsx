@@ -1,25 +1,25 @@
 // import PropTypes from 'prop-types';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import ButtonDelete from '../ButtonDelete';
 import projectsOperations from 'redux/projects/projects-operations';
 
-import { getLoadingProjects } from 'redux/projects/projects-selectors';
+// import { getLoadingProjects } from 'redux/projects/projects-selectors';
 
 import styles from './ProjectItem.module.scss';
-import Spinner from 'components/Loader/Loader';
+// import Spinner from 'components/Loader/Loader';
 
 const ProjectItem = ({ project }) => {
   const dispatch = useDispatch();
-  const loading = useSelector(getLoadingProjects);
+  // const loading = useSelector(getLoadingProjects);
 
   const handleClick = () =>
     dispatch(projectsOperations.deleteProject(project.id));
 
   return (
     <div className={styles.itemWrapper}>
-      {loading && <Spinner />}
+      {/* {loading && <Spinner />} */}
       <h3 className={styles.itemTitle}>{project.name}</h3>
       <p className={styles.itemDescription}> {project.description}</p>
       <ButtonDelete handleClick={handleClick} />

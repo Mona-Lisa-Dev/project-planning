@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux';
+
 import SprintItem from '../SprintItem';
 import { getSprints } from 'redux/sprints/sprints-selectors';
+
 import styles from './SprintList.module.scss';
 
 const SprintList = ({ currentProject }) => {

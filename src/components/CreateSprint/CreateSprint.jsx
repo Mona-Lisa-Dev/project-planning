@@ -1,5 +1,6 @@
 import 'date-fns';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 // import { withStyles } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core';
@@ -11,6 +12,9 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import TextField from '@material-ui/core/TextField';
+
+import sprintsOperations from 'redux/sprints/sprints-operations';
+
 import s from './CreateSprint.module.scss';
 
 const useStyles = makeStyles({
@@ -235,13 +239,15 @@ const materialTheme = createMuiTheme({
   },
 });
 
-const CreateSprint = () => {
+const CreateSprint = ({ onClickCancel, projectId }) => {
   const [sprintName, setSprintName] = useState('');
   const [previousDays, setPreviousDays] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [duration, setDuration] = useState('');
   const classes = useStyles();
   // const DataPicker = styles();
+
+  const dispatch = useDispatch();
 
   // Input - Date
   const handleDateChange = date => {
@@ -266,6 +272,15 @@ const CreateSprint = () => {
     console.log('sprintName', sprintName);
     console.log('selectedDate', selectedDate);
     console.log('duration', duration);
+
+    const newSprint = {
+      name: sprintName,
+      startDate: selectedDate,
+      duration,
+    };
+
+    dispatch(sprintsOperations.createSprint(projectId, newSprint));
+    onClickCancel();
 
     setSprintName('');
     setSelectedDate(new Date());
