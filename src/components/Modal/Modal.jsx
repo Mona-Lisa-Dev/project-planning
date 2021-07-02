@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
+import { ReactComponent as CloseModalBtn } from './closeModalBtn.svg';
 import s from './Modal.module.scss';
 
 const modalRoot = document.querySelector('#modal-root');
@@ -23,7 +24,10 @@ const Modal = ({ onCloseModal, children }) => {
 
   return createPortal(
     <div className={s.backdrop} onClick={handleCloseByBackdrop}>
-      <div className={s.content}>{children}</div>
+      <div className={s.content}>
+        {children}
+        <CloseModalBtn className={s.CloseModalBtn} onClick={onCloseModal} />
+      </div>
     </div>,
     modalRoot,
   );
