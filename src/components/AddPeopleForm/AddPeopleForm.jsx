@@ -1,15 +1,18 @@
 // import { Button, TextField } from '@material-ui/core';
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import s from './AddPeopleForm.module.scss';
+import { useDispatch } from 'react-redux';
+
+import projectsOperations from 'redux/projects/projects-operations';
 import PeopleList from 'components/PeopleList';
 
-const AddPeopleForm = ({ onClickCancel }) => {
+import s from './AddPeopleForm.module.scss';
+
+const AddPeopleForm = ({ onClickCancel, projectId }) => {
   const [email, setEmail] = useState('');
   const [users, setUsers] = useState([]);
   const [emptyInput, setEmptyInput] = useState(false);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleChange = e => {
     setEmail(e.target.value);
@@ -22,16 +25,14 @@ const AddPeopleForm = ({ onClickCancel }) => {
       setEmptyInput(true);
       return;
     }
-    // если ввели имейл, добавляем юзера в список
+
     const user = {
-      // пока нет базы, использую uuid
-      id: uuidv4(),
       email,
     };
     setUsers(prevState => [user, ...prevState]);
 
     // здесь будет отправка на бек
-    // dispatch(addContact({ name, number }));
+    dispatch(projectsOperations.addParticipant(projectId, user));
 
     setEmail('');
     setEmptyInput(false);
