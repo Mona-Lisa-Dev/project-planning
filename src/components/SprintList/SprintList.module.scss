@@ -1,50 +1,102 @@
 @import '../../scss/breakpoints';
+@import '../../scss/vars';
 
+// ul
 .listWrapper {
-  margin-top: 30px;
-  width: $mobile;
-}
-
-@media screen and (min-width: $mobile) and (max-width: $mobile-max) {
-  .listItem:not(:last-child) {
-    margin-bottom: 10px;
-  }
-}
-
-@media screen and (min-width: $tablet) and (max-width: $tablet-max) {
-  .listWrapper {
-    width: $tablet;
+  @media screen and (min-width: $tablet) {
     display: flex;
     flex-wrap: wrap;
+    width: 452px;
   }
 
+  @media screen and (min-width: $desktop) {
+    width: 870px;
+  }
+
+  // li
   .listItem {
-    &:not(:nth-child(2n)) {
-      margin-right: 20px;
+    height: 170px;
+    background-color: $primaryWhiteColor;
+    border-radius: 5px;
+    box-shadow: $primaryShadow;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
     }
 
-    &:not(:nth-last-child(-n + 2)) {
-      margin-bottom: 20px;
+    @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
+      width: 216px;
+      height: 255px;
+
+      &:not(:nth-child(2n)) {
+        margin-right: 20px;
+      }
+
+      &:not(:nth-last-child(-n + 2)) {
+        margin-bottom: 20px;
+      }
+    }
+
+    @media screen and (min-width: $desktop) {
+      width: 270px;
+      height: 224px;
+
+      &:not(:nth-child(3n)) {
+        margin-right: 30px;
+      }
+
+      &:not(:nth-last-child(-n + 3)) {
+        margin-bottom: 30px;
+      }
     }
   }
 }
 
-@media screen and (min-width: $desktop) {
-  .listWrapper {
-    width: $desktop;
-    display: flex;
-    flex-wrap: wrap;
-    padding-left: 70px;
-    padding-right: 30px;
-  }
+// .listWrapper {
+//   margin-top: 30px;
+//   width: $mobile;
+// }
 
-  .listItem {
-    &:not(:nth-child(3n)) {
-      margin-right: 30px;
-    }
+// @media screen and (min-width: $mobile) and (max-width: $mobile-max) {
+//   .listItem:not(:last-child) {
+//     margin-bottom: 10px;
+//   }
+// }
 
-    &:not(:nth-last-child(-n + 3)) {
-      margin-bottom: 30px;
-    }
-  }
-}
+// @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
+//   .listWrapper {
+//     width: $tablet;
+//     display: flex;
+//     flex-wrap: wrap;
+//   }
+
+//   .listItem {
+//     &:not(:nth-child(2n)) {
+//       margin-right: 20px;
+//     }
+
+//     &:not(:nth-last-child(-n + 2)) {
+//       margin-bottom: 20px;
+//     }
+//   }
+// }
+
+// @media screen and (min-width: $desktop) {
+//   .listWrapper {
+//     width: $desktop;
+//     display: flex;
+//     flex-wrap: wrap;
+//     padding-left: 70px;
+//     padding-right: 30px;
+//   }
+
+//   .listItem {
+//     &:not(:nth-child(3n)) {
+//       margin-right: 30px;
+//     }
+
+//     &:not(:nth-last-child(-n + 3)) {
+//       margin-bottom: 30px;
+//     }
+//   }
+// }

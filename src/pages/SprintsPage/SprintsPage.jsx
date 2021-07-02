@@ -6,7 +6,8 @@ import { useMediaQuery } from '@material-ui/core';
 import { refs } from './refs';
 import { ReactComponent as EditIcon } from './svg/edit_icon.svg';
 import { ReactComponent as AddGroupIcon } from './svg/add_group_icon.svg';
-import { ReactComponent as PlusButtonIcon } from './svg/plus_button_icon.svg';
+import { ReactComponent as CreateNewSprint } from './svg/plus_button_icon.svg';
+import { ReactComponent as CreateNewProject } from './svg/plus_button_icon_two.svg';
 
 import SideBar from 'components/SideBar';
 import Modal from 'components/Modal';
@@ -23,8 +24,14 @@ import projectsOperations from 'redux/projects/projects-operations';
 import s from './SprintsPage.module.scss';
 
 const SprintsPage = props => {
-  const [showModalAddPeople, setShowModalAddPeople] = useState(false);
-  const [showModalCreateSprint, setShowModalCreateSprint] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [el, setEl] = useState('');
+
+  const toggleModal = el => {
+    setEl(el);
+    setShowModal(!showModal);
+    console.log('name', el);
+  };
 
   const { projectId } = props.match.params;
   const dispatch = useDispatch();
@@ -37,49 +44,46 @@ const SprintsPage = props => {
     dispatch(projectsOperations.getProjectById(projectId));
   }, [dispatch, projectId]);
 
+  // ======= useMediaQuery =======
   const handleMaxWidth = width => {
     return `(max-width:${width}px) `;
   };
-
   const handleMinWidth = width => {
     return `(min-width:${width}px) `;
   };
-
   const tablet = useMediaQuery(handleMinWidth(refs.tablet));
   const tabletMax = useMediaQuery(handleMaxWidth(refs.tabletMax));
   const desktop = useMediaQuery(handleMinWidth(refs.desktop));
-
-  // const toggleModal = () => {
-  //   setShowModal(!showModal);
-  // };
-
-  const openModalAddPeople = () => setShowModalAddPeople(true);
-  const openModalCreateSprint = () => setShowModalCreateSprint(true);
-  const handleCloseModal = () => {
-    setShowModalAddPeople(false);
-    setShowModalCreateSprint(false);
-  };
+  // ======= End useMediaQuery =======
 
   return (
     <>
       <main>
         <aside>
           <SideBar>
-            <div className={s.sideBarPlug}>
-              <ul>
-                {projects.map(project => (
-                  <li key={project.id}>
-                    <Link
-                      to={{
-                        pathname: `/projects/${project.id}`,
-                      }}
-                    >
-                      <h3>{project.name}</h3>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <ul>
+              {projects.map(project => (
+                <li key={project.id}>
+                  <Link
+                    to={{
+                      pathname: `/projects/${project.id}`,
+                    }}
+                  >
+                    <h3>{project.name}</h3>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            {tablet && (
+              <div className={s.CreateNewProjectWrap}>
+                <CreateNewProject
+                  className={s.CreateNewProject}
+                  onClick={() => toggleModal('createProject')}
+                />
+                <span>Create a project</span>
+              </div>
+            )}
           </SideBar>
         </aside>
 
@@ -87,27 +91,33 @@ const SprintsPage = props => {
           <div className={s.headerWrap}>
             <div className={s.contentWrap}>
               <div className={s.titleWrap}>
-                <h2>{currentProject?.name}</h2>
+                <h2>{currentProject?.name || 'Project 1'}</h2>
                 <EditIcon className={s.EditIcon} />
               </div>
-              <p>{currentProject?.description}</p>
+
+              <p>
+                {currentProject?.description ||
+                  'Short description of the project, if it exist, it is posted here. The width of the text block'}
+              </p>
+
               <div className={s.addWrap}>
                 <AddGroupIcon className={s.AddGroupIcon} />
-                <span onClick={openModalAddPeople}>Add people</span>
+                <span onClick={() => toggleModal('addPeople')}>Add people</span>
               </div>
             </div>
+
             {tabletMax && (
-              <PlusButtonIcon
-                className={s.PlusButtonIconFixed}
-                onClick={openModalCreateSprint}
+              <CreateNewSprint
+                className={s.CreateNewSprintFixed}
+                onClick={() => toggleModal('createSprint')}
               />
             )}
             {tablet && (
               <div className={s.createSprintWrap}>
                 {tablet && (
-                  <PlusButtonIcon
-                    className={s.PlusButtonIcon}
-                    onClick={openModalCreateSprint}
+                  <CreateNewSprint
+                    className={s.CreateNewSprint}
+                    onClick={() => toggleModal('createSprint')}
                   />
                 )}
                 {desktop && <span>Create a sprint</span>}
@@ -119,21 +129,15 @@ const SprintsPage = props => {
         </article>
       </main>
 
-      {showModalAddPeople && (
-        <Modal onCloseModal={handleCloseModal}>
-          <AddPeopleForm
-            onClickCancel={handleCloseModal}
-            projectId={projectId}
-          />
-        </Modal>
-      )}
-
-      {showModalCreateSprint && (
-        <Modal onCloseModal={handleCloseModal}>
-          <CreateSprint
-            onClickCancel={handleCloseModal}
-            projectId={projectId}
-          />
+      {showModal && (
+        <Modal onCloseModal={toggleModal}>
+          {el === 'createSprint' ? (
+            <CreateSprint />
+          ) : el === 'addPeople' ? (
+            <AddPeopleForm />
+          ) : (
+            'Put here your CreateProject Component'
+          )}
         </Modal>
       )}
     </>
@@ -141,3 +145,33 @@ const SprintsPage = props => {
 };
 
 export default SprintsPage;
+
+/*
+const [showModalAddPeople, setShowModalAddPeople] = useState(false);
+const [showModalCreateSprint, setShowModalCreateSprint] = useState(false);
+
+
+const openModalAddPeople = () => setShowModalAddPeople(true);
+const openModalCreateSprint = () => setShowModalCreateSprint(true);
+const handleCloseModal = () => {
+  setShowModalAddPeople(false);
+  setShowModalCreateSprint(false);
+};
+
+<span onClick={openModalAddPeople}>Add people</span>
+
+onClick={openModalCreateSprint}
+onClick={openModalCreateSprint}
+
+{showModalAddPeople && (
+  <Modal onCloseModal={handleCloseModal}>
+    <AddPeopleForm onClickCancel={handleCloseModal} />
+  </Modal>
+)}
+
+{showModalCreateSprint && (
+  <Modal onCloseModal={handleCloseModal}>
+    <CreateSprint onClickCancel={handleCloseModal} />
+  </Modal>
+)} 
+*/
