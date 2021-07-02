@@ -2,7 +2,13 @@
 @import '../../scss/breakpoints';
 
 .diagram_title {
-  padding: 20px 0 0 20px;
+  @media screen and (max-width: $mobile-max) {
+    // padding-left: 20px;
+    display: none;
+  }
+  @media screen and (min-width: $tablet) {
+    padding: 20px 0 0 30px;
+  }
 }
 
 .backdrop {
@@ -41,11 +47,13 @@
   // padding: 63px 20px 20px;
   // height: 100%;
   background-color: $primaryWhiteColor;
+  .contentText {
+    padding: 30px;
+  }
 
   @media screen and (max-width: $mobile-max) {
-    padding: 30px 10px 30px 10px;
-    width: 859px;
-    overflow-x: auto;
+    // padding: 30px 10px 30px 10px;
+    // width: 688px;
   }
 
   @media screen and (min-width: $tablet) {
