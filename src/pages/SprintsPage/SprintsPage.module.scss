@@ -19,7 +19,6 @@ main {
   }
 
   aside {
-    // width: 100%;
     @media screen and (max-width: $mobile-max) {
       padding: 0 20px;
       height: 37px;
@@ -186,12 +185,5 @@ main {
   right: 20px;
   bottom: 20px;
   cursor: pointer;
-}
-
-.sideBarPlug {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 37px;
-  background-color: pink;
+  z-index: 2;
 }

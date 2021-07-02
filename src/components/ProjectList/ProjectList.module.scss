@@ -7,13 +7,17 @@
   flex-wrap: wrap;
 
   padding-top: 36px;
-  margin: 0;
-  justify-content: center;
+
+  margin: 0 auto;
+
 }
 
 .listItem {
   border-radius: 5px;
   height: 136px;
+  position: relative;
+  transition: all 0.5s linear;
+  transform: scale(1);
 
   &:nth-child(3n + 1) {
     background-color: $project-purple;
@@ -25,6 +29,11 @@
 
   &:nth-child(3n) {
     background-color: $project-green;
+  }
+
+  &:hover,
+  &:focus {
+    transform: scale(1.05);
   }
 }
 

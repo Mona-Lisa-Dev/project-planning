@@ -17,8 +17,6 @@ import Spinner from 'components/Loader/Loader';
 
 // import DiagramModal from 'components/Diagram/DiagramModal';
 
-// import Spinner from 'components/Loader';
-
 const LoginPage = lazy(
   () => import('./pages/LoginPage') /* webpackChunkName: "LoginPage" */,
 );
@@ -28,7 +26,6 @@ const RegisterPage = lazy(() =>
 const ProjectsPage = lazy(() =>
   import('./pages/ProjectsPage' /* webpackChunkName: "ProjectsPage" */),
 );
-
 const SprintsPage = lazy(() =>
   import('./pages/SprintsPage' /* webpackChunkName: "SprintsPage" */),
 );
@@ -43,7 +40,6 @@ const App = () => {
   return (
     <>
       <AppBar />
-      {/* <Spinner /> */}
 
       <Container>
         <Suspense fallback={<Spinner />}>

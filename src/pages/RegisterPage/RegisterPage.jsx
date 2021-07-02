@@ -1,4 +1,6 @@
+
 import { useState, useEffect } from 'react';
+
 import Spinner from 'components/Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -81,7 +83,7 @@ const RegisterPage = () => {
   const handleFormSubmit = event => {
     event.preventDefault();
 
-    const user = { email, password, confirmPassword };
+    const user = { email, password };
     dispatch(authOperations.signup(user));
 
     reset();
