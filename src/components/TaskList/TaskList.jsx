@@ -20,7 +20,7 @@ const TaskList = ({ tasks }) => {
   const handleSubmit = e => {
     e.preventDefault();
     //TODO фильтруем массив тасок - проверить такое ли имя в базе
-    setVisibleTasks(tasks.filter(task => task.taskName.includes(searchText)));
+    setVisibleTasks(tasks.filter(task => task.name.includes(searchText)));
   };
 
   useEffect(() => {
@@ -60,14 +60,14 @@ const TaskList = ({ tasks }) => {
       ) : (
         <ul className={styles.taskList}>
           {visibleTasks.map(
-            ({ id, taskName, planTime, customTime = 0, totalTime }) => (
+            ({ id, name, scheduledHours, spentHours = 0, allHours }) => (
               <TaskItem
                 key={id}
                 id={id}
-                taskName={taskName}
-                planTime={planTime}
-                customTime={customTime}
-                totalTime={totalTime}
+                name={name}
+                scheduledHours={scheduledHours}
+                spentHours={spentHours}
+                allHours={allHours}
               />
             ),
           )}
@@ -83,10 +83,10 @@ TaskList.propTypes = {
   tasks: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      taskName: PropTypes.string.isRequired,
-      planTime: PropTypes.number.isRequired,
-      customTime: PropTypes.number,
-      totalTime: PropTypes.number,
+      name: PropTypes.string.isRequired,
+      scheduledHours: PropTypes.number.isRequired,
+      spentHours: PropTypes.number,
+      allHours: PropTypes.number,
     }),
   ),
 };

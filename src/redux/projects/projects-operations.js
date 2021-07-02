@@ -95,13 +95,13 @@ const updateProject = (projectId, updatedProject) => async dispatch => {
   }
 };
 
-const addParticipant = (projectId, updatedProject) => async dispatch => {
+const addParticipant = (projectId, email) => async dispatch => {
   dispatch(addParticipantRequest());
 
   try {
     const {
       data: { data },
-    } = await axios.patch(`/projects/${projectId}/participant`, updatedProject);
+    } = await axios.patch(`/projects/${projectId}/participant`, email);
     dispatch(addParticipantSuccess(data.project));
 
     return data.project;
