@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux';
 
 import projectsOperations from 'redux/projects/projects-operations';
 
-import ButtonDelete from '../ButtonDelete';
+// import ButtonDelete from '../ButtonDelete';
+import ButtonDelete from '../ButtonDeleteProject';
 
 // import { getLoadingProjects } from 'redux/projects/projects-selectors';
 
