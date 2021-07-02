@@ -58,7 +58,7 @@ const App = () => {
               restricted
               render={props =>
                 isAuthorized ? (
-                  routes.projects
+                  <Redirect to={routes.projects} />
                 ) : isSignup ? (
                   <Redirect to={routes.login} />
                 ) : (
@@ -67,14 +67,14 @@ const App = () => {
               }
             />
 
-            {/* <PrivateRoute
+            <PrivateRoute
               path={routes.sprints}
               restricted
               component={SprintsPage}
               redirectTo={routes.login}
-            /> */}
+            />
 
-            <Route
+            {/* <Route
               path={routes.sprints}
               restricted
               render={props =>
@@ -86,7 +86,7 @@ const App = () => {
               }
               // component={SprintsPage}
               // redirectTo={routes.login}
-            />
+            /> */}
 
             <PrivateRoute
               path={routes.projects}

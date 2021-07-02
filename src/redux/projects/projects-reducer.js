@@ -34,7 +34,7 @@ const projectItems = createReducer([], {
     state.filter(({ id }) => id !== payload),
   [updateProjectSuccess]: (state, { payload }) =>
     state.map(item => (item.id === payload.id ? payload : item)),
-  [addParticipantSuccess]: (_, { payload }) => payload.participants, //TODO проверить на фронте
+
   [deleteParticipantSuccess]: (_, { payload }) => payload.participants, //TODO проверить
 
   [logoutSuccess]: () => [],
@@ -42,6 +42,8 @@ const projectItems = createReducer([], {
 
 const currentProject = createReducer(null, {
   [getProjectByIdSuccess]: (_, { payload }) => payload,
+  [addParticipantSuccess]: (state, { payload }) =>
+    state.participants.push(payload), //TODO проверить на фронте
 });
 
 const loading = createReducer(false, {
