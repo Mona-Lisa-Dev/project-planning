@@ -132,9 +132,9 @@ const SprintsPage = props => {
       {showModal && (
         <Modal onCloseModal={toggleModal}>
           {el === 'createSprint' ? (
-            <CreateSprint />
+            <CreateSprint onClickCancel={toggleModal} projectId={projectId} />
           ) : el === 'addPeople' ? (
-            <AddPeopleForm />
+            <AddPeopleForm onClickCancel={toggleModal} projectId={projectId} />
           ) : (
             'Put here your CreateProject Component'
           )}
