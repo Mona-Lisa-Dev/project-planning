@@ -128,20 +128,22 @@ const getAllParticipants = projectId => async dispatch => {
   }
 };
 
-const deleteParticipant = (projectId, email) => async dispatch => {
-  dispatch(deleteParticipantRequest());
+const deleteParticipant =
+  (projectId, { email }) =>
+  async dispatch => {
+    dispatch(deleteParticipantRequest());
 
-  try {
-    const {
-      data: { data },
-    } = await axios.delete(`/projects/${projectId}/participant`, email);
-    dispatch(deleteParticipantSuccess(data.project));
+    try {
+      const {
+        data: { data },
+      } = await axios.post(`/projects/${projectId}/participant`, { email });
+      dispatch(deleteParticipantSuccess(data.project.psrticipants));
 
-    return data.project;
-  } catch (error) {
-    dispatch(deleteParticipantError(error.message));
-  }
-};
+      return data.project.psrticipants;
+    } catch (error) {
+      dispatch(deleteParticipantError(error.message));
+    }
+  };
 
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {

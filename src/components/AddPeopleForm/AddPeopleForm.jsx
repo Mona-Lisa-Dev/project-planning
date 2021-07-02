@@ -1,6 +1,7 @@
 // import { Button, TextField } from '@material-ui/core';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 
 import { getParticipants } from 'redux/projects/projects-selectors';
 import projectsOperations from 'redux/projects/projects-operations';
@@ -22,6 +23,10 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
 
   const handleChange = e => {
     setEmail(e.target.value);
+  };
+
+  const handleClick = email => {
+    dispatch(projectsOperations.deleteParticipant(projectId, { email }));
   };
 
   const handleSubmit = e => {
@@ -74,7 +79,22 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
             There are {participants.length} participants in project now:
           </p>
 
-          <PeopleList participants={participants} />
+          <ul>
+            {participants.map(item => (
+              <li className={s.participant} key={item}>
+                {item}{' '}
+                <button
+                  type="button"
+                  onClick={() => handleClick(item)}
+                  className={s.deleteButton}
+                >
+                  <DeleteOutlinedIcon />
+                </button>
+              </li>
+            ))}
+          </ul>
+
+          {/* <PeopleList projectId={projectId} participants={participants} /> */}
         </div>
       )}
 
