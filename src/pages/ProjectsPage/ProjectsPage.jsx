@@ -18,8 +18,7 @@ const ProjectsPage = () => {
   const dispatch = useDispatch();
   useEffect(() => dispatch(projectsOperations.getAllProjects()), [dispatch]);
 
-  const openModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(!showModal);
+  const toggleModal = () => setShowModal(!showModal);
 
   return (
     <>
@@ -34,14 +33,14 @@ const ProjectsPage = () => {
             type="button"
             name="Create"
             id="CreateButton"
-            onClick={openModal}
+            onClick={toggleModal}
           ></button>
           Create a project
         </label>
 
         {showModal && (
-          <Modal onCloseModal={handleCloseModal}>
-            <CreateProject onClickCancel={handleCloseModal} />
+          <Modal onCloseModal={toggleModal}>
+            <CreateProject onClickCancel={toggleModal} />
           </Modal>
         )}
       </div>

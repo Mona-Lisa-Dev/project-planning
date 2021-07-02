@@ -14,6 +14,9 @@ import {
   updateSprintRequest,
   updateSprintSuccess,
   updateSprintError,
+  getSprintByIdRequest,
+  getSprintByIdSuccess,
+  getSprintByIdError,
 } from './sprints-actions';
 
 import { logoutSuccess } from 'redux/auth/auth-actions';
@@ -29,6 +32,10 @@ const sprintsItems = createReducer([], {
   [logoutSuccess]: () => [],
 });
 
+const currentSprint = createReducer(null, {
+  [getSprintByIdSuccess]: (_, { payload }) => payload,
+});
+
 const loading = createReducer(false, {
   [getAllSprintsRequest]: () => true,
   [getAllSprintsSuccess]: () => false,
@@ -42,6 +49,9 @@ const loading = createReducer(false, {
   [updateSprintRequest]: () => true,
   [updateSprintSuccess]: () => false,
   [updateSprintError]: () => false,
+  [getSprintByIdRequest]: () => true,
+  [getSprintByIdSuccess]: () => false,
+  [getSprintByIdError]: () => false,
 });
 
 const error = createReducer(null, {
@@ -53,10 +63,13 @@ const error = createReducer(null, {
   [deleteSprintRequest]: () => null,
   [updateSprintError]: (_, { payload }) => payload,
   [updateSprintRequest]: () => null,
+  [getSprintByIdError]: (_, { payload }) => payload,
+  [getSprintByIdRequest]: () => null,
 });
 
 export default combineReducers({
   items: sprintsItems,
+  currentSprint,
   loading,
   error,
 });

@@ -19,3 +19,11 @@ export const deleteSprintError = createAction('sprints/deleteSprintError');
 export const updateSprintRequest = createAction('sprints/updateSprintRequest');
 export const updateSprintSuccess = createAction('sprints/updateSprintSuccess');
 export const updateSprintError = createAction('sprints/updateSprintError');
+
+export const getSprintByIdRequest = createAction(
+  'sprints/getSprintByIdRequest',
+);
+export const getSprintByIdSuccess = createAction(
+  'sprints/getSprintByIdSuccess',
+);
+export const getSprintByIdError = createAction('sprints/getSprintByIdError');

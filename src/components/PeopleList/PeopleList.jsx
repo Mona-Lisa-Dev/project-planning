@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 const PeopleList = ({ users }) => {
   return (
     <ul>
-      {users.map(({ id, email }) => (
-        <li key={id}>{email}</li>
+      {users.map(({ email }) => (
+        <li key={email}>{email}</li>
       ))}
     </ul>
   );
