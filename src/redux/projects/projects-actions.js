@@ -57,3 +57,13 @@ export const getProjectByIdSuccess = createAction(
   'projects/getProjectByIdSuccess',
 );
 export const getProjectByIdError = createAction('projects/getProjectByIdError');
+
+export const getAllParticipantsRequest = createAction(
+  'projects/getAllParticipantsRequest',
+);
+export const getAllParticipantsSuccess = createAction(
+  'projects/getAllParticipantsSuccess',
+);
+export const getAllParticipantsError = createAction(
+  'projects/getAllParticipantsError',
+);

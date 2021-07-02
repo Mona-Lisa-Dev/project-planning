@@ -1,7 +1,8 @@
 // import { Button, TextField } from '@material-ui/core';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { getParticipants } from 'redux/projects/projects-selectors';
 import projectsOperations from 'redux/projects/projects-operations';
 import PeopleList from 'components/PeopleList';
 
@@ -9,10 +10,15 @@ import s from './AddPeopleForm.module.scss';
 
 const AddPeopleForm = ({ onClickCancel, projectId }) => {
   const [email, setEmail] = useState('');
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   const [emptyInput, setEmptyInput] = useState(false);
+  const participants = useSelector(getParticipants);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(projectsOperations.getAllParticipants(projectId));
+  }, [dispatch, projectId]);
 
   const handleChange = e => {
     setEmail(e.target.value);
@@ -26,13 +32,12 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
       return;
     }
 
-    const user = {
+    const participant = {
       email,
     };
-    setUsers(prevState => [user, ...prevState]);
+    // setUsers(prevState => [participant, ...prevState]);
 
-    // здесь будет отправка на бек
-    dispatch(projectsOperations.addParticipant(projectId, user));
+    dispatch(projectsOperations.addParticipant(projectId, participant));
 
     setEmail('');
     setEmptyInput(false);
@@ -58,7 +63,7 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
         </label>
       </form>
 
-      {users.length === 0 ? (
+      {participants.length === 0 ? (
         <div>
           <p className={s.text}>Added users:</p>
           <p>You have not added any users yet</p>
@@ -66,9 +71,10 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
       ) : (
         <div>
           <p className={s.text}>
-            There are {users.length} participants in project now:
+            There are {participants.length} participants in project now:
           </p>
-          <PeopleList users={users} />
+
+          <PeopleList participants={participants} />
         </div>
       )}
 

@@ -91,14 +91,11 @@ const SprintsPage = props => {
           <div className={s.headerWrap}>
             <div className={s.contentWrap}>
               <div className={s.titleWrap}>
-                <h2>{currentProject?.name || 'Project 1'}</h2>
+                <h2>{currentProject?.name}</h2>
                 <EditIcon className={s.EditIcon} />
               </div>
 
-              <p>
-                {currentProject?.description ||
-                  'Short description of the project, if it exist, it is posted here. The width of the text block'}
-              </p>
+              <p>{currentProject?.description}</p>
 
               <div className={s.addWrap}>
                 <AddGroupIcon className={s.AddGroupIcon} />

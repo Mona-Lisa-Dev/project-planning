@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 
-const PeopleList = ({ users }) => {
+const PeopleList = ({ participants }) => {
   return (
     <ul>
-      {users.map(({ email }) => (
-        <li key={email}>{email}</li>
+      {participants.map(item => (
+        <li key={item}>{item}</li>
       ))}
     </ul>
   );
@@ -13,10 +13,5 @@ const PeopleList = ({ users }) => {
 export default PeopleList;
 
 PeopleList.propTypes = {
-  users: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired,
-    }),
-  ),
+  participants: PropTypes.arrayOf(PropTypes.string.isRequired),
 };
