@@ -1,0 +1,291 @@
+@import '../../scss/vars';
+@import '../../scss/breakpoints';
+
+main {
+  margin-left: auto;
+  margin-right: auto;
+
+  @media screen and (min-width: $tablet) {
+    display: flex;
+    padding: 0 40px 0 40px;
+    width: $tablet;
+  }
+
+  @media screen and (min-width: $desktop) {
+    width: $desktop;
+    padding: 0 55px 0 55px;
+  }
+
+  // Sidebar
+  aside {
+    position: relative;
+    border-right: 1px solid rgba(24, 28, 39, 0.1);
+    @media screen and (max-width: $mobile-max) {
+      padding: 10px 0 10px 20px;
+      border-bottom: 1px solid rgba(24, 28, 39, 0.1);
+    }
+
+    @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
+      padding: 20px 20px 0 0;
+      width: 216px;
+    }
+
+    @media screen and (min-width: $desktop) {
+      padding: 20px 0 0 0;
+      width: 200px;
+    }
+  }
+}
+.linkToBack {
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: #181c27;
+  &::before {
+    content: url(./svg/arrow.svg);
+    margin-right: 10px;
+  }
+  @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
+    margin-bottom: 80px;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-bottom: 120px;
+  }
+}
+.navSprintsList {
+  font-size: 14px;
+  @media screen and (max-width: $mobile-max) {
+    display: none;
+  }
+}
+.linkToSprint {
+  width: 119px;
+  color: #181c27;
+  margin-bottom: 30px;
+}
+
+.btnCreateSprint {
+  position: fixed;
+  bottom: 80px;
+  left: 80px;
+  cursor: pointer;
+  border: none;
+  width: 44px;
+  height: 44px;
+  background: url(./svg/plus.svg) no-repeat;
+  box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+  border-radius: 25px;
+  &::after {
+    position: fixed;
+    bottom: 60px;
+    left: 60px;
+    content: 'Create a sprint';
+  }
+}
+
+// Content
+.sprintContent {
+  position: relative;
+  @media screen and (max-width: $mobile-max) {
+    width: 320px;
+    padding-left: 20px;
+    border-left: none;
+  }
+  @media screen and (min-width: $tablet) {
+    padding-top: 20px;
+    width: 512px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    width: 1026px;
+  }
+}
+
+.sprintDate {
+  margin-bottom: 20px;
+  font-size: 12px;
+  line-height: 1.25;
+  letter-spacing: 0.04em;
+  color: rgba(24, 28, 39, 0.6);
+  @media screen and (max-width: $mobile-max) {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    height: 70px;
+  }
+  @media screen and (min-width: $tablet) {
+    margin-left: 20px;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-left: 70px;
+  }
+}
+
+.titleDisable {
+  display: none;
+}
+.title {
+  color: $text-dark;
+  letter-spacing: 0.04em;
+  font-family: $main-font;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.22;
+  @media screen and (max-width: $mobile-max) {
+    width: 260px;
+    height: 64px;
+    font-size: 26px;
+  }
+  @media screen and (min-width: $tablet) {
+    margin-right: 20px;
+    margin-left: 20px;
+    width: 334px;
+    height: 88px;
+    font-size: 36px;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-right: 40px;
+    margin-left: 70px;
+    height: 75px;
+  }
+}
+
+// Форма для изменения заголовка
+.changeTitleForm {
+  display: none;
+}
+.changeTitleFormActive {
+  display: flex;
+  align-items: center;
+}
+
+.inputChangeTitle {
+  display: inline-block;
+  border: none;
+  outline: none;
+  box-shadow: 2px 4px 8px rgba(0, 5, 97, 0.1);
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 5px;
+  @media screen and (max-width: $mobile-max) {
+    width: 260px;
+    height: 64px;
+  }
+  @media screen and (min-width: $tablet) {
+    margin-right: 20px;
+    margin-left: 20px;
+    width: 334px;
+    height: 88px;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-right: 40px;
+    margin-left: 70px;
+    height: 75px;
+  }
+}
+
+.btnSaveChange {
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  width: 25px;
+  height: 25px;
+  background: center url(./svg/saver.svg) no-repeat;
+  background-size: 18px;
+  &:hover,
+  &:focus {
+    background: center url(./svg/saverActive.svg) no-repeat;
+    background-size: 18px;
+  }
+  @media screen and (min-width: $tablet) {
+    margin: 10px 34px 0 0;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-right: 230px;
+  }
+}
+
+.sprintHeader {
+  display: flex;
+  @media screen and (max-width: $tablet-max) {
+    align-items: flex-start;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-bottom: 30px;
+    align-items: baseline;
+  }
+}
+
+.btnChangeDisable {
+  display: none;
+}
+.btnChange {
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  width: 20px;
+  height: 20px;
+  background-color: #a6a6a6;
+  background: url(./svg/btnChange.svg) no-repeat;
+  transition: all 0.25s linear;
+  &:hover,
+  &:focus {
+    background: url(./svg/btnChangeActive.svg) no-repeat;
+    transform: scale(1.2);
+  }
+  @media screen and (min-width: $tablet) {
+    margin: 10px 34px 0 0;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-right: 230px;
+  }
+}
+
+.btnCreateTask {
+  position: relative;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  background: url(./svg/plus.svg) no-repeat;
+  box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+
+  @media screen and (max-width: $mobile-max) {
+    position: fixed;
+    z-index: 10;
+    bottom: 30px;
+    right: 10px;
+  }
+  @media screen and (min-width: $desktop) {
+    &::after {
+      content: 'Create a task';
+      position: absolute;
+      width: 185px;
+      font-size: 18px;
+      line-height: 1.22;
+      letter-spacing: 0.04em;
+      left: 20px;
+      top: 10px;
+    }
+  }
+}
+
+.btnOpenAnalytics {
+  position: fixed;
+  z-index: 10;
+  cursor: pointer;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+  background: center url(./svg/analytics.svg) no-repeat;
+  @media screen and (min-width: $tablet) {
+    bottom: 80px;
+    right: 10px;
+  }
+  @media screen and (max-width: $mobile-max) {
+    bottom: 30px;
+    left: 10px;
+  }
+}

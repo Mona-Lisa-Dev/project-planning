@@ -2,14 +2,23 @@ import { useState, useEffect } from 'react';
 import styles from './TaskItem.module.scss';
 import ButtonDelete from '../ButtonDelete';
 
-const TaskItem = ({ id, taskName, planTime, customTime, totalTime }) => {
-  const [queryCustomTime, setQueryCustomTime] = useState(Number(customTime));
-  const [queryTotalTime, setQueryTotalTime] = useState(Number(totalTime));
+const TaskItem = ({
+  id,
+  name,
+  scheduledHours,
+  spentHours = 0,
+  allHours = 0,
+}) => {
+  const [queryCustomTime, setQueryCustomTime] = useState(Number(spentHours));
+  const [queryTotalTime, setQueryTotalTime] = useState(Number(allHours));
 
   const handleInputChange = e => {
     setQueryCustomTime(e.target.value);
-    setQueryTotalTime(queryTotalTime + Number(e.target.value));
+    setQueryTotalTime(Number(allHours) + Number(e.target.value));
   };
+
+  // TODO удаление на беке
+  const handleDeleteClick = id => {};
 
   //TODO функция отправляет запрос на бэк для сохранения часов
   const saveCustomTime = () => {};
@@ -22,8 +31,8 @@ const TaskItem = ({ id, taskName, planTime, customTime, totalTime }) => {
 
   return (
     <li className={styles.taskItem}>
-      <p className={styles.taskName}> {taskName} </p>
-      <p className={styles.planTime}> {planTime} </p>
+      <p className={styles.taskName}> {name} </p>
+      <p className={styles.planTime}> {scheduledHours} </p>
       <div className={styles.inputTimeBefore}>
         <input
           type="text"
@@ -34,7 +43,7 @@ const TaskItem = ({ id, taskName, planTime, customTime, totalTime }) => {
       </div>
       <p className={styles.totalTime}> {queryTotalTime} </p>
 
-      <ButtonDelete id={id} />
+      <ButtonDelete handleClick={handleDeleteClick} />
     </li>
   );
 };

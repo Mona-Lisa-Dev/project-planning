@@ -1,10 +1,61 @@
 @import '../../scss/breakpoints';
+@import '../../scss/vars';
 
 .listWrapper {
-  width: $mobile;
+  width: 282px;
   display: flex;
   flex-wrap: wrap;
+
   padding-top: 36px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.listItem {
+  border-radius: 5px;
+  height: 136px;
+
+  &:nth-child(3n + 1) {
+    background-color: $project-purple;
+  }
+
+  &:nth-child(3n + 2) {
+    background-color: $project-rose;
+  }
+
+  &:nth-child(3n) {
+    background-color: $project-green;
+  }
+}
+
+@media screen and (min-width: $tablet) {
+  .listItem {
+    &:nth-child(4n + 1) {
+      background: bottom url(./FirstWave.svg) no-repeat;
+    }
+
+    &:nth-child(4n + 2) {
+      background: bottom url(./SecondWave.svg) no-repeat;
+    }
+
+    &:nth-child(4n + 3) {
+      background: bottom url(./ThirdWave.svg) no-repeat;
+    }
+    &:nth-child(4n) {
+      background: bottom url(./FourthWave.svg) no-repeat;
+    }
+    &:nth-child(3n + 1) {
+      background-color: $project-purple;
+    }
+
+    &:nth-child(3n + 2) {
+      background-color: $project-rose;
+    }
+
+    &:nth-child(3n) {
+      background-color: $project-green;
+    }
+  }
 }
 
 @media screen and (min-width: $mobile) and (max-width: $mobile-max) {
@@ -21,11 +72,11 @@
 
 @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
   .listWrapper {
-    width: $tablet;
-    padding-top: 30px;
+    width: 688px;
   }
 
   .listItem {
+    height: 216px;
     &:not(:nth-child(3n)) {
       margin-right: 20px;
     }
@@ -38,11 +89,11 @@
 
 @media screen and (min-width: $desktop) {
   .listWrapper {
-    width: $desktop;
-    padding-top: 30px;
+    width: 1170px;
   }
 
   .listItem {
+    height: 270px;
     &:not(:nth-child(4n)) {
       margin-right: 30px;
     }

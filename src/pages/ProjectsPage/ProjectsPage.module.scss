@@ -32,16 +32,7 @@
 
 .ProjectsList {
   display: flex;
-  // flex-wrap: wrap;
 }
-
-// .ProjectsListItem {
-//   width: 270px;
-//   height: 270px;
-//   // &:not(:nth-child(4n)) {
-//   //   margin-right: 30px;
-//   // }
-// }
 
 .ProjectsCreateButton {
   width: 44px;
@@ -79,7 +70,7 @@
   .ProjectsHeaderBar {
     display: flex;
     justify-content: space-between;
-    padding: 20px 0px 36px 20px;
+    padding: 20px 0px 0px 20px;
     position: relative;
   }
 
@@ -88,25 +79,12 @@
   }
 
   .ProjectsCreateButton {
-    position: absolute;
+    position: fixed;
     // bottom: 20px;
-    top: 524px;
-    right: 20px;
+    bottom: 3%;
+    right: 3%;
     margin: 0px;
   }
-
-  // .ProjectsList {
-  //   display: flex;
-  // }
-
-  // .ProjectsListItem {
-  //   width: calc((100%-10px) / 2);
-  //   margin-right: 10px;
-
-  //   &:nth-child(2n) {
-  //     margin-right: 0px;
-  //   }
-  // }
 
   .ProjectsTitle {
     font-family: $main-font;
@@ -121,19 +99,8 @@
 
 @media screen and (min-width: $tablet) {
   .ProjectsHeaderBar {
-    padding: 40px 40px 30px 47px;
+    padding: 40px 40px 0px 47px;
   }
-
-  // .ProjectsList {
-  //   display: flex;
-  // }
-
-  // .ProjectsListItem {
-  //   width: calc((100%-60px) / 4);
-  //   &:not(:nth-child(4n)) {
-  //     margin-right: 30px;
-  //   }
-  // }
 
   .ProjectsTitle {
     font-size: 36px;
@@ -145,19 +112,8 @@
 
 @media screen and (min-width: $desktop) {
   .ProjectsHeaderBar {
-    padding: 40px 86px 30px 62px;
+    padding: 40px 86px 0px 62px;
   }
-
-  // .ProjectsList {
-  //   display: flex;
-  // }
-
-  // .ProjectsListItem {
-  //   width: calc((100%-60px) / 4);
-  //   &:not(:nth-child(4n)) {
-  //     margin-right: 30px;
-  //   }
-  // }
 
   .ProjectsCreateButton {
     margin-right: 20px;
