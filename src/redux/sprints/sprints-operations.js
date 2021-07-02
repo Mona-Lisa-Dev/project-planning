@@ -13,6 +13,9 @@ import {
   updateSprintRequest,
   updateSprintSuccess,
   updateSprintError,
+  getSprintByIdRequest,
+  getSprintByIdSuccess,
+  getSprintByIdError,
 } from './sprints-actions';
 
 const getAllSprints = projectId => async dispatch => {
@@ -27,6 +30,21 @@ const getAllSprints = projectId => async dispatch => {
     return data.sprints;
   } catch (error) {
     dispatch(getAllSprintsError(error.message));
+  }
+};
+
+const getSprintById = (projectId, sprintId) => async dispatch => {
+  dispatch(getSprintByIdRequest());
+
+  try {
+    const {
+      data: { data },
+    } = await axios.get(`/sprints/${projectId}/${sprintId}`);
+    dispatch(getSprintByIdSuccess(data.sprint));
+
+    return data.sprint;
+  } catch (error) {
+    dispatch(getSprintByIdError(error.message));
   }
 };
 
@@ -80,4 +98,5 @@ export default {
   createSprint,
   deleteSprint,
   updateSprint,
+  getSprintById,
 };

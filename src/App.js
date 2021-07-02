@@ -54,7 +54,7 @@ const App = () => {
               restricted
               render={props =>
                 isAuthorized ? (
-                  routes.projects
+                  <Redirect to={routes.projects} />
                 ) : isSignup ? (
                   <Redirect to={routes.login} />
                 ) : (
