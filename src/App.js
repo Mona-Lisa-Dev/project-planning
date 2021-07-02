@@ -15,6 +15,8 @@ import './scss/_main.scss';
 // import PrivateRoute from 'components/PrivateRoute';
 // import PublicRoute from 'components/PublicRoute';
 // import Diagram from 'components/Diagram';
+// import DiagramModal from 'components/Diagram/DiagramModal';
+
 const LoginPage = lazy(
   () => import('./pages/LoginPage') /* webpackChunkName: "LoginPage" */,
 );

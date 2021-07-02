@@ -1,4 +1,4 @@
-// import s from './Diagram.module.scss';
+import s from './Diagram.module.scss';
 
 import { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
@@ -59,8 +59,8 @@ const Diagram = () => {
   }, []);
 
   return (
-    <div style={{ width: '1000px', height: '400px', padding: '20px' }}>
-      <h1>BurnDown Chart (Calendar Team)</h1>
+    <div>
+      <h3 className={s.diagram_title}>BurnDown Chart (Calendar Team)</h3>
       <Line
         data={chartData}
         options={{
@@ -74,6 +74,22 @@ const Diagram = () => {
             ],
           },
           responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+              // labels: {
+              //   wigth: 10,
+              // },
+            },
+            title: {
+              display: true,
+              position: 'left',
+              text: 'Человеко-часы',
+            },
+          },
+          layout: {
+            padding: 20,
+          },
         }}
       />
     </div>
