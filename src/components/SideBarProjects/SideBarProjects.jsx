@@ -1,15 +1,13 @@
 import { useMediaQuery } from '@material-ui/core';
 import { refs } from '../../pages/SprintsPage/refs';
 
-import { Link, withRouter } from 'react-router-dom';
-import Violet from './img/violet-8C72DF.png';
-import Orange from './img/orange-FF765F.png';
-import Green from './img/green-71DF87.png';
+import { NavLink, withRouter } from 'react-router-dom';
+// import Violet from './img/violet-8C72DF.png';
+// import Orange from './img/orange-FF765F.png';
+// import Green from './img/green-71DF87.png';
 import s from './SideBarProjects.module.scss';
 
 const SideBarProjects = ({ projects, match }) => {
-  const { projectId } = match.params;
-
   // ------- useMediaQuery -------
   const handleMinWidth = width => {
     return `(min-width:${width}px) `;
@@ -23,30 +21,28 @@ const SideBarProjects = ({ projects, match }) => {
         <ul className={s.SideBarProjectsList}>
           {projects.map(project => (
             <li key={project.id}>
-              <Link
+              <NavLink
                 to={{
                   pathname: `/projects/${project.id}`,
                 }}
+                className={s.link}
+                activeClassName={s.activeLink}
               >
-                {projectId === String(project.id) ? (
-                  <div className={s.activeProjectNameWrap}>
-                    <span style={{ backgroundColor: `#${project.color}` }} />
-                    {project.color === '8C72DF' ? (
-                      <img src={Violet} alt="dd" />
-                    ) : project.color === 'FF765F' ? (
-                      <img src={Orange} alt="dd" />
-                    ) : (
-                      <img src={Green} alt="dd" />
-                    )}
-                    <h3>{project.name}</h3>
+                <span className={s.square} />
+                <span className={s.squareShadow} />
+                <h3 className={s.name}>{project.name}</h3>
+                {/* {projectId === String(project.id) ? (
+                  <div>
+                    <span className={s.square} />
+                    <h3 className={s.name}>{project.name}</h3>
                   </div>
                 ) : (
-                  <div className={s.projectNameWrap}>
-                    <span style={{ backgroundColor: `#${project.color}` }} />
-                    <h3>{project.name}</h3>
+                  <div>
+                    <span className={s.square} />
+                    <h3 className={s.name}>{project.name}</h3>
                   </div>
-                )}
-              </Link>
+                )} */}
+              </NavLink>
             </li>
           ))}
         </ul>
