@@ -34,14 +34,13 @@ const SprintsPage = props => {
   const [showModal, setShowModal] = useState(false);
   const [el, setEl] = useState('');
   const [showInput, setShowInput] = useState(false);
-  const [name, setName] = useState('');  
+  const [name, setName] = useState('');
 
   const { projectId } = props.match.params;
   const dispatch = useDispatch();
 
   const currentProject = useSelector(getCurrentProject);
   const projects = useSelector(getProjects);
-  const currentProject = useSelector(getCurrentProject);
 
   useEffect(() => {
     dispatch(projectsOperations.getProjectById(projectId));
@@ -92,7 +91,6 @@ const SprintsPage = props => {
             <ShowProjects />
 
             <SideBarProjects projects={projects} />
-
 
             {/* <ul>
               {projects.map(project => (
