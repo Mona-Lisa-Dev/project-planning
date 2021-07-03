@@ -114,6 +114,12 @@ main {
           }
         }
 
+        .buttonSave {
+          border: none;
+          background-color: transparent;
+          color: $text-light;
+        }
+
         p {
           margin: 0 0 30px;
           letter-spacing: 0.04em;

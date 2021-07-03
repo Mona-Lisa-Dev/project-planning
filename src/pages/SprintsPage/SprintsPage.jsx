@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // import { Link } from 'react-router-dom';
 
+import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import { useMediaQuery } from '@material-ui/core';
 import { refs } from './refs';
 import { ReactComponent as EditIcon } from './svg/edit_icon.svg';
@@ -16,8 +17,9 @@ import Modal from 'components/Modal';
 import CreateSprint from 'components/CreateSprint';
 import SprintList from 'components/SprintList';
 import AddPeopleForm from 'components/AddPeopleForm';
+import CreateProject from 'components/CreateProject';
 import {
-  // getProjects,
+  getProjects,
   getCurrentProject,
 } from 'redux/projects/projects-selectors';
 import sprintsOperations from 'redux/sprints/sprints-operations';
@@ -26,21 +28,24 @@ import projectsOperations from 'redux/projects/projects-operations';
 import s from './SprintsPage.module.scss';
 
 // Delete it later
-import projects from './alternativeProjects.json';
+// import projects from './alternativeProjects.json';
 
 const SprintsPage = props => {
   const [showModal, setShowModal] = useState(false);
   const [el, setEl] = useState('');
+  const [showInput, setShowInput] = useState(false);
+  const [name, setName] = useState('');  
 
   const { projectId } = props.match.params;
   const dispatch = useDispatch();
 
-  // const projects = useSelector(getProjects);
+  const currentProject = useSelector(getCurrentProject);
+  const projects = useSelector(getProjects);
   const currentProject = useSelector(getCurrentProject);
 
   useEffect(() => {
-    dispatch(sprintsOperations.getAllSprints(projectId));
     dispatch(projectsOperations.getProjectById(projectId));
+    dispatch(sprintsOperations.getAllSprints(projectId));
   }, [dispatch, projectId]);
 
   // ----------- Modal -----------
@@ -66,13 +71,28 @@ const SprintsPage = props => {
   const desktop = useMediaQuery(handleMinWidth(refs.desktop));
   // ----- End useMediaQuery -----
 
+  const handleNameChange = event => setName(event.target.value);
+  const editNameHandle = () => {
+    setName(currentProject?.name);
+    setShowInput(true);
+  };
+
+  const closeInputHandler = () => {
+    if (currentProject.name !== name || name !== '') {
+      dispatch(projectsOperations.updateProject(projectId, { name }));
+    }
+    setShowInput(false);
+  };
+
   return (
     <>
       <main>
         <aside>
           <SideBar>
             <ShowProjects />
+
             <SideBarProjects projects={projects} />
+
 
             {/* <ul>
               {projects.map(project => (
@@ -104,9 +124,33 @@ const SprintsPage = props => {
           <div className={s.headerWrap}>
             <div className={s.contentWrap}>
               <div className={s.titleWrap}>
-                <h2>{currentProject?.name}</h2>
+                {showInput ? (
+                  <form onSubmit={closeInputHandler}>
+                    <label>
+                      <input
+                        value={name}
+                        name="name"
+                        type="text"
+                        onChange={handleNameChange}
+                      />
+                      <button className={s.buttonSave} type="submit">
+                        <SaveOutlinedIcon />
+                      </button>
+                    </label>
+                  </form>
+                ) : (
+                  <>
+                    <h2>{currentProject?.name}</h2>
 
-                <EditIcon className={s.EditIcon} />
+                    <button
+                      type="button"
+                      className={s.buttonSave}
+                      onClick={editNameHandle}
+                    >
+                      <EditIcon className={s.EditIcon} />
+                    </button>
+                  </>
+                )}
               </div>
 
               <p>{currentProject?.description}</p>
@@ -147,7 +191,7 @@ const SprintsPage = props => {
           ) : el === 'addPeople' ? (
             <AddPeopleForm onClickCancel={toggleModal} projectId={projectId} />
           ) : (
-            'Put here your CreateProject Component'
+            <CreateProject onClickCancel={toggleModal} />
           )}
         </Modal>
       )}
