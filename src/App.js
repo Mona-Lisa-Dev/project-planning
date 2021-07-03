@@ -29,6 +29,9 @@ const ProjectsPage = lazy(() =>
 const SprintsPage = lazy(() =>
   import('./pages/SprintsPage' /* webpackChunkName: "SprintsPage" */),
 );
+const TasksPage = lazy(() =>
+  import('./pages/TasksPage' /* webpackChunkName: "TasksPage" */),
+);
 
 const App = () => {
   const isAuthorized = useSelector(getIsAuthenticated);
@@ -51,6 +54,7 @@ const App = () => {
               component={LoginPage}
               redirectTo={routes.projects}
             />
+
             <Route
               path={routes.signup}
               restricted
@@ -66,27 +70,18 @@ const App = () => {
             />
 
             <PrivateRoute
+              path={routes.tasks}
+              restricted
+              component={TasksPage}
+              redirectTo={routes.login}
+            />
+
+            <PrivateRoute
               path={routes.sprints}
               restricted
               component={SprintsPage}
               redirectTo={routes.login}
             />
-
-            {/* <Route
-              path={routes.sprints}
-              restricted
-              render={props =>
-                isAuthorized ? (
-                  <SprintsPage {...props} />
-                ) : (
-                  <Redirect to={routes.login} />
-                )
-              }
-              // component={SprintsPage}
-              // redirectTo={routes.login}
-            /> */}
-
-            {/* <Route path={routes.sprints} component={SprintsPage} /> */}
 
             <PrivateRoute
               path={routes.projects}
@@ -94,12 +89,6 @@ const App = () => {
               component={ProjectsPage}
               redirectTo={routes.login}
             />
-            {/* <PublicRoute
-              path={routes.home}
-              restricted
-              component={isAuthorized ? ProjectsPage : RegisterPage}
-              redirectTo={routes.projects}
-            /> */}
 
             <Route
               path={routes.home}
