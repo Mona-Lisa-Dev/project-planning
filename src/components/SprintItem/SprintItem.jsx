@@ -9,14 +9,11 @@ import styles from './SprintItem.module.scss';
 const SprintItem = ({ currentProject, sprint }) => {
   const dispatch = useDispatch();
 
-  console.log('currentProject', currentProject);
-  console.log('sprint', sprint);
-
   const handleClick = () =>
     dispatch(sprintsOperations.deleteSprint(currentProject.id, sprint.id));
 
   return (
-    <>
+    <div className={styles.LinkWrapper}>
       <Link
         to={{
           pathname: `/projects/${sprint.project}/${sprint.id}`,
@@ -42,7 +39,7 @@ const SprintItem = ({ currentProject, sprint }) => {
         </div>
       </Link>
       <ButtonDelete handleClick={handleClick} />
-    </>
+    </div>
   );
 };
 

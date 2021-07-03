@@ -7,13 +7,15 @@ import SideBar from 'components/SideBar';
 
 import styles from './TasksPage.module.scss';
 
-const TasksPage = ({ sprintId }) => {
+const TasksPage = props => {
   const [tasks, setTasks] = useState([]);
   const [sprintName, setSprintName] = useState('');
   const [showModalCreateTask, setShowModalCreateTask] = useState(false);
   const [showModalCreateSprint, setShowModalCreateSprint] = useState(false);
   const [showModalAnalytics, setShowModalAnalytics] = useState(false);
   const [showChangeTitleForm, setShowChangeTitleForm] = useState(false);
+
+  const { projectId, sprintId } = props.match.params;
 
   const handleCloseModal = () => {
     setShowModalCreateTask(false);
@@ -82,7 +84,14 @@ const TasksPage = ({ sprintId }) => {
       <main>
         <aside>
           <SideBar>
-            <Link className={styles.linkToBack}>Show sprints</Link>
+            <Link
+              className={styles.linkToBack}
+              to={{
+                pathname: `/projects/${projectId}`,
+              }}
+            >
+              Show sprints
+            </Link>
             <div className={styles.navSprintsList}>
               <ul>
                 {/* //Todo вставить линки на спринты* поменять на навлинки и добавить активный класс*/}
