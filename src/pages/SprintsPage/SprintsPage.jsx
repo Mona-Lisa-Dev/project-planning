@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 import { useMediaQuery } from '@material-ui/core';
 import { refs } from './refs';
@@ -11,18 +11,22 @@ import { ReactComponent as CreateNewProject } from './svg/plus_button_icon_two.s
 
 import SideBar from 'components/SideBar';
 import ShowProjects from 'components/ShowProjects';
+import SideBarProjects from 'components/SideBarProjects';
 import Modal from 'components/Modal';
 import CreateSprint from 'components/CreateSprint';
 import SprintList from 'components/SprintList';
 import AddPeopleForm from 'components/AddPeopleForm';
 import {
-  getProjects,
+  // getProjects,
   getCurrentProject,
 } from 'redux/projects/projects-selectors';
 import sprintsOperations from 'redux/sprints/sprints-operations';
 import projectsOperations from 'redux/projects/projects-operations';
 
 import s from './SprintsPage.module.scss';
+
+// Delete it later
+import projects from './alternativeProjects.json';
 
 const SprintsPage = props => {
   const [showModal, setShowModal] = useState(false);
@@ -31,7 +35,7 @@ const SprintsPage = props => {
   const { projectId } = props.match.params;
   const dispatch = useDispatch();
 
-  const projects = useSelector(getProjects);
+  // const projects = useSelector(getProjects);
   const currentProject = useSelector(getCurrentProject);
 
   useEffect(() => {
@@ -67,9 +71,10 @@ const SprintsPage = props => {
       <main>
         <aside>
           <SideBar>
-//             <ShowProjects />
+            <ShowProjects />
+            <SideBarProjects projects={projects} />
 
-            <ul>
+            {/* <ul>
               {projects.map(project => (
                 <li key={project.id}>
                   <Link
@@ -81,7 +86,7 @@ const SprintsPage = props => {
                   </Link>
                 </li>
               ))}
-            </ul>
+            </ul> */}
 
             {tablet && (
               <div className={s.CreateNewProjectWrap}>
@@ -105,7 +110,6 @@ const SprintsPage = props => {
               </div>
 
               <p>{currentProject?.description}</p>
-
 
               <div className={s.addWrap}>
                 <AddGroupIcon className={s.AddGroupIcon} />
