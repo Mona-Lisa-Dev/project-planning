@@ -15,6 +15,7 @@ import Modal from 'components/Modal';
 import CreateSprint from 'components/CreateSprint';
 import SprintList from 'components/SprintList';
 import AddPeopleForm from 'components/AddPeopleForm';
+import CreateProject from 'components/CreateProject';
 import {
   getProjects,
   getCurrentProject,
@@ -67,7 +68,7 @@ const SprintsPage = props => {
       <main>
         <aside>
           <SideBar>
-//             <ShowProjects />
+            <ShowProjects />
 
             <ul>
               {projects.map(project => (
@@ -106,7 +107,6 @@ const SprintsPage = props => {
 
               <p>{currentProject?.description}</p>
 
-
               <div className={s.addWrap}>
                 <AddGroupIcon className={s.AddGroupIcon} />
                 <span onClick={() => toggleModal('addPeople')}>Add people</span>
@@ -143,7 +143,7 @@ const SprintsPage = props => {
           ) : el === 'addPeople' ? (
             <AddPeopleForm onClickCancel={toggleModal} projectId={projectId} />
           ) : (
-            'Put here your CreateProject Component'
+            <CreateProject onClickCancel={toggleModal} />
           )}
         </Modal>
       )}
