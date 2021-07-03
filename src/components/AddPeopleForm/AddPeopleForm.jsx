@@ -6,6 +6,7 @@ import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import { getParticipants } from 'redux/projects/projects-selectors';
 import projectsOperations from 'redux/projects/projects-operations';
 import PeopleList from 'components/PeopleList';
+import swal from 'sweetalert';
 
 import s from './AddPeopleForm.module.scss';
 
@@ -34,6 +35,15 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
     // если нет имейла, подсвечиваем инпут красным
     if (!email) {
       setEmptyInput(true);
+      return;
+    }
+
+    const normalizedName = email.toLowerCase().trim();
+    const isExistingUser = participants.find(
+      el => el.toLowerCase() === normalizedName,
+    );
+    if (isExistingUser) {
+      swal('Warning!', `${email} is already in Participants!`, 'warning');
       return;
     }
 
