@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import Spinner from 'components/Loader/Loader';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -52,7 +54,7 @@ const CreateProject = ({ onClickCancel }) => {
             value={name}
             name="name"
             type="text"
-            placeholder=" "
+            placeholder={emptyInput ? 'Please enter project name' : ' '}
             className={emptyInput ? styles.empty_input : styles.input_name}
             onChange={handleNameChange}
           />
@@ -64,7 +66,7 @@ const CreateProject = ({ onClickCancel }) => {
             value={description}
             name="description"
             type="text"
-            placeholder=" "
+            placeholder={emptyInput ? 'Please enter description' : ' '}
             className={emptyInput ? styles.empty_input : styles.input}
             onChange={handleDescriptionChange}
           />
@@ -87,6 +89,10 @@ const CreateProject = ({ onClickCancel }) => {
       </form>
     </div>
   );
+};
+
+CreateProject.propTypes = {
+  onClickCancel: PropTypes.func.isRequired,
 };
 
 export default CreateProject;
