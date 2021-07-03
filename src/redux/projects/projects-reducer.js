@@ -44,8 +44,7 @@ const projectItems = createReducer([], {
 const participants = createReducer([], {
   [getAllParticipantsSuccess]: (_, { payload }) => payload.participants,
   [addParticipantSuccess]: (_, { payload }) => payload,
-  [deleteParticipantSuccess]: (state, { payload }) =>
-    state.filter(el => el !== payload), //TODO проверить
+  [deleteParticipantSuccess]: (_, { payload }) => payload,
 });
 
 const currentProject = createReducer(null, {

@@ -29,8 +29,8 @@ const PeopleList = ({ projectId, participants }) => {
   );
 };
 
-export default PeopleList;
-
 PeopleList.propTypes = {
   participants: PropTypes.arrayOf(PropTypes.string.isRequired),
 };
+
+export default PeopleList;
