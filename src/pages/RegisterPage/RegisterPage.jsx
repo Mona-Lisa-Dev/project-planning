@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 
 import Spinner from 'components/Loader/Loader';
@@ -6,9 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import authOperations from 'redux/auth/auth-operations';
 
-import { getLoadingUser } from 'redux/auth/auth-selectors';
+import { getLoadingUser, getErrorSignup } from 'redux/auth/auth-selectors';
 
 import styles from './RegisterPage.module.scss';
+import swal from 'sweetalert';
 
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
@@ -26,8 +26,19 @@ const RegisterPage = () => {
   const [validForm, setValidForm] = useState(false);
 
   const loading = useSelector(getLoadingUser);
+  const Error = useSelector(getErrorSignup);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    Error &&
+      swal({
+        text: `${Error}`,
+        icon: 'error',
+        button: { text: 'OK', className: `${styles.swalButton}` },
+      });
+    setValidForm(false);
+  }, [Error]);
 
   useEffect(() => {
     if (emailError || passwordError || confirmPasswordError || !validPassword) {
