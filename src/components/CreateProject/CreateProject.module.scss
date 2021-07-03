@@ -155,6 +155,11 @@
   font-size: 12px;
 }
 
+.empty_input + .nameInput {
+  transform: translateY(-18px);
+  font-size: 12px;
+}
+
 .ready_btn {
   margin: 0 auto;
   // margin-top: 40px;
@@ -175,6 +180,7 @@
     box-shadow: 0 3px 4px rgba(255, 107, 8, 0.3);
   }
 }
+
 .cancel_btn {
   color: $text-light;
   outline: none;
