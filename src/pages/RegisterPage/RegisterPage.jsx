@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 
 import Spinner from 'components/Loader/Loader';
@@ -19,8 +18,7 @@ const RegisterPage = () => {
   const [passwordDirty, setPasswordDirty] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [confirmPasswordError, setConfirmPasswordError] =
-    useState('Empty field');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [confirmPasswordDirty, setConfirmPasswordDirty] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
   const [validForm, setValidForm] = useState(false);
@@ -128,7 +126,6 @@ const RegisterPage = () => {
         <div className={`${styles.general} ${styles.ellipse9}`}></div>
         <div className={`${styles.general} ${styles.ellipse10}`}></div>
       </div>
-
       <form
         onSubmit={handleFormSubmit}
         className={styles.form}
@@ -182,7 +179,7 @@ const RegisterPage = () => {
           />
           <span className={styles.nameInput}>Repeat password</span>
           {confirmPasswordDirty && confirmPasswordError && validPassword && (
-            <p className={styles.error}>{confirmPasswordError}</p>
+            <p className={styles.error}>Passwords do not match</p>
           )}
         </label>
 

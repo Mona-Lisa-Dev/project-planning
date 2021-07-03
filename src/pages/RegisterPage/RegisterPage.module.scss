@@ -29,6 +29,7 @@
   background-color: $form-reg-background;
   box-shadow: $main-shadow;
   border-radius: 5px;
+  // position: absolute;
 }
 
 .labelForm {
@@ -178,6 +179,12 @@
   }
 }
 
+@media screen and (min-width: $mobilePlus) {
+  .form {
+    padding: 47px 70px;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .general {
     display: block;
@@ -190,7 +197,7 @@
     background-color: $main-orange;
     width: 78px;
     height: 78px;
-    top: calc(113px - 80px);
+    top: 113px;
     left: 621px;
   }
 
@@ -198,7 +205,7 @@
     background-color: $main-orange;
     width: 26px;
     height: 26px;
-    top: calc(139px - 80px);
+    top: 139px;
     left: 800px;
   }
 
@@ -206,14 +213,15 @@
     background-color: $text-white;
     width: 431px;
     height: 439px;
-    top: calc(209px - 80px);
+    top: 209px;
     left: 669px;
   }
+
   .ellipse4 {
     background-color: $main-orange;
     width: 387px;
     height: 387px;
-    top: calc(243px - 80px);
+    top: 243px;
     left: 669px;
   }
 
@@ -221,7 +229,7 @@
     background-color: $text-white;
     width: 314px;
     height: 320px;
-    top: calc(459px - 80px);
+    top: 459px;
     left: 496px;
     z-index: -2;
   }
@@ -230,7 +238,7 @@
     background-color: $main-orange;
     width: 282px;
     height: 282px;
-    top: calc(463px - 80px);
+    top: 463px;
     left: 514px;
   }
 
@@ -238,7 +246,7 @@
     background-color: $main-orange;
     width: 252px;
     height: 252px;
-    top: calc(526px - 80px);
+    top: 526px;
     left: -73px;
   }
 
@@ -246,7 +254,7 @@
     background-color: $text-white;
     width: 298px;
     height: 298px;
-    top: calc(517px - 80px);
+    top: 517px;
     left: -111px;
     z-index: -2;
   }
@@ -255,7 +263,7 @@
     background-color: $text-white;
     width: 118px;
     height: 118px;
-    top: calc(377px - 80px);
+    top: 377px;
     left: -145px;
   }
 
@@ -263,7 +271,7 @@
     background-color: $text-white;
     width: 48px;
     height: 48px;
-    top: calc(250px - 80px);
+    top: 250px;
     left: -26px;
   }
 
@@ -293,53 +301,54 @@
     margin-top: 56px;
     padding: 60px 70px;
   }
+
   .ellipse1 {
-    top: calc(103px - 80px);
+    top: 103px;
     left: 877px;
   }
 
   .ellipse2 {
-    top: calc(129px - 80px);
+    top: 129px;
     left: 1055px;
   }
 
   .ellipse3 {
-    top: calc(199px - 80px);
     left: 925px;
+    top: 200px;
   }
 
   .ellipse4 {
-    top: calc(233px - 80px);
+    top: 233px;
     left: 925px;
   }
 
   .ellipse5 {
-    top: calc(449px - 80px);
+    top: 449px;
     left: 752px;
   }
 
   .ellipse6 {
-    top: calc(453px - 80px);
+    top: 453px;
     left: 770px;
   }
 
   .ellipse7 {
-    top: calc(516px - 80px);
+    top: 516px;
     left: 183px;
   }
 
   .ellipse8 {
-    top: calc(507px - 80px);
+    top: 507px;
     left: 145px;
   }
 
   .ellipse9 {
-    top: calc(367px - 80px);
+    top: 367px;
     left: 111px;
   }
 
   .ellipse10 {
-    top: calc(240px - 80px);
+    top: 240px;
     left: 230px;
   }
 }
