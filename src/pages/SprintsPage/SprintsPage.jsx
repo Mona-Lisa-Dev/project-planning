@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import { useMediaQuery } from '@material-ui/core';
@@ -12,6 +12,7 @@ import { ReactComponent as CreateNewProject } from './svg/plus_button_icon_two.s
 
 import SideBar from 'components/SideBar';
 import ShowProjects from 'components/ShowProjects';
+import SideBarProjects from 'components/SideBarProjects';
 import Modal from 'components/Modal';
 import CreateSprint from 'components/CreateSprint';
 import SprintList from 'components/SprintList';
@@ -26,18 +27,21 @@ import projectsOperations from 'redux/projects/projects-operations';
 
 import s from './SprintsPage.module.scss';
 
+// Delete it later
+// import projects from './alternativeProjects.json';
+
 const SprintsPage = props => {
   const [showModal, setShowModal] = useState(false);
   const [el, setEl] = useState('');
   const [showInput, setShowInput] = useState(false);
-
-  const currentProject = useSelector(getCurrentProject);
-  const [name, setName] = useState('');
+  const [name, setName] = useState('');  
 
   const { projectId } = props.match.params;
   const dispatch = useDispatch();
 
+  const currentProject = useSelector(getCurrentProject);
   const projects = useSelector(getProjects);
+  const currentProject = useSelector(getCurrentProject);
 
   useEffect(() => {
     dispatch(projectsOperations.getProjectById(projectId));
@@ -87,7 +91,10 @@ const SprintsPage = props => {
           <SideBar>
             <ShowProjects />
 
-            <ul>
+            <SideBarProjects projects={projects} />
+
+
+            {/* <ul>
               {projects.map(project => (
                 <li key={project.id}>
                   <Link
@@ -99,7 +106,7 @@ const SprintsPage = props => {
                   </Link>
                 </li>
               ))}
-            </ul>
+            </ul> */}
 
             {tablet && (
               <div className={s.CreateNewProjectWrap}>
