@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import { useMediaQuery } from '@material-ui/core';
 import { refs } from './refs';
 import { ReactComponent as EditIcon } from './svg/edit_icon.svg';
@@ -28,16 +29,19 @@ import s from './SprintsPage.module.scss';
 const SprintsPage = props => {
   const [showModal, setShowModal] = useState(false);
   const [el, setEl] = useState('');
+  const [showInput, setShowInput] = useState(false);
+
+  const currentProject = useSelector(getCurrentProject);
+  const [name, setName] = useState('');
 
   const { projectId } = props.match.params;
   const dispatch = useDispatch();
 
   const projects = useSelector(getProjects);
-  const currentProject = useSelector(getCurrentProject);
 
   useEffect(() => {
-    dispatch(sprintsOperations.getAllSprints(projectId));
     dispatch(projectsOperations.getProjectById(projectId));
+    dispatch(sprintsOperations.getAllSprints(projectId));
   }, [dispatch, projectId]);
 
   // ----------- Modal -----------
@@ -62,6 +66,19 @@ const SprintsPage = props => {
   const tabletMax = useMediaQuery(handleMaxWidth(refs.tabletMax));
   const desktop = useMediaQuery(handleMinWidth(refs.desktop));
   // ----- End useMediaQuery -----
+
+  const handleNameChange = event => setName(event.target.value);
+  const editNameHandle = () => {
+    setName(currentProject?.name);
+    setShowInput(true);
+  };
+
+  const closeInputHandler = () => {
+    if (currentProject.name !== name || name !== '') {
+      dispatch(projectsOperations.updateProject(projectId, { name }));
+    }
+    setShowInput(false);
+  };
 
   return (
     <>
@@ -100,9 +117,33 @@ const SprintsPage = props => {
           <div className={s.headerWrap}>
             <div className={s.contentWrap}>
               <div className={s.titleWrap}>
-                <h2>{currentProject?.name}</h2>
+                {showInput ? (
+                  <form onSubmit={closeInputHandler}>
+                    <label>
+                      <input
+                        value={name}
+                        name="name"
+                        type="text"
+                        onChange={handleNameChange}
+                      />
+                      <button className={s.buttonSave} type="submit">
+                        <SaveOutlinedIcon />
+                      </button>
+                    </label>
+                  </form>
+                ) : (
+                  <>
+                    <h2>{currentProject?.name}</h2>
 
-                <EditIcon className={s.EditIcon} />
+                    <button
+                      type="button"
+                      className={s.buttonSave}
+                      onClick={editNameHandle}
+                    >
+                      <EditIcon className={s.EditIcon} />
+                    </button>
+                  </>
+                )}
               </div>
 
               <p>{currentProject?.description}</p>
