@@ -2,6 +2,10 @@
 @import '../../scss/breakpoints';
 @import '../../scss/base';
 
+.backgroundMain {
+  position: relative;
+}
+
 .title {
   margin-left: auto;
   margin-right: auto;
@@ -10,11 +14,11 @@
 }
 
 .form {
-  margin-left: auto;
-  margin-right: auto;
+  position: absolute;
   padding-left: 20px;
   padding-right: 20px;
-  width: 100%;
+  width: 570px;
+  height: 538px;
   background-color: $form-reg-background;
   box-shadow: $primaryShadow;
   border-radius: 5px;
@@ -161,6 +165,9 @@
   }
   .form {
     padding: 47px 20px;
+    position: absolute;
+    width: 320px;
+    height: 508px;
   }
 
   .nameInput {
@@ -176,19 +183,12 @@
   // .form {
   //   padding: 47px 70px;
   // }
-
-  .general {
-    display: block;
-    position: fixed;
-    border-radius: 50%;
-    z-index: -1;
-  }
 }
 
 @media screen and (min-width: $tablet) {
   .general {
     display: block;
-    position: fixed;
+    position: absolute;
     border-radius: 50%;
     z-index: -1;
   }
@@ -201,13 +201,13 @@
     left: 621px;
   }
 
-  .ellipse2 {
-    background-color: $main-orange;
-    width: 26px;
-    height: 26px;
-    top: 139px;
-    left: 799px;
-  }
+  // .ellipse2 {
+  //   background-color: $main-orange;
+  //   width: 26px;
+  //   height: 26px;
+  //   top: 139px;
+  //   left: 799px;
+  // }
 
   .ellipse3 {
     background-color: $text-white;
@@ -259,13 +259,13 @@
     z-index: -2;
   }
 
-  .ellipse9 {
-    background-color: $text-white;
-    width: 118px;
-    height: 118px;
-    top: 377px;
-    left: -145px;
-  }
+  // .ellipse9 {
+  //   background-color: $text-white;
+  //   width: 118px;
+  //   height: 118px;
+  //   top: 377px;
+  //   left: -145px;
+  // }
 
   .ellipse10 {
     background-color: $text-white;
@@ -279,10 +279,15 @@
     width: 106px;
     font-size: 36px;
   }
+
   .form {
-    margin-top: 103px;
+    position: absolute;
     width: 570px;
+    height: 454px;
+    left: 99px;
+    top: 183px;
     padding: 60px 70px;
+    position: absolute;
   }
 
   .nameInput {
@@ -336,6 +341,9 @@
   }
 
   .ellipse9 {
+    background-color: $text-white;
+    width: 118px;
+    height: 118px;
     top: 367px;
     left: 111px;
   }
@@ -346,7 +354,8 @@
   }
 
   .form {
-    margin-top: 93px;
+    left: 355px;
+    top: 173px;
     padding: 60px 70px;
   }
 }
