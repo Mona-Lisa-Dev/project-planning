@@ -27,9 +27,6 @@ import projectsOperations from 'redux/projects/projects-operations';
 
 import s from './SprintsPage.module.scss';
 
-// Delete it later
-// import projects from './alternativeProjects.json';
-
 const SprintsPage = props => {
   const [showModal, setShowModal] = useState(false);
   const [el, setEl] = useState('');
@@ -89,22 +86,7 @@ const SprintsPage = props => {
         <aside>
           <SideBar>
             <ShowProjects />
-
             <SideBarProjects projects={projects} />
-
-            {/* <ul>
-              {projects.map(project => (
-                <li key={project.id}>
-                  <Link
-                    to={{
-                      pathname: `/projects/${project.id}`,
-                    }}
-                  >
-                    <h3>{project.name}</h3>
-                  </Link>
-                </li>
-              ))}
-            </ul> */}
 
             {tablet && (
               <div className={s.CreateNewProjectWrap}>

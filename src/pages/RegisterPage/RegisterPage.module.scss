@@ -2,6 +2,10 @@
 @import '../../scss/breakpoints';
 @import '../../scss/base';
 
+.backgroundMain {
+  position: fixed;
+}
+
 .registration {
   color: $main-background;
 }
@@ -21,11 +25,9 @@
 }
 
 .form {
-  margin-left: auto;
-  margin-right: auto;
+  position: absolute;
   padding-left: 20px;
   padding-right: 20px;
-  width: 100%;
   background-color: $form-reg-background;
   box-shadow: $main-shadow;
   border-radius: 5px;
@@ -168,7 +170,12 @@
 
   .form {
     padding: 47px 20px;
+    width: 320px;
+    height: 508px;
+    left: 0px;
+    top: 0px;
   }
+
   .nameInput {
     font-size: 16px;
   }
@@ -177,11 +184,16 @@
     font-size: 16px;
   }
 }
+// @media screen and (min-width: $mobilePlus) {
+//   .form {
+//     padding: 47px 70px;
+//   }
+// }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: $tablet) {
   .general {
     display: block;
-    position: fixed;
+    position: absolute;
     border-radius: 50%;
     z-index: -1;
   }
@@ -190,38 +202,40 @@
     background-color: $main-orange;
     width: 78px;
     height: 78px;
-    top: calc(113px - 80px);
-    left: 621px;
+    top: 161px;
+    left: 622px;
   }
 
-  .ellipse2 {
-    background-color: $main-orange;
-    width: 26px;
-    height: 26px;
-    top: calc(139px - 80px);
-    left: 800px;
-  }
+  // .ellipse2 {
+  //   background-color: $main-orange;
+  //   width: 26px;
+  //   height: 26px;
+  //   top: 139px;
+  //   left: 800px;
+  // }
 
   .ellipse3 {
     background-color: $text-white;
     width: 431px;
-    height: 439px;
-    top: calc(209px - 80px);
+    height: 431px;
+    top: 259px;
     left: 669px;
   }
+
   .ellipse4 {
     background-color: $main-orange;
     width: 387px;
     height: 387px;
-    top: calc(243px - 80px);
-    left: 669px;
+    left: 670px;
+    top: 291px;
+    border-radius: 193.5px;
   }
 
   .ellipse5 {
     background-color: $text-white;
     width: 314px;
-    height: 320px;
-    top: calc(459px - 80px);
+    height: 314px;
+    top: 509px;
     left: 496px;
     z-index: -2;
   }
@@ -230,41 +244,38 @@
     background-color: $main-orange;
     width: 282px;
     height: 282px;
-    top: calc(463px - 80px);
-    left: 514px;
+    left: 515px;
+    top: 511px;
   }
 
   .ellipse7 {
     background-color: $main-orange;
     width: 252px;
     height: 252px;
-    top: calc(526px - 80px);
-    left: -73px;
+    left: -72px;
+    top: 574px;
   }
 
   .ellipse8 {
     background-color: $text-white;
     width: 298px;
     height: 298px;
-    top: calc(517px - 80px);
-    left: -111px;
+    left: -110px;
+    top: 565px;
     z-index: -2;
   }
 
-  .ellipse9 {
-    background-color: $text-white;
-    width: 118px;
-    height: 118px;
-    top: calc(377px - 80px);
-    left: -145px;
-  }
+  // .ellipse9 {
+  // top: 377px;
+  // left: -145px;
+  // }
 
   .ellipse10 {
     background-color: $text-white;
     width: 48px;
     height: 48px;
-    top: calc(250px - 80px);
     left: -26px;
+    top: 250px;
   }
 
   .title {
@@ -274,8 +285,10 @@
   }
 
   .form {
-    margin-top: 114px;
     width: 570px;
+    height: 538px;
+    left: 100px;
+    top: 194px;
     padding: 60px 70px;
   }
 
@@ -290,56 +303,80 @@
 
 @media screen and (min-width: $desktop) {
   .form {
-    margin-top: 56px;
     padding: 60px 70px;
+    left: 355px;
+    top: 136px;
   }
+
   .ellipse1 {
-    top: calc(103px - 80px);
+    top: 103px;
     left: 877px;
   }
 
   .ellipse2 {
-    top: calc(129px - 80px);
+    background-color: $main-orange;
+    width: 26px;
+    height: 26px;
+    top: 129px;
     left: 1055px;
   }
 
   .ellipse3 {
-    top: calc(199px - 80px);
     left: 925px;
+    top: 200px;
   }
 
   .ellipse4 {
-    top: calc(233px - 80px);
+    top: 233px;
     left: 925px;
   }
 
   .ellipse5 {
-    top: calc(449px - 80px);
+    top: 449px;
     left: 752px;
   }
 
   .ellipse6 {
-    top: calc(453px - 80px);
+    top: 453px;
     left: 770px;
   }
 
   .ellipse7 {
-    top: calc(516px - 80px);
+    top: 516px;
     left: 183px;
   }
 
   .ellipse8 {
-    top: calc(507px - 80px);
+    top: 507px;
     left: 145px;
   }
 
   .ellipse9 {
-    top: calc(367px - 80px);
+    background-color: $text-white;
+    width: 118px;
+    height: 118px;
+    top: 367px;
     left: 111px;
   }
 
   .ellipse10 {
-    top: calc(240px - 80px);
+    top: 240px;
     left: 230px;
   }
+}
+
+.swalButton {
+  background-color: $main-orange;
+  box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+  transition: all 300ms ease;
+  padding: 11px 44px;
+  border: none;
+  border-radius: 25px;
+  font-size: 12px;
+}
+.swalButton:hover {
+  color: $main-orange;
+  font-weight: 800;
+  background-color: $text-white;
+  box-shadow: 0px 4px 10px 4px rgba(255, 107, 8, 0.3);
 }

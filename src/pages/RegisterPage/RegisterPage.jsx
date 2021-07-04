@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 
 import Spinner from 'components/Loader/Loader';
@@ -6,9 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import authOperations from 'redux/auth/auth-operations';
 
-import { getLoadingUser } from 'redux/auth/auth-selectors';
+import { getLoadingUser, getErrorSignup } from 'redux/auth/auth-selectors';
 
 import styles from './RegisterPage.module.scss';
+import swal from 'sweetalert';
 
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
@@ -19,15 +19,25 @@ const RegisterPage = () => {
   const [passwordDirty, setPasswordDirty] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [confirmPasswordError, setConfirmPasswordError] =
-    useState('Empty field');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [confirmPasswordDirty, setConfirmPasswordDirty] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
   const [validForm, setValidForm] = useState(false);
 
   const loading = useSelector(getLoadingUser);
+  const Error = useSelector(getErrorSignup);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    Error &&
+      swal({
+        text: `${Error}`,
+        icon: 'error',
+        button: { text: 'OK', className: `${styles.swalButton}` },
+      });
+    setValidForm(false);
+  }, [Error]);
 
   useEffect(() => {
     if (emailError || passwordError || confirmPasswordError || !validPassword) {
@@ -128,77 +138,82 @@ const RegisterPage = () => {
         <div className={`${styles.general} ${styles.ellipse9}`}></div>
         <div className={`${styles.general} ${styles.ellipse10}`}></div>
       </div>
+      <div>
+        <form
+          onSubmit={handleFormSubmit}
+          className={styles.form}
+          autoComplete="off"
+        >
+          <h1 className={styles.title}>Registration</h1>
+          <label className={styles.labelForm}>
+            <input
+              className={styles.inputForm}
+              placeholder=" "
+              type={'email'}
+              name={'email'}
+              onChange={handleChange}
+              onBlur={blurHandler}
+              value={email}
+              required
+            />
+            <span className={styles.nameInput}>E-mail</span>
+            {emailDirty && emailError && (
+              <p className={styles.error}>{emailError}</p>
+            )}
+          </label>
 
-      <form
-        onSubmit={handleFormSubmit}
-        className={styles.form}
-        autoComplete="off"
-      >
-        <h1 className={styles.title}>Registration</h1>
-        <label className={styles.labelForm}>
-          <input
-            className={styles.inputForm}
-            placeholder=" "
-            type={'email'}
-            name={'email'}
-            onChange={handleChange}
-            onBlur={blurHandler}
-            value={email}
-            required
-          />
-          <span className={styles.nameInput}>E-mail</span>
-          {emailDirty && emailError && (
-            <p className={styles.error}>{emailError}</p>
-          )}
-        </label>
+          <label className={styles.labelForm}>
+            <input
+              className={styles.inputForm}
+              placeholder=" "
+              type={'password'}
+              name={'password'}
+              onChange={handleChange}
+              onBlur={blurHandler}
+              value={password}
+              required
+            />
+            <span className={styles.nameInput}>Password</span>
+            {passwordDirty && passwordError && (
+              <p className={styles.error}>{passwordError}</p>
+            )}
+          </label>
 
-        <label className={styles.labelForm}>
-          <input
-            className={styles.inputForm}
-            placeholder=" "
-            type={'password'}
-            name={'password'}
-            onChange={handleChange}
-            onBlur={blurHandler}
-            value={password}
-            required
-          />
-          <span className={styles.nameInput}>Password</span>
-          {passwordDirty && passwordError && (
-            <p className={styles.error}>{passwordError}</p>
-          )}
-        </label>
+          <label className={styles.labelForm}>
+            <input
+              className={styles.inputForm}
+              placeholder=" "
+              type={'password'}
+              name={'confirmPassword'}
+              onChange={handleChange}
+              onBlur={blurHandler}
+              value={confirmPassword}
+              required
+            />
+            <span className={styles.nameInput}>Repeat password</span>
+            {confirmPasswordDirty && confirmPasswordError && validPassword && (
+              <p className={styles.error}>Passwords do not match</p>
+            )}
+          </label>
 
-        <label className={styles.labelForm}>
-          <input
-            className={styles.inputForm}
-            placeholder=" "
-            type={'password'}
-            name={'confirmPassword'}
-            onChange={handleChange}
-            onBlur={blurHandler}
-            value={confirmPassword}
-            required
-          />
-          <span className={styles.nameInput}>Repeat password</span>
-          {confirmPasswordDirty && confirmPasswordError && validPassword && (
-            <p className={styles.error}>{confirmPasswordError}</p>
-          )}
-        </label>
+          <button
+            disabled={!validForm}
+            className={styles.btnReg}
+            type={'submit'}
+          >
+            Register
+          </button>
 
-        <button disabled={!validForm} className={styles.btnReg} type={'submit'}>
-          Register
-        </button>
+          {loading && <Spinner />}
 
-        {loading && <Spinner />}
-
-        <div className={styles.login}>
-          <p className={styles.question}> Do you have an account?</p>
-          <a className={styles.auth} href="/login">
-            Log in
-          </a>
-        </div>
-      </form>
+          <div className={styles.login}>
+            <p className={styles.question}> Do you have an account?</p>
+            <a className={styles.auth} href="/login">
+              Log in
+            </a>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

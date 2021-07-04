@@ -1,7 +1,6 @@
 import 'date-fns';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-// import { withStyles } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
@@ -26,18 +25,6 @@ const useStyles = makeStyles({
     '& .MuiFormControl-root': {
       margin: 0,
       width: '100%',
-
-      // '& div': {
-      //   backgroundColor: 'red',
-      // },
-
-      // '&.MuiTextField-root:first-child': {
-      //   backgroundColor: 'red',
-      //   // marginBottom: 40,
-      //   // [`@media (min-width: ${768}px)`]: {
-      //   //   marginBottom: 53,
-      //   // },
-      // },
     },
 
     // Lable
@@ -48,7 +35,6 @@ const useStyles = makeStyles({
       color: 'rgba(24, 28, 39, 0.6)',
 
       '&.MuiFormLabel-root': {
-        // paddingLeft: 0,
         paddingLeft: 7,
         color: 'rgba(24, 28, 39, 0.6)',
         fontSize: 16,
@@ -61,18 +47,7 @@ const useStyles = makeStyles({
           fontSize: '1.2rem',
           paddingLeft: 0,
         },
-
-        // '&.MuiFormLabel-root.MuiFormLabel-filled': {
-        //   fontSize: 30,
-        // },
       },
-
-      // '&.Mui-focused': {
-      //   paddingLeft: 0,
-      //   fontSize: '1rem',
-      //   color: 'green',
-      //   // color: '#ff6b08',
-      // },
     },
 
     '& input': {
@@ -81,10 +56,6 @@ const useStyles = makeStyles({
       fontSize: 18,
       color: '#181C27',
     },
-
-    // '& input:focus': {
-    //   fontFamily: ['Montserrat', 'sans-serif'],
-    // },
 
     // Input border
     '& .MuiInput-underline:after': {
@@ -98,19 +69,6 @@ const useStyles = makeStyles({
     '& .MuiInput-underline:hover:before': {
       borderBottom: '1px solid rgba(24, 28, 39, 0.2)',
     },
-
-    // '& .MuiOutlinedInput-root': {
-    //   '& fieldset': {
-    //     borderColor: 'blue',
-    //   },
-    //   '&:hover fieldset': {
-    //     borderColor: 'yellow',
-    //   },
-    //   '&.Mui-focused fieldset': {
-    //     borderColor: 'skyblue',
-    //     backgroundColor: 'green',
-    //   },
-    // },
   },
 });
 
@@ -244,18 +202,23 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
   const [previousDays, setPreviousDays] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [duration, setDuration] = useState('');
+  const [error, setError] = useState(false);
+  const errorMessage = 'This field is require';
   const classes = useStyles();
-  // const DataPicker = styles();
 
   const dispatch = useDispatch();
 
   // Input - Date
   const handleDateChange = date => {
+    setError(false);
+
     setSelectedDate(date);
   };
 
   // Input - sprintName and duration
   const handleInputForm = e => {
+    setError(false);
+
     const { name, value } = e.target;
     name === 'sprintName' ? setSprintName(value) : setDuration(value);
   };
@@ -269,9 +232,16 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
   const createNewSprint = e => {
     e.preventDefault();
 
-    // console.log('sprintName', sprintName);
-    // console.log('selectedDate', selectedDate);
-    // console.log('duration', duration);
+    sprintName !== '' && selectedDate !== null && duration !== ''
+      ? sendNewSprint()
+      : setError(true);
+
+    return;
+  };
+
+  // Send new sprint
+  const sendNewSprint = () => {
+    setError(false);
 
     const newSprint = {
       name: sprintName,
@@ -279,8 +249,11 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
       duration,
     };
 
+    // Лена, валидация еще не дописана !!!!!!!!!
     dispatch(sprintsOperations.createSprint(projectId, newSprint));
     onClickCancel();
+
+    console.log('newSprint-->', newSprint);
 
     setSprintName('');
     setSelectedDate(new Date());
@@ -297,7 +270,11 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
         onSubmit={createNewSprint}
       >
         <div className={s.nameTextFieldWrap}>
+          {sprintName === '' && error && (
+            <span className={s.error}>{errorMessage}</span>
+          )}
           <TextField
+            required
             id="standard-basic"
             label="The name of the sprint"
             type="text"
@@ -323,12 +300,15 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
 
         <div className={s.dataWrap}>
           <div className={s.KeyboardDatePickerWrap}>
+            {selectedDate === null && error && (
+              <span className={s.error}>{errorMessage}</span>
+            )}
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <ThemeProvider theme={materialTheme}>
                 <Grid container justify="space-around">
                   {previousDays ? (
                     <KeyboardDatePicker
-                      // className={DataPicker}
+                      required
                       disableToolbar
                       variant="inline"
                       format="dd MMM"
@@ -367,7 +347,11 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
           </div>
 
           <div className={s.durationTextFieldWrap}>
+            {duration === '' && error && (
+              <span className={s.error}>{errorMessage}</span>
+            )}
             <TextField
+              required
               id="standard-basic"
               label="Duration"
               type="text"
