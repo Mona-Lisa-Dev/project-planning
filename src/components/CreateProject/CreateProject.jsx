@@ -1,11 +1,9 @@
 import PropTypes from 'prop-types';
-
-import Spinner from 'components/Loader/Loader';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Spinner from 'components/Loader/Loader';
 
 import projectsOperations from 'redux/projects/projects-operations';
-
 import { getLoadingProjects } from 'redux/projects/projects-selectors';
 
 import styles from './CreateProject.module.scss';

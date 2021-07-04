@@ -23,10 +23,19 @@ const TasksPage = props => {
   const [showChangeTitleForm, setShowChangeTitleForm] = useState(false);
 
   const { projectId, sprintId } = props.match.params;
+  console.log('projectId', projectId);
+  console.log('sprintId', sprintId);
+
+  const dispatch = useDispatch();
 
   const currentSprint = useSelector(getCurrentSprint);
   const sprints = useSelector(getSprints);
   const tasks = useSelector(getTasks);
+
+  useEffect(() => {
+    dispatch(sprintsOperations.getSprintById(projectId, sprintId));
+    dispatch(tasksOperations.getAllTasks(sprintId));
+  }, [dispatch, projectId, sprintId]);
 
   const handleCloseModal = () => {
     setShowModalCreateTask(false);
@@ -44,13 +53,24 @@ const TasksPage = props => {
   };
 
   const handleClickBtnChange = () => {
+    setSprintName(currentSprint?.name);
     setShowChangeTitleForm(!showChangeTitleForm);
   };
+
   const handleSubmit = e => {
     e.preventDefault();
+
+    if (currentSprint.name !== sprintName || sprintName !== '') {
+      dispatch(
+        sprintsOperations.updateSprint(projectId, sprintId, {
+          name: sprintName,
+        }),
+      );
+    }
+
     setShowChangeTitleForm(!showChangeTitleForm);
-    //TODO запрос на бэк для обновление названия спринта
   };
+
   const handleInputChangeTitle = e => {
     setSprintName(e.target.value);
   };
@@ -99,9 +119,7 @@ const TasksPage = props => {
                 type="button"
                 className={styles.btnCreateSprint}
                 onClick={openModalCreateSprint}
-              >
-                {' '}
-              </button>
+              ></button>
             </div>
           </SideBar>
         </aside>
@@ -118,7 +136,7 @@ const TasksPage = props => {
                 showChangeTitleForm ? styles.titleDisable : styles.title
               }
             >
-              {sprintName}
+              {currentSprint?.name}
             </h1>
 
             <form
@@ -178,12 +196,16 @@ const TasksPage = props => {
 
       {showModalCreateTask && (
         <Modal onCloseModal={handleCloseModal}>
-          <CreateTaskForm />
+          <CreateTaskForm onClickCancel={handleCloseModal} />
         </Modal>
       )}
       {showModalCreateSprint && (
         <Modal onCloseModal={handleCloseModal}>
-          <h3>Create Sprint</h3>
+          <CreateSprint
+            projectId={projectId}
+            sprintId={sprintId}
+            onClickCancel={handleCloseModal}
+          />
         </Modal>
       )}
       {showModalAnalytics && (
