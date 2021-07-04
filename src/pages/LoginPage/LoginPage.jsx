@@ -6,6 +6,7 @@ import authOperations from 'redux/auth/auth-operations';
 import { getLoadingUser } from 'redux/auth/auth-selectors';
 
 import styles from './LoginPage.module.scss';
+import { Fragment } from 'react';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -90,25 +91,27 @@ const LoginPage = () => {
   };
 
   return (
-    <div className={styles.backgroundMain}>
-      <div className={styles.registration}>
-        <div className={`${styles.general} ${styles.ellipse1}`}></div>
-        <div className={`${styles.general} ${styles.ellipse2}`}></div>
-        <div className={`${styles.general} ${styles.ellipse3}`}></div>
-        <div className={`${styles.general} ${styles.ellipse4}`}></div>
-        <div className={`${styles.general} ${styles.ellipse5}`}></div>
-        <div className={`${styles.general} ${styles.ellipse6}`}></div>
-        <div className={`${styles.general} ${styles.ellipse7}`}></div>
-        <div className={`${styles.general} ${styles.ellipse8}`}></div>
-        <div className={`${styles.general} ${styles.ellipse9}`}></div>
-        <div className={`${styles.general} ${styles.ellipse10}`}></div>
+    <>
+      <div className={styles.backgroundMain}>
+        <div className={styles.registration}>
+          <div className={`${styles.general} ${styles.ellipse1}`}></div>
+          <div className={`${styles.general} ${styles.ellipse2}`}></div>
+          <div className={`${styles.general} ${styles.ellipse3}`}></div>
+          <div className={`${styles.general} ${styles.ellipse4}`}></div>
+          <div className={`${styles.general} ${styles.ellipse5}`}></div>
+          <div className={`${styles.general} ${styles.ellipse6}`}></div>
+          <div className={`${styles.general} ${styles.ellipse7}`}></div>
+          <div className={`${styles.general} ${styles.ellipse8}`}></div>
+          <div className={`${styles.general} ${styles.ellipse9}`}></div>
+          <div className={`${styles.general} ${styles.ellipse10}`}></div>
+        </div>
       </div>
       <form
         onSubmit={handleFormSubmit}
         className={styles.form}
         autoComplete="off"
       >
-        <h1 className={styles.title}>Enter</h1>
+        <h1 className={styles.title}>Login</h1>
         <label className={styles.labelForm}>
           <input
             className={styles.inputForm}
@@ -142,7 +145,7 @@ const LoginPage = () => {
           )}
         </label>
         <button className={styles.btnLog} type={'submit'} disabled={!validForm}>
-          Enter
+          Login
         </button>
 
         {loading && <Spinner />}
@@ -154,7 +157,7 @@ const LoginPage = () => {
           </a>
         </div>
       </form>
-    </div>
+    </>
   );
 };
 

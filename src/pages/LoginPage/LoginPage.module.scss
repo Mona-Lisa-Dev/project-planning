@@ -3,7 +3,7 @@
 @import '../../scss/base';
 
 .backgroundMain {
-  position: relative;
+  position: fixed;
 }
 
 .title {
@@ -22,6 +22,10 @@
   background-color: $form-reg-background;
   box-shadow: $primaryShadow;
   border-radius: 5px;
+
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .labelForm {
@@ -284,10 +288,10 @@
     position: absolute;
     width: 570px;
     height: 454px;
-    left: 99px;
-    top: 183px;
-    padding: 60px 70px;
-    position: absolute;
+    // left: 99px;
+    // top: 183px;
+    padding: 50px 70px;
+    // position: absolute;
   }
 
   .nameInput {
@@ -354,8 +358,8 @@
   }
 
   .form {
-    left: 355px;
-    top: 173px;
-    padding: 60px 70px;
+    // left: 355px;
+    // top: 173px;
+    padding: 50px 70px;
   }
 }
