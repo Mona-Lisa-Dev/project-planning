@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Spinner from 'components/Loader/Loader';
 import Container from 'components/Container';
 import AppBar from 'components/AppBar';
+import Footer from 'components/Footer';
 import PrivateRoute from 'components/PrivateRoute';
 import PublicRoute from 'components/PublicRoute';
 import authOperations from 'redux/auth/auth-operations';
@@ -100,6 +101,8 @@ const App = () => {
           </Switch>
         </Suspense>
       </Container>
+
+      <Footer />
     </>
   );
 };
