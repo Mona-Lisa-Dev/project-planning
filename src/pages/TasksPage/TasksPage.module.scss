@@ -57,10 +57,29 @@ main {
     display: none;
   }
 }
+.sprintsWrap {
+  display: flex;
+  align-items: center;
+}
+
 .linkToSprint {
-  width: 119px;
-  color: #181c27;
   margin-bottom: 30px;
+  width: 119px;
+  color: $text-light;
+
+  & span {
+    display: block;
+    margin-right: 15px;
+    width: 36px;
+    height: 36px;
+    border-radius: 5px;
+    color: $form-background;
+    box-shadow: $primaryShadow;
+  }
+}
+
+.linkToSprintActive {
+  color: #181c27;
 }
 
 .btnCreateSprint {

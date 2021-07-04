@@ -1,14 +1,21 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, NavLink } from 'react-router-dom';
 import TaskList from 'components/TaskList';
 import Modal from 'components/Modal';
 import CreateTaskForm from 'components/CreateTaskForm';
 import SideBar from 'components/SideBar';
+import CreateSprint from 'components/CreateSprint';
+
+import { getTasks } from 'redux/tasks/tasks-selectors';
+import { getSprints, getCurrentSprint } from 'redux/sprints/sprints-selectors';
+import sprintsOperations from 'redux/sprints/sprints-operations';
+import tasksOperations from 'redux/tasks/tasks-operations';
 
 import styles from './TasksPage.module.scss';
 
 const TasksPage = props => {
-  const [tasks, setTasks] = useState([]);
+  // const [tasks, setTasks] = useState([]);
   const [sprintName, setSprintName] = useState('');
   const [showModalCreateTask, setShowModalCreateTask] = useState(false);
   const [showModalCreateSprint, setShowModalCreateSprint] = useState(false);
@@ -16,6 +23,10 @@ const TasksPage = props => {
   const [showChangeTitleForm, setShowChangeTitleForm] = useState(false);
 
   const { projectId, sprintId } = props.match.params;
+
+  const currentSprint = useSelector(getCurrentSprint);
+  const sprints = useSelector(getSprints);
+  const tasks = useSelector(getTasks);
 
   const handleCloseModal = () => {
     setShowModalCreateTask(false);
@@ -46,36 +57,7 @@ const TasksPage = props => {
 
   useEffect(() => {
     //TODO fetch tasks and SprintName
-    setTasks([
-      {
-        id: 1,
-        name: 'first task',
-        scheduledHours: '2',
-        spentHours: '1',
-        allHours: '1',
-      },
-      {
-        id: 2,
-        name: 'second task',
-        scheduledHours: '4',
-        spentHours: '1',
-        allHours: '1',
-      },
-      {
-        id: 3,
-        name: 'third task',
-        scheduledHours: '4',
-        spentHours: '0',
-        allHours: '0',
-      },
-      {
-        id: 4,
-        name: 'fourth task',
-        scheduledHours: '4',
-        spentHours: '1',
-        allHours: '1',
-      },
-    ]);
+
     setSprintName('This is name of sprint');
   }, [sprintId]);
 
@@ -94,10 +76,22 @@ const TasksPage = props => {
             </Link>
             <div className={styles.navSprintsList}>
               <ul>
-                {/* //Todo вставить линки на спринты* поменять на навлинки и добавить активный класс*/}
-                <li>
-                  <Link className={styles.linkToSprint}> 1 Sprint</Link>
-                </li>
+                {sprints.map(sprint => (
+                  <li key={sprint.id}>
+                    <NavLink
+                      className={styles.linkToSprint}
+                      activeClassName={styles.linkToSprintActive}
+                      to={{
+                        pathname: `/projects/${projectId}/${sprint.id}`,
+                      }}
+                    >
+                      <div className={styles.sprintsWrap}>
+                        <span />
+                        <h3>{sprint.name}</h3>
+                      </div>
+                    </NavLink>
+                  </li>
+                ))}
               </ul>
 
               {/*Кнопка создания спринта в сайдбаре */}
