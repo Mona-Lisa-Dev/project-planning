@@ -20,7 +20,7 @@ const TaskItem = ({ currentSprint, task }) => {
   // console.log('task', task);
 
   useEffect(() => {
-    dispatch(tasksOperations.getTaskById(currentSprint?.id, task.id));
+    dispatch(tasksOperations.getTaskById(currentSprint?.id, task?.id));
   }, [currentSprint.id, dispatch, task.id]);
 
   const handleInputChange = e => {
