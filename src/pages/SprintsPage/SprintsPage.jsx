@@ -22,8 +22,10 @@ import {
   getProjects,
   getCurrentProject,
 } from 'redux/projects/projects-selectors';
+import { getError } from 'redux/sprints/sprints-selectors';
 import sprintsOperations from 'redux/sprints/sprints-operations';
 import projectsOperations from 'redux/projects/projects-operations';
+import swal from 'sweetalert';
 
 import s from './SprintsPage.module.scss';
 
@@ -38,6 +40,16 @@ const SprintsPage = props => {
 
   const currentProject = useSelector(getCurrentProject);
   const projects = useSelector(getProjects);
+  const Error = useSelector(getError);
+
+  useEffect(() => {
+    Error &&
+      swal({
+        text: `${Error}`,
+        icon: 'error',
+        button: { text: 'OK', className: `${s.swalButton}` },
+      });
+  }, [Error]);
 
   useEffect(() => {
     dispatch(projectsOperations.getProjectById(projectId));
@@ -104,31 +116,30 @@ const SprintsPage = props => {
           <div className={s.headerWrap}>
             <div className={s.contentWrap}>
               <div className={s.titleWrap}>
-                {showInput ? (
-                  <form onSubmit={closeInputHandler}>
-                    <label>
-                      <input
-                        value={name}
-                        name="name"
-                        type="text"
-                        onChange={handleNameChange}
-                      />
-                      <button className={s.buttonSave} type="submit">
-                        <SaveOutlinedIcon />
-                      </button>
-                    </label>
-                  </form>
-                ) : (
+                <form
+                  onSubmit={closeInputHandler}
+                  className={
+                    showInput ? s.changeTitleFormActive : s.changeTitleForm
+                  }
+                >
+                  <input
+                    className={s.inputChangeTitle}
+                    value={name}
+                    name="name"
+                    type="text"
+                    onChange={handleNameChange}
+                  />
+                  <button className={s.buttonSave} type="submit"></button>
+                </form>
+                {!showInput && (
                   <>
                     <h2>{currentProject?.name}</h2>
 
                     <button
                       type="button"
-                      className={s.buttonSave}
+                      className={s.buttonChange}
                       onClick={editNameHandle}
-                    >
-                      <EditIcon className={s.EditIcon} />
-                    </button>
+                    ></button>
                   </>
                 )}
               </div>
