@@ -1,11 +1,12 @@
+import { styled } from '@material-ui/styles';
 import styles from './ButtonDelete.module.scss';
 
-const ButtonDelete = ({ handleClick }) => {
+const ButtonDelete = ({ className, handleClick }) => {
   return (
     <button
       type="button"
-      className={styles.btnDelete}
       onClick={() => handleClick()}
+      className={className ? styles.isHidden : styles.btnDelete}
     ></button>
   );
 };

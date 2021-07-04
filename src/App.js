@@ -2,6 +2,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { lazy, Suspense, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import Spinner from 'components/Loader/Loader';
 import Container from 'components/Container';
 import AppBar from 'components/AppBar';
 import PrivateRoute from 'components/PrivateRoute';
@@ -11,7 +12,6 @@ import { getIsAuthenticated, getIsSignup } from 'redux/auth/auth-selectors';
 
 import routes from 'routes';
 import './scss/_main.scss';
-import Spinner from 'components/Loader/Loader';
 
 const LoginPage = lazy(
   () => import('./pages/LoginPage') /* webpackChunkName: "LoginPage" */,
