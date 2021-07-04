@@ -2,6 +2,10 @@
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
+import { confirmAlert } from 'react-confirm-alert';
+// import 'react-confirm-alert/src/react-confirm-alert.css';
+import '../../react-confirm-alert.css';
+
 import projectsOperations from 'redux/projects/projects-operations';
 
 // import ButtonDelete from '../ButtonDelete';
@@ -16,8 +20,38 @@ const ProjectItem = ({ project }) => {
   // const loading = useSelector(getLoadingProjects);
   const dispatch = useDispatch();
 
-  const handleClick = () =>
+  const handleClickDelete = () =>
     dispatch(projectsOperations.deleteProject(project.id));
+
+  const onClick = () => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className={styles.custom_ui}>
+            <h1>Are you sure?</h1>
+            <p>You want to delete this project?</p>
+            <button
+              className={styles.cancelBtn}
+              type="button"
+              onClick={onClose}
+            >
+              Cancel
+            </button>
+            <button
+              className={styles.rdyBtn}
+              type="button"
+              onClick={() => {
+                handleClickDelete();
+                onClose();
+              }}
+            >
+              Ready
+            </button>
+          </div>
+        );
+      },
+    });
+  };
 
   return (
     <>
@@ -34,7 +68,7 @@ const ProjectItem = ({ project }) => {
         </div>
       </NavLink>
       <div className={styles.buttonWrapper}>
-        <ButtonDelete handleClick={handleClick} />
+        <ButtonDelete handleClick={onClick} />
       </div>
     </>
   );
