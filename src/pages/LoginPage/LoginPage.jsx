@@ -228,7 +228,7 @@ const LoginPage = () => {
         className={styles.form}
         autoComplete="off"
       >
-        <h1 className={styles.title}>Enter</h1>
+        <h1 className={styles.title}>Login</h1>
         <label className={styles.labelForm}>
           <input
             className={styles.inputForm}
@@ -262,7 +262,7 @@ const LoginPage = () => {
           )}
         </label>
         <button className={styles.btnLog} type={'submit'} disabled={!validForm}>
-          Enter
+          Login
         </button>
 
         {loading && <Spinner />}
@@ -274,7 +274,7 @@ const LoginPage = () => {
           </a>
         </div>
       </form>
-    </div>
+    </>
   );
   */
 };

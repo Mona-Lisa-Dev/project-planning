@@ -1,6 +1,10 @@
 @import '../../scss/vars';
 @import '../../scss/breakpoints';
 
+.isHidden {
+  display: none;
+}
+
 .btnDelete {
   border-radius: 50%;
   cursor: pointer;
