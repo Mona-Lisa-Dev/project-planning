@@ -18,10 +18,6 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(projectsOperations.getAllParticipants(projectId));
-  }, [dispatch, projectId]);
-
   const handleChange = e => {
     setEmail(e.target.value);
   };
