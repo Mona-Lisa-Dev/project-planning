@@ -15,6 +15,7 @@ import {
   getCurrentUserSuccess,
   getCurrentUserError,
   clearError,
+  noToken,
 } from './auth-actions';
 
 const initialUserState = { name: null, email: null };
@@ -64,6 +65,14 @@ const isLoading = createReducer(false, {
   [getCurrentUserError]: () => false,
 });
 
+const isLoadingUser = createReducer(true, {
+  [noToken]: () => false,
+
+  [getCurrentUserSuccess]: () => false,
+  [getCurrentUserError]: () => false,
+  [getCurrentUserRequest]: () => true,
+});
+
 const setError = (_, { payload }) => payload;
 
 const errorSignup = createReducer(null, {
@@ -94,4 +103,5 @@ export default combineReducers({
   error,
   errorSignup,
   errorLogin,
+  isLoadingUser,
 });

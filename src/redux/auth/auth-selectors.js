@@ -9,3 +9,5 @@ export const getErrorSignup = state => state.auth.errorSignup;
 export const getErrorLogin = state => state.auth.errorLogin;
 
 export const getError = state => state.auth.error;
+
+export const getStatusLoadingUser = state => state.auth.isLoadingUser;
