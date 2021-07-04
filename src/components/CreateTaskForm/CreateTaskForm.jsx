@@ -8,6 +8,8 @@ const CreateTaskForm = ({ projectId, sprintId, onClickCancel }) => {
   const [hours, setHours] = useState('');
   const [emptyInput, setEmptyInput] = useState(false);
 
+  console.log('projectId', projectId);
+
   const dispatch = useDispatch();
 
   const handleChangeTask = e => {
@@ -25,15 +27,13 @@ const CreateTaskForm = ({ projectId, sprintId, onClickCancel }) => {
       setEmptyInput(true);
       return;
     }
-    // если ввели значения, добавляем таск в стейт
-    const newTask = {
-      // пока нет базы, использую uuid
-      name: task,
-      scheduledTime: hours,
-    };
 
-    // здесь будет отправка на бек
-    dispatch(tasksOperations.createTask(projectId, sprintId, { newTask }));
+    dispatch(
+      tasksOperations.createTask(projectId, sprintId, {
+        name: task,
+        scheduledTime: hours,
+      }),
+    );
     onClickCancel();
 
     setTask('');
@@ -75,11 +75,10 @@ const CreateTaskForm = ({ projectId, sprintId, onClickCancel }) => {
         </label>
       </form>
 
-      {/* при клике будет отправляться запрос на бек */}
       <button form="add" type="submit" className={s.ready_btn}>
         Ready
       </button>
-      {/* закрытие реализуется на модалке */}
+
       <button
         onClick={onClickCancel}
         form="add"

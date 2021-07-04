@@ -17,6 +17,7 @@ import {
   getTaskByIdRequest,
   getTaskByIdSuccess,
   getTaskByIdError,
+  changeFilter,
 } from './tasks-actions';
 
 import { logoutSuccess } from 'redux/auth/auth-actions';
@@ -34,6 +35,10 @@ const tasksItems = createReducer([], {
 
 const currentTask = createReducer(null, {
   [getTaskByIdSuccess]: (_, { payload }) => payload,
+});
+
+const filter = createReducer('', {
+  [changeFilter]: (_, { payload }) => payload,
 });
 
 const loading = createReducer(false, {
@@ -70,6 +75,7 @@ const error = createReducer(null, {
 export default combineReducers({
   items: tasksItems,
   currentTask,
+  filter,
   loading,
   error,
 });

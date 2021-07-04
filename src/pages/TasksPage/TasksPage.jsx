@@ -6,6 +6,7 @@ import Modal from 'components/Modal';
 import CreateTaskForm from 'components/CreateTaskForm';
 import SideBar from 'components/SideBar';
 import CreateSprint from 'components/CreateSprint';
+import DiagramModal from 'components/Diagram/DiagramModal';
 
 import { getTasks } from 'redux/tasks/tasks-selectors';
 import { getSprints, getCurrentSprint } from 'redux/sprints/sprints-selectors';
@@ -15,7 +16,6 @@ import tasksOperations from 'redux/tasks/tasks-operations';
 import styles from './TasksPage.module.scss';
 
 const TasksPage = props => {
-  // const [tasks, setTasks] = useState([]);
   const [sprintName, setSprintName] = useState('');
   const [showModalCreateTask, setShowModalCreateTask] = useState(false);
   const [showModalCreateSprint, setShowModalCreateSprint] = useState(false);
@@ -23,9 +23,6 @@ const TasksPage = props => {
   const [showChangeTitleForm, setShowChangeTitleForm] = useState(false);
 
   const { projectId, sprintId } = props.match.params;
-  console.log('projectId', projectId);
-  console.log('sprintId', sprintId);
-
   const dispatch = useDispatch();
 
   const currentSprint = useSelector(getCurrentSprint);
@@ -74,12 +71,6 @@ const TasksPage = props => {
   const handleInputChangeTitle = e => {
     setSprintName(e.target.value);
   };
-
-  useEffect(() => {
-    //TODO fetch tasks and SprintName
-
-    setSprintName('This is name of sprint');
-  }, [sprintId]);
 
   return (
     <>
@@ -153,9 +144,7 @@ const TasksPage = props => {
                 onChange={handleInputChangeTitle}
               ></input>
               {/* Кнопка сoхранения нового названия */}
-              <button type="submit" className={styles.btnSaveChange}>
-                {' '}
-              </button>
+              <button type="submit" className={styles.btnSaveChange}></button>
             </form>
 
             {/* Кнопка открытия формы для изменения названия */}
@@ -165,18 +154,14 @@ const TasksPage = props => {
                 showChangeTitleForm ? styles.btnChangeDisable : styles.btnChange
               }
               onClick={handleClickBtnChange}
-            >
-              {' '}
-            </button>
+            ></button>
 
             {/* Кнопка открытия модалки создания новой задачи */}
             <button
               type="button"
               className={styles.btnCreateTask}
               onClick={openModalCreateTask}
-            >
-              {' '}
-            </button>
+            ></button>
           </div>
 
           {/* Кнопка открытия модалки с аналитикой */}
@@ -185,33 +170,31 @@ const TasksPage = props => {
               type="button"
               className={styles.btnOpenAnalytics}
               onClick={openModalAnalytics}
-            >
-              {' '}
-            </button>
+            ></button>
           )}
 
-          <TaskList tasks={tasks} />
+          <TaskList currentSprint={currentSprint} tasks={tasks} />
         </div>
       </main>
 
       {showModalCreateTask && (
         <Modal onCloseModal={handleCloseModal}>
-          <CreateTaskForm onClickCancel={handleCloseModal} />
-        </Modal>
-      )}
-      {showModalCreateSprint && (
-        <Modal onCloseModal={handleCloseModal}>
-          <CreateSprint
+          <CreateTaskForm
             projectId={projectId}
             sprintId={sprintId}
             onClickCancel={handleCloseModal}
           />
         </Modal>
       )}
-      {showModalAnalytics && (
-        <h3>Analytics</h3>
-        // TODO Modal
+      {showModalCreateSprint && (
+        <Modal onCloseModal={handleCloseModal}>
+          <CreateSprint
+            onClickCancel={handleCloseModal}
+            projectId={projectId}
+          />
+        </Modal>
       )}
+      {showModalAnalytics && <DiagramModal onCloseModal={handleCloseModal} />}
     </>
   );
 };
