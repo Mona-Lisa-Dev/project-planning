@@ -86,8 +86,6 @@ const App = () => {
               // redirectTo={routes.login}
             /> */}
 
-            {/* <Route path={routes.sprints} component={SprintsPage} /> */}
-
             <PrivateRoute
               path={routes.projects}
               restricted

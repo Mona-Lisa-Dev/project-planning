@@ -19,6 +19,7 @@
   }
 
   .nameTextFieldWrap {
+    position: relative;
     margin-bottom: 40px;
 
     @media screen and (min-width: $tablet) {
@@ -83,6 +84,8 @@
     }
 
     .KeyboardDatePickerWrap {
+      position: relative;
+
       @media screen and (max-width: $mobile-max) {
         margin-bottom: 40px;
       }
@@ -92,6 +95,18 @@
         margin-right: 30px;
       }
     }
+  }
+
+  .durationTextFieldWrap {
+    position: relative;
+  }
+
+  .error {
+    position: absolute;
+    right: 0;
+    bottom: -15px;
+    color: red;
+    font-size: 10px;
   }
 
   // Button (submit)
