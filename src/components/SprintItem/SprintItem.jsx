@@ -1,4 +1,5 @@
 // import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import sprintsOperations from 'redux/sprints/sprints-operations';
@@ -12,24 +13,31 @@ const SprintItem = ({ currentProject, sprint }) => {
     dispatch(sprintsOperations.deleteSprint(currentProject.id, sprint.id));
 
   return (
-    <div className={styles.itemWrap}>
-      <h3>{sprint.name}</h3>
+    <div className={styles.LinkWrapper}>
+      <Link
+        to={{
+          pathname: `/projects/${sprint.project}/${sprint.id}`,
+        }}
+      >
+        <div className={styles.itemWrap}>
+          <h3>{sprint.name}</h3>
 
-      <ul>
-        <li>
-          <span>Start date</span>
-          <span>{sprint.startDate}</span>
-        </li>
-        <li>
-          <span>End date</span>
-          <span>{sprint.endDate}</span>
-        </li>
-        <li>
-          <span>Duration</span>
-          <span>{sprint.duration}</span>
-        </li>
-      </ul>
-
+          <ul>
+            <li>
+              <span>Start date</span>
+              <span>{sprint.startDate}</span>
+            </li>
+            <li>
+              <span>End date</span>
+              <span>{sprint.endDate}</span>
+            </li>
+            <li>
+              <span>Duration</span>
+              <span>{sprint.duration}</span>
+            </li>
+          </ul>
+        </div>
+      </Link>
       <ButtonDelete handleClick={handleClick} />
     </div>
   );

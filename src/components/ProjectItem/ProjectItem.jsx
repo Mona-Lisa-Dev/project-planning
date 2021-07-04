@@ -1,16 +1,13 @@
 // import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import projectsOperations from 'redux/projects/projects-operations';
-
-// import ButtonDelete from '../ButtonDelete';
+// import { getLoadingProjects } from 'redux/projects/projects-selectors';
+// import Spinner from 'components/Loader/Loader';
 import ButtonDelete from '../ButtonDeleteProject';
 
-// import { getLoadingProjects } from 'redux/projects/projects-selectors';
-
 import styles from './ProjectItem.module.scss';
-// import Spinner from 'components/Loader/Loader';
 
 const ProjectItem = ({ project }) => {
   // const loading = useSelector(getLoadingProjects);
@@ -21,8 +18,7 @@ const ProjectItem = ({ project }) => {
 
   return (
     <>
-      <NavLink
-        className={styles.NavLink}
+      <Link
         to={{
           pathname: `/projects/${project.id}`,
         }}
@@ -32,7 +28,7 @@ const ProjectItem = ({ project }) => {
           <h3 className={styles.itemTitle}>{project.name}</h3>
           <p className={styles.itemDescription}> {project.description}</p>
         </div>
-      </NavLink>
+      </Link>
       <div className={styles.buttonWrapper}>
         <ButtonDelete handleClick={handleClick} />
       </div>

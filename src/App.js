@@ -13,10 +13,6 @@ import routes from 'routes';
 import './scss/_main.scss';
 import Spinner from 'components/Loader/Loader';
 
-// import Diagram from 'components/Diagram';
-
-// import DiagramModal from 'components/Diagram/DiagramModal';
-
 const LoginPage = lazy(
   () => import('./pages/LoginPage') /* webpackChunkName: "LoginPage" */,
 );
@@ -29,6 +25,9 @@ const ProjectsPage = lazy(() =>
 const SprintsPage = lazy(() =>
   import('./pages/SprintsPage' /* webpackChunkName: "SprintsPage" */),
 );
+const TasksPage = lazy(() =>
+  import('./pages/TasksPage' /* webpackChunkName: "TasksPage" */),
+);
 
 const App = () => {
   const isAuthorized = useSelector(getIsAuthenticated);
@@ -40,7 +39,6 @@ const App = () => {
   return (
     <>
       <AppBar />
-      {/* <DiagramModal /> */}
 
       <Container>
         <Suspense fallback={<Spinner />}>
@@ -51,6 +49,7 @@ const App = () => {
               component={LoginPage}
               redirectTo={routes.projects}
             />
+
             <Route
               path={routes.signup}
               restricted
@@ -66,25 +65,18 @@ const App = () => {
             />
 
             <PrivateRoute
+              path={routes.tasks}
+              restricted
+              component={TasksPage}
+              redirectTo={routes.login}
+            />
+
+            <PrivateRoute
               path={routes.sprints}
               restricted
               component={SprintsPage}
               redirectTo={routes.login}
             />
-
-            {/* <Route
-              path={routes.sprints}
-              restricted
-              render={props =>
-                isAuthorized ? (
-                  <SprintsPage {...props} />
-                ) : (
-                  <Redirect to={routes.login} />
-                )
-              }
-              // component={SprintsPage}
-              // redirectTo={routes.login}
-            /> */}
 
             <PrivateRoute
               path={routes.projects}
@@ -92,12 +84,6 @@ const App = () => {
               component={ProjectsPage}
               redirectTo={routes.login}
             />
-            {/* <PublicRoute
-              path={routes.home}
-              restricted
-              component={isAuthorized ? ProjectsPage : RegisterPage}
-              redirectTo={routes.projects}
-            /> */}
 
             <Route
               path={routes.home}

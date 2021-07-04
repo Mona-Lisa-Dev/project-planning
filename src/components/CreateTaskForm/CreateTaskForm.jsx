@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { useDispatch } from 'react-redux';
+import tasksOperations from 'redux/tasks/tasks-operations';
 import s from './CreateTaskForm.module.scss';
 
-const CreateTaskForm = () => {
+const CreateTaskForm = ({ projectId, sprintId, onClickCancel }) => {
   const [task, setTask] = useState('');
   const [hours, setHours] = useState('');
-  const [tasks, setTasks] = useState([]);
   const [emptyInput, setEmptyInput] = useState(false);
 
-  // const dispatch = useDispatch();
+  console.log('projectId', projectId);
+
+  const dispatch = useDispatch();
 
   const handleChangeTask = e => {
     setTask(e.target.value);
@@ -25,17 +27,14 @@ const CreateTaskForm = () => {
       setEmptyInput(true);
       return;
     }
-    // если ввели значения, добавляем таск в стейт
-    const newTask = {
-      // пока нет базы, использую uuid
-      id: uuidv4(),
-      task,
-      hours,
-    };
-    setTasks(prevState => [newTask, ...prevState]);
 
-    // здесь будет отправка на бек
-    // dispatch(addTask({ task, hours }));
+    dispatch(
+      tasksOperations.createTask(projectId, sprintId, {
+        name: task,
+        scheduledTime: hours,
+      }),
+    );
+    onClickCancel();
 
     setTask('');
     setHours('');
@@ -76,12 +75,16 @@ const CreateTaskForm = () => {
         </label>
       </form>
 
-      {/* при клике будет отправляться запрос на бек */}
       <button form="add" type="submit" className={s.ready_btn}>
         Ready
       </button>
-      {/* закрытие реализуется на модалке */}
-      <button form="add" type="button" className={s.cancel_btn}>
+
+      <button
+        onClick={onClickCancel}
+        form="add"
+        type="button"
+        className={s.cancel_btn}
+      >
         Cancel
       </button>
     </div>

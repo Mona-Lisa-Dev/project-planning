@@ -1,19 +1,38 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, NavLink } from 'react-router-dom';
 import TaskList from 'components/TaskList';
 import Modal from 'components/Modal';
 import CreateTaskForm from 'components/CreateTaskForm';
 import SideBar from 'components/SideBar';
+import CreateSprint from 'components/CreateSprint';
+import DiagramModal from 'components/Diagram/DiagramModal';
+
+import { getTasks } from 'redux/tasks/tasks-selectors';
+import { getSprints, getCurrentSprint } from 'redux/sprints/sprints-selectors';
+import sprintsOperations from 'redux/sprints/sprints-operations';
+import tasksOperations from 'redux/tasks/tasks-operations';
 
 import styles from './TasksPage.module.scss';
 
-const TasksPage = ({ sprintId }) => {
-  const [tasks, setTasks] = useState([]);
+const TasksPage = props => {
   const [sprintName, setSprintName] = useState('');
   const [showModalCreateTask, setShowModalCreateTask] = useState(false);
   const [showModalCreateSprint, setShowModalCreateSprint] = useState(false);
   const [showModalAnalytics, setShowModalAnalytics] = useState(false);
   const [showChangeTitleForm, setShowChangeTitleForm] = useState(false);
+
+  const { projectId, sprintId } = props.match.params;
+  const dispatch = useDispatch();
+
+  const currentSprint = useSelector(getCurrentSprint);
+  const sprints = useSelector(getSprints);
+  const tasks = useSelector(getTasks);
+
+  useEffect(() => {
+    dispatch(sprintsOperations.getSprintById(projectId, sprintId));
+    dispatch(tasksOperations.getAllTasks(sprintId));
+  }, [dispatch, projectId, sprintId]);
 
   const handleCloseModal = () => {
     setShowModalCreateTask(false);
@@ -31,64 +50,59 @@ const TasksPage = ({ sprintId }) => {
   };
 
   const handleClickBtnChange = () => {
+    setSprintName(currentSprint?.name);
     setShowChangeTitleForm(!showChangeTitleForm);
   };
+
   const handleSubmit = e => {
     e.preventDefault();
+
+    if (currentSprint.name !== sprintName || sprintName !== '') {
+      dispatch(
+        sprintsOperations.updateSprint(projectId, sprintId, {
+          name: sprintName,
+        }),
+      );
+    }
+
     setShowChangeTitleForm(!showChangeTitleForm);
-    //TODO запрос на бэк для обновление названия спринта
   };
+
   const handleInputChangeTitle = e => {
     setSprintName(e.target.value);
   };
-
-  useEffect(() => {
-    //TODO fetch tasks and SprintName
-    setTasks([
-      {
-        id: 1,
-        name: 'first task',
-        scheduledHours: '2',
-        spentHours: '1',
-        allHours: '1',
-      },
-      {
-        id: 2,
-        name: 'second task',
-        scheduledHours: '4',
-        spentHours: '1',
-        allHours: '1',
-      },
-      {
-        id: 3,
-        name: 'third task',
-        scheduledHours: '4',
-        spentHours: '0',
-        allHours: '0',
-      },
-      {
-        id: 4,
-        name: 'fourth task',
-        scheduledHours: '4',
-        spentHours: '1',
-        allHours: '1',
-      },
-    ]);
-    setSprintName('This is name of sprint');
-  }, [sprintId]);
 
   return (
     <>
       <main>
         <aside>
           <SideBar>
-            <Link className={styles.linkToBack}>Show sprints</Link>
+            <Link
+              className={styles.linkToBack}
+              to={{
+                pathname: `/projects/${projectId}`,
+              }}
+            >
+              Show sprints
+            </Link>
             <div className={styles.navSprintsList}>
               <ul>
-                {/* //Todo вставить линки на спринты* поменять на навлинки и добавить активный класс*/}
-                <li>
-                  <Link className={styles.linkToSprint}> 1 Sprint</Link>
-                </li>
+                {sprints.map(sprint => (
+                  <li key={sprint.id}>
+                    <NavLink
+                      className={styles.linkToSprint}
+                      activeClassName={styles.linkToSprintActive}
+                      to={{
+                        pathname: `/projects/${projectId}/${sprint.id}`,
+                      }}
+                    >
+                      <div className={styles.sprintsWrap}>
+                        <span />
+                        <h3>{sprint.name}</h3>
+                      </div>
+                    </NavLink>
+                  </li>
+                ))}
               </ul>
 
               {/*Кнопка создания спринта в сайдбаре */}
@@ -96,9 +110,7 @@ const TasksPage = ({ sprintId }) => {
                 type="button"
                 className={styles.btnCreateSprint}
                 onClick={openModalCreateSprint}
-              >
-                {' '}
-              </button>
+              ></button>
             </div>
           </SideBar>
         </aside>
@@ -115,7 +127,7 @@ const TasksPage = ({ sprintId }) => {
                 showChangeTitleForm ? styles.titleDisable : styles.title
               }
             >
-              {sprintName}
+              {currentSprint?.name}
             </h1>
 
             <form
@@ -132,9 +144,7 @@ const TasksPage = ({ sprintId }) => {
                 onChange={handleInputChangeTitle}
               ></input>
               {/* Кнопка сoхранения нового названия */}
-              <button type="submit" className={styles.btnSaveChange}>
-                {' '}
-              </button>
+              <button type="submit" className={styles.btnSaveChange}></button>
             </form>
 
             {/* Кнопка открытия формы для изменения названия */}
@@ -144,18 +154,14 @@ const TasksPage = ({ sprintId }) => {
                 showChangeTitleForm ? styles.btnChangeDisable : styles.btnChange
               }
               onClick={handleClickBtnChange}
-            >
-              {' '}
-            </button>
+            ></button>
 
             {/* Кнопка открытия модалки создания новой задачи */}
             <button
               type="button"
               className={styles.btnCreateTask}
               onClick={openModalCreateTask}
-            >
-              {' '}
-            </button>
+            ></button>
           </div>
 
           {/* Кнопка открытия модалки с аналитикой */}
@@ -164,29 +170,31 @@ const TasksPage = ({ sprintId }) => {
               type="button"
               className={styles.btnOpenAnalytics}
               onClick={openModalAnalytics}
-            >
-              {' '}
-            </button>
+            ></button>
           )}
 
-          <TaskList tasks={tasks} />
+          <TaskList currentSprint={currentSprint} tasks={tasks} />
         </div>
       </main>
 
       {showModalCreateTask && (
         <Modal onCloseModal={handleCloseModal}>
-          <CreateTaskForm />
+          <CreateTaskForm
+            projectId={projectId}
+            sprintId={sprintId}
+            onClickCancel={handleCloseModal}
+          />
         </Modal>
       )}
       {showModalCreateSprint && (
         <Modal onCloseModal={handleCloseModal}>
-          <h3>Create Sprint</h3>
+          <CreateSprint
+            onClickCancel={handleCloseModal}
+            projectId={projectId}
+          />
         </Modal>
       )}
-      {showModalAnalytics && (
-        <h3>Analytics</h3>
-        // TODO Modal
-      )}
+      {showModalAnalytics && <DiagramModal onCloseModal={handleCloseModal} />}
     </>
   );
 };
