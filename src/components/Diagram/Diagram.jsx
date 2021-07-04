@@ -1,7 +1,7 @@
 import s from './Diagram.module.scss';
 
 import { useState, useEffect } from 'react';
-// import { Line } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 const Diagram = () => {
   const [chartData, setChartData] = useState({});
@@ -61,7 +61,7 @@ const Diagram = () => {
   return (
     <div>
       <h3 className={s.diagram_title}>BurnDown Chart (Calendar Team)</h3>
-      {/* <Line
+      <Line
         data={chartData}
         options={{
           scales: {
@@ -91,7 +91,7 @@ const Diagram = () => {
             padding: 20,
           },
         }}
-      /> */}
+      />
     </div>
   );
 };
