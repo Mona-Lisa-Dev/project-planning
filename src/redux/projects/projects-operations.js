@@ -22,9 +22,9 @@ import {
   getProjectByIdRequest,
   getProjectByIdSuccess,
   getProjectByIdError,
-  getAllParticipantsRequest,
-  getAllParticipantsSuccess,
-  getAllParticipantsError,
+  // getAllParticipantsRequest,
+  // getAllParticipantsSuccess,
+  // getAllParticipantsError,
 } from './projects-actions';
 
 const getAllProjects = () => async dispatch => {
@@ -113,20 +113,20 @@ const addParticipant = (projectId, email) => async dispatch => {
   }
 };
 
-const getAllParticipants = projectId => async dispatch => {
-  dispatch(getAllParticipantsRequest());
+// const getAllParticipants = projectId => async dispatch => {
+//   dispatch(getAllParticipantsRequest());
 
-  try {
-    const {
-      data: { data },
-    } = await axios.get(`/projects/${projectId}/participant`);
-    dispatch(getAllParticipantsSuccess(data));
+//   try {
+//     const {
+//       data: { data },
+//     } = await axios.get(`/projects/${projectId}/participant`);
+//     dispatch(getAllParticipantsSuccess(data));
 
-    return data;
-  } catch (error) {
-    dispatch(getAllParticipantsError(error.message));
-  }
-};
+//     return data;
+//   } catch (error) {
+//     dispatch(getAllParticipantsError(error.message));
+//   }
+// };
 
 const deleteParticipant =
   (projectId, { email }) =>
@@ -154,5 +154,5 @@ export default {
   updateProject,
   addParticipant,
   deleteParticipant,
-  getAllParticipants,
+  // getAllParticipants,
 };

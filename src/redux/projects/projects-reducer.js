@@ -23,9 +23,9 @@ import {
   getProjectByIdRequest,
   getProjectByIdSuccess,
   getProjectByIdError,
-  getAllParticipantsRequest,
-  getAllParticipantsSuccess,
-  getAllParticipantsError,
+  // getAllParticipantsRequest,
+  // getAllParticipantsSuccess,
+  // getAllParticipantsError,
 } from './projects-actions';
 
 import { logoutSuccess } from 'redux/auth/auth-actions';
@@ -40,7 +40,7 @@ const projectItems = createReducer([], {
 });
 
 const participants = createReducer([], {
-  [getAllParticipantsSuccess]: (_, { payload }) => payload.participants,
+  [getProjectByIdSuccess]: (_, { payload }) => payload.participants,
   [addParticipantSuccess]: (_, { payload }) => payload,
   [deleteParticipantSuccess]: (_, { payload }) => payload,
 });
@@ -72,9 +72,9 @@ const loading = createReducer(false, {
   [getProjectByIdRequest]: () => true,
   [getProjectByIdSuccess]: () => false,
   [getProjectByIdError]: () => false,
-  [getAllParticipantsRequest]: () => true,
-  [getAllParticipantsSuccess]: () => false,
-  [getAllParticipantsError]: () => false,
+  // [getAllParticipantsRequest]: () => true,
+  // [getAllParticipantsSuccess]: () => false,
+  // [getAllParticipantsError]: () => false,
 });
 
 const error = createReducer(null, {
@@ -92,8 +92,8 @@ const error = createReducer(null, {
   [deleteParticipantRequest]: () => null,
   [getProjectByIdError]: (_, { payload }) => payload,
   [getProjectByIdRequest]: () => null,
-  [getAllParticipantsError]: (_, { payload }) => payload,
-  [getAllParticipantsRequest]: () => null,
+  // [getAllParticipantsError]: (_, { payload }) => payload,
+  // [getAllParticipantsRequest]: () => null,
 });
 
 export default combineReducers({
