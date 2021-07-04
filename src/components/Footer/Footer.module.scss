@@ -1,0 +1,19 @@
+@import '../../scss/vars';
+
+.Footer {
+  display: flex;
+  justify-content: center;
+  background-color: $main-background;
+  border-top: $main-border;
+  padding-top: 25px;
+  padding-bottom: 20px;
+}
+
+.Footer_text {
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.Footer_link {
+  border-bottom: 1px solid $text-light;
+}
