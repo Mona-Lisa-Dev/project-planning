@@ -29,6 +29,11 @@ const TasksPage = props => {
   const sprints = useSelector(getSprints);
   const tasks = useSelector(getTasks);
 
+  console.log('currentSprint', currentSprint);
+
+  const paginationTotalPages = new Array(currentSprint?.duration).fill(); // totalPages
+  console.log('paginationTotalPages', paginationTotalPages);
+
   useEffect(() => {
     dispatch(sprintsOperations.getSprintById(projectId, sprintId));
     dispatch(tasksOperations.getAllTasks(sprintId));
@@ -117,7 +122,9 @@ const TasksPage = props => {
 
         <div className={styles.sprintContent}>
           <div className={styles.sprintDate}>
-            {/*TODO Пагинация */}
+            {paginationTotalPages.map((_, i) => (
+              <button type="button">{i + 1}</button>
+            ))}
             <p>current date</p>
           </div>
 

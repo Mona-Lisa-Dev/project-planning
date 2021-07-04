@@ -19,10 +19,6 @@ const TaskItem = ({ currentSprint, task }) => {
   // console.log('currentTask', currentTask);
   // console.log('task', task);
 
-  useEffect(() => {
-    dispatch(tasksOperations.getTaskById(currentSprint?.id, task?.id));
-  }, [currentSprint.id, dispatch, task.id]);
-
   const handleInputChange = e => {
     setQueryCustomTime(e.target.value);
     setQueryTotalTime(Number(totalTime) + Number(e.target.value));

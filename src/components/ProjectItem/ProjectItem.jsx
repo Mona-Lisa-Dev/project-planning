@@ -1,12 +1,13 @@
 // import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { confirmAlert } from 'react-confirm-alert';
 // import 'react-confirm-alert/src/react-confirm-alert.css';
-import '../../react-confirm-alert.css';
+import '../ButtonDeleteProject/react-confirm-alert.scss';
 
 import projectsOperations from 'redux/projects/projects-operations';
+import { getUserEmail } from 'redux/auth/auth-selectors';
 // import { getLoadingProjects } from 'redux/projects/projects-selectors';
 // import Spinner from 'components/Loader/Loader';
 import ButtonDelete from '../ButtonDeleteProject';
@@ -16,6 +17,9 @@ import styles from './ProjectItem.module.scss';
 const ProjectItem = ({ project }) => {
   // const loading = useSelector(getLoadingProjects);
   const dispatch = useDispatch();
+  console.log('project', project);
+
+  const userEmail = useSelector(getUserEmail);
 
   const handleClickDelete = () =>
     dispatch(projectsOperations.deleteProject(project.id));
@@ -64,7 +68,10 @@ const ProjectItem = ({ project }) => {
         </div>
       </Link>
       <div className={styles.buttonWrapper}>
-        <ButtonDelete handleClick={onClick} />
+        <ButtonDelete
+          className={userEmail !== project.owner.email}
+          handleClick={onClick}
+        />
       </div>
     </>
   );

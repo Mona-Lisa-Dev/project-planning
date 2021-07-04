@@ -10,15 +10,15 @@ body.react-confirm-alert-body-element {
   -webkit-filter: blur(2px);
 }
 
-.react-confirm-alert-overlay {
+div.react-confirm-alert-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 99;
-  background: rgba(24, 28, 39, 0.25) !important;
-  /* background-color: rgba(24, 28, 39, 0.25); */
+  // background: rgba(24, 28, 39, 0.25) !important;
+  background-color: rgba(24, 28, 39, 0.25);
   display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flex;

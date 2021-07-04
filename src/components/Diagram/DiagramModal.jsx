@@ -44,7 +44,7 @@ const DiagramModal = ({ onCloseModal }) => {
   return createPortal(
     <div className={s.backdrop} onClick={handleCloseByBackdrop}>
       <div className={s.content}>
-        <ButtonClose onClose={handleCloseByButton} />
+        <ButtonClose onCloseModal={handleCloseByButton} />
         {mobileMax && <p className={s.contentText}>Rotate your device</p>}
         {tabletMin && <Diagram />}
       </div>

@@ -15,6 +15,9 @@ const SideBarProjects = ({ projects, match }) => {
   const tablet = useMediaQuery(handleMinWidth(refs.tablet));
   // ----- End useMediaQuery -----
 
+  // const { projectId } = match.params;
+  // console.log('projectId', projectId);
+
   return (
     <>
       {tablet && (
