@@ -49,6 +49,8 @@
       padding: 120px 50px 40px;
       width: 530px;
       box-shadow: $primaryShadow;
+      transition: all 250ms linear;
+      transform: scale(1);
     }
 
     .CloseModalBtn {
