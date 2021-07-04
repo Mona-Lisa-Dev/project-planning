@@ -85,7 +85,8 @@ const SprintsPage = props => {
     setShowInput(true);
   };
 
-  const closeInputHandler = () => {
+  const closeInputHandler = e => {
+    e.preventDefault();
     if (currentProject.name !== name || name !== '') {
       dispatch(projectsOperations.updateProject(projectId, { name }));
     }
