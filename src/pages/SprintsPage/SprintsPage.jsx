@@ -51,6 +51,7 @@ const SprintsPage = props => {
   }, [Error]);
 
   useEffect(() => {
+    dispatch(projectsOperations.getAllProjects());
     dispatch(projectsOperations.getProjectById(projectId));
     dispatch(sprintsOperations.getAllSprints(projectId));
   }, [dispatch, projectId]);

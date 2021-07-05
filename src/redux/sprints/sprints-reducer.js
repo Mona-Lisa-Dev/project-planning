@@ -27,8 +27,8 @@ const sprintsItems = createReducer([], {
   [createSprintSuccess]: (state, { payload }) => [...state, payload],
   [deleteSprintSuccess]: (state, { payload }) =>
     state.filter(({ id }) => id !== payload),
-
-  [logoutSuccess]: () => [],
+  [updateSprintSuccess]: (state, { payload }) =>
+    state.map(el => (el.id === payload.id ? { ...payload } : el)),
 });
 
 const currentSprint = createReducer(null, {

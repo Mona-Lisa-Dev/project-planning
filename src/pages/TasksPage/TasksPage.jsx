@@ -78,6 +78,7 @@ const TasksPage = props => {
   }
 
   useEffect(() => {
+    dispatch(sprintsOperations.getAllSprints(projectId));
     dispatch(sprintsOperations.getSprintById(projectId, sprintId));
     // dispatch(tasksOperations.getAllTasks(sprintId));
   }, [dispatch, projectId, sprintId]);
