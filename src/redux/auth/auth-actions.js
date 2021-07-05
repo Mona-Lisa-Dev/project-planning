@@ -17,3 +17,4 @@ export const getCurrentUserSuccess = createAction('auth/getCurrentUserSuccess');
 export const getCurrentUserError = createAction('auth/getCurrentUserError');
 
 export const clearError = createAction('auth/clearError');
+export const noToken = createAction('auth/noToken');

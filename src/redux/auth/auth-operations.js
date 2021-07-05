@@ -12,6 +12,7 @@ import {
   getCurrentUserRequest,
   getCurrentUserSuccess,
   getCurrentUserError,
+  noToken,
 } from './auth-actions';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
@@ -77,7 +78,10 @@ const getCurrentUser = () => async (dispatch, getState) => {
     auth: { token: persistedToken },
   } = getState();
 
-  if (!persistedToken) return;
+  if (!persistedToken) {
+    dispatch(noToken());
+    return;
+  }
 
   token.set(persistedToken);
   dispatch(getCurrentUserRequest());

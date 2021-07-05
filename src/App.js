@@ -9,7 +9,11 @@ import Footer from 'components/Footer';
 import PrivateRoute from 'components/PrivateRoute';
 import PublicRoute from 'components/PublicRoute';
 import authOperations from 'redux/auth/auth-operations';
-import { getIsAuthenticated, getIsSignup } from 'redux/auth/auth-selectors';
+import {
+  getIsAuthenticated,
+  getIsSignup,
+  getStatusLoadingUser,
+} from 'redux/auth/auth-selectors';
 
 import routes from 'routes';
 import './scss/_main.scss';
@@ -33,6 +37,7 @@ const TasksPage = lazy(() =>
 const App = () => {
   const isAuthorized = useSelector(getIsAuthenticated);
   const isSignup = useSelector(getIsSignup);
+  const isLoadingUser = useSelector(getStatusLoadingUser);
 
   const dispatch = useDispatch();
   useEffect(() => dispatch(authOperations.getCurrentUser()), [dispatch]);
@@ -43,62 +48,64 @@ const App = () => {
 
       <Container>
         <Suspense fallback={<Spinner />}>
-          <Switch>
-            <PublicRoute
-              path={routes.login}
-              restricted
-              component={LoginPage}
-              redirectTo={routes.projects}
-            />
+          {isLoadingUser || (
+            <Switch>
+              <PublicRoute
+                path={routes.login}
+                restricted
+                component={LoginPage}
+                redirectTo={routes.projects}
+              />
 
-            <Route
-              path={routes.signup}
-              restricted
-              render={props =>
-                isAuthorized ? (
-                  <Redirect to={routes.projects} />
-                ) : isSignup ? (
-                  <Redirect to={routes.login} />
-                ) : (
-                  <RegisterPage />
-                )
-              }
-            />
+              <Route
+                path={routes.signup}
+                restricted
+                render={props =>
+                  isAuthorized ? (
+                    <Redirect to={routes.projects} />
+                  ) : isSignup ? (
+                    <Redirect to={routes.login} />
+                  ) : (
+                    <RegisterPage />
+                  )
+                }
+              />
 
-            <PrivateRoute
-              path={routes.tasks}
-              restricted
-              component={TasksPage}
-              redirectTo={routes.login}
-            />
+              <PrivateRoute
+                path={routes.tasks}
+                restricted
+                component={TasksPage}
+                redirectTo={routes.login}
+              />
 
-            <PrivateRoute
-              path={routes.sprints}
-              restricted
-              component={SprintsPage}
-              redirectTo={routes.login}
-            />
+              <PrivateRoute
+                path={routes.sprints}
+                restricted
+                component={SprintsPage}
+                redirectTo={routes.login}
+              />
 
-            <PrivateRoute
-              path={routes.projects}
-              restricted
-              component={ProjectsPage}
-              redirectTo={routes.login}
-            />
+              <PrivateRoute
+                path={routes.projects}
+                restricted
+                component={ProjectsPage}
+                redirectTo={routes.login}
+              />
 
-            <Route
-              path={routes.home}
-              restricted
-              render={props =>
-                isAuthorized ? (
-                  <Redirect to={routes.projects} />
-                ) : (
-                  <Redirect to={routes.signup} />
-                )
-              }
-            />
-            <Redirect to={routes.home} />
-          </Switch>
+              <Route
+                path={routes.home}
+                restricted
+                render={props =>
+                  isAuthorized ? (
+                    <Redirect to={routes.projects} />
+                  ) : (
+                    <Redirect to={routes.signup} />
+                  )
+                }
+              />
+              <Redirect to={routes.home} />
+            </Switch>
+          )}
         </Suspense>
       </Container>
 
