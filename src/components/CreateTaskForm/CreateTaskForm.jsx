@@ -60,7 +60,8 @@ const CreateTaskForm = ({ projectId, sprintId, onClickCancel }) => {
           <input
             id={hours}
             value={hours}
-            type="number"
+            type="text"
+            pattern="[0-9]{1,2}$"
             name="hours"
             placeholder={
               emptyInput ? 'Enter scheduled hours' : 'Scheduled hours'
