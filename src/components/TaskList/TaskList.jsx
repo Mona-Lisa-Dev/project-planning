@@ -1,21 +1,15 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import TaskItem from '../TaskItem';
-import { getFilter, getVisibleTasks } from 'redux/tasks/tasks-selectors';
 import * as tasksActions from 'redux/tasks/tasks-actions';
 
 import styles from './TaskList.module.scss';
 
 const TaskList = ({ currentSprint, tasks }) => {
-  // const [visibleTasks, setVisibleTasks] = useState([]);
+  const [visibleTasks, setVisibleTasks] = useState([]);
   const [isVisibleInputFind, setIsVisibleInputFind] = useState(false);
-  // const [searchText, setSearchText] = useState('');
-
-  console.log('tasks', tasks);
-
-  const filter = useSelector(getFilter);
-  const visibleTasks = useSelector(getVisibleTasks);
+  const [searchText, setSearchText] = useState('');
 
   const dispatch = useDispatch();
 
@@ -25,18 +19,23 @@ const TaskList = ({ currentSprint, tasks }) => {
 
   const handleSearchTextChange = e => {
     dispatch(tasksActions.changeFilter(e.currentTarget.value));
-    // setSearchText(e.target.value);
+    setSearchText(e.target.value);
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    //TODO фильтруем массив тасок - проверить такое ли имя в базе
-    // setVisibleTasks(tasks.filter(task => task.name.includes(searchText)));
+
+    const normalizedSearchText = searchText.toLowerCase();
+    setVisibleTasks(
+      tasks.filter(task =>
+        task.name.toLowerCase().includes(normalizedSearchText),
+      ),
+    );
   };
 
-  // useEffect(() => {
-  // setVisibleTasks(tasks);
-  // }, [tasks]);
+  useEffect(() => {
+    setVisibleTasks(tasks);
+  }, [tasks]);
 
   return (
     <>
@@ -53,7 +52,7 @@ const TaskList = ({ currentSprint, tasks }) => {
               isVisibleInputFind ? styles.findInputActive : styles.findInput
             }
             type="text"
-            value={filter}
+            value={searchText}
             onChange={handleSearchTextChange}
           ></input>
           <button
@@ -67,13 +66,8 @@ const TaskList = ({ currentSprint, tasks }) => {
       {tasks.length === 0 ? (
         <p className={styles.taskList}>Create first task</p>
       ) : (
-        // <ul className={styles.taskList}>
-        //   {visibleTasks.map(task => (
-        //     <TaskItem currentSprint={currentSprint} key={task.id} task={task} />
-        //   ))}
-        // </ul>
         <ul className={styles.taskList}>
-          {tasks.map(task => (
+          {visibleTasks.map(task => (
             <TaskItem currentSprint={currentSprint} key={task.id} task={task} />
           ))}
         </ul>

@@ -34,7 +34,7 @@ const sprintsItems = createReducer([], {
 const currentSprint = createReducer(null, {
   [getSprintByIdSuccess]: (_, { payload }) => payload,
   [updateSprintSuccess]: (_, { payload }) => payload,
-  // [createTaskSuccess]: (state, { payload }) => payload,
+  [createTaskSuccess]: (state, { payload }) => [...state, payload],
 });
 
 const loading = createReducer(false, {
