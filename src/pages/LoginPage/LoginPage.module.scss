@@ -72,7 +72,11 @@
       justify-content: center;
       align-items: center;
       height: calc(100vh - 81px);
-      min-height: 445px;
+      min-height: 510px;
+    }
+
+    @media screen and (min-width: $desktop) {
+      min-height: 470px;
     }
 
     // Single Circle ------------------------
