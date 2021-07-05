@@ -2,13 +2,11 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // import { Link } from 'react-router-dom';
 
-import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
+// import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import { useMediaQuery } from '@material-ui/core';
 import { refs } from './refs';
-import { ReactComponent as EditIcon } from './svg/edit_icon.svg';
 import { ReactComponent as AddGroupIcon } from './svg/add_group_icon.svg';
-import { ReactComponent as CreateNewSprint } from './svg/plus_button_icon.svg';
-import { ReactComponent as CreateNewProject } from './svg/plus_button_icon_two.svg';
+import { ReactComponent as CreateBtn } from './svg/create_button_icon.svg';
 
 import SideBar from 'components/SideBar';
 import ShowProjects from 'components/ShowProjects';
@@ -103,7 +101,7 @@ const SprintsPage = props => {
 
             {tablet && (
               <div className={s.CreateNewProjectWrap}>
-                <CreateNewProject
+                <CreateBtn
                   className={s.CreateNewProject}
                   onClick={() => toggleModal('createProject')}
                 />
@@ -154,7 +152,7 @@ const SprintsPage = props => {
             </div>
 
             {tabletMax && (
-              <CreateNewSprint
+              <CreateBtn
                 className={s.CreateNewSprintFixed}
                 onClick={() => toggleModal('createSprint')}
               />
@@ -162,7 +160,7 @@ const SprintsPage = props => {
             {tablet && (
               <div className={s.createSprintWrap}>
                 {tablet && (
-                  <CreateNewSprint
+                  <CreateBtn
                     className={s.CreateNewSprint}
                     onClick={() => toggleModal('createSprint')}
                   />
