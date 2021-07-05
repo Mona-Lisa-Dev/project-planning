@@ -19,6 +19,7 @@ import {
   getSprintByIdError,
 } from './sprints-actions';
 
+import { createTaskSuccess } from 'redux/tasks/tasks-actions';
 import { logoutSuccess } from 'redux/auth/auth-actions';
 
 const sprintsItems = createReducer([], {
@@ -33,6 +34,7 @@ const sprintsItems = createReducer([], {
 const currentSprint = createReducer(null, {
   [getSprintByIdSuccess]: (_, { payload }) => payload,
   [updateSprintSuccess]: (_, { payload }) => payload,
+  // [createTaskSuccess]: (state, { payload }) => payload,
 });
 
 const loading = createReducer(false, {

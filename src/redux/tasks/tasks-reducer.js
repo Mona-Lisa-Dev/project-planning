@@ -24,7 +24,7 @@ import { logoutSuccess } from 'redux/auth/auth-actions';
 
 const tasksItems = createReducer([], {
   [getAllTasksSuccess]: (_, { payload }) => payload,
-  [createTaskSuccess]: (state, { payload }) => [...state, payload],
+  // [createTaskSuccess]: (state, { payload }) => [...state, payload],
   [deleteTaskSuccess]: (state, { payload }) =>
     state.filter(({ id }) => id !== payload),
   [updateTaskSuccess]: (state, { payload }) =>

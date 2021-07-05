@@ -1,4 +1,7 @@
 export const getTasks = state => state.tasks.items;
+
+// export const getTasks = state => state.sprints.currentSprint.days;
+
 export const getCurrentTask = state => state.tasks.currentTask;
 export const getFilter = state => state.tasks.filter;
 export const getLoadingTasks = state => state.tasks.loading;

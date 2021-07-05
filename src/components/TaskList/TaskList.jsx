@@ -12,6 +12,8 @@ const TaskList = ({ currentSprint, tasks }) => {
   const [isVisibleInputFind, setIsVisibleInputFind] = useState(false);
   // const [searchText, setSearchText] = useState('');
 
+  console.log('tasks', tasks);
+
   const filter = useSelector(getFilter);
   const visibleTasks = useSelector(getVisibleTasks);
 
@@ -65,8 +67,13 @@ const TaskList = ({ currentSprint, tasks }) => {
       {tasks.length === 0 ? (
         <p className={styles.taskList}>Create first task</p>
       ) : (
+        // <ul className={styles.taskList}>
+        //   {visibleTasks.map(task => (
+        //     <TaskItem currentSprint={currentSprint} key={task.id} task={task} />
+        //   ))}
+        // </ul>
         <ul className={styles.taskList}>
-          {visibleTasks.map(task => (
+          {tasks.map(task => (
             <TaskItem currentSprint={currentSprint} key={task.id} task={task} />
           ))}
         </ul>
