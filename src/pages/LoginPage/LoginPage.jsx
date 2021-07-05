@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Spinner from 'components/Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import authOperations from 'redux/auth/auth-operations';
-
+import swal from 'sweetalert';
 // Circles -----------------------
 import { useMediaQuery } from '@material-ui/core';
 import { refs } from '../../pages/SprintsPage/refs';
@@ -13,7 +13,7 @@ import { ReactComponent as DeskLeftCircle } from './svg/deskLeftCircle.svg';
 import { ReactComponent as DeskRightCircles } from './svg/deskRightCircles.svg';
 // -------------------------------
 
-import { getLoadingUser } from 'redux/auth/auth-selectors';
+import { getLoadingUser, getErrorLogin } from 'redux/auth/auth-selectors';
 
 import styles from './LoginPage.module.scss';
 
@@ -28,8 +28,18 @@ const LoginPage = () => {
   const [validForm, setValidForm] = useState(false);
 
   const loading = useSelector(getLoadingUser);
-
+  const Error = useSelector(getErrorLogin);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    Error &&
+      swal({
+        text: `${Error}`,
+        icon: 'error',
+        button: { text: 'OK', className: `${styles.swalButton}` },
+      });
+    setValidForm(false);
+  }, [Error]);
 
   useEffect(() => {
     if (emailError || passwordError) {
