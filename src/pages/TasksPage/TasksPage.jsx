@@ -54,9 +54,8 @@ const TasksPage = props => {
   );
   console.log(`arrDate`, arrDate);
 
-
-//   const onClickDay = date => {
-//     currentSprint?.days?.map(
+  //   const onClickDay = date => {
+  //     currentSprint?.days?.map(
 
   const onClickDay = i => {
     const date = arrDate[i < 0 ? 0 : i - 1];
@@ -64,7 +63,6 @@ const TasksPage = props => {
     setCurrentDay(currentDay === 1 ? currentDay : currentDay - 1);
     console.log(`currentDay`, currentDay);
     currentSprint?.days.map(
-
       day => date === day.date && setOneDayTasks(day.tasks),
       // day => {
       //   if (date === day.date) {
@@ -94,13 +92,11 @@ const TasksPage = props => {
     setRenderTasks(false);
   }
 
-
   useEffect(() => {
     dispatch(sprintsOperations.getAllSprints(projectId));
     dispatch(sprintsOperations.getSprintById(projectId, sprintId));
     // dispatch(tasksOperations.getAllTasks(sprintId));
   }, [dispatch, projectId, sprintId]);
-
 
   const handleCloseModal = () => {
     setRenderTasks(true);
@@ -187,12 +183,11 @@ const TasksPage = props => {
 
           <div className={styles.sprintContent}>
             <div className={styles.sprintDate}>
-
-//               <ul>
-//                 {arrDate?.map((day, i) => (
-//                   <li key={day}>
-//                     <button type="button" onClick={() => onClickDay(day)}>
-//                       {i + 1}
+              {/* <ul>
+               {arrDate?.map((day, i) => (
+                 <li key={day}>
+                   <button type="button" onClick={() => onClickDay(day)}>
+                     {i + 1} */}
 
               <ul className={styles.pagination}>
                 {arrDate.map((day, i) => (
@@ -210,7 +205,6 @@ const TasksPage = props => {
                       className={styles.btnBefore}
                     >
                       {'<'}
-
                     </button>
 
                     <p className={styles.currentDay}>{currentDay} / </p>
