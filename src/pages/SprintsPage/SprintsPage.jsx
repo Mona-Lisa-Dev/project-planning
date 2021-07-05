@@ -51,6 +51,7 @@ const SprintsPage = props => {
   }, [Error]);
 
   useEffect(() => {
+    dispatch(projectsOperations.getAllProjects());
     dispatch(projectsOperations.getProjectById(projectId));
     dispatch(sprintsOperations.getAllSprints(projectId));
   }, [dispatch, projectId]);
@@ -103,6 +104,7 @@ const SprintsPage = props => {
             {tablet && (
               <div className={s.CreateNewProjectWrap}>
                 <CreateBtn
+                  title="Create a project"
                   className={s.CreateNewProject}
                   onClick={() => toggleModal('createProject')}
                 />
@@ -136,6 +138,7 @@ const SprintsPage = props => {
                     <h2>{currentProject?.name}</h2>
 
                     <button
+                      title="Edit the name"
                       type="button"
                       className={s.buttonChange}
                       onClick={editNameHandle}
@@ -162,6 +165,7 @@ const SprintsPage = props => {
               <div className={s.createSprintWrap}>
                 {tablet && (
                   <CreateBtn
+                    title="Create a sprint"
                     className={s.CreateNewSprint}
                     onClick={() => toggleModal('createSprint')}
                   />

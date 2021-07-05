@@ -23,7 +23,7 @@ const TasksPage = props => {
   const [showChangeTitleForm, setShowChangeTitleForm] = useState(false);
   const [renderTasks, setRenderTasks] = useState(false);
   const [oneDayTasks, setOneDayTasks] = useState([]);
-
+  const [currentDay, setCurrentDay] = useState(1);
   const { projectId, sprintId } = props.match.params;
   const dispatch = useDispatch();
 
@@ -52,9 +52,19 @@ const TasksPage = props => {
     (acc, day) => [...acc, day.date],
     [],
   );
+  console.log(`arrDate`, arrDate);
 
-  const onClickDay = date => {
-    currentSprint?.days?.map(
+
+//   const onClickDay = date => {
+//     currentSprint?.days?.map(
+
+  const onClickDay = i => {
+    const date = arrDate[i < 0 ? 0 : i - 1];
+    console.log(`date`, date);
+    setCurrentDay(currentDay === 1 ? currentDay : currentDay - 1);
+    console.log(`currentDay`, currentDay);
+    currentSprint?.days.map(
+
       day => date === day.date && setOneDayTasks(day.tasks),
       // day => {
       //   if (date === day.date) {
@@ -62,6 +72,15 @@ const TasksPage = props => {
       //     return setOneDayTasks(day.tasks);
       //   }
       // },
+    );
+  };
+  const onClickNextDay = i => {
+    const date = arrDate[i + 1];
+    console.log(`date`, date);
+    setCurrentDay(currentDay !== arrDate.length ? currentDay + 1 : currentDay);
+    console.log(`currentDay`, currentDay);
+    currentSprint?.days.map(
+      day => date === day.date && setOneDayTasks(day.tasks),
     );
   };
 
@@ -74,6 +93,14 @@ const TasksPage = props => {
     getAllTasksForToday();
     setRenderTasks(false);
   }
+
+
+  useEffect(() => {
+    dispatch(sprintsOperations.getAllSprints(projectId));
+    dispatch(sprintsOperations.getSprintById(projectId, sprintId));
+    // dispatch(tasksOperations.getAllTasks(sprintId));
+  }, [dispatch, projectId, sprintId]);
+
 
   const handleCloseModal = () => {
     setRenderTasks(true);
@@ -160,13 +187,41 @@ const TasksPage = props => {
 
           <div className={styles.sprintContent}>
             <div className={styles.sprintDate}>
-              <ul>
-                {arrDate?.map((day, i) => (
-                  <li key={day}>
-                    <button type="button" onClick={() => onClickDay(day)}>
-                      {i + 1}
+
+//               <ul>
+//                 {arrDate?.map((day, i) => (
+//                   <li key={day}>
+//                     <button type="button" onClick={() => onClickDay(day)}>
+//                       {i + 1}
+
+              <ul className={styles.pagination}>
+                {arrDate.map((day, i) => (
+                  <li
+                    key={day}
+                    className={
+                      currentDay === i + 1
+                        ? styles.paginationItem
+                        : styles.paginationItemNone
+                    }
+                  >
+                    <button
+                      type="button"
+                      onClick={() => onClickDay(i)}
+                      className={styles.btnBefore}
+                    >
+                      {'<'}
+
                     </button>
-                    <p> {day}</p>
+
+                    <p className={styles.currentDay}>{currentDay} / </p>
+                    <p className={styles.totalDay}>{arrDate.length}</p>
+
+                    <button
+                      type="button"
+                      onClick={() => onClickNextDay(i)}
+                      className={styles.btnNext}
+                    >{`>`}</button>
+                    <p className={styles.calendarDay}> {day}</p>
                   </li>
                 ))}
               </ul>
