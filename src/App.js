@@ -17,7 +17,6 @@ import {
 
 import routes from 'routes';
 import './scss/_main.scss';
-import CreateTaskForm from 'components/CreateTaskForm/CreateTaskForm';
 
 const LoginPage = lazy(
   () => import('./pages/LoginPage') /* webpackChunkName: "LoginPage" */,
@@ -46,7 +45,6 @@ const App = () => {
   return (
     <>
       <AppBar />
-      <CreateTaskForm />
 
       <Container>
         <Suspense fallback={<Spinner />}>
