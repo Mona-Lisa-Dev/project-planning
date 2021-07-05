@@ -5,11 +5,9 @@
   width: 282px;
   display: flex;
   flex-wrap: wrap;
-
   padding-top: 36px;
-
+  padding-bottom: 36px;
   margin: 0 auto;
-
 }
 
 .listItem {
@@ -40,18 +38,18 @@
 @media screen and (min-width: $tablet) {
   .listItem {
     &:nth-child(4n + 1) {
-      background: bottom url(./FirstWave.svg) no-repeat;
+      background: bottom url(./Pictures/FirstWave.svg) no-repeat;
     }
 
     &:nth-child(4n + 2) {
-      background: bottom url(./SecondWave.svg) no-repeat;
+      background: bottom url(./Pictures/SecondWave.svg) no-repeat;
     }
 
     &:nth-child(4n + 3) {
-      background: bottom url(./ThirdWave.svg) no-repeat;
+      background: bottom url(./Pictures/ThirdWave.svg) no-repeat;
     }
     &:nth-child(4n) {
-      background: bottom url(./FourthWave.svg) no-repeat;
+      background: bottom url(./Pictures/FourthWave.svg) no-repeat;
     }
     &:nth-child(3n + 1) {
       background-color: $project-purple;
