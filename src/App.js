@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { lazy, Suspense, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -38,9 +39,13 @@ const App = () => {
   const isAuthorized = useSelector(getIsAuthenticated);
   const isSignup = useSelector(getIsSignup);
   const isLoadingUser = useSelector(getStatusLoadingUser);
+  const [load, setLoad] = useState(false);
 
   const dispatch = useDispatch();
-  useEffect(() => dispatch(authOperations.getCurrentUser()), [dispatch]);
+  useEffect(() => {
+    setLoad(true);
+    dispatch(authOperations.getCurrentUser());
+  }, [dispatch]);
 
   return (
     <>
@@ -106,10 +111,9 @@ const App = () => {
               <Redirect to={routes.home} />
             </Switch>
           )}
+          {load && <Footer />}
         </Suspense>
       </Container>
-
-      <Footer />
     </>
   );
 };

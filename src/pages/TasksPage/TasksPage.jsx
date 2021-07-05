@@ -10,10 +10,8 @@ import SideBar from 'components/SideBar';
 import CreateSprint from 'components/CreateSprint';
 import DiagramModal from 'components/Diagram/DiagramModal';
 
-import { getTasks } from 'redux/tasks/tasks-selectors';
 import { getSprints, getCurrentSprint } from 'redux/sprints/sprints-selectors';
 import sprintsOperations from 'redux/sprints/sprints-operations';
-import tasksOperations from 'redux/tasks/tasks-operations';
 
 import styles from './TasksPage.module.scss';
 
@@ -31,7 +29,6 @@ const TasksPage = props => {
 
   const currentSprint = useSelector(getCurrentSprint);
   const sprints = useSelector(getSprints);
-  // const tasks = useSelector(getTasks);
 
   const getAllTasksForToday = () => {
     const { days } = currentSprint;
@@ -39,7 +36,7 @@ const TasksPage = props => {
     const today = new Date();
     const todayFormat = dayjs(today).format('YYYY-MM-DD');
 
-    days.map(day => todayFormat === day.date && setOneDayTasks(day.tasks));
+    days?.map(day => todayFormat === day.date && setOneDayTasks(day.tasks));
     // days.map(day => {
     //   if (todayFormat === day.date) {
     //     console.log('day.date', day.date);
@@ -51,13 +48,13 @@ const TasksPage = props => {
   console.log('oneDayTasks', oneDayTasks);
   // console.log('currentSprint', currentSprint);
 
-  const arrDate = currentSprint?.days.reduce(
+  const arrDate = currentSprint?.days?.reduce(
     (acc, day) => [...acc, day.date],
     [],
   );
 
   const onClickDay = date => {
-    currentSprint?.days.map(
+    currentSprint?.days?.map(
       day => date === day.date && setOneDayTasks(day.tasks),
       // day => {
       //   if (date === day.date) {
@@ -68,21 +65,18 @@ const TasksPage = props => {
     );
   };
 
+  useEffect(() => setRenderTasks(true), []);
   useEffect(() => {
-    setRenderTasks(true);
-  }, []);
+    dispatch(sprintsOperations.getSprintById(projectId, sprintId));
+  }, [dispatch, projectId, sprintId]);
 
   if (renderTasks && currentSprint) {
     getAllTasksForToday();
     setRenderTasks(false);
   }
 
-  useEffect(() => {
-    dispatch(sprintsOperations.getSprintById(projectId, sprintId));
-    // dispatch(tasksOperations.getAllTasks(sprintId));
-  }, [dispatch, projectId, sprintId]);
-
   const handleCloseModal = () => {
+    setRenderTasks(true);
     setShowModalCreateTask(false);
     setShowModalCreateSprint(false);
     setShowModalAnalytics(false);
@@ -167,7 +161,7 @@ const TasksPage = props => {
           <div className={styles.sprintContent}>
             <div className={styles.sprintDate}>
               <ul>
-                {arrDate.map((day, i) => (
+                {arrDate?.map((day, i) => (
                   <li key={day}>
                     <button type="button" onClick={() => onClickDay(day)}>
                       {i + 1}
