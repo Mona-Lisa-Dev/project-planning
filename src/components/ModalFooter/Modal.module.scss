@@ -22,7 +22,7 @@
   .content {
     display: flex;
     justify-content: center;
-    padding: 63px 20px 0;
+    padding: 30px;
     height: 100%;
     background-color: $primaryWhiteColor;
     overflow-y: scroll;
@@ -42,13 +42,11 @@
     @media screen and (min-width: $tablet) {
       margin-left: auto;
       margin-right: auto;
-      padding: 120px 40px 40px;
-      width: 512px;
+      width: 670px;
     }
 
     @media screen and (min-width: $desktop) {
-      padding: 120px 50px 40px;
-      width: 530px;
+      width: 1170px;
       box-shadow: $primaryShadow;
       transition: all 250ms linear;
       transform: scale(1);

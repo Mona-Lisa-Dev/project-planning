@@ -19,9 +19,9 @@ const Footer = () => {
       {showModal && (
         <Modal onCloseModal={toggleModal}>
           {
-            <ul>
+            <ul className={styles.Team_list}>
               {team.map(mate => (
-                <li key={mate.id}>
+                <li key={mate.id} className={styles.Team_item}>
                   <TeamCard team={mate}></TeamCard>
                 </li>
               ))}

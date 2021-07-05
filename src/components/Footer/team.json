@@ -3,7 +3,7 @@
     "id": "1",
     "name": "Elena Tsemko",
     "photo": "",
-    "linkedin": "",
+    "linkedin": "https://www.linkedin.com/in/elena-tsemko/",
     "github": "https://github.com/OlenaTsemko",
     "doing": "Team-lead"
   },
@@ -11,7 +11,7 @@
     "id": "2",
     "name": "Viktoriia Ksenofontova",
     "photo": "",
-    "linkedin": "linkedin.com/in/viktoriia-ksenofontova",
+    "linkedin": "https://www.linkedin.com/in/viktoriia-ksenofontova",
     "github": "https://github.com/Viktoriia-Ksenofontova",
     "doing": "Scrum master"
   },
@@ -19,9 +19,9 @@
     "id": "3",
     "name": "Artem Sergieiev",
     "photo": "",
-    "linkedin": "",
-    "github": "",
-    "doing": ""
+    "linkedin": "https://www.linkedin.com/in/artem-sergieiev/",
+    "github": "https://github.com/ArtemS83",
+    "doing": "-MongoDB -backend -fix bags"
   },
   {
     "id": "4",
@@ -45,7 +45,7 @@
     "photo": "",
     "linkedin": "https://www.linkedin.com/in/ihor-prokopets-652561208",
     "github": "https://github.com/Xoyk23",
-    "doing": "Make projects page,app bar, user menu, private and publick routes components, routing, deleting confirmation."
+    "doing": "Make projects page, app bar, user menu, private and publick routes components, routing, deleting confirmation."
   },
   {
     "id": "7",
@@ -67,9 +67,9 @@
     "id": "9",
     "name": "Olga Tomilko",
     "photo": "",
-    "linkedin": "",
+    "linkedin": "https://www.linkedin.com/in/olga-tomilko",
     "github": "https://github.com/OlgaTomilko",
-    "doing": ""
+    "doing": "Created components ProjectList, ProjectItem, SprintList, developed styles for Footer"
   },
   {
     "id": "10",
@@ -81,18 +81,18 @@
   },
   {
     "id": "11",
-    "name": "Serhii Stanislav",
-    "photo": "",
-    "linkedin": "",
-    "github": "",
-    "doing": ""
-  },
-  {
-    "id": "12",
     "name": "Myroslava Nikolaenko",
     "photo": "",
     "linkedin": "https://www.linkedin.com/in/myroslava-nikolaienko-3686b3211/",
     "github": "https://github.com/Mira1702",
     "doing": "Create component CreateProject (HTML, SCSS, JavaScript, React). Development of Project Presentation"
+  },
+  {
+    "id": "12",
+    "name": "Serhii Stanislav",
+    "photo": "",
+    "linkedin": "",
+    "github": "",
+    "doing": ""
   }
 ]

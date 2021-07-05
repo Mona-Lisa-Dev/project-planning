@@ -1,2 +1,37 @@
 @import '../../scss/vars';
 @import '../../scss/breakpoints';
+
+.card {
+  padding: 10px;
+}
+
+.name {
+  margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.22;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.links {
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1.21;
+  letter-spacing: 0.04em;
+}
+
+.doing {
+  margin-bottom: 16px;
+
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.21;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+}
+
+.photo {
+  margin-bottom: 30px;
+}
