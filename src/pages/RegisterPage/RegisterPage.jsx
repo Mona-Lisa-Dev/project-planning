@@ -1,14 +1,19 @@
 import { useState, useEffect } from 'react';
-
 import Spinner from 'components/Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
-
 import authOperations from 'redux/auth/auth-operations';
 
 import { getLoadingUser, getErrorSignup } from 'redux/auth/auth-selectors';
-
 import styles from './RegisterPage.module.scss';
 import swal from 'sweetalert';
+
+import { useMediaQuery } from '@material-ui/core';
+import { refs } from '../../pages/SprintsPage/refs';
+import { ReactComponent as TabletLeftCircles } from '../LoginPage/svg/tabletLeftCircles.svg';
+import { ReactComponent as TabletRightCircles } from '../LoginPage/svg/tabletRightCircles.svg';
+import { ReactComponent as DeskLeftCircles } from '../LoginPage/svg/deskLeftCircles.svg';
+import { ReactComponent as DeskLeftCircle } from '../LoginPage/svg/deskLeftCircle.svg';
+import { ReactComponent as DeskRightCircles } from '../LoginPage/svg/deskRightCircles.svg';
 
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
@@ -46,6 +51,19 @@ const RegisterPage = () => {
     }
     setValidForm(true);
   }, [emailError, passwordError, validPassword, confirmPasswordError]);
+
+  // ------- useMediaQuery -------
+  const handleMixWidth = (minWidth, maxWidth) => {
+    return `(min-width:${minWidth}px) and (max-width:${maxWidth}px) `;
+  };
+  const handleMinWidth = width => {
+    return `(min-width:${width}px) `;
+  };
+  const desktopMix = useMediaQuery(
+    handleMixWidth(refs.tablet, refs.desktopMax),
+  );
+  const desktop = useMediaQuery(handleMinWidth(refs.desktop));
+  // ----- End useMediaQuery -----
 
   const handleChange = event => {
     const { name, value } = event.currentTarget;
@@ -125,94 +143,209 @@ const RegisterPage = () => {
   };
 
   return (
-    <>
-      <div className={styles.backgroundMain}>
-        <div className={styles.registration}>
-          <div className={`${styles.general} ${styles.ellipse1}`}></div>
-          <div className={`${styles.general} ${styles.ellipse2}`}></div>
-          <div className={`${styles.general} ${styles.ellipse3}`}></div>
-          <div className={`${styles.general} ${styles.ellipse4}`}></div>
-          <div className={`${styles.general} ${styles.ellipse5}`}></div>
-          <div className={`${styles.general} ${styles.ellipse6}`}></div>
-          <div className={`${styles.general} ${styles.ellipse7}`}></div>
-          <div className={`${styles.general} ${styles.ellipse8}`}></div>
-          <div className={`${styles.general} ${styles.ellipse9}`}></div>
-          <div className={`${styles.general} ${styles.ellipse10}`}></div>
-        </div>
+    <div className={styles.backgroundMain}>
+      <div className={styles.circlesWrap}>
+        {desktopMix && (
+          <div className={styles.tabletCircles}>
+            <div className={styles.tabletLeftSide}>
+              <TabletLeftCircles />
+            </div>
+            <div className={styles.tabletRightSide}>
+              <TabletRightCircles className={styles.tabletRightCircles} />
+            </div>
+          </div>
+        )}
+
+        {desktop && (
+          <div className={styles.deskCircles}>
+            <div className={styles.deskLeftSide}>
+              <DeskLeftCircles />
+            </div>
+            <div className={styles.deskRightSide}>
+              <DeskRightCircles className={styles.rightCircles} />
+            </div>
+          </div>
+        )}
       </div>
 
-      <form
-        onSubmit={handleFormSubmit}
-        className={styles.form}
-        autoComplete="off"
-      >
-        <h1 className={styles.title}>Registration</h1>
-        <label className={styles.labelForm}>
-          <input
-            className={styles.inputForm}
-            placeholder=" "
-            type={'email'}
-            name={'email'}
-            onChange={handleChange}
-            onBlur={blurHandler}
-            value={email}
-            required
-          />
-          <span className={styles.nameInput}>E-mail</span>
-          {emailDirty && emailError && (
-            <p className={styles.error}>{emailError}</p>
+      <div className={styles.formWrap}>
+        <div className={styles.circleWrap}>
+          {desktop && (
+            <div className={styles.deskCircles}>
+              <div className={styles.deskLeftSide}>
+                <DeskLeftCircle className={styles.DeskLeftCircle} />
+              </div>
+            </div>
           )}
-        </label>
-
-        <label className={styles.labelForm}>
-          <input
-            className={styles.inputForm}
-            placeholder=" "
-            type={'password'}
-            name={'password'}
-            onChange={handleChange}
-            onBlur={blurHandler}
-            value={password}
-            required
-          />
-          <span className={styles.nameInput}>Password</span>
-          {passwordDirty && passwordError && (
-            <p className={styles.error}>{passwordError}</p>
-          )}
-        </label>
-
-        <label className={styles.labelForm}>
-          <input
-            className={styles.inputForm}
-            placeholder=" "
-            type={'password'}
-            name={'confirmPassword'}
-            onChange={handleChange}
-            onBlur={blurHandler}
-            value={confirmPassword}
-            required
-          />
-          <span className={styles.nameInput}>Repeat password</span>
-          {confirmPasswordDirty && confirmPasswordError && validPassword && (
-            <p className={styles.error}>Passwords do not match</p>
-          )}
-        </label>
-
-        <button disabled={!validForm} className={styles.btnReg} type={'submit'}>
-          Register
-        </button>
-
-        {loading && <Spinner />}
-
-        <div className={styles.login}>
-          <p className={styles.question}> Do you have an account?</p>
-          <a className={styles.auth} href="/login">
-            Log in
-          </a>
         </div>
-      </form>
-    </>
+
+        <form
+          onSubmit={handleFormSubmit}
+          className={styles.form}
+          autoComplete="off"
+        >
+          <h1 className={styles.title}>Registration</h1>
+          <label className={styles.labelForm}>
+            <input
+              className={styles.inputForm}
+              placeholder=" "
+              type={'email'}
+              name={'email'}
+              onChange={handleChange}
+              onBlur={blurHandler}
+              value={email}
+              required
+            />
+            <span className={styles.nameInput}>E-mail</span>
+            {emailDirty && emailError && (
+              <p className={styles.error}>{emailError}</p>
+            )}
+          </label>
+
+          <label className={styles.labelForm}>
+            <input
+              className={styles.inputForm}
+              placeholder=" "
+              type={'password'}
+              name={'password'}
+              onChange={handleChange}
+              onBlur={blurHandler}
+              value={password}
+              required
+            />
+            <span className={styles.nameInput}>Password</span>
+            {passwordDirty && passwordError && (
+              <p className={styles.error}>{passwordError}</p>
+            )}
+          </label>
+
+          <label className={styles.labelForm}>
+            <input
+              className={styles.inputForm}
+              placeholder=" "
+              type={'password'}
+              name={'confirmPassword'}
+              onChange={handleChange}
+              onBlur={blurHandler}
+              value={confirmPassword}
+              required
+            />
+            <span className={styles.nameInput}>Repeat password</span>
+            {confirmPasswordDirty && confirmPasswordError && validPassword && (
+              <p className={styles.error}>Passwords do not match</p>
+            )}
+          </label>
+
+          <button
+            disabled={!validForm}
+            className={styles.btnReg}
+            type={'submit'}
+          >
+            Register
+          </button>
+
+          {loading && <Spinner />}
+
+          <div className={styles.login}>
+            <p className={styles.question}> Do you have an account?</p>
+            <a className={styles.auth} href="/login">
+              Log in
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
   );
+
+  // return (
+  //   <>
+  //     <div className={styles.backgroundMain}>
+  //       <div className={styles.registration}>
+  //         <div className={`${styles.general} ${styles.ellipse1}`}></div>
+  //         <div className={`${styles.general} ${styles.ellipse2}`}></div>
+  //         <div className={`${styles.general} ${styles.ellipse3}`}></div>
+  //         <div className={`${styles.general} ${styles.ellipse4}`}></div>
+  //         <div className={`${styles.general} ${styles.ellipse5}`}></div>
+  //         <div className={`${styles.general} ${styles.ellipse6}`}></div>
+  //         <div className={`${styles.general} ${styles.ellipse7}`}></div>
+  //         <div className={`${styles.general} ${styles.ellipse8}`}></div>
+  //         <div className={`${styles.general} ${styles.ellipse9}`}></div>
+  //         <div className={`${styles.general} ${styles.ellipse10}`}></div>
+  //       </div>
+  //     </div>
+
+  //     <form
+  //       onSubmit={handleFormSubmit}
+  //       className={styles.form}
+  //       autoComplete="off"
+  //     >
+  //       <h1 className={styles.title}>Registration</h1>
+  //       <label className={styles.labelForm}>
+  //         <input
+  //           className={styles.inputForm}
+  //           placeholder=" "
+  //           type={'email'}
+  //           name={'email'}
+  //           onChange={handleChange}
+  //           onBlur={blurHandler}
+  //           value={email}
+  //           required
+  //         />
+  //         <span className={styles.nameInput}>E-mail</span>
+  //         {emailDirty && emailError && (
+  //           <p className={styles.error}>{emailError}</p>
+  //         )}
+  //       </label>
+
+  //       <label className={styles.labelForm}>
+  //         <input
+  //           className={styles.inputForm}
+  //           placeholder=" "
+  //           type={'password'}
+  //           name={'password'}
+  //           onChange={handleChange}
+  //           onBlur={blurHandler}
+  //           value={password}
+  //           required
+  //         />
+  //         <span className={styles.nameInput}>Password</span>
+  //         {passwordDirty && passwordError && (
+  //           <p className={styles.error}>{passwordError}</p>
+  //         )}
+  //       </label>
+
+  //       <label className={styles.labelForm}>
+  //         <input
+  //           className={styles.inputForm}
+  //           placeholder=" "
+  //           type={'password'}
+  //           name={'confirmPassword'}
+  //           onChange={handleChange}
+  //           onBlur={blurHandler}
+  //           value={confirmPassword}
+  //           required
+  //         />
+  //         <span className={styles.nameInput}>Repeat password</span>
+  //         {confirmPasswordDirty && confirmPasswordError && validPassword && (
+  //           <p className={styles.error}>Passwords do not match</p>
+  //         )}
+  //       </label>
+
+  //       <button disabled={!validForm} className={styles.btnReg} type={'submit'}>
+  //         Register
+  //       </button>
+
+  //       {loading && <Spinner />}
+
+  //       <div className={styles.login}>
+  //         <p className={styles.question}> Do you have an account?</p>
+  //         <a className={styles.auth} href="/login">
+  //           Log in
+  //         </a>
+  //       </div>
+  //     </form>
+  //   </>
+  // );
 };
 
 export default RegisterPage;
