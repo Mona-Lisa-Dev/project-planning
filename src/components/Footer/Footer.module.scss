@@ -3,10 +3,13 @@
 .Footer {
   display: flex;
   justify-content: center;
+  margin-top: 40px;
   background-color: $main-background;
   border-top: $main-border;
   padding-top: 25px;
   padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .Footer_text {
@@ -16,4 +19,5 @@
 
 .Footer_link {
   border-bottom: 1px solid $text-light;
+  cursor: pointer;
 }

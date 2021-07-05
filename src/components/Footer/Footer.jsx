@@ -1,13 +1,36 @@
+import { useState } from 'react';
+import Modal from 'components/ModalFooter';
 import styles from './Footer.module.scss';
+import team from './team.json';
+import TeamCard from 'components/TeamCard';
 
-export default function Footer() {
+const Footer = () => {
+  const [showModal, setShowModal] = useState(false);
+  const toggleModal = () => setShowModal(!showModal);
+
   return (
     <footer className={styles.Footer}>
       <span className={styles.Footer_text}>
         © 2021 | All Rights Reserved | Developed by
       </span>
-      {/* <здесь будет открытие модалки, пока я обернула в span */}
-      <span className={styles.Footer_link}> GoIT Students</span>
+      <a className={styles.Footer_link} onClick={toggleModal}>
+        GoIT Students
+      </a>
+      {showModal && (
+        <Modal onCloseModal={toggleModal}>
+          {
+            <ul>
+              {team.map(mate => (
+                <li key={mate.id}>
+                  <TeamCard team={mate}></TeamCard>
+                </li>
+              ))}
+            </ul>
+          }
+        </Modal>
+      )}
     </footer>
   );
-}
+};
+
+export default Footer;
