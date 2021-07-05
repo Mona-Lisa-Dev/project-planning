@@ -6,19 +6,33 @@ import CreateProject from 'components/CreateProject';
 import ProjectList from 'components/ProjectList';
 import projectsOperations from 'redux/projects/projects-operations';
 
-import { getLoadingProjects } from 'redux/projects/projects-selectors';
+import {
+  getLoadingProjects,
+  getError,
+} from 'redux/projects/projects-selectors';
 
 import styles from './ProjectsPage.module.scss';
 import Spinner from 'components/Loader/Loader';
+import swal from 'sweetalert';
 
 const ProjectsPage = () => {
   const [showModal, setShowModal] = useState(false);
   const loading = useSelector(getLoadingProjects);
+  const Error = useSelector(getError);
 
   const dispatch = useDispatch();
   useEffect(() => dispatch(projectsOperations.getAllProjects()), [dispatch]);
 
   const toggleModal = () => setShowModal(!showModal);
+
+  useEffect(() => {
+    Error &&
+      swal({
+        text: `${Error}`,
+        icon: 'error',
+        button: { text: 'OK', className: `${styles.swalButton}` },
+      });
+  }, [Error]);
 
   return (
     <>

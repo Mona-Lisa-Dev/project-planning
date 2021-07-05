@@ -2,8 +2,12 @@ import Spinner from 'components/Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 
 import authOperations from 'redux/auth/auth-operations';
-import { getUserEmail, getLoadingUser } from 'redux/auth/auth-selectors';
-
+import {
+  getUserEmail,
+  getLoadingUser,
+  getError,
+} from 'redux/auth/auth-selectors';
+import swal from 'sweetalert';
 // import exit from './images/exitIcon.svg';
 import styles from './UserBar.module.scss';
 
@@ -11,8 +15,16 @@ export default function UserBar() {
   const dispatch = useDispatch();
   const email = useSelector(getUserEmail);
   const loading = useSelector(getLoadingUser);
-
-  const onLogout = () => dispatch(authOperations.logout());
+  const Error = useSelector(getError);
+  const onLogout = () => {
+    dispatch(authOperations.logout());
+    Error &&
+      swal({
+        text: `${Error}`,
+        icon: 'error',
+        button: { text: 'OK', className: `${styles.swalButton}` },
+      });
+  };
 
   return (
     <div className={styles.Cont}>
