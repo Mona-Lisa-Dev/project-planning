@@ -21,7 +21,7 @@ const TasksPage = props => {
   const [showModalCreateSprint, setShowModalCreateSprint] = useState(false);
   const [showModalAnalytics, setShowModalAnalytics] = useState(false);
   const [showChangeTitleForm, setShowChangeTitleForm] = useState(false);
-  const [renderTasks, setRenderTasks] = useState(false);
+  // const [renderTasks, setRenderTasks] = useState(false);
   const [oneDayTasks, setOneDayTasks] = useState([]);
   const [currentDay, setCurrentDay] = useState(1);
   const { projectId, sprintId } = props.match.params;
@@ -30,20 +30,25 @@ const TasksPage = props => {
   const currentSprint = useSelector(getCurrentSprint);
   const sprints = useSelector(getSprints);
 
-  const getAllTasksForToday = () => {
-    const { days } = currentSprint;
+  // const getAllTasksForToday = () => {
+  // const { days } = currentSprint;
+  // const today = new Date();
+  // const todayFormat = dayjs(today).format('YYYY-MM-DD');
+  // days?.map(day => todayFormat === day.date && setOneDayTasks(day.tasks));
+  // days.map(day => {
+  //   if (todayFormat === day.date) {
+  //     console.log('day.date', day.date);
+  //     return setOneDayTasks(day.tasks);
+  //   }
+  // });
+  // };
 
-    const today = new Date();
-    const todayFormat = dayjs(today).format('YYYY-MM-DD');
-
-    days?.map(day => todayFormat === day.date && setOneDayTasks(day.tasks));
-    // days.map(day => {
-    //   if (todayFormat === day.date) {
-    //     console.log('day.date', day.date);
-    //     return setOneDayTasks(day.tasks);
-    //   }
-    // });
-  };
+  // useEffect(() => {
+  //   const { days } = currentSprint;
+  //   const today = new Date();
+  //   const todayFormat = dayjs(today).format('YYYY-MM-DD');
+  //   days?.map(day => todayFormat === day.date && setOneDayTasks(day.tasks));
+  // }, [currentSprint]);
 
   console.log('oneDayTasks', oneDayTasks);
   // console.log('currentSprint', currentSprint);
@@ -54,9 +59,8 @@ const TasksPage = props => {
   );
   console.log(`arrDate`, arrDate);
 
-  //   const onClickDay = date => {
-  //     currentSprint?.days?.map(
-
+  // const onClickDay = date => {
+  // currentSprint?.days?.map(
   const onClickDay = i => {
     const date = arrDate[i < 0 ? 0 : i - 1];
     console.log(`date`, date);
@@ -82,24 +86,30 @@ const TasksPage = props => {
     );
   };
 
-  useEffect(() => setRenderTasks(true), []);
   useEffect(() => {
-    dispatch(sprintsOperations.getSprintById(projectId, sprintId));
-  }, [dispatch, projectId, sprintId]);
+    // setRenderTasks(true);
 
-  if (renderTasks && currentSprint) {
-    getAllTasksForToday();
-    setRenderTasks(false);
-  }
+    currentSprint?.days?.map(
+      day =>
+        dayjs(new Date()).format('YYYY-MM-DD') === day.date &&
+        setOneDayTasks(day.tasks),
+    );
+
+    // return () => setOneDayTasks([]);
+  }, [currentSprint?.days]);
 
   useEffect(() => {
     dispatch(sprintsOperations.getAllSprints(projectId));
     dispatch(sprintsOperations.getSprintById(projectId, sprintId));
-    // dispatch(tasksOperations.getAllTasks(sprintId));
   }, [dispatch, projectId, sprintId]);
 
+  // if (renderTasks && currentSprint) {
+  //   getAllTasksForToday();
+  //   setRenderTasks(false);
+  // }
+
   const handleCloseModal = () => {
-    setRenderTasks(true);
+    // setRenderTasks(true);
     setShowModalCreateTask(false);
     setShowModalCreateSprint(false);
     setShowModalAnalytics(false);
@@ -184,10 +194,14 @@ const TasksPage = props => {
           <div className={styles.sprintContent}>
             <div className={styles.sprintDate}>
               {/* <ul>
-               {arrDate?.map((day, i) => (
-                 <li key={day}>
-                   <button type="button" onClick={() => onClickDay(day)}>
-                     {i + 1} */}
+                {arrDate?.map((day, i) => (
+                  <li key={day}>
+                    <button type="button" onClick={() => onClickDay(day)}>
+                      {i + 1}
+                    </button>
+                  </li>
+                ))}
+              </ul> */}
 
               <ul className={styles.pagination}>
                 {arrDate.map((day, i) => (

@@ -29,12 +29,14 @@ const sprintsItems = createReducer([], {
     state.filter(({ id }) => id !== payload),
   [updateSprintSuccess]: (state, { payload }) =>
     state.map(el => (el.id === payload.id ? { ...payload } : el)),
+
+  [logoutSuccess]: () => [],
 });
 
 const currentSprint = createReducer(null, {
   [getSprintByIdSuccess]: (_, { payload }) => payload,
   [updateSprintSuccess]: (_, { payload }) => payload,
-  [createTaskSuccess]: (state, { payload }) => [...state, payload],
+  // [createTaskSuccess]: (state, { payload }) => [...state, payload],
 });
 
 const loading = createReducer(false, {

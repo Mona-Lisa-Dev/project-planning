@@ -37,6 +37,7 @@ const projectItems = createReducer([], {
     state.filter(({ id }) => id !== payload),
   [updateProjectSuccess]: (state, { payload }) =>
     state.map(el => (el.id === payload.id ? { ...payload } : el)),
+
   [logoutSuccess]: () => [],
 });
 

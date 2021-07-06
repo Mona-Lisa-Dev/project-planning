@@ -111,9 +111,9 @@ const App = () => {
               <Redirect to={routes.home} />
             </Switch>
           )}
-          {load && <Footer />}
         </Suspense>
       </Container>
+      {load && <Footer />}
     </>
   );
 };
