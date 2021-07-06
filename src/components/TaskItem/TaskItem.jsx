@@ -12,10 +12,20 @@ import sprintsOperations from 'redux/sprints/sprints-operations';
 import ButtonDelete from '../ButtonDelete';
 import styles from './TaskItem.module.scss';
 
-const TaskItem = ({ currentSprint, task }) => {
-  const { id, name, scheduledTime, spentHours = 0, totalTime = 0 } = task;
+const TaskItem = ({ currentDate, currentSprint, task }) => {
+  const {
+    id,
+    name,
+    project,
+    sprint,
+    scheduledTime,
+    spenHours = 0,
+    totalTime = 0,
+  } = task;
 
-  const [queryCustomTime, setQueryCustomTime] = useState(Number(spentHours));
+  console.log('currentDate', currentDate);
+
+  const [queryCustomTime, setQueryCustomTime] = useState(Number(spenHours));
   const [queryTotalTime, setQueryTotalTime] = useState(Number(totalTime));
 
   const dispatch = useDispatch();
@@ -47,7 +57,16 @@ const TaskItem = ({ currentSprint, task }) => {
     dispatch(tasksOperations.deleteTask(currentSprint.id, id));
 
   //TODO функция отправляет запрос на бэк для сохранения часов
-  const saveCustomTime = () => {};
+  const saveCustomTime = () => {
+    const payload = {
+      projectId: project,
+      sprintId: sprint,
+      taskId: id,
+      day: currentDate,
+      value: queryCustomTime,
+    };
+    dispatch(tasksOperations.updateTask(payload));
+  };
 
   const handleClick = () => {
     confirmAlert({
@@ -93,6 +112,7 @@ const TaskItem = ({ currentSprint, task }) => {
         <input
           type="text"
           value={queryCustomTime}
+          onBlur={saveCustomTime}
           onChange={handleInputChange}
           className={styles.inputTime}
         />

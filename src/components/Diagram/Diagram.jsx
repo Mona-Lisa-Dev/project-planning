@@ -3,8 +3,11 @@ import s from './Diagram.module.scss';
 import { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 
-const Diagram = () => {
+const Diagram = (sprint, arrDate) => {
   const [chartData, setChartData] = useState({});
+
+  const { startDate, endDate } = sprint.sprint;
+  console.log('sprint', sprint);
 
   useEffect(() => {
     // получаем даты
@@ -28,7 +31,7 @@ const Diagram = () => {
         );
       }
     };
-    datesRange('2021-06-26', '2021-07-08');
+    datesRange(startDate, endDate);
 
     // cоздаем график
     const chart = () => {

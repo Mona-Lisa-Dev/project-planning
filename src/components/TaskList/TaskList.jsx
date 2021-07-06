@@ -6,7 +6,7 @@ import * as tasksActions from 'redux/tasks/tasks-actions';
 
 import styles from './TaskList.module.scss';
 
-const TaskList = ({ currentSprint, tasks }) => {
+const TaskList = ({ currentDate, currentSprint, tasks }) => {
   const [visibleTasks, setVisibleTasks] = useState([]);
   const [isVisibleInputFind, setIsVisibleInputFind] = useState(false);
   const [searchText, setSearchText] = useState('');
@@ -68,7 +68,12 @@ const TaskList = ({ currentSprint, tasks }) => {
       ) : (
         <ul className={styles.taskList}>
           {visibleTasks.map(task => (
-            <TaskItem currentSprint={currentSprint} key={task.id} task={task} />
+            <TaskItem
+              currentDate={currentDate}
+              currentSprint={currentSprint}
+              key={task.id}
+              task={task}
+            />
           ))}
         </ul>
       )}
