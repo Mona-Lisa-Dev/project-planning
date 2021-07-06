@@ -19,13 +19,16 @@ const Footer = () => {
       {showModal && (
         <Modal onCloseModal={toggleModal}>
           {
-            <ul className={styles.Team_list}>
-              {team.map(mate => (
-                <li key={mate.id} className={styles.Team_item}>
-                  <TeamCard team={mate}></TeamCard>
-                </li>
-              ))}
-            </ul>
+            <div>
+              <h2 className={styles.Team_title}> Our team</h2>
+              <ul className={styles.Team_list}>
+                {team.map(mate => (
+                  <li key={mate.id} className={styles.Team_item}>
+                    <TeamCard team={mate}></TeamCard>
+                  </li>
+                ))}
+              </ul>
+            </div>
           }
         </Modal>
       )}

@@ -36,6 +36,8 @@
 }
 
 .Team_item {
+  background-color: $form-reg-background;
+  border-radius: 5px;
   -webkit-box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.2),
     0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12);
 
@@ -52,6 +54,7 @@
     & {
       width: calc((100% - 30px) / 2);
       margin-right: 30px;
+      margin-bottom: 30px;
 
       &:nth-child(2n) {
         margin-right: 0;
@@ -72,6 +75,29 @@
 
     &:not(:nth-last-child(-n + 4)) {
       margin-bottom: 30px;
+    }
+
+    &:focus,
+    &:hover {
+      box-shadow: 0px 3px 3px 0px $main-orange;
+    }
+  }
+}
+
+.Team_title {
+  margin-bottom: 30px;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.23;
+
+  text-align: center;
+  letter-spacing: 0.04em;
+
+  @media screen and (min-width: $tablet) {
+    & {
+      margin-bottom: 36px;
+      font-size: 36px;
+      line-height: 1.22;
     }
   }
 }
