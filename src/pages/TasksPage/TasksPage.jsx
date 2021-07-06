@@ -21,7 +21,7 @@ const TasksPage = props => {
   const [showModalCreateSprint, setShowModalCreateSprint] = useState(false);
   const [showModalAnalytics, setShowModalAnalytics] = useState(false);
   const [showChangeTitleForm, setShowChangeTitleForm] = useState(false);
-  // const [renderTasks, setRenderTasks] = useState(false);
+
   const [oneDayTasks, setOneDayTasks] = useState([]);
   const [currentDay, setCurrentDay] = useState(1);
   const [currentDate, setCurrentDate] = useState('');

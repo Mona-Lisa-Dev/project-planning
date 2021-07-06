@@ -16,6 +16,9 @@ import {
   getTaskByIdRequest,
   getTaskByIdSuccess,
   getTaskByIdError,
+  getTasksByDayRequest,
+  getTasksByDaySuccess,
+  getTasksByDayError,
 } from './tasks-actions';
 
 const getAllTasks = sprintId => async dispatch => {
@@ -75,7 +78,7 @@ const deleteTask = (sprintId, taskId) => async dispatch => {
 };
 
 const updateTask = payload => async dispatch => {
-  const { projectId, sprintId, taskId, day, value } = payload;
+  const { sprintId, taskId, day, value } = payload;
 
   dispatch(updateTaskRequest());
 
@@ -83,13 +86,28 @@ const updateTask = payload => async dispatch => {
     const {
       data: { data },
     } = await axios.patch(
-      `/tasks/${projectId}/${sprintId}/${taskId}/day=${day}/value=${value}`,
+      `/tasks/${sprintId}/${taskId}/day=${day}/value=${value}`,
     );
     dispatch(updateTaskSuccess(data.task));
 
     return data.task;
   } catch (error) {
     dispatch(updateTaskError(error.message));
+  }
+};
+
+const getTasksByDay = (sprintId, day) => async dispatch => {
+  dispatch(getTasksByDayRequest());
+
+  try {
+    const {
+      data: { data },
+    } = await axios.get(`/tasks/${sprintId}/byday=${day}`);
+    dispatch(getTasksByDaySuccess(data.task));
+
+    return data.task;
+  } catch (error) {
+    dispatch(getTasksByDayError(error.message));
   }
 };
 
@@ -100,4 +118,5 @@ export default {
   createTask,
   deleteTask,
   updateTask,
+  getTasksByDay,
 };

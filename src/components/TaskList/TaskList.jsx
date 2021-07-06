@@ -70,8 +70,8 @@ const TaskList = ({ currentDate, currentSprint, tasks }) => {
         <ul className={styles.taskList}>
           {visibleTasks.map(task => (
             <TaskItem
-              currentDate={currentDate}
-              currentSprint={currentSprint}
+              // currentDate={currentDate}
+              // currentSprint={currentSprint}
               key={task.id}
               task={task}
             />
