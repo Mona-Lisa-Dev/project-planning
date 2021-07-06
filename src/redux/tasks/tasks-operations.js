@@ -75,7 +75,7 @@ const deleteTask = (sprintId, taskId) => async dispatch => {
 };
 
 const updateTask = payload => async dispatch => {
-  const { sprintId, taskId, day, value } = payload;
+  const { projectId, sprintId, taskId, day, value } = payload;
 
   dispatch(updateTaskRequest());
 
@@ -83,7 +83,7 @@ const updateTask = payload => async dispatch => {
     const {
       data: { data },
     } = await axios.patch(
-      `/tasks/${sprintId}/${taskId}/day=${day}/value=${value}`,
+      `/tasks/${projectId}/${sprintId}/${taskId}/day=${day}/value=${value}`,
     );
     dispatch(updateTaskSuccess(data.task));
 

@@ -59,15 +59,20 @@ const TasksPage = props => {
   );
   console.log(`arrDate`, arrDate);
 
+  const [currentDate, setCurrentDate] = useState('');
+
   // const onClickDay = date => {
   // currentSprint?.days?.map(
   const onClickDay = i => {
     const date = arrDate[i < 0 ? 0 : i - 1];
-    console.log(`date`, date);
+    // console.log(`onClickdate`, date);
     setCurrentDay(currentDay === 1 ? currentDay : currentDay - 1);
     console.log(`currentDay`, currentDay);
     currentSprint?.days.map(
-      day => date === day.date && setOneDayTasks(day.tasks),
+      day => {
+        date === day.date && setOneDayTasks(day.tasks);
+        date === day.date && setCurrentDate(day.date);
+      },
       // day => {
       //   if (date === day.date) {
       //     console.log('day.date', day.date);
@@ -78,22 +83,25 @@ const TasksPage = props => {
   };
   const onClickNextDay = i => {
     const date = arrDate[i + 1];
-    console.log(`date`, date);
+    // console.log(`nextdate`, date);
     setCurrentDay(currentDay !== arrDate.length ? currentDay + 1 : currentDay);
+
     console.log(`currentDay`, currentDay);
-    currentSprint?.days.map(
-      day => date === day.date && setOneDayTasks(day.tasks),
-    );
+    currentSprint?.days.map(day => {
+      date === day.date && setOneDayTasks(day.tasks);
+      date === day.date && setCurrentDate(day.date);
+    });
   };
 
   useEffect(() => {
     // setRenderTasks(true);
 
-    currentSprint?.days?.map(
-      day =>
-        dayjs(new Date()).format('YYYY-MM-DD') === day.date &&
-        setOneDayTasks(day.tasks),
-    );
+    currentSprint?.days?.map(day => {
+      if (dayjs(new Date()).format('YYYY-MM-DD') === day.date) {
+        setOneDayTasks(day.tasks);
+        setCurrentDate(day.date);
+      }
+    });
 
     // return () => setOneDayTasks([]);
   }, [currentSprint?.days]);
@@ -229,6 +237,7 @@ const TasksPage = props => {
                       onClick={() => onClickNextDay(i)}
                       className={styles.btnNext}
                     >{`>`}</button>
+
                     <p className={styles.calendarDay}> {day}</p>
                   </li>
                 ))}
@@ -286,7 +295,11 @@ const TasksPage = props => {
                 onClick={openModalAnalytics}
               ></button>
             )}
-            <TaskList currentSprint={currentSprint} tasks={oneDayTasks} />
+            <TaskList
+              currentDate={currentDate}
+              currentSprint={currentSprint}
+              tasks={oneDayTasks}
+            />
           </div>
         </main>
 
@@ -307,7 +320,13 @@ const TasksPage = props => {
             />
           </Modal>
         )}
-        {showModalAnalytics && <DiagramModal onCloseModal={handleCloseModal} />}
+        {showModalAnalytics && (
+          <DiagramModal
+            sprint={currentSprint}
+            arrDate={arrDate}
+            onCloseModal={handleCloseModal}
+          />
+        )}
       </>
     )
   );
