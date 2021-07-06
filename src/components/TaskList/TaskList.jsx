@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import TaskItem from '../TaskItem';
@@ -35,6 +35,7 @@ const TaskList = ({ currentDate, currentSprint, tasks }) => {
 
   useEffect(() => {
     setVisibleTasks(tasks);
+    console.log(`visible tasks`, visibleTasks);
   }, [tasks]);
 
   return (

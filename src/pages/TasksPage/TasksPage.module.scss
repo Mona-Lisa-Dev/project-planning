@@ -92,32 +92,6 @@ main {
   color: #181c27;
 }
 
-.btnCreateSprint {
-  position: relative;
-  margin: 40px 0 0px 60px;
-  cursor: pointer;
-  border: none;
-  width: 44px;
-  height: 44px;
-  background: url(./svg/plus.svg) no-repeat;
-  box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
-  border-radius: 25px;
-  transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
-  &::after {
-    position: absolute;
-    width: 160px;
-    top: 60px;
-    left: -60px;
-    content: 'Create a sprint';
-  }
-  &:focus,
-  &:hover {
-    outline: none;
-    box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
-    transform: scale(1.15);
-  }
-}
-
 // Content
 .sprintContent {
   position: relative;
@@ -348,7 +322,31 @@ main {
     }
   }
 }
-
+.btnCreateSprint {
+  position: relative;
+  margin: 40px 0 0px 60px;
+  cursor: pointer;
+  border: none;
+  width: 44px;
+  height: 44px;
+  background: url(./svg/plus.svg) no-repeat;
+  box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+  border-radius: 25px;
+  transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  &::after {
+    position: absolute;
+    width: 160px;
+    top: 60px;
+    left: -60px;
+    content: 'Create a sprint';
+  }
+  &:focus,
+  &:hover {
+    outline: none;
+    box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+    transform: scale(1.15);
+  }
+}
 .btnOpenAnalytics {
   position: absolute;
   z-index: 10;

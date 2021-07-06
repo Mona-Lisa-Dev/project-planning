@@ -5,7 +5,7 @@ import { confirmAlert } from 'react-confirm-alert';
 
 import '../ButtonDeleteProject/react-confirm-alert.scss';
 
-import { getCurrentTask } from 'redux/tasks/tasks-selectors';
+// import { getCurrentTask } from 'redux/tasks/tasks-selectors';
 import { getUpgrateRequire } from 'redux/sprints/sprints-selectors';
 import tasksOperations from 'redux/tasks/tasks-operations';
 import sprintsOperations from 'redux/sprints/sprints-operations';
@@ -23,10 +23,10 @@ const TaskItem = ({ currentDate, currentSprint, task }) => {
     totalTime = 0,
   } = task;
 
-  console.log('currentDate', currentDate);
+  // console.log('currentDate', currentDate);
 
-  const [queryCustomTime, setQueryCustomTime] = useState(Number(spenHours));
-  const [queryTotalTime, setQueryTotalTime] = useState(Number(totalTime));
+  const [queryCustomTime, setQueryCustomTime] = useState(0);
+  const [queryTotalTime, setQueryTotalTime] = useState(totalTime);
 
   const dispatch = useDispatch();
 
@@ -42,15 +42,17 @@ const TaskItem = ({ currentDate, currentSprint, task }) => {
       );
   }, [upgrateRequire]);
 
-  // const currentTask = useSelector(getCurrentTask);
-
-  // console.log('currentSprint', currentSprint);
-  // console.log('currentTask', currentTask);
-  // console.log('task', task);
+  useEffect(() => {
+    setQueryCustomTime(spenHours);
+    setQueryTotalTime(totalTime);
+  }, [spenHours, totalTime]);
 
   const handleInputChange = e => {
-    setQueryCustomTime(e.target.value);
-    setQueryTotalTime(Number(totalTime) + Number(e.target.value));
+    setQueryCustomTime(Number(e.target.value));
+    setQueryTotalTime(Number(e.target.value) + queryTotalTime);
+    if (typeof queryCustomTime === 'number' && queryCustomTime >= 0) {
+      saveCustomTime(queryCustomTime);
+    }
   };
 
   const handleDeleteClick = () =>
@@ -97,12 +99,6 @@ const TaskItem = ({ currentDate, currentSprint, task }) => {
       },
     });
   };
-
-  useEffect(() => {
-    if (typeof queryCustomTime !== 'number' || queryCustomTime < 0) return;
-
-    saveCustomTime(queryCustomTime);
-  }, [queryCustomTime]);
 
   return (
     <li className={styles.taskItem}>
