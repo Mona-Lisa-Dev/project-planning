@@ -6,7 +6,9 @@ import { confirmAlert } from 'react-confirm-alert';
 import '../ButtonDeleteProject/react-confirm-alert.scss';
 
 import { getCurrentTask } from 'redux/tasks/tasks-selectors';
+import { getUpgrateRequire } from 'redux/sprints/sprints-selectors';
 import tasksOperations from 'redux/tasks/tasks-operations';
+import sprintsOperations from 'redux/sprints/sprints-operations';
 import ButtonDelete from '../ButtonDelete';
 import styles from './TaskItem.module.scss';
 
@@ -16,9 +18,22 @@ const TaskItem = ({ currentSprint, task }) => {
   const [queryCustomTime, setQueryCustomTime] = useState(Number(spentHours));
   const [queryTotalTime, setQueryTotalTime] = useState(Number(totalTime));
 
+  const dispatch = useDispatch();
+
+  const upgrateRequire = useSelector(getUpgrateRequire);
+
+  useEffect(() => {
+    upgrateRequire &&
+      dispatch(
+        sprintsOperations.getSprintById(
+          currentSprint.project,
+          currentSprint.id,
+        ),
+      );
+  }, [upgrateRequire]);
+
   // const currentTask = useSelector(getCurrentTask);
 
-  const dispatch = useDispatch();
   // console.log('currentSprint', currentSprint);
   // console.log('currentTask', currentTask);
   // console.log('task', task);
