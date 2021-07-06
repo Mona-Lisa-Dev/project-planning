@@ -2,17 +2,14 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { confirmAlert } from 'react-confirm-alert';
-
 import '../ButtonDeleteProject/react-confirm-alert.scss';
 
-// import { getCurrentTask } from 'redux/tasks/tasks-selectors';
-import { getUpgrateRequire } from 'redux/sprints/sprints-selectors';
 import tasksOperations from 'redux/tasks/tasks-operations';
-import sprintsOperations from 'redux/sprints/sprints-operations';
+
 import ButtonDelete from '../ButtonDelete';
 import styles from './TaskItem.module.scss';
 
-const TaskItem = ({ currentDate, currentSprint, task }) => {
+const TaskItem = ({ task }) => {
   const {
     id,
     name,
@@ -30,18 +27,6 @@ const TaskItem = ({ currentDate, currentSprint, task }) => {
 
   const dispatch = useDispatch();
 
-  const upgrateRequire = useSelector(getUpgrateRequire);
-
-  useEffect(() => {
-    upgrateRequire &&
-      dispatch(
-        sprintsOperations.getSprintById(
-          currentSprint.project,
-          currentSprint.id,
-        ),
-      );
-  }, [upgrateRequire]);
-
   useEffect(() => {
     setQueryCustomTime(spenHours);
     setQueryTotalTime(totalTime);
@@ -55,8 +40,8 @@ const TaskItem = ({ currentDate, currentSprint, task }) => {
     }
   };
 
-  const handleDeleteClick = () =>
-    dispatch(tasksOperations.deleteTask(currentSprint.id, id));
+  const handleDeleteClick = () => {};
+  // dispatch(tasksOperations.deleteTask(currentSprint.id, id));
 
   //TODO функция отправляет запрос на бэк для сохранения часов
   const saveCustomTime = () => {
@@ -64,7 +49,7 @@ const TaskItem = ({ currentDate, currentSprint, task }) => {
       projectId: project,
       sprintId: sprint,
       taskId: id,
-      day: currentDate,
+      // day: currentDate,
       value: queryCustomTime,
     };
     dispatch(tasksOperations.updateTask(payload));
