@@ -15,10 +15,8 @@
 }
 
 .links {
-  margin-bottom: 10px;
-  font-size: 14px;
-  line-height: 1.21;
-  letter-spacing: 0.04em;
+  display: flex;
+  justify-content: space-around;
 }
 
 .doing {
@@ -34,4 +32,18 @@
 
 .photo {
   margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 200px;
+}
+
+.icons {
+  fill: $text-light;
+
+  @media screen and (min-width: $desktop) {
+    &:hover,
+    &:focus {
+      fill: $main-orange;
+    }
+  }
 }
