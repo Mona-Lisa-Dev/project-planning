@@ -10,6 +10,10 @@
   padding-bottom: 20px;
   padding-left: 20px;
   padding-right: 20px;
+  @media screen and (max-width: $mobile-max) {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 }
 
 .Footer_text {
@@ -18,6 +22,10 @@
   font-size: 14px;
   line-height: 1.21;
   letter-spacing: 0.04em;
+  @media screen and (max-width: $mobile-max) {
+    font-size: 9px;
+    white-space: nowrap;
+  }
 }
 
 .Footer_link {
@@ -26,6 +34,10 @@
   letter-spacing: 0.04em;
   border-bottom: 1px solid $text-light;
   cursor: pointer;
+  @media screen and (max-width: $mobile-max) {
+    font-size: 9px;
+    white-space: nowrap;
+  }
 }
 
 @media screen and (min-width: $tablet) {
