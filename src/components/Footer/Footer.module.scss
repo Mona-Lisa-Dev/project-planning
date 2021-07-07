@@ -11,6 +11,8 @@
   padding-left: 20px;
   padding-right: 20px;
   @media screen and (max-width: $mobile-max) {
+    flex-direction: column;
+    align-items: center;
     padding-top: 10px;
     padding-bottom: 10px;
   }
@@ -23,8 +25,9 @@
   line-height: 1.21;
   letter-spacing: 0.04em;
   @media screen and (max-width: $mobile-max) {
-    font-size: 9px;
+    font-size: 10px;
     white-space: nowrap;
+    margin-bottom: 5px;
   }
 }
 

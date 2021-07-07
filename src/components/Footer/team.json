@@ -2,10 +2,19 @@
   {
     "id": "1",
     "name": "Elena Tsemko",
-    "photo": "imagesTeam/Lena.jpg",
+    "photo": "imagesTeam/Lena.jpeg",
     "linkedin": "https://www.linkedin.com/in/elena-tsemko/",
     "github": "https://github.com/OlenaTsemko",
-    "doing": "Team-lead"
+    "position": "Frontend developer",
+    "doing": [
+      "- Team-lead",
+      "- Redux (state | operations | selectors)",
+      "- API request logic in all components and pages",
+      "- Worked on pagination (logic)",
+      "- Routing",
+      "- Control styles",
+      "- Control & fix bugs"
+    ]
   },
   {
     "id": "2",
@@ -13,7 +22,16 @@
     "photo": "imagesTeam/Viki.jpg",
     "linkedin": "https://www.linkedin.com/in/viktoriia-ksenofontova",
     "github": "https://github.com/Viktoriia-Ksenofontova",
-    "doing": "Scrum master"
+    "position": "Frontend developer",
+    "doing": [
+      "- Scrum master",
+      "- Created TasksPage adaptive for media queries (JSX, SCSS, logic)",
+      "- Filter",
+      "- Created components TaskItem, TaskList",
+      "- Worked on pagination (logic, styles)",
+      "- Control styles",
+      "- Control & fix bugs"
+    ]
   },
   {
     "id": "3",
@@ -21,23 +39,45 @@
     "photo": "imagesTeam/Artem.jpg",
     "linkedin": "https://www.linkedin.com/in/artem-sergieiev/",
     "github": "https://github.com/ArtemS83",
-    "doing": "-MongoDB -backend -fix bags"
+    "position": "Backend developer",
+    "doing": [
+      "- Worked on backend scheme and the logic of the Project and Task",
+      "- Validation",
+      "- MongoDB",
+      "- Worked on API requests logic (frontend)",
+      "- Control styles",
+      "- Control & fix bugs"
+    ]
   },
   {
     "id": "4",
     "name": "Alex Deviatov",
-    "photo": "imagesTeam/Alex.jpg",
+    "photo": "imagesTeam/Alex.jpeg",
     "linkedin": "https://www.linkedin.com/in/alex-deviatov/",
     "github": "https://github.com/lewyk",
-    "doing": "Backend"
+    "position": "Backend developer",
+    "doing": [
+      "- Worked on backend scheme and the logic of the Sprint and Task",
+      "- Validation",
+      "- Routing (frontend)",
+      "- Control & fix styles",
+      "- Control & fix bugs"
+    ]
   },
   {
     "id": "5",
     "name": "Yevheniia Petrychenko",
-    "photo": "imagesTeam/Evgeniia.jpg",
+    "photo": "imagesTeam/Evgeniia.jpeg",
     "linkedin": "https://www.linkedin.com/in/yevheniia-petrychenko-955483216/",
     "github": "https://github.com/yevheniia-petrychenko ",
-    "doing": "Duties on project: created backend user component, worked on tasks component, created swagger UI interface, planning."
+    "position": "Backend developer",
+    "doing": [
+      "- Created backend user component (scheme and the logic)",
+      "- Worked on tasks component",
+      "- Created swagger UI interface",
+      "- Planning",
+      "- Control & fix bugs"
+    ]
   },
   {
     "id": "6",
@@ -45,7 +85,15 @@
     "photo": "imagesTeam/Ihor.jpg",
     "linkedin": "https://www.linkedin.com/in/ihor-prokopets-652561208",
     "github": "https://github.com/Xoyk23",
-    "doing": "Make projects page, app bar, user menu, private and publick routes components, routing, deleting confirmation."
+    "position": "Frontend developer",
+    "doing": [
+      "- Created ProjectsPage",
+      "- Created components AppBar, UserMenu",
+      "- Private and publick routes components | routing",
+      "- Deleting confirmation",
+      "- Control & fix styles",
+      "- Control & fix bugs"
+    ]
   },
   {
     "id": "7",
@@ -53,7 +101,15 @@
     "photo": "imagesTeam/Evgeniia_.jpg",
     "linkedin": "https://www.linkedin.com/in/suska/",
     "github": "https://github.com/Yevheniia30",
-    "doing": "Сreated performing tasks diagram, form for adding participants, form for creating tasks, loader(spinner)"
+    "position": "Frontend developer",
+    "doing": [
+      "- Сreated performing tasks diagram",
+      "- Created components",
+      "- Form for adding participants, form for creating tasks",
+      "- Loader(spinner)",
+      "- Control & fix styles",
+      "- Control & fix bugs"
+    ]
   },
   {
     "id": "8",
@@ -61,7 +117,13 @@
     "photo": "imagesTeam/Vadim.png",
     "linkedin": "https://www.linkedin.com/in/vadim-vatrya-4858b2204/",
     "github": "https://github.com/Vadim-Vatrya",
-    "doing": "Developed markup and styles for registration and login pages"
+    "position": "Frontend developer",
+    "doing": [
+      "- Developed markup and styles for registration page",
+      "- Created markup and styles for login page",
+      "- Control & fix styles",
+      "- Control & fix bugs"
+    ]
   },
   {
     "id": "9",
@@ -69,7 +131,12 @@
     "photo": "imagesTeam/Olga.jpg",
     "linkedin": "https://www.linkedin.com/in/olga-tomilko",
     "github": "https://github.com/OlgaTomilko",
-    "doing": "Created components ProjectList, ProjectItem, SprintList, developed styles for Footer"
+    "position": "Frontend developer",
+    "doing": [
+      "- Created components ProjectList, ProjectItem, SprintList",
+      "- Developed and created markup and styles for Footer (Modal)",
+      "- Control & fix styles "
+    ]
   },
   {
     "id": "10",
@@ -77,7 +144,12 @@
     "photo": "imagesTeam/Nataliia.JPG",
     "linkedin": "https://www.linkedin.com/in/nataliia-prykhodko-b829b5214/",
     "github": "https://github.com/Nataliia333",
-    "doing": "Create markup and sprintItem single sprint styles on the project page for three extensions. Footer"
+    "position": "Frontend developer",
+    "doing": [
+      "- Created markup and styles for sprintItem for three extensions",
+      "- Developed and created markup and styles for Footer",
+      "- Control & fix styles"
+    ]
   },
   {
     "id": "11",
@@ -85,7 +157,11 @@
     "photo": "imagesTeam/Mira.jpg",
     "linkedin": "https://www.linkedin.com/in/myroslava-nikolaienko-3686b3211/",
     "github": "https://github.com/Mira1702",
-    "doing": "Create component CreateProject (HTML, SCSS, JavaScript, React). Development of Project Presentation"
+    "position": "Frontend developer",
+    "doing": [
+      "- Create component CreateProject adaptive for different media queries (JSX, SCSS modules, logic)",
+      "- Development of Project Presentation"
+    ]
   },
   {
     "id": "12",
@@ -93,6 +169,13 @@
     "photo": "imagesTeam/Serhii.png",
     "linkedin": "https://www.linkedin.com/in/serhiistanislav",
     "github": "https://github.com/itstoreall",
-    "doing": "In this project I created a SprintsPage, Modal, CreateSprint component and a background with circles for the Login page"
+    "position": "Frontend developer",
+    "doing": [
+      "- Сreated a SprintsPage adaptive for different media queries (JSX, SCSS modules, logic)",
+      "- Created Modal component, CreateSprint component",
+      "- Styles for background with circles for the Login page",
+      "- Control & fix styles",
+      "- Control & fix bugs"
+    ]
   }
 ]

@@ -3,9 +3,19 @@ const TeamCard = ({ team }) => {
   const photo = require(`./${team.photo}`).default;
   return (
     <div className={styles.card}>
-      <img src={photo} alt="teammate" className={styles.photo} />
+      <div className={styles.photoWrapper}>
+        <img src={photo} alt="teammate" className={styles.photo} />
+      </div>
       <h3 className={styles.name}>{team.name}</h3>
-      <p className={styles.doing}> {team.doing}</p>
+      <p className={styles.position}>{team.position}</p>
+      {/* <p className={styles.doing}> {team.doing}</p> */}
+      <ul className={styles.doingList}>
+        {[...team.doing].map(el => (
+          <li key={el} className={styles.doing}>
+            {el}
+          </li>
+        ))}
+      </ul>
       <div className={styles.links}>
         <a href={team.linkedin}>
           <span>
