@@ -9,7 +9,9 @@ import styles from './SprintList.module.scss';
 const SprintList = ({ currentProject }) => {
   const sprints = useSelector(getSprints);
 
-  return (
+  return sprints.length === 0 ? (
+    <p className={styles.listWrapper}>Create first sprint</p>
+  ) : (
     <ul className={styles.listWrapper}>
       {sprints.map(sprint => (
         <li key={sprint.id} className={styles.listItem}>

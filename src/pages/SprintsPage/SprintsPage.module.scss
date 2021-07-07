@@ -117,16 +117,30 @@ main {
             font-size: 26px;
             font-weight: 500;
             letter-spacing: 0.04em;
-
+            // добавить троеточие в конце длинных названий
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            @media screen and (max-width: $mobile-max) {
+              width: 260px;
+              height: 64px;
+            }
             @media screen and (min-width: $tablet) {
               font-size: 36px;
+              width: 330px;
+              height: 88px;
+            }
+            @media screen and (min-width: $desktop) {
+              height: 85px;
             }
           }
           .buttonChange {
             border-radius: 50%;
             cursor: pointer;
             border: none;
-            width: 20px;
+            min-width: 20px;
             height: 20px;
             background-color: #a6a6a6;
             background: url(./svg/btnChange.svg) no-repeat;
