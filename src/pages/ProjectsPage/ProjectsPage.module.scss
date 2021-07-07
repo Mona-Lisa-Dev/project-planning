@@ -80,10 +80,11 @@
 
   .ProjectsCreateButton {
     position: fixed;
-    // bottom: 20px;
-    bottom: 3%;
+
+    bottom: 6%;
     right: 3%;
     margin: 0px;
+    z-index: 99;
   }
 
   .ProjectsTitle {
