@@ -8,7 +8,7 @@ import styles from './TaskItem.module.scss';
 
 const TaskItem = ({ currentSprint, task }) => {
   const { id, name, scheduledTime, spentHours = 0, totalTime = 0 } = task;
-
+  console.log(`task`, task);
   const [queryCustomTime, setQueryCustomTime] = useState(Number(spentHours));
   const [queryTotalTime, setQueryTotalTime] = useState(Number(totalTime));
 
@@ -37,7 +37,7 @@ const TaskItem = ({ currentSprint, task }) => {
   }, [queryCustomTime]);
 
   return (
-    <li className={styles.taskItem}>
+    <>
       <p className={styles.taskName}> {name} </p>
       <p className={styles.planTime}> {scheduledTime} </p>
       <div className={styles.inputTimeBefore}>
@@ -51,7 +51,7 @@ const TaskItem = ({ currentSprint, task }) => {
       <p className={styles.totalTime}> {queryTotalTime} </p>
 
       <ButtonDelete handleClick={handleDeleteClick} />
-    </li>
+    </>
   );
 };
 

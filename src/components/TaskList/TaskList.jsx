@@ -67,7 +67,9 @@ const TaskList = ({ currentSprint, tasks }) => {
       ) : (
         <ul className={styles.taskList}>
           {visibleTasks.map(task => (
-            <TaskItem currentSprint={currentSprint} key={task.id} task={task} />
+            <li key={task.id} className={styles.taskItem}>
+              <TaskItem currentSprint={currentSprint} task={task} />
+            </li>
           ))}
         </ul>
       )}
