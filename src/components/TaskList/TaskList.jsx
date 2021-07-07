@@ -68,9 +68,19 @@ const TaskList = ({ tasks }) => {
         <p className={styles.taskList}>Create first task</p>
       ) : (
         <ul className={styles.taskList}>
-          {visibleTasks.map(task => (
-            <TaskItem key={task.id} task={task} />
-          ))}
+          {tasks.map(
+            ({ id, name, sprint, scheduledTime, totalTime, byDay }) => (
+              <TaskItem
+                key={id}
+                id={id}
+                name={name}
+                sprint={sprint}
+                scheduledTime={scheduledTime}
+                totalTime={totalTime}
+                byDay={byDay}
+              />
+            ),
+          )}
         </ul>
       )}
     </>

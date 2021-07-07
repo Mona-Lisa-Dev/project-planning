@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
-// import dayjs from 'dayjs';
+import dayjs from 'dayjs';
 
 import TaskList from 'components/TaskList';
 import Modal from 'components/Modal';
@@ -13,8 +13,10 @@ import DiagramModal from 'components/Diagram/DiagramModal';
 import { getTasks } from 'redux/tasks/tasks-selectors';
 import { getSprints, getCurrentSprint } from 'redux/sprints/sprints-selectors';
 import sprintsOperations from 'redux/sprints/sprints-operations';
+import tasksOperations from 'redux/tasks/tasks-operations';
 
 import styles from './TasksPage.module.scss';
+import { getDate } from 'date-fns';
 
 const TasksPage = props => {
   const [sprintName, setSprintName] = useState('');
@@ -23,48 +25,54 @@ const TasksPage = props => {
   const [showModalAnalytics, setShowModalAnalytics] = useState(false);
   const [showChangeTitleForm, setShowChangeTitleForm] = useState(false);
 
-  // const [oneDayTasks, setOneDayTasks] = useState([]);
-  // const [currentDay, setCurrentDay] = useState(1);
-  // const [currentDate, setCurrentDate] = useState('');
+  const [currentDay, setCurrentDay] = useState(1);
   const { projectId, sprintId } = props.match.params;
   const dispatch = useDispatch();
 
   const currentSprint = useSelector(getCurrentSprint);
   const sprints = useSelector(getSprints);
-
   const tasks = useSelector(getTasks);
+  // console.log('tasks', tasks);
+  // console.log('currentSprint', currentSprint);
 
-  // const arrDate = currentSprint?.days?.reduce(
-  //   (acc, day) => [...acc, day.date],
-  //   [],
-  // );
-  // console.log(`arrDate`, arrDate);
+  const arrDate = currentSprint?.totalDaly?.reduce(
+    (acc, day) => [...acc, Object.keys(day)[0]],
+    [],
+  );
 
-  const onClickDay = () => {
-    // setCurrentDay(currentDay === 1 ? currentDay : currentDay - 1);
-    // setOneDayTasks(currentSprint.days[currentDay - 1].tasks);
-    // setOneDayTasks(currentSprint.days[currentDay].tasks);
-    // setCurrentDate(currentSprint.days[currentDay].date);
-    // console.log(`currentDay`, currentDay);
-    // currentSprint?.days.map(
-    //   day => {
-    //     date === day.date && setOneDayTasks(day.tasks);
-    //     date === day.date && setCurrentDate(day.date);
-    //   },
-    // day => {
-    //   if (date === day.date) {
-    //     console.log('day.date', day.date);
-    //     return setOneDayTasks(day.tasks);
-    //   }
-    // },
-    // );
-    // console.log(`currentDay`, currentDay);
-    // console.log('oneDayTasks', oneDayTasks);
+  useEffect(() => {
+    async function fetchData() {
+      await dispatch(sprintsOperations.getSprintById(projectId, sprintId));
+
+      await dispatch(
+        tasksOperations.getTasksByDay(
+          sprintId,
+          dayjs(new Date()).format('YYYY-MM-DD'),
+        ),
+      );
+      // arrDate?.find(date => dayjs(new Date()).format('YYYY-MM-DD') === date) &&
+      //   setCurrentDay(currentDay === 1 ? currentDay : currentDay - 1);
+    }
+
+    fetchData();
+  }, [dispatch, projectId, sprintId]);
+
+  console.log(`arrDate`, arrDate);
+
+  const onClickDay = i => {
+    const day = arrDate.find((el, ind) => ind === i - 1 && el);
+    console.log('dayOnClick', day);
+
+    setCurrentDay(currentDay === 1 ? currentDay : currentDay - 1);
+    dispatch(tasksOperations.getTasksByDay(currentSprint.id, day));
   };
 
-  const onClickNextDay = () => {
-    // setCurrentDay(currentDay !== arrDate.length ? currentDay + 1 : currentDay);
-    // setOneDayTasks(currentSprint.days[currentDay - 1].tasks);
+  const onClickNextDay = i => {
+    const day = arrDate.find((el, ind) => ind === i + 1 && el);
+    console.log('dayOnClickNext', day);
+
+    setCurrentDay(currentDay !== arrDate.length ? currentDay + 1 : currentDay);
+    dispatch(tasksOperations.getTasksByDay(currentSprint.id, day));
   };
 
   useEffect(() => {
@@ -72,17 +80,7 @@ const TasksPage = props => {
     dispatch(sprintsOperations.getSprintById(projectId, sprintId));
   }, [dispatch, projectId, sprintId]);
 
-  // useEffect(() => {
-  // if (currentSprint?.days) {
-  //   setOneDayTasks(currentSprint.days[currentDay - 1].tasks);
-  //   setCurrentDate(currentSprint.days[currentDay - 1].date);
-  //   // console.log('oneDayTasks', oneDayTasks);
-  // }
-  // return () => setOneDayTasks([]);
-  // }, [currentDay, currentSprint]);
-
   const handleCloseModal = () => {
-    // setRenderTasks(true);
     setShowModalCreateTask(false);
     setShowModalCreateSprint(false);
     setShowModalAnalytics(false);
@@ -177,7 +175,7 @@ const TasksPage = props => {
               </ul> */}
 
               <ul className={styles.pagination}>
-                {/* {arrDate.map((day, i) => (
+                {arrDate.map((day, i) => (
                   <li
                     key={day}
                     className={
@@ -188,24 +186,24 @@ const TasksPage = props => {
                   >
                     <button
                       type="button"
-                      onClick={() => onClickDay()}
+                      onClick={() => onClickDay(i)}
                       className={styles.btnBefore}
+                      disabled={currentDay === 1 ? true : false}
                     >
                       {'<'}
-                    </button> */}
+                    </button>
 
-                {/* <p className={styles.currentDay}>{currentDay} / </p> */}
-                {/* <p className={styles.totalDay}>{arrDate.length}</p> */}
-
-                {/* <button
+                    <p className={styles.currentDay}>{i + 1} / </p>
+                    <p className={styles.totalDay}>{arrDate.length}</p>
+                    <button
                       type="button"
-                      onClick={() => onClickNextDay()}
+                      onClick={() => onClickNextDay(i)}
                       className={styles.btnNext}
-                    >{`>`}</button> */}
-
-                {/* <p className={styles.calendarDay}> {day}</p>
+                      disabled={currentDay === arrDate.length ? true : false}
+                    >{`>`}</button>
+                    <p className={styles.calendarDay}> {day}</p>
                   </li>
-                ))} */}
+                ))}
               </ul>
             </div>
             <div className={styles.sprintHeader}>
