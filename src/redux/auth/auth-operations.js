@@ -15,7 +15,8 @@ import {
   noToken,
 } from './auth-actions';
 
-axios.defaults.baseURL = 'http://localhost:5000/api';
+// axios.defaults.baseURL = 'http://localhost:5000/api';
+axios.defaults.baseURL = 'https://project-planning-rest-api.herokuapp.com/api';
 
 const token = {
   set(token) {
