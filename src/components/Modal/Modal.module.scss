@@ -81,7 +81,6 @@
 
     @media screen and (max-width: $mobile-max) {
       margin: 0 auto;
-      max-width: 320px;
       animation: showModalSlideMob 400ms forwards;
     }
 
@@ -96,6 +95,13 @@
       padding: 120px 50px 40px;
       width: 530px;
       box-shadow: $primaryShadow;
+    }
+
+    .childrenWrap {
+      @media screen and (max-width: $mobile-max) {
+        width: 100%;
+        max-width: $mobilePlus;
+      }
     }
 
     .CloseModalBtn {

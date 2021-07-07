@@ -25,7 +25,7 @@ const Modal = ({ onCloseModal, children }) => {
   return createPortal(
     <div className={s.backdrop} onClick={handleCloseByBackdrop}>
       <div className={s.content}>
-        {children}
+        <div className={s.childrenWrap}>{children}</div>
         <CloseModalBtn className={s.CloseModalBtn} onClick={onCloseModal} />
       </div>
     </div>,
