@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import { useDispatch } from 'react-redux';
+
 import projectsOperations from 'redux/projects/projects-operations';
 
 import s from './PeopleList.module.scss';
