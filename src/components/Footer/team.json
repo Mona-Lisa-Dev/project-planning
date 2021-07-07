@@ -9,7 +9,7 @@
     "doing": [
       "- Team-lead",
       "- Redux (state | operations | selectors)",
-      "- API request logic in all components and pages",
+      "- API requests logic in all components and pages",
       "- Worked on pagination (logic)",
       "- Routing",
       "- Control styles",
@@ -41,7 +41,7 @@
     "github": "https://github.com/ArtemS83",
     "position": "Backend developer",
     "doing": [
-      "- Worked on backend scheme and the logic of the Project and Task",
+      "- Worked on backend schemas and the logic of the Project and Task",
       "- Validation",
       "- MongoDB",
       "- Worked on API requests logic (frontend)",
@@ -57,7 +57,7 @@
     "github": "https://github.com/lewyk",
     "position": "Backend developer",
     "doing": [
-      "- Worked on backend scheme and the logic of the Sprint and Task",
+      "- Worked on backend schemas and the logic of the Sprint and Task",
       "- Validation",
       "- Routing (frontend)",
       "- Control & fix styles",
@@ -67,7 +67,7 @@
   {
     "id": "5",
     "name": "Yevheniia Petrychenko",
-    "photo": "imagesTeam/Evgeniia.jpeg",
+    "photo": "imagesTeam/Evgeniia.jpg",
     "linkedin": "https://www.linkedin.com/in/yevheniia-petrychenko-955483216/",
     "github": "https://github.com/yevheniia-petrychenko ",
     "position": "Backend developer",
@@ -90,7 +90,7 @@
       "- Created ProjectsPage",
       "- Created components AppBar, UserMenu",
       "- Private and publick routes components | routing",
-      "- Deleting confirmation",
+      "- Confirmation of delete",
       "- Control & fix styles",
       "- Control & fix bugs"
     ]
@@ -103,7 +103,7 @@
     "github": "https://github.com/Yevheniia30",
     "position": "Frontend developer",
     "doing": [
-      "- Сreated performing tasks diagram",
+      "- Сreated tasks performance diagram",
       "- Created components",
       "- Form for adding participants, form for creating tasks",
       "- Loader(spinner)",
@@ -119,7 +119,7 @@
     "github": "https://github.com/Vadim-Vatrya",
     "position": "Frontend developer",
     "doing": [
-      "- Developed markup and styles for registration page",
+      "- Created markup and styles for registration page",
       "- Created markup and styles for login page",
       "- Control & fix styles",
       "- Control & fix bugs"
@@ -134,7 +134,7 @@
     "position": "Frontend developer",
     "doing": [
       "- Created components ProjectList, ProjectItem, SprintList",
-      "- Developed and created markup and styles for Footer (Modal)",
+      "- Created markup and styles for FooterModal (JSX, SCSS modules, logic)",
       "- Control & fix styles "
     ]
   },
@@ -146,9 +146,9 @@
     "github": "https://github.com/Nataliia333",
     "position": "Frontend developer",
     "doing": [
-      "- Created markup and styles for sprintItem for three extensions",
-      "- Developed and created markup and styles for Footer",
-      "- Control & fix styles"
+      "- Created markup and styles for sprintItem adaptive for media queries",
+      "- Created markup and styles for Footer",
+      "- Control & fix styles (JSX, SCSS modules, logic)"
     ]
   },
   {
@@ -159,8 +159,8 @@
     "github": "https://github.com/Mira1702",
     "position": "Frontend developer",
     "doing": [
-      "- Create component CreateProject adaptive for different media queries (JSX, SCSS modules, logic)",
-      "- Development of Project Presentation"
+      "- Created component CreateProject adaptive for media queries (JSX, SCSS modules, logic)",
+      "- Created Project Presentation"
     ]
   },
   {
@@ -171,7 +171,7 @@
     "github": "https://github.com/itstoreall",
     "position": "Frontend developer",
     "doing": [
-      "- Сreated a SprintsPage adaptive for different media queries (JSX, SCSS modules, logic)",
+      "- Сreated a SprintsPage adaptive for media queries (JSX, SCSS modules, logic)",
       "- Created Modal component, CreateSprint component",
       "- Styles for background with circles for the Login page",
       "- Control & fix styles",
