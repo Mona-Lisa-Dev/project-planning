@@ -3,10 +3,11 @@ import s from './Diagram.module.scss';
 import { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 
-const Diagram = (sprint, arrDate) => {
+const Diagram = sprint => {
   const [chartData, setChartData] = useState({});
 
-  const { startDate, endDate } = sprint.sprint;
+  const { startDate, endDate, duration, allScheduledTime, totalDaly } =
+    sprint.sprint;
   console.log('sprint', sprint);
 
   useEffect(() => {
@@ -33,16 +34,31 @@ const Diagram = (sprint, arrDate) => {
     };
     datesRange(startDate, endDate);
 
+    const redLineArray = new Array(duration)
+      .fill(allScheduledTime)
+      .map((el, i, arr) =>
+        i > 0 ? allScheduledTime - (allScheduledTime / arr.length) * i : el,
+      );
+
+    const blueLineArray = new Array(duration)
+      .fill(allScheduledTime)
+      .map((el, i, arr) => {
+        let temp = 0;
+        for (let j = i; j >= 0; j--) {
+          temp += Object.values(totalDaly[j])[0];
+        }
+        return arr[i] - temp;
+      });
+
     // cоздаем график
     const chart = () => {
       setChartData({
         labels: dates,
         datasets: [
           {
-            // часы будут рассчитываться по формулам, пока что внесены рандомные
             label: 'Запланированные оставшиеся трудозатраты',
             // запланированные часы
-            data: [130, 120, 110, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10],
+            data: redLineArray,
             fill: false,
             backgroundColor: '#FA3B3F',
             borderColor: '#FA3B3F',
@@ -50,7 +66,7 @@ const Diagram = (sprint, arrDate) => {
           {
             label: 'Актуальные оставшиеся трудозатраты в часах ',
             // фактические  часы
-            data: [131, 115, 118, 102, 90, 85, 66, 60, 49, 43, 30, 22, 12],
+            data: blueLineArray,
             fill: false,
             backgroundColor: '#1988EE',
             borderColor: '#1988EE',

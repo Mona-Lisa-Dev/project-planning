@@ -10,7 +10,7 @@ import s from './Diagram.module.scss';
 
 const modalRoot = document.querySelector('#modal-root');
 
-const DiagramModal = ({ sprint, arrDate, onCloseModal }) => {
+const DiagramModal = ({ sprint, onCloseModal }) => {
   useEffect(() => {
     window.addEventListener('keydown', handleCloseByEsc);
 
@@ -44,9 +44,9 @@ const DiagramModal = ({ sprint, arrDate, onCloseModal }) => {
   return createPortal(
     <div className={s.backdrop} onClick={handleCloseByBackdrop}>
       <div className={s.content}>
-        <ButtonClose onclose={handleCloseByButton} />
+        <ButtonClose onClose={handleCloseByButton} />
         {mobileMax && <p className={s.contentText}>Rotate your device</p>}
-        {tabletMin && <Diagram sprint={sprint} arrDate={arrDate} />}
+        {tabletMin && <Diagram sprint={sprint} />}
       </div>
     </div>,
     modalRoot,

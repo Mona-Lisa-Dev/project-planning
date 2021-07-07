@@ -19,11 +19,11 @@ import {
   getSprintByIdError,
 } from './sprints-actions';
 
-import {
-  createTaskSuccess,
-  deleteTaskError,
-  deleteTaskSuccess,
-} from 'redux/tasks/tasks-actions';
+// import {
+//   createTaskSuccess,
+//   deleteTaskError,
+//   deleteTaskSuccess,
+// } from 'redux/tasks/tasks-actions';
 import { logoutSuccess } from 'redux/auth/auth-actions';
 
 const sprintsItems = createReducer([], {
@@ -48,11 +48,11 @@ const currentSprint = createReducer(null, {
 //     state.filter(({ id }) => id !== payload),
 // });
 
-const upgrateRequire = createReducer(false, {
-  [deleteTaskSuccess]: () => true,
-  [deleteTaskError]: () => false,
-  [getSprintByIdRequest]: () => false,
-});
+// const upgrateRequire = createReducer(false, {
+//   [deleteTaskSuccess]: () => true,
+//   [deleteTaskError]: () => false,
+//   [getSprintByIdRequest]: () => false,
+// });
 
 const loading = createReducer(false, {
   [getAllSprintsRequest]: () => true,
@@ -88,7 +88,7 @@ const error = createReducer(null, {
 export default combineReducers({
   items: sprintsItems,
   currentSprint,
-  upgrateRequire,
+  // upgrateRequire,
   loading,
   error,
 });
