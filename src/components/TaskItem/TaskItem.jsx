@@ -54,6 +54,7 @@ const TaskItem = ({
         day || dayjs(new Date()).format('YYYY-MM-DD'),
       ),
     );
+    await dispatch(sprintsOperations.getSprintById(project, sprint));
   };
 
   //TODO функция отправляет запрос на бэк для сохранения часов

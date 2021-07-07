@@ -38,7 +38,8 @@ const Diagram = sprint => {
       .fill(allScheduledTime)
       .map((el, i, arr) =>
         i > 0 ? allScheduledTime - (allScheduledTime / arr.length) * i : el,
-      );
+      )
+      .concat([0]);
 
     const blueLineArray = new Array(duration)
       .fill(allScheduledTime)
@@ -62,14 +63,16 @@ const Diagram = sprint => {
             fill: false,
             backgroundColor: '#FA3B3F',
             borderColor: '#FA3B3F',
+            borderWidth: 1,
           },
           {
             label: 'Current remaining staff time ',
             // фактические  часы
-            data: blueLineArray,
+            data: [allScheduledTime, ...blueLineArray],
             fill: false,
             backgroundColor: '#1988EE',
             borderColor: '#1988EE',
+            borderWidth: 1,
           },
         ],
       });
@@ -87,6 +90,7 @@ const Diagram = sprint => {
             yAxes: [
               {
                 ticks: {
+                  suggestedMin: 0, // minimum will be 0, unless there is a lower value.
                   beginAtZero: true,
                 },
               },
