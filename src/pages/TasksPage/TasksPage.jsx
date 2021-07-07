@@ -37,24 +37,23 @@ const TasksPage = props => {
     [],
   );
 
+  // console.log('currentSprint', currentSprint.startDate);
+
   useEffect(() => {
     async function fetchData() {
       await dispatch(sprintsOperations.getSprintById(projectId, sprintId));
-
       await dispatch(
         tasksOperations.getTasksByDay(
           sprintId,
           dayjs(new Date()).format('YYYY-MM-DD'),
         ),
       );
-      // arrDate?.find(date => dayjs(new Date()).format('YYYY-MM-DD') === date) &&
-      //   setCurrentDay(currentDay === 1 ? currentDay : currentDay - 1);
     }
 
     fetchData();
   }, [dispatch, projectId, sprintId]);
 
-  console.log(`arrDate`, arrDate);
+  // console.log(`arrDate`, arrDate);
 
   const onClickDay = i => {
     const day = arrDate.find((el, ind) => ind === i - 1 && el);
@@ -161,16 +160,6 @@ const TasksPage = props => {
 
           <div className={styles.sprintContent}>
             <div className={styles.sprintDate}>
-              {/* <ul>
-                {arrDate?.map((day, i) => (
-                  <li key={day}>
-                    <button type="button" onClick={() => onClickDay(day)}>
-                      {i + 1}
-                    </button>
-                  </li>
-                ))}
-              </ul> */}
-
               <ul className={styles.pagination}>
                 {arrDate.map((day, i) => (
                   <li
@@ -279,7 +268,6 @@ const TasksPage = props => {
         {showModalAnalytics && (
           <DiagramModal
             sprint={currentSprint}
-            // arrDate={arrDate}
             onCloseModal={handleCloseModal}
           />
         )}

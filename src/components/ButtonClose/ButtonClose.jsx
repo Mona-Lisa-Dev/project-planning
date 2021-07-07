@@ -11,7 +11,7 @@ const ButtonClose = ({ onClose }) => {
   );
 };
 ButtonClose.propTypes = {
-  onclose: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default ButtonClose;
