@@ -56,7 +56,7 @@ const Diagram = sprint => {
         labels: dates,
         datasets: [
           {
-            label: 'Запланированные оставшиеся трудозатраты',
+            label: 'Planned remaining staff time',
             // запланированные часы
             data: redLineArray,
             fill: false,
@@ -64,7 +64,7 @@ const Diagram = sprint => {
             borderColor: '#FA3B3F',
           },
           {
-            label: 'Актуальные оставшиеся трудозатраты в часах ',
+            label: 'Current remaining staff time ',
             // фактические  часы
             data: blueLineArray,
             fill: false,
@@ -96,14 +96,14 @@ const Diagram = sprint => {
           plugins: {
             legend: {
               position: 'top',
-              // labels: {
-              //   wigth: 10,
-              // },
+              labels: {
+                usePointStyle: true,
+              },
             },
             title: {
               display: true,
               position: 'left',
-              text: 'Человеко-часы',
+              text: 'Man-hours',
             },
           },
           layout: {
