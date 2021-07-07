@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import dayjs from 'dayjs';
 
 import { confirmAlert } from 'react-confirm-alert';
 import '../ButtonDeleteProject/react-confirm-alert.scss';
@@ -9,50 +10,58 @@ import tasksOperations from 'redux/tasks/tasks-operations';
 import ButtonDelete from '../ButtonDelete';
 import styles from './TaskItem.module.scss';
 
-const TaskItem = ({ task }) => {
-  const {
-    id,
-    name,
-    project,
-    sprint,
-    scheduledTime,
-    spenHours = 0,
-    totalTime = 0,
-  } = task;
-
-  // console.log('currentDate', currentDate);
-
+const TaskItem = ({ id, name, sprint, scheduledTime, totalTime, byDay }) => {
   const [queryCustomTime, setQueryCustomTime] = useState(0);
-  const [queryTotalTime, setQueryTotalTime] = useState(totalTime);
+  const [day, setDay] = useState('');
+  // const [queryTotalTime, setQueryTotalTime] = useState(totalTime);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setQueryCustomTime(spenHours);
-    setQueryTotalTime(totalTime);
-  }, [spenHours, totalTime]);
+    if (!byDay) return;
+    setQueryCustomTime(Object.values(byDay)[0]);
+    setDay(Object.keys(byDay)[0]);
+  }, [byDay]);
 
   const handleInputChange = e => {
-    setQueryCustomTime(Number(e.target.value));
-    setQueryTotalTime(Number(e.target.value) + queryTotalTime);
-    if (typeof queryCustomTime === 'number' && queryCustomTime >= 0) {
-      saveCustomTime(queryCustomTime);
+    if (
+      typeof Number(e.target.value) !== 'number' ||
+      Number(e.target.value) < 0
+    ) {
+      console.log('Enter number more 0');
+      console.log(typeof e.target.value);
+      // return;
     }
+    // if (spenHours === Number(e.target.value)) return;//
+    setQueryCustomTime(Number(e.target.value));
+    if (typeof e.target.value !== 'number') return;
   };
 
-  const handleDeleteClick = () => {};
-  // dispatch(tasksOperations.deleteTask(currentSprint.id, id));
+  const handleDeleteClick = async () => {
+    await dispatch(tasksOperations.deleteTask(sprint, id));
+    await dispatch(
+      tasksOperations.getTasksByDay(
+        sprint,
+        day || dayjs(new Date()).format('YYYY-MM-DD'),
+      ),
+    );
+  };
 
   //TODO функция отправляет запрос на бэк для сохранения часов
-  const saveCustomTime = () => {
+  const onSubmitRequest = async () => {
     const payload = {
-      projectId: project,
       sprintId: sprint,
       taskId: id,
-      // day: currentDate,
+      day,
       value: queryCustomTime,
     };
-    dispatch(tasksOperations.updateTask(payload));
+
+    await dispatch(tasksOperations.updateTask(payload));
+    await dispatch(tasksOperations.getTasksByDay(sprint, day));
+
+    // setQueryTotalTime(
+    //   Number(queryCustomTime) + Number(queryTotalTime) - Number(spenHours),
+    // );
   };
 
   const handleClick = () => {
@@ -93,12 +102,12 @@ const TaskItem = ({ task }) => {
         <input
           type="text"
           value={queryCustomTime}
-          onBlur={saveCustomTime}
+          onBlur={onSubmitRequest}
           onChange={handleInputChange}
           className={styles.inputTime}
         />
       </div>
-      <p className={styles.totalTime}> {queryTotalTime} </p>
+      <p className={styles.totalTime}> {totalTime} </p>
 
       <ButtonDelete handleClick={handleClick} />
     </li>
