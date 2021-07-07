@@ -1,0 +1,397 @@
+@import '../../scss/vars';
+@import '../../scss/breakpoints';
+
+main {
+  margin-left: auto;
+  margin-right: auto;
+
+  @media screen and (max-width: $mobile-max) {
+    min-height: calc(100vh - 61px);
+  }
+  @media screen and (min-width: $tablet) {
+    display: flex;
+    padding: 0 40px 0 40px;
+    width: $tablet;
+    min-height: calc(100vh - 81px);
+  }
+
+  @media screen and (min-width: $desktop) {
+    width: $desktop;
+    padding: 0 55px 0 55px;
+  }
+
+  // Sidebar
+  aside {
+    position: relative;
+
+    @media screen and (max-width: $mobile-max) {
+      padding: 10px 0 10px 20px;
+      border-bottom: 1px solid rgba(24, 28, 39, 0.1);
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 414px;
+    }
+
+    @media screen and (min-width: $tablet) {
+      border-right: 1px solid rgba(24, 28, 39, 0.1);
+      padding: 20px 20px 0 0;
+      width: 216px;
+    }
+
+    @media screen and (min-width: $desktop) {
+      width: 200px;
+      padding: 20px 0 0 0;
+    }
+  }
+}
+.linkToBack {
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: #181c27;
+  &::before {
+    content: url(./svg/arrow.svg);
+    margin-right: 10px;
+  }
+  @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
+    margin-top: 5px;
+    margin-bottom: 80px;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-top: 25px;
+    margin-bottom: 120px;
+  }
+}
+.navSprintsList {
+  font-size: 14px;
+  @media screen and (max-width: $mobile-max) {
+    display: none;
+  }
+}
+.sprintsWrap {
+  display: flex;
+  align-items: center;
+}
+
+.linkToSprint {
+  position: relative;
+  margin-bottom: 30px;
+  color: #181c27;
+  font-size: 14px;
+  span {
+    display: block;
+    margin-right: 15px;
+    min-width: 36px;
+    min-height: 36px;
+    border-radius: 5px;
+    color: $form-background;
+    box-shadow: $primaryShadow;
+  }
+  h3 {
+    font-weight: normal;
+    max-height: 60px;
+    max-width: 110px;
+    // добавить троеточие в конце длинных названий
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.linkToSprintActive {
+  h3 {
+    font-weight: bold;
+  }
+}
+
+// Content
+.sprintContent {
+  position: relative;
+  @media screen and (max-width: $mobile-max) {
+    max-width: 414px;
+    padding: 0 20px 0 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media screen and (min-width: $tablet) {
+    padding-top: 20px;
+    width: 512px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    width: 1026px;
+  }
+}
+
+.sprintDate {
+  display: flex;
+  margin-bottom: 20px;
+  font-size: 12px;
+  line-height: 1.25;
+  letter-spacing: 0.04em;
+  color: rgba(24, 28, 39, 0.6);
+  @media screen and (max-width: $mobile-max) {
+    justify-content: space-between;
+    padding-top: 10px;
+    height: 70px;
+  }
+  @media screen and (min-width: $tablet) {
+    margin-left: 20px;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-left: 70px;
+  }
+}
+
+.pagination {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+.btnBefore,
+.btnNext {
+  cursor: pointer;
+  border: none;
+  font-size: 26px;
+}
+.paginationItem {
+  display: flex;
+  @media screen and (max-width: $mobile-max) {
+    justify-content: space-between;
+  }
+}
+.paginationItemNone {
+  display: none;
+}
+.currentDay {
+  padding: 5px 5px 0 10px;
+  font-size: 18px;
+  color: #181c27;
+}
+.totalDay,
+.calendarDay {
+  padding: 10px 10px 5px 5px;
+  font-size: 12px;
+  color: rgba(24, 28, 39, 0.6);
+}
+
+.titleDisable {
+  display: none;
+}
+.title {
+  color: $text-dark;
+  letter-spacing: 0.04em;
+  font-family: $main-font;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.22;
+  // добавить троеточие в конце длинных названий
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  @media screen and (max-width: $mobile-max) {
+    width: 260px;
+    height: 64px;
+    font-size: 26px;
+  }
+  @media screen and (min-width: $tablet) {
+    width: 330px;
+    margin-right: 20px;
+    margin-left: 20px;
+    height: 88px;
+    font-size: 36px;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-right: 40px;
+    margin-left: 70px;
+    height: 85px;
+  }
+}
+
+// Форма для изменения заголовка
+.changeTitleForm {
+  display: none;
+}
+.changeTitleFormActive {
+  display: flex;
+  align-items: center;
+}
+
+.inputChangeTitle {
+  display: inline-block;
+  border: none;
+  outline: none;
+  box-shadow: 2px 4px 8px rgba(0, 5, 97, 0.1);
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 5px;
+  @media screen and (max-width: $mobile-max) {
+    width: 260px;
+    height: 64px;
+  }
+  @media screen and (min-width: $tablet) {
+    margin-right: 20px;
+    margin-left: 20px;
+    width: 334px;
+    height: 88px;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-right: 40px;
+    margin-left: 70px;
+    height: 75px;
+  }
+}
+
+.btnSaveChange {
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  width: 25px;
+  height: 25px;
+  background: center url(./svg/saver.svg) no-repeat;
+  background-size: 18px;
+  &:hover,
+  &:focus {
+    background: center url(./svg/saverActive.svg) no-repeat;
+    background-size: 18px;
+  }
+  @media screen and (min-width: $tablet) {
+    margin: 10px 34px 0 0;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-right: 230px;
+  }
+}
+
+.sprintHeader {
+  display: flex;
+  @media screen and (max-width: $tablet-max) {
+    align-items: flex-start;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-bottom: 30px;
+    align-items: baseline;
+  }
+}
+
+.btnChangeDisable {
+  display: none;
+}
+.btnChange {
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  width: 20px;
+  height: 20px;
+  background-color: #a6a6a6;
+  background: url(./svg/btnChange.svg) no-repeat;
+  transition: all 0.25s linear;
+  &:hover,
+  &:focus {
+    background: url(./svg/btnChangeActive.svg) no-repeat;
+    transform: scale(1.2);
+  }
+  @media screen and (max-width: $mobile-max) {
+    margin: 0 0 0 30px;
+  }
+  @media screen and (min-width: $tablet) {
+    margin: 10px 34px 0 0;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-right: 230px;
+  }
+}
+
+.btnCreateTask {
+  position: relative;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  background: url(./svg/plus.svg) no-repeat;
+  box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+  transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  &:focus,
+  &:hover {
+    outline: none;
+    box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+    transform: scale(1.15);
+  }
+  @media screen and (max-width: $mobile-max) {
+    position: absolute;
+    z-index: 1;
+    right: 0px;
+    top: calc(100vh - 200px);
+  }
+  @media screen and (min-width: $desktop) {
+    &::after {
+      content: 'Create a task';
+      position: absolute;
+      width: 185px;
+      font-size: 18px;
+      line-height: 1.22;
+      letter-spacing: 0.04em;
+      left: 20px;
+      top: 10px;
+    }
+  }
+}
+.btnCreateSprint {
+  position: relative;
+  margin: 40px 0 0px 60px;
+  cursor: pointer;
+  border: none;
+  width: 44px;
+  height: 44px;
+  background: url(./svg/plus.svg) no-repeat;
+  box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+  border-radius: 25px;
+  transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  &::after {
+    position: absolute;
+    width: 160px;
+    top: 60px;
+    left: -60px;
+    content: 'Create a sprint';
+  }
+  &:focus,
+  &:hover {
+    outline: none;
+    box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+    transform: scale(1.15);
+  }
+}
+.btnOpenAnalytics {
+  position: absolute;
+  z-index: 10;
+  cursor: pointer;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+  background: center url(./svg/analytics.svg) no-repeat;
+  transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  &:focus,
+  &:hover {
+    outline: none;
+    box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+    transform: scale(1.15);
+  }
+  @media screen and (min-width: $tablet) {
+    bottom: 80px;
+    right: 10px;
+  }
+  @media screen and (max-width: $mobile-max) {
+    bottom: 30px;
+    left: 0;
+    z-index: 1;
+    top: calc(100vh - 200px);
+  }
+}
