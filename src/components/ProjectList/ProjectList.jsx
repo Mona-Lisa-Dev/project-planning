@@ -7,7 +7,9 @@ import styles from './ProjectList.module.scss';
 const ProjectList = () => {
   const projects = useSelector(getProjects);
 
-  return (
+  return projects.length === 0 ? (
+    <p className={styles.listWrapper}>Create first project</p>
+  ) : (
     <ul className={styles.listWrapper}>
       {projects.map(project => (
         <li key={project.id} className={styles.listItem}>

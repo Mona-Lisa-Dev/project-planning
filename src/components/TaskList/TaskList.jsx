@@ -34,7 +34,7 @@ const TaskList = ({ tasks }) => {
           <li className={styles.taskListHeadItem}>Hours spent</li>
         </ul>
 
-        <label>
+        <label className={styles.searchForm}>
           <input
             className={
               isVisibleInputFind ? styles.findInputActive : styles.findInput
