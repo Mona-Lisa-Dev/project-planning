@@ -11,12 +11,8 @@ import ButtonDelete from '../ButtonDelete';
 import styles from './TaskItem.module.scss';
 
 const TaskItem = ({ id, name, sprint, scheduledTime, totalTime, byDay }) => {
-  // const { id, name, sprint, scheduledTime, totalTime = 0, byDay } = task;
-
-  // console.log('Object.keys(byDay)[0]', task.byDay);
-
   const [queryCustomTime, setQueryCustomTime] = useState(0);
-
+  const [day, setDay] = useState('');
   // const [queryTotalTime, setQueryTotalTime] = useState(totalTime);
 
   const dispatch = useDispatch();
@@ -24,15 +20,13 @@ const TaskItem = ({ id, name, sprint, scheduledTime, totalTime, byDay }) => {
   useEffect(() => {
     if (!byDay) return;
     setQueryCustomTime(Object.values(byDay)[0]);
-
-    // setQueryTotalTime(totalTime);
+    setDay(Object.keys(byDay)[0]);
   }, [byDay]);
 
   const handleInputChange = e => {
     if (
       typeof Number(e.target.value) !== 'number' ||
       Number(e.target.value) < 0
-      // ||
     ) {
       console.log('Enter number more 0');
       console.log(typeof e.target.value);
@@ -41,34 +35,29 @@ const TaskItem = ({ id, name, sprint, scheduledTime, totalTime, byDay }) => {
     // if (spenHours === Number(e.target.value)) return;//
     setQueryCustomTime(Number(e.target.value));
     if (typeof e.target.value !== 'number') return;
-    // setQueryTotalTime(Number(totalTime) - spenHours + Number(e.target.value));
   };
 
-  // const handleInputChange = e => {
-  //   if (e.target.value === '') return;
-  //   setQueryCustomTime(Number(e.target.value));
-
-  //   // if (typeof queryCustomTime === 'number' && queryCustomTime >= 0) {
-  //   //   onSubmitRequest(queryCustomTime);
-  //   // }
-  // };
-
-  const handleDeleteClick = () => {};
-  // dispatch(tasksOperations.deleteTask(currentSprint.id, id));
+  const handleDeleteClick = async () => {
+    await dispatch(tasksOperations.deleteTask(sprint, id));
+    await dispatch(
+      tasksOperations.getTasksByDay(
+        sprint,
+        day || dayjs(new Date()).format('YYYY-MM-DD'),
+      ),
+    );
+  };
 
   //TODO функция отправляет запрос на бэк для сохранения часов
   const onSubmitRequest = async () => {
     const payload = {
       sprintId: sprint,
       taskId: id,
-      day: Object.keys(byDay)[0],
+      day,
       value: queryCustomTime,
     };
 
     await dispatch(tasksOperations.updateTask(payload));
-    await dispatch(
-      tasksOperations.getTasksByDay(sprint, Object.keys(byDay)[0]),
-    );
+    await dispatch(tasksOperations.getTasksByDay(sprint, day));
 
     // setQueryTotalTime(
     //   Number(queryCustomTime) + Number(queryTotalTime) - Number(spenHours),

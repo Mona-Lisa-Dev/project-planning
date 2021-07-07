@@ -12,6 +12,7 @@ const TaskList = ({ tasks }) => {
   const [searchText, setSearchText] = useState('');
 
   const dispatch = useDispatch();
+  console.log('tasks', tasks);
 
   const changesVisibleInputFind = () => {
     setIsVisibleInputFind(!isVisibleInputFind);

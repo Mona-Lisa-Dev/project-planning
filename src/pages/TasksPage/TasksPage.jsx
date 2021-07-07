@@ -16,7 +16,6 @@ import sprintsOperations from 'redux/sprints/sprints-operations';
 import tasksOperations from 'redux/tasks/tasks-operations';
 
 import styles from './TasksPage.module.scss';
-import { getDate } from 'date-fns';
 
 const TasksPage = props => {
   const [sprintName, setSprintName] = useState('');
@@ -32,8 +31,6 @@ const TasksPage = props => {
   const currentSprint = useSelector(getCurrentSprint);
   const sprints = useSelector(getSprints);
   const tasks = useSelector(getTasks);
-  // console.log('tasks', tasks);
-  // console.log('currentSprint', currentSprint);
 
   const arrDate = currentSprint?.totalDaly?.reduce(
     (acc, day) => [...acc, Object.keys(day)[0]],
