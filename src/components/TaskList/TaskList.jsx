@@ -57,12 +57,21 @@ const TaskList = ({ tasks }) => {
       ) : (
         <ul className={styles.taskList}>
           {visibleTasks.map(
-            ({ id, name, sprint, scheduledTime, totalTime, byDay }) => (
+            ({
+              id,
+              name,
+              sprint,
+              scheduledTime,
+              totalTime,
+              byDay,
+              project,
+            }) => (
               <TaskItem
                 key={id}
                 id={id}
                 name={name}
                 sprint={sprint}
+                project={project}
                 scheduledTime={scheduledTime}
                 totalTime={totalTime}
                 byDay={byDay}
