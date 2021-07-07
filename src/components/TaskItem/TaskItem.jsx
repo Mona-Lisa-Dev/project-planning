@@ -5,12 +5,21 @@ import dayjs from 'dayjs';
 import { confirmAlert } from 'react-confirm-alert';
 import '../ButtonDeleteProject/react-confirm-alert.scss';
 
+import sprintsOperations from 'redux/sprints/sprints-operations';
 import tasksOperations from 'redux/tasks/tasks-operations';
 
 import ButtonDelete from '../ButtonDelete';
 import styles from './TaskItem.module.scss';
 
-const TaskItem = ({ id, name, sprint, scheduledTime, totalTime, byDay }) => {
+const TaskItem = ({
+  id,
+  name,
+  sprint,
+  scheduledTime,
+  totalTime,
+  byDay,
+  project,
+}) => {
   const [queryCustomTime, setQueryCustomTime] = useState(0);
   const [day, setDay] = useState('');
   // const [queryTotalTime, setQueryTotalTime] = useState(totalTime);
@@ -58,6 +67,7 @@ const TaskItem = ({ id, name, sprint, scheduledTime, totalTime, byDay }) => {
 
     await dispatch(tasksOperations.updateTask(payload));
     await dispatch(tasksOperations.getTasksByDay(sprint, day));
+    await dispatch(sprintsOperations.getSprintById(project, sprint));
 
     // setQueryTotalTime(
     //   Number(queryCustomTime) + Number(queryTotalTime) - Number(spenHours),
