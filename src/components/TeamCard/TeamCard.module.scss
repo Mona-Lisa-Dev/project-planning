@@ -2,13 +2,30 @@
 @import '../../scss/breakpoints';
 
 .card {
-  padding: 10px;
+  padding: 20px;
+}
+
+.photoWrapper {
+  width: 100%;
 }
 
 .name {
   margin-bottom: 10px;
   font-weight: 500;
   font-size: 18px;
+  line-height: 1.22;
+  letter-spacing: 0.04em;
+  text-align: center;
+
+  @media screen and (min-width: $desktop) {
+    height: 42px;
+  }
+}
+
+.position {
+  margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 16px;
   line-height: 1.22;
   letter-spacing: 0.04em;
   text-align: center;
@@ -19,11 +36,16 @@
   justify-content: space-around;
 }
 
+.doingList {
+  height: 185px;
+  padding: 10px 0;
+}
+
 .doing {
-  margin-bottom: 16px;
+  margin-bottom: 5px;
 
   font-weight: normal;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.21;
   display: flex;
   align-items: center;
@@ -32,8 +54,10 @@
 
 .photo {
   margin-bottom: 30px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  display: block;
+  object-fit: cover;
+
   height: 200px;
 }
 

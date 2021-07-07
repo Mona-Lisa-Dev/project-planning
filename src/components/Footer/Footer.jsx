@@ -13,6 +13,7 @@ const Footer = () => {
       <span className={styles.Footer_text}>
         © 2021 | All Rights Reserved | Developed by
       </span>
+      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
       <a className={styles.Footer_link} onClick={toggleModal}>
         GoIT Students
       </a>
