@@ -1,0 +1,49 @@
+@import '../../scss/vars';
+@import '../../scss/breakpoints';
+
+.card {
+  padding: 10px;
+}
+
+.name {
+  margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.22;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.links {
+  display: flex;
+  justify-content: space-around;
+}
+
+.doing {
+  margin-bottom: 16px;
+
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.21;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+}
+
+.photo {
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 200px;
+}
+
+.icons {
+  fill: $text-light;
+
+  @media screen and (min-width: $desktop) {
+    &:hover,
+    &:focus {
+      fill: $main-orange;
+    }
+  }
+}

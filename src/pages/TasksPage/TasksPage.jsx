@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
+import dayjs from 'dayjs';
+
 import TaskList from 'components/TaskList';
 import Modal from 'components/Modal';
 import CreateTaskForm from 'components/CreateTaskForm';
@@ -22,6 +24,7 @@ const TasksPage = props => {
   const [showModalAnalytics, setShowModalAnalytics] = useState(false);
   const [showChangeTitleForm, setShowChangeTitleForm] = useState(false);
 
+  const [currentDay, setCurrentDay] = useState(1);
   const { projectId, sprintId } = props.match.params;
   const dispatch = useDispatch();
 
@@ -29,14 +32,48 @@ const TasksPage = props => {
   const sprints = useSelector(getSprints);
   const tasks = useSelector(getTasks);
 
-  console.log('currentSprint', currentSprint);
+  const arrDate = currentSprint?.totalDaly?.reduce(
+    (acc, day) => [...acc, Object.keys(day)[0]],
+    [],
+  );
 
-  const paginationTotalPages = new Array(currentSprint?.duration).fill(); // totalPages
-  console.log('paginationTotalPages', paginationTotalPages);
+  // console.log('currentSprint', currentSprint.startDate);
 
   useEffect(() => {
+    async function fetchData() {
+      await dispatch(sprintsOperations.getSprintById(projectId, sprintId));
+      await dispatch(
+        tasksOperations.getTasksByDay(
+          sprintId,
+          dayjs(new Date()).format('YYYY-MM-DD'),
+        ),
+      );
+    }
+
+    fetchData();
+  }, [dispatch, projectId, sprintId]);
+
+  // console.log(`arrDate`, arrDate);
+
+  const onClickDay = i => {
+    const day = arrDate.find((el, ind) => ind === i - 1 && el);
+    console.log('dayOnClick', day);
+
+    setCurrentDay(currentDay === 1 ? currentDay : currentDay - 1);
+    dispatch(tasksOperations.getTasksByDay(currentSprint.id, day));
+  };
+
+  const onClickNextDay = i => {
+    const day = arrDate.find((el, ind) => ind === i + 1 && el);
+    console.log('dayOnClickNext', day);
+
+    setCurrentDay(currentDay !== arrDate.length ? currentDay + 1 : currentDay);
+    dispatch(tasksOperations.getTasksByDay(currentSprint.id, day));
+  };
+
+  useEffect(() => {
+    dispatch(sprintsOperations.getAllSprints(projectId));
     dispatch(sprintsOperations.getSprintById(projectId, sprintId));
-    dispatch(tasksOperations.getAllTasks(sprintId));
   }, [dispatch, projectId, sprintId]);
 
   const handleCloseModal = () => {
@@ -78,131 +115,164 @@ const TasksPage = props => {
   };
 
   return (
-    <>
-      <main>
-        <aside>
-          <SideBar>
-            <Link
-              className={styles.linkToBack}
-              to={{
-                pathname: `/projects/${projectId}`,
-              }}
-            >
-              Show sprints
-            </Link>
-            <div className={styles.navSprintsList}>
-              <ul>
-                {sprints.map(sprint => (
-                  <li key={sprint.id}>
-                    <NavLink
-                      className={styles.linkToSprint}
-                      activeClassName={styles.linkToSprintActive}
-                      to={{
-                        pathname: `/projects/${projectId}/${sprint.id}`,
-                      }}
+    currentSprint && (
+      <>
+        <main>
+          <aside>
+            <SideBar>
+              <Link
+                className={styles.linkToBack}
+                to={{
+                  pathname: `/projects/${projectId}`,
+                }}
+              >
+                Show sprints
+              </Link>
+              <div className={styles.navSprintsList}>
+                <ul>
+                  {sprints.map(sprint => (
+                    <li key={sprint.id}>
+                      <NavLink
+                        className={styles.linkToSprint}
+                        activeClassName={styles.linkToSprintActive}
+                        to={{
+                          pathname: `/projects/${projectId}/${sprint.id}`,
+                        }}
+                      >
+                        <div className={styles.sprintsWrap}>
+                          <span />
+                          <h3>{sprint.name}</h3>
+                        </div>
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+
+                {/*Кнопка создания спринта в сайдбаре */}
+                <button
+                  type="button"
+                  className={styles.btnCreateSprint}
+                  onClick={openModalCreateSprint}
+                ></button>
+              </div>
+            </SideBar>
+          </aside>
+
+          <div className={styles.sprintContent}>
+            <div className={styles.sprintDate}>
+              <ul className={styles.pagination}>
+                {arrDate.map((day, i) => (
+                  <li
+                    key={day}
+                    className={
+                      currentDay === i + 1
+                        ? styles.paginationItem
+                        : styles.paginationItemNone
+                    }
+                  >
+                    <button
+                      type="button"
+                      onClick={() => onClickDay(i)}
+                      className={styles.btnBefore}
+                      disabled={currentDay === 1 ? true : false}
                     >
-                      <div className={styles.sprintsWrap}>
-                        <span />
-                        <h3>{sprint.name}</h3>
-                      </div>
-                    </NavLink>
+                      {'<'}
+                    </button>
+
+                    <p className={styles.currentDay}>{i + 1} / </p>
+                    <p className={styles.totalDay}>{arrDate.length}</p>
+                    <button
+                      type="button"
+                      onClick={() => onClickNextDay(i)}
+                      className={styles.btnNext}
+                      disabled={currentDay === arrDate.length ? true : false}
+                    >{`>`}</button>
+                    <p className={styles.calendarDay}> {day}</p>
                   </li>
                 ))}
               </ul>
+            </div>
+            <div className={styles.sprintHeader}>
+              <h1
+                className={
+                  showChangeTitleForm ? styles.titleDisable : styles.title
+                }
+              >
+                {currentSprint?.name}
+              </h1>
 
-              {/*Кнопка создания спринта в сайдбаре */}
+              <form
+                onSubmit={handleSubmit}
+                className={
+                  showChangeTitleForm
+                    ? styles.changeTitleFormActive
+                    : styles.changeTitleForm
+                }
+              >
+                <input
+                  className={styles.inputChangeTitle}
+                  value={sprintName}
+                  onChange={handleInputChangeTitle}
+                ></input>
+                {/* Кнопка сoхранения нового названия */}
+                <button type="submit" className={styles.btnSaveChange}></button>
+              </form>
+
+              {/* Кнопка открытия формы для изменения названия */}
               <button
                 type="button"
-                className={styles.btnCreateSprint}
-                onClick={openModalCreateSprint}
+                className={
+                  showChangeTitleForm
+                    ? styles.btnChangeDisable
+                    : styles.btnChange
+                }
+                onClick={handleClickBtnChange}
+              ></button>
+
+              {/* Кнопка открытия модалки создания новой задачи */}
+              <button
+                type="button"
+                className={styles.btnCreateTask}
+                onClick={openModalCreateTask}
               ></button>
             </div>
-          </SideBar>
-        </aside>
-
-        <div className={styles.sprintContent}>
-          <div className={styles.sprintDate}>
-            {paginationTotalPages.map((_, i) => (
-              <button type="button">{i + 1}</button>
-            ))}
-            <p>current date</p>
+            {/* Кнопка открытия модалки с аналитикой */}
+            {tasks.length > 2 && (
+              <button
+                type="button"
+                className={styles.btnOpenAnalytics}
+                onClick={openModalAnalytics}
+              ></button>
+            )}
+            <TaskList tasks={tasks} />
           </div>
+        </main>
 
-          <div className={styles.sprintHeader}>
-            <h1
-              className={
-                showChangeTitleForm ? styles.titleDisable : styles.title
-              }
-            >
-              {currentSprint?.name}
-            </h1>
-
-            <form
-              onSubmit={handleSubmit}
-              className={
-                showChangeTitleForm
-                  ? styles.changeTitleFormActive
-                  : styles.changeTitleForm
-              }
-            >
-              <input
-                className={styles.inputChangeTitle}
-                value={sprintName}
-                onChange={handleInputChangeTitle}
-              ></input>
-              {/* Кнопка сoхранения нового названия */}
-              <button type="submit" className={styles.btnSaveChange}></button>
-            </form>
-
-            {/* Кнопка открытия формы для изменения названия */}
-            <button
-              type="button"
-              className={
-                showChangeTitleForm ? styles.btnChangeDisable : styles.btnChange
-              }
-              onClick={handleClickBtnChange}
-            ></button>
-
-            {/* Кнопка открытия модалки создания новой задачи */}
-            <button
-              type="button"
-              className={styles.btnCreateTask}
-              onClick={openModalCreateTask}
-            ></button>
-          </div>
-
-          {/* Кнопка открытия модалки с аналитикой */}
-          {tasks.length > 2 && (
-            <button
-              type="button"
-              className={styles.btnOpenAnalytics}
-              onClick={openModalAnalytics}
-            ></button>
-          )}
-
-          <TaskList currentSprint={currentSprint} tasks={tasks} />
-        </div>
-      </main>
-
-      {showModalCreateTask && (
-        <Modal onCloseModal={handleCloseModal}>
-          <CreateTaskForm
-            projectId={projectId}
-            sprintId={sprintId}
-            onClickCancel={handleCloseModal}
+        {showModalCreateTask && (
+          <Modal onCloseModal={handleCloseModal}>
+            <CreateTaskForm
+              projectId={projectId}
+              sprintId={sprintId}
+              onClickCancel={handleCloseModal}
+            />
+          </Modal>
+        )}
+        {showModalCreateSprint && (
+          <Modal onCloseModal={handleCloseModal}>
+            <CreateSprint
+              onClickCancel={handleCloseModal}
+              projectId={projectId}
+            />
+          </Modal>
+        )}
+        {showModalAnalytics && (
+          <DiagramModal
+            sprint={currentSprint}
+            onCloseModal={handleCloseModal}
           />
-        </Modal>
-      )}
-      {showModalCreateSprint && (
-        <Modal onCloseModal={handleCloseModal}>
-          <CreateSprint
-            onClickCancel={handleCloseModal}
-            projectId={projectId}
-          />
-        </Modal>
-      )}
-      {showModalAnalytics && <DiagramModal onCloseModal={handleCloseModal} />}
-    </>
+        )}
+      </>
+    )
   );
 };
 

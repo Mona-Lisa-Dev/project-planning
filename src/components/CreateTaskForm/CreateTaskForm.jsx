@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import tasksOperations from 'redux/tasks/tasks-operations';
+import sprintsOperations from 'redux/sprints/sprints-operations';
 import s from './CreateTaskForm.module.scss';
 
 const CreateTaskForm = ({ projectId, sprintId, onClickCancel }) => {
@@ -20,7 +21,7 @@ const CreateTaskForm = ({ projectId, sprintId, onClickCancel }) => {
     setHours(e.target.value);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     // если пустой инпут, подсвечиваем красным
     if (!task || !hours) {
@@ -28,12 +29,14 @@ const CreateTaskForm = ({ projectId, sprintId, onClickCancel }) => {
       return;
     }
 
-    dispatch(
+    await dispatch(
       tasksOperations.createTask(projectId, sprintId, {
         name: task,
         scheduledTime: hours,
       }),
     );
+    await dispatch(sprintsOperations.getSprintById(projectId, sprintId));
+
     onClickCancel();
 
     setTask('');
@@ -60,7 +63,8 @@ const CreateTaskForm = ({ projectId, sprintId, onClickCancel }) => {
           <input
             id={hours}
             value={hours}
-            type="number"
+            type="text"
+            pattern="[0-9]{1,2}$"
             name="hours"
             placeholder={
               emptyInput ? 'Enter scheduled hours' : 'Scheduled hours'

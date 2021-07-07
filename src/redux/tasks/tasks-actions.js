@@ -20,4 +20,8 @@ export const getTaskByIdRequest = createAction('tasks/getTaskByIdRequest');
 export const getTaskByIdSuccess = createAction('tasks/getTaskByIdSuccess');
 export const getTaskByIdError = createAction('tasks/getTaskByIdError');
 
+export const getTasksByDayRequest = createAction('tasks/getTasksByDayRequest');
+export const getTasksByDaySuccess = createAction('tasks/getTasksByDaySuccess');
+export const getTasksByDayError = createAction('tasks/getTasksByDayError');
+
 export const changeFilter = createAction('tasks/changeFilter');

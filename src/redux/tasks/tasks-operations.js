@@ -16,6 +16,9 @@ import {
   getTaskByIdRequest,
   getTaskByIdSuccess,
   getTaskByIdError,
+  getTasksByDayRequest,
+  getTasksByDaySuccess,
+  getTasksByDayError,
 } from './tasks-actions';
 
 const getAllTasks = sprintId => async dispatch => {
@@ -93,6 +96,23 @@ const updateTask = payload => async dispatch => {
   }
 };
 
+const getTasksByDay = (sprintId, day) => async dispatch => {
+  dispatch(getTasksByDayRequest());
+  console.log('day', day);
+
+  try {
+    const {
+      data: { data },
+    } = await axios.get(`/tasks/${sprintId}/byday=${day}`);
+    dispatch(getTasksByDaySuccess(data.tasksByDay));
+    console.log('data', data);
+
+    return data.tasksByDay;
+  } catch (error) {
+    dispatch(getTasksByDayError(error.message));
+  }
+};
+
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
   getAllTasks,
@@ -100,4 +120,5 @@ export default {
   createTask,
   deleteTask,
   updateTask,
+  getTasksByDay,
 };

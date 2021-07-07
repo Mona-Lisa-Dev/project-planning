@@ -1,16 +1,100 @@
 @import '../../scss/vars';
 @import '../../scss/breakpoints';
 
-.labelForm {
-  font-family: $main-font;
+//======================================newAnimationForInput===============================================
+
+.labelBox {
   position: relative;
+  width: 100%;
+  margin-bottom: 50px;
+  @media screen and (max-width: $mobile-max) {
+    margin-bottom: 58px;
+  }
 }
 
+.labelBoxDescription {
+  position: relative;
+  width: 100%;
+  margin-bottom: 60px;
+  @media screen and (max-width: $mobile-max) {
+    margin-bottom: 40px;
+    font-size: 16px;
+  }
+}
+
+.labelBox::before,
+.labelBox::after,
+.labelBoxDescription::before,
+.labelBoxDescription::after {
+  content: '';
+  position: absolute;
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  background-color: $main-orange;
+  transition: width 0.2s;
+}
+
+.labelBox::before,
+.labelBoxDescription::before {
+  left: 50%;
+}
+
+.labelBox::after,
+.labelBoxDescription::after {
+  right: 50%;
+}
+
+.input_name:focus ~ .labelBox::before,
+.input_name:focus ~ .labelBox::after,
+.input:focus ~ .labelBoxDescription::before,
+.input:focus ~ .labelBoxDescription::after {
+  width: 50%;
+}
+
+.nameLabel {
+  position: absolute;
+  top: -25px;
+
+  pointer-events: none;
+
+  color: $text-light;
+  font-size: 18px;
+  transition: 0.2s ease all;
+  @media screen and (max-width: $mobile-max) {
+    font-size: 16px;
+  }
+}
+
+.descriptionLabel {
+  position: absolute;
+  top: -25px;
+
+  pointer-events: none;
+
+  color: $text-light;
+  font-size: 18px;
+  transition: 0.2s ease all;
+  @media screen and (max-width: $mobile-max) {
+    font-size: 16px;
+  }
+}
+
+.input_name:focus ~ .labelBox .nameLabel,
+.input_name:not(:placeholder-shown) ~ .labelBox .nameLabel {
+  font-size: 12px;
+  transform: translateY(-18px);
+}
+
+.input:focus ~ .labelBoxDescription .descriptionLabel,
+.input:not(:placeholder-shown) ~ .labelBoxDescription .descriptionLabel {
+  font-size: 12px;
+  transform: translateY(-18px);
+}
+
+//===============================================================================================================================================
+
 .form {
-  // position: absolute;
-  // top: 0;
-  // right: 0;
-  // height: 100%;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -18,19 +102,6 @@
   color: $text-dark;
   border: $form-input-border;
   border: none;
-  // @media screen and (max-width: $mobile-max) {
-  // padding: 63px 20px 0 20px;
-  // width: 320px;
-  // top: 60px;
-  // }
-  // @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
-  // padding: 120px 70px 0 89px;
-  // width: 512px;
-  // }
-  // @media screen and (min-width: $desktop) {
-  // padding: 120px 50px 0 50px;
-  // width: 530px;
-  // }
 }
 
 .title {
@@ -48,7 +119,6 @@
 
 .input,
 .empty_input {
-  margin-bottom: 60px;
   width: 100%;
   height: 30px;
   border: none;
@@ -58,51 +128,26 @@
   outline: 0;
 
   font-size: 18px;
-  // &::placeholder {
-  //   margin-bottom: 9px;
-  //   color: $text-light;
-  //   font-size: 16px;
-  // }
-
-  &:hover {
-    border-color: $main-orange;
-    outline: 0;
-  }
-
-  &:focus-within {
-    border-color: $main-orange;
-    outline: 0;
-  }
 
   @media screen and (max-width: $mobile-max) {
-    margin-bottom: 40px;
     font-size: 16px;
   }
 }
 
 .input_name {
-  margin-bottom: 50px;
   width: 100%;
   height: 30px;
   border: none;
   border-bottom: $form-input-border;
+  font-size: 18px;
 
-  &:hover {
-    border-color: $main-orange;
-    outline: 0;
-  }
   &:focus-within {
     border-color: $main-orange;
     outline: 0;
   }
 
-  // &::placeholder {
-  //   margin-bottom: 9px;
-  //   color: $text-light;
-  //   font-size: 16px;
-  // }
   @media screen and (max-width: $mobile-max) {
-    margin-bottom: 58px;
+    font-size: 16px;
   }
 }
 
@@ -113,56 +158,9 @@
   }
 }
 
-.nameInput {
-  color: $text-light;
-  font-size: 16px;
-  position: absolute;
-  left: 5px;
-  // top: 26px;
-  transform: translateY(9px);
-  transition: transform 250ms linear;
-  font-weight: normal;
-}
-
-.descriptionInput {
-  // margin-bottom: 9px;
-  color: $text-light;
-  font-size: 16px;
-  position: absolute;
-  left: 50px;
-  // transform: translateY(9px);
-  transition: transform 250ms linear;
-  font-weight: normal;
-}
-
-.empty_input:not(:placeholder-shown) + .nameInput {
-  transform: translateY(-18px);
-  font-size: 12px;
-}
-
-.input_name:not(:placeholder-shown) + .nameInput {
-  transform: translateY(-18px);
-  font-size: 12px;
-}
-
-.input:not(:placeholder-shown) + .nameInput {
-  transform: translateY(-18px);
-  font-size: 12px;
-}
-
-.labelForm:focus-within > .nameInput {
-  transform: translateY(-18px);
-  font-size: 12px;
-}
-
-.empty_input + .nameInput {
-  transform: translateY(-18px);
-  font-size: 12px;
-}
-
 .ready_btn {
   margin: 0 auto;
-  // margin-top: 40px;
+
   margin-bottom: 20px;
   width: 148px;
   height: 44px;

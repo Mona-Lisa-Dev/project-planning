@@ -16,6 +16,7 @@ import sprintsOperations from 'redux/sprints/sprints-operations';
 
 import s from './CreateSprint.module.scss';
 
+// Form
 const useStyles = makeStyles({
   root: {
     '& .MuiGrid-container': {
@@ -211,7 +212,6 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
   // Input - Date
   const handleDateChange = date => {
     setError(false);
-
     setSelectedDate(date);
   };
 
@@ -249,11 +249,8 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
       duration,
     };
 
-    // Лена, валидация еще не дописана !!!!!!!!!
     dispatch(sprintsOperations.createSprint(projectId, newSprint));
     onClickCancel();
-
-    console.log('newSprint-->', newSprint);
 
     setSprintName('');
     setSelectedDate(new Date());

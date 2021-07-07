@@ -31,6 +31,7 @@ main {
     }
 
     @media screen and (min-width: $tablet) {
+      position: relative;
       min-height: calc(100vh - 81px);
       border-right: 1px solid rgba(24, 28, 39, 0.1);
     }
@@ -41,6 +42,10 @@ main {
     }
 
     .CreateNewProjectWrap {
+      position: absolute;
+      bottom: 0;
+      width: calc(100% - 50px);
+
       padding: 0 0 40px;
       text-align: center;
 
@@ -132,9 +137,6 @@ main {
               transform: scale(1.2);
             }
           }
-          // .EditIcon {
-          //   cursor: pointer;
-          // }
         }
 
         p {
@@ -200,12 +202,6 @@ main {
             margin-right: 16px;
           }
         }
-
-        span {
-          @media screen and (min-width: $desktop) {
-            margin-bottom: 6px;
-          }
-        }
       }
     }
   }
@@ -222,6 +218,7 @@ main {
   height: 44px;
   border-radius: 25px;
   transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+
   &:focus,
   &:hover {
     outline: none;

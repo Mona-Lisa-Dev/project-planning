@@ -47,29 +47,34 @@ const CreateProject = ({ onClickCancel }) => {
     <div className={styles.form}>
       <h2 className={styles.title}>Creating a project</h2>
       <form onSubmit={handleSubmit} autoComplete="off" className={styles.form}>
-        <label className={styles.labelForm}>
-          <input
-            value={name}
-            name="name"
-            type="text"
-            placeholder={emptyInput ? 'Please enter project name' : ' '}
-            className={emptyInput ? styles.empty_input : styles.input_name}
-            onChange={handleNameChange}
-          />
-          <span className={styles.nameInput}>Project name</span>
-        </label>
-        <label className={styles.labelForm}>
-          <input
-            id="add"
-            value={description}
-            name="description"
-            type="text"
-            placeholder={emptyInput ? 'Please enter description' : ' '}
-            className={emptyInput ? styles.empty_input : styles.input}
-            onChange={handleDescriptionChange}
-          />
-          <span className={styles.nameInput}>Descirption</span>
-        </label>
+        <input
+          value={name}
+          name="name"
+          type="text"
+          placeholder={emptyInput ? 'Please enter project name' : ' '}
+          className={emptyInput ? styles.empty_input : styles.input_name}
+          onChange={handleNameChange}
+        />
+        <div className={styles.labelBox}>
+          <label className={styles.nameLabel}>
+            {emptyInput ? ' ' : 'Project name'}
+          </label>
+        </div>
+
+        <input
+          id="add"
+          value={description}
+          name="description"
+          type="text"
+          placeholder={emptyInput ? 'Please enter description' : ' '}
+          className={emptyInput ? styles.empty_input : styles.input}
+          onChange={handleDescriptionChange}
+        />
+        <div className={styles.labelBoxDescription}>
+          <label className={styles.descriptionLabel}>
+            {emptyInput ? ' ' : 'Please enter description'}
+          </label>
+        </div>
 
         {loading && <Spinner />}
 

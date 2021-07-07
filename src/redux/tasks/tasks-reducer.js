@@ -17,19 +17,20 @@ import {
   getTaskByIdRequest,
   getTaskByIdSuccess,
   getTaskByIdError,
+  getTasksByDayRequest,
+  getTasksByDaySuccess,
+  getTasksByDayError,
   changeFilter,
 } from './tasks-actions';
 
 import { logoutSuccess } from 'redux/auth/auth-actions';
 
 const tasksItems = createReducer([], {
-  [getAllTasksSuccess]: (_, { payload }) => payload,
+  // [getAllTasksSuccess]: (_, { payload }) => payload,
   [createTaskSuccess]: (state, { payload }) => [...state, payload],
-  [deleteTaskSuccess]: (state, { payload }) =>
-    state.filter(({ id }) => id !== payload),
-  [updateTaskSuccess]: (state, { payload }) =>
-    state.map(item => (item.id === payload.id ? payload : item)),
-
+  [updateTaskSuccess]: (state, { payload }) => [...state, payload],
+  [getTasksByDaySuccess]: (_, { payload }) => payload,
+  [getTasksByDayError]: () => [],
   [logoutSuccess]: () => [],
 });
 
@@ -57,6 +58,9 @@ const loading = createReducer(false, {
   [getTaskByIdRequest]: () => true,
   [getTaskByIdSuccess]: () => false,
   [getTaskByIdError]: () => false,
+  [getTasksByDayRequest]: () => true,
+  [getTasksByDaySuccess]: () => false,
+  [getTasksByDayError]: () => false,
 });
 
 const error = createReducer(null, {
@@ -70,6 +74,8 @@ const error = createReducer(null, {
   [updateTaskRequest]: () => null,
   [getTaskByIdError]: (_, { payload }) => payload,
   [getTaskByIdRequest]: () => null,
+  [getTasksByDayError]: (_, { payload }) => payload,
+  [getTasksByDayRequest]: () => null,
 });
 
 export default combineReducers({
