@@ -41,7 +41,7 @@ const TaskItem = ({
       console.log(typeof e.target.value);
       // return;
     }
-    // if (spenHours === Number(e.target.value)) return;//
+    // if (spenHours === Number(e.target.value)) return; //
     setQueryCustomTime(Number(e.target.value));
     if (typeof e.target.value !== 'number') return;
   };
