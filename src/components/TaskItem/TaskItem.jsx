@@ -111,7 +111,7 @@ const TaskItem = ({
       <p className={styles.planTime}> {scheduledTime} </p>
       <div className={styles.inputTimeBefore}>
         <input
-          type="text"
+          type="number"
           value={queryCustomTime}
           onBlur={onSubmitRequest}
           onChange={handleInputChange}
