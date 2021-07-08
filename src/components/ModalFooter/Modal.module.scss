@@ -55,11 +55,22 @@
     .CloseModalBtn {
       position: absolute;
       top: 0;
-      right: 0;
       padding: 9px;
       width: 44px;
       height: 44px;
       cursor: pointer;
+
+      @media screen and (max-width: $mobile-max) {
+        margin-left: 290px;
+      }
+
+      @media screen and (min-width: $tablet) {
+        margin-left: 640px;
+      }
+
+      @media screen and (min-width: $desktop) {
+        right: 0;
+      }
     }
   }
 }
