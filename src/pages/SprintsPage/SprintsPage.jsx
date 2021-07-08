@@ -95,8 +95,8 @@ const SprintsPage = props => {
 
   return (
     <>
-      <main>
-        <aside>
+      <main className={s.main}>
+        <aside className={s.aside}>
           <SideBar>
             <ShowProjects />
             <SideBarProjects projects={projects} />
