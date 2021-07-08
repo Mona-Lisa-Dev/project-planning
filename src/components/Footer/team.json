@@ -2,10 +2,10 @@
   {
     "id": "1",
     "name": "Elena Tsemko",
-    "photo": "imagesTeam/Lena.jpeg",
+    "photo": "imagesTeam/Lena.jpg",
     "linkedin": "https://www.linkedin.com/in/elena-tsemko/",
     "github": "https://github.com/OlenaTsemko",
-    "position": "Frontend developer",
+    "position": "Fullstack developer",
     "doing": [
       "- Team-lead",
       "- Redux (state | operations | selectors)",
@@ -22,7 +22,7 @@
     "photo": "imagesTeam/Viki.jpg",
     "linkedin": "https://www.linkedin.com/in/viktoriia-ksenofontova",
     "github": "https://github.com/Viktoriia-Ksenofontova",
-    "position": "Frontend developer",
+    "position": "Fullstack developer",
     "doing": [
       "- Scrum master",
       "- Created TasksPage adaptive for media queries (JSX, SCSS, logic)",
@@ -39,12 +39,14 @@
     "photo": "imagesTeam/Artem.jpg",
     "linkedin": "https://www.linkedin.com/in/artem-sergieiev/",
     "github": "https://github.com/ArtemS83",
-    "position": "Backend developer",
+    "position": "Fullstack developer",
     "doing": [
+      "Backend:",
       "- Worked on backend schemas and the logic of the Project and Task",
       "- Validation",
       "- MongoDB",
-      "- Worked on API requests logic (frontend)",
+      "Frontend:",
+      "- Worked on API requests logic",
       "- Control styles",
       "- Control & fix bugs"
     ]
@@ -52,13 +54,15 @@
   {
     "id": "4",
     "name": "Alex Deviatov",
-    "photo": "imagesTeam/Alex.jpeg",
+    "photo": "imagesTeam/Alex.jpg",
     "linkedin": "https://www.linkedin.com/in/alex-deviatov/",
     "github": "https://github.com/lewyk",
-    "position": "Backend developer",
+    "position": "Fullstack developer",
     "doing": [
+      "Backend:",
       "- Worked on backend schemas and the logic of the Sprint and Task",
       "- Validation",
+      "Frontend:",
       "- Routing (frontend)",
       "- Control & fix styles",
       "- Control & fix bugs"
@@ -70,8 +74,9 @@
     "photo": "imagesTeam/Evgeniia.jpg",
     "linkedin": "https://www.linkedin.com/in/yevheniia-petrychenko-955483216/",
     "github": "https://github.com/yevheniia-petrychenko ",
-    "position": "Backend developer",
+    "position": "Fullstack developer",
     "doing": [
+      "Backend:",
       "- Created backend user component (scheme and the logic)",
       "- Worked on tasks component",
       "- Created swagger UI interface",
@@ -85,7 +90,7 @@
     "photo": "imagesTeam/Ihor.jpg",
     "linkedin": "https://www.linkedin.com/in/ihor-prokopets-652561208",
     "github": "https://github.com/Xoyk23",
-    "position": "Frontend developer",
+    "position": "Fullstack developer",
     "doing": [
       "- Created ProjectsPage",
       "- Created components AppBar, UserMenu",
@@ -101,7 +106,7 @@
     "photo": "imagesTeam/Evgeniia_.jpg",
     "linkedin": "https://www.linkedin.com/in/suska/",
     "github": "https://github.com/Yevheniia30",
-    "position": "Frontend developer",
+    "position": "Fullstack developer",
     "doing": [
       "- Сreated tasks performance diagram",
       "- Created components",
@@ -113,11 +118,11 @@
   },
   {
     "id": "8",
-    "name": "Vadim-Vatrya",
-    "photo": "imagesTeam/Vadim.png",
+    "name": "Vadim Vatrya",
+    "photo": "imagesTeam/Vadim.jpg",
     "linkedin": "https://www.linkedin.com/in/vadim-vatrya-4858b2204/",
     "github": "https://github.com/Vadim-Vatrya",
-    "position": "Frontend developer",
+    "position": "Fullstack developer",
     "doing": [
       "- Created markup and styles for registration page",
       "- Created markup and styles for login page",
@@ -131,7 +136,7 @@
     "photo": "imagesTeam/Olga.jpg",
     "linkedin": "https://www.linkedin.com/in/olga-tomilko",
     "github": "https://github.com/OlgaTomilko",
-    "position": "Frontend developer",
+    "position": "Fullstack developer",
     "doing": [
       "- Created components ProjectList, ProjectItem, SprintList",
       "- Created markup and styles for FooterModal (JSX, SCSS modules, logic)",
@@ -144,11 +149,11 @@
     "photo": "imagesTeam/Nataliia.JPG",
     "linkedin": "https://www.linkedin.com/in/nataliia-prykhodko-b829b5214/",
     "github": "https://github.com/Nataliia333",
-    "position": "Frontend developer",
+    "position": "Fullstack developer",
     "doing": [
       "- Created markup and styles for sprintItem adaptive for media queries",
-      "- Created markup and styles for Footer",
-      "- Control & fix styles (JSX, SCSS modules, logic)"
+      "- Created markup and styles for Footer (JSX, SCSS modules)",
+      "- Control & fix styles"
     ]
   },
   {
@@ -157,7 +162,7 @@
     "photo": "imagesTeam/Mira.jpg",
     "linkedin": "https://www.linkedin.com/in/myroslava-nikolaienko-3686b3211/",
     "github": "https://github.com/Mira1702",
-    "position": "Frontend developer",
+    "position": "Fullstack developer",
     "doing": [
       "- Created component CreateProject adaptive for media queries (JSX, SCSS modules, logic)",
       "- Created Project Presentation"
@@ -166,10 +171,10 @@
   {
     "id": "12",
     "name": "Serhii Stanislav",
-    "photo": "imagesTeam/Serhii.png",
+    "photo": "imagesTeam/Serhii.jpg",
     "linkedin": "https://www.linkedin.com/in/serhiistanislav",
     "github": "https://github.com/itstoreall",
-    "position": "Frontend developer",
+    "position": "Fullstack developer",
     "doing": [
       "- Сreated a SprintsPage adaptive for media queries (JSX, SCSS modules, logic)",
       "- Created Modal component, CreateSprint component",

@@ -43,6 +43,10 @@
   }
 }
 
+.Team_list {
+  padding-bottom: 30px;
+}
+
 @media screen and (min-width: $tablet) {
   .Team_list {
     display: flex;
@@ -52,13 +56,13 @@
 
 .Team_item {
   background-color: $form-reg-background;
-  border-radius: 5px;
+  border-radius: 8px;
   -webkit-box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.2),
     0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12);
 
   box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.2), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 1px 3px rgba(0, 0, 0, 0.12);
-  border-radius: 0px 0px 4px 4px;
+  // border-radius: 0px 0px 4px 4px;
 
   @media screen and (min-width: $mobile) and (max-width: $mobile-max) {
     &:not(:last-child) {

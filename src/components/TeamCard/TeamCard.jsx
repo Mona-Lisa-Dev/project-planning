@@ -4,7 +4,12 @@ const TeamCard = ({ team }) => {
   return (
     <div className={styles.card}>
       <div className={styles.photoWrapper}>
-        <img src={photo} alt="teammate" className={styles.photo} />
+        <img
+          src={photo}
+          loading="lazy"
+          alt="teammate"
+          className={styles.photo}
+        />
       </div>
       <h3 className={styles.name}>{team.name}</h3>
       <p className={styles.position}>{team.position}</p>
