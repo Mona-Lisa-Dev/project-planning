@@ -1,42 +1,58 @@
 @import '../../scss/vars';
+@import '../../scss/breakpoints';
 
-.SideBarProjectsList {
-  margin-bottom: 200px;
-  width: 170px;
+.SideBarProjectsWrap {
+  @media screen and (min-width: $tablet) {
+    margin-bottom: 8vh;
+    height: 45vh;
+    min-height: 320px;
+    overflow-y: scroll;
+  }
 
-  li {
-    &:not(:last-child) {
-      margin-bottom: 30px;
-    }
+  // Hides SideBarProjects scrollbar
+  -ms-overflow-style: none; // IE and Edge
+  scrollbar-width: none; // Firefox
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari,Opera
+  }
 
-    // Colors and Shadows --------------
-    &:nth-child(3n + 1) {
-      .link .square {
-        background-color: $project-purple;
+  .SideBarProjectsList {
+    width: 170px;
+
+    li {
+      &:not(:last-child) {
+        margin-bottom: 30px;
       }
-      .activeLink .squareShadow {
-        background-image: url('img/violet-8C72DF.png');
-        background-repeat: no-repeat;
+
+      // Colors and Shadows --------------
+      &:nth-child(3n + 1) {
+        .link .square {
+          background-color: $project-purple;
+        }
+        .activeLink .squareShadow {
+          background-image: url('img/violet-8C72DF.png');
+          background-repeat: no-repeat;
+        }
       }
-    }
-    &:nth-child(3n + 2) {
-      .link .square {
-        background-color: $project-rose;
+      &:nth-child(3n + 2) {
+        .link .square {
+          background-color: $project-rose;
+        }
+        .activeLink .squareShadow {
+          background-image: url('img/orange-FF765F.png');
+          background-repeat: no-repeat;
+        }
       }
-      .activeLink .squareShadow {
-        background-image: url('img/orange-FF765F.png');
-        background-repeat: no-repeat;
-      }
-    }
-    &:nth-child(3n) {
-      .link .square {
-        background-color: $project-green;
-      }
-      .activeLink .squareShadow {
-        background-image: url('img/green-71DF87.png');
-        background-repeat: no-repeat;
-      }
-    } // ----------- End Colors and Shadows
+      &:nth-child(3n) {
+        .link .square {
+          background-color: $project-green;
+        }
+        .activeLink .squareShadow {
+          background-image: url('img/green-71DF87.png');
+          background-repeat: no-repeat;
+        }
+      } // ----------- End Colors and Shadows
+
 
     .link {
       position: relative;
@@ -69,22 +85,23 @@
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
-      }
-    }
 
-    // Active Link
-    .activeLink {
-      .name {
-        font-weight: 700;
       }
 
-      .squareShadow {
-        position: absolute;
-        top: -2px;
-        left: -3px;
-        width: 44px;
-        height: 44px;
-        z-index: -1;
+      // Active Link
+      .activeLink {
+        .name {
+          font-weight: 700;
+        }
+
+        .squareShadow {
+          position: absolute;
+          top: -2px;
+          left: -3px;
+          width: 44px;
+          height: 44px;
+          z-index: -1;
+        }
       }
     }
   }

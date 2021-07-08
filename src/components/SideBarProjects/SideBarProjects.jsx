@@ -12,7 +12,7 @@ const SideBarProjects = ({ projects }) => {
   // ----- End useMediaQuery -----
 
   return (
-    <>
+    <div className={s.SideBarProjectsWrap}>
       {tablet && (
         <ul className={s.SideBarProjectsList}>
           {projects?.map(project => (
@@ -32,7 +32,7 @@ const SideBarProjects = ({ projects }) => {
           ))}
         </ul>
       )}
-    </>
+    </div>
   );
 };
 
