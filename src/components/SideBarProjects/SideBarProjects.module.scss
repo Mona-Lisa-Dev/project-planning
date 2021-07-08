@@ -7,17 +7,28 @@
     height: 45vh;
     min-height: 320px;
     overflow-y: scroll;
-  }
+    overflow-x: hidden;
+    scrollbar-width: thin;
 
-  // Hides SideBarProjects scrollbar
-  -ms-overflow-style: none; // IE and Edge
-  scrollbar-width: none; // Firefox
-  &::-webkit-scrollbar {
-    display: none; // Chrome, Safari,Opera
+    &::-webkit-scrollbar {
+      width: 3px;
+      background-color: #edeef3;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #ff6b08;
+      border-radius: 1.5px;
+    }
   }
 
   .SideBarProjectsList {
-    width: 170px;
+    @media screen and (min-width: $tablet) {
+      width: 185px;
+    }
+
+    @media screen and (min-width: $desktop) {
+      width: 177px;
+    }
 
     li {
       &:not(:last-child) {
@@ -54,6 +65,7 @@
       } // ----------- End Colors and Shadows
 
 
+
     .link {
       position: relative;
       display: flex;
@@ -61,6 +73,15 @@
       width: 170px;
       color: #181c27;
       text-align: left;
+      
+         @media screen and (min-width: $tablet) {
+          width: 177px;
+        }
+
+        @media screen and (min-width: $desktop) {
+          width: 165px;
+        }
+      
       .square {
         display: block;
         margin-right: 15px;
@@ -85,6 +106,7 @@
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
+
 
       }
 
