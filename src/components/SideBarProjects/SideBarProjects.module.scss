@@ -53,30 +53,39 @@
         }
       } // ----------- End Colors and Shadows
 
-      .link {
-        position: relative;
-        display: flex;
-        align-items: center;
-        width: 170px;
+
+    .link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 170px;
+      color: #181c27;
+      text-align: left;
+      .square {
+        display: block;
+        margin-right: 15px;
+        width: 36px;
+        height: 36px;
+        border-radius: 5px;
+        // background-color: white;
+      }
+
+      .name {
+        width: 118px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 0.04em;
         color: #181c27;
+        max-height: 60px;
+        max-width: 110px;
+        // добавить троеточие в конце длинных названий
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
 
-        .square {
-          display: block;
-          margin-right: 15px;
-          width: 36px;
-          height: 36px;
-          border-radius: 5px;
-          background-color: white;
-        }
-
-        .name {
-          width: 118px;
-          font-weight: 400;
-          font-size: 14px;
-          line-height: 17px;
-          letter-spacing: 0.04em;
-          color: #181c27;
-        }
       }
 
       // Active Link
