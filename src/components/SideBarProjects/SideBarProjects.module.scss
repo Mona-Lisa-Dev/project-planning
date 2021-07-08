@@ -1,82 +1,98 @@
 @import '../../scss/vars';
+@import '../../scss/breakpoints';
 
-.SideBarProjectsList {
-  margin-bottom: 200px;
-  width: 170px;
+.SideBarProjectsWrap {
+  @media screen and (min-width: $tablet) {
+    margin-bottom: 8vh;
+    height: 45vh;
+    min-height: 320px;
+    overflow-y: scroll;
+  }
 
-  li {
-    &:not(:last-child) {
-      margin-bottom: 30px;
-    }
+  // Hides SideBarProjects scrollbar
+  -ms-overflow-style: none; // IE and Edge
+  scrollbar-width: none; // Firefox
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari,Opera
+  }
 
-    // Colors and Shadows --------------
-    &:nth-child(3n + 1) {
-      .link .square {
-        background-color: $project-purple;
-      }
-      .activeLink .squareShadow {
-        background-image: url('img/violet-8C72DF.png');
-        background-repeat: no-repeat;
-      }
-    }
-    &:nth-child(3n + 2) {
-      .link .square {
-        background-color: $project-rose;
-      }
-      .activeLink .squareShadow {
-        background-image: url('img/orange-FF765F.png');
-        background-repeat: no-repeat;
-      }
-    }
-    &:nth-child(3n) {
-      .link .square {
-        background-color: $project-green;
-      }
-      .activeLink .squareShadow {
-        background-image: url('img/green-71DF87.png');
-        background-repeat: no-repeat;
-      }
-    } // ----------- End Colors and Shadows
+  .SideBarProjectsList {
+    width: 170px;
 
-    .link {
-      position: relative;
-      display: flex;
-      align-items: center;
-      width: 170px;
-      color: #181c27;
-
-      .square {
-        display: block;
-        margin-right: 15px;
-        width: 36px;
-        height: 36px;
-        border-radius: 5px;
-        background-color: white;
+    li {
+      &:not(:last-child) {
+        margin-bottom: 30px;
       }
 
-      .name {
-        width: 118px;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 17px;
-        letter-spacing: 0.04em;
+      // Colors and Shadows --------------
+      &:nth-child(3n + 1) {
+        .link .square {
+          background-color: $project-purple;
+        }
+        .activeLink .squareShadow {
+          background-image: url('img/violet-8C72DF.png');
+          background-repeat: no-repeat;
+        }
+      }
+      &:nth-child(3n + 2) {
+        .link .square {
+          background-color: $project-rose;
+        }
+        .activeLink .squareShadow {
+          background-image: url('img/orange-FF765F.png');
+          background-repeat: no-repeat;
+        }
+      }
+      &:nth-child(3n) {
+        .link .square {
+          background-color: $project-green;
+        }
+        .activeLink .squareShadow {
+          background-image: url('img/green-71DF87.png');
+          background-repeat: no-repeat;
+        }
+      } // ----------- End Colors and Shadows
+
+      .link {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 170px;
         color: #181c27;
-      }
-    }
 
-    // Active Link
-    .activeLink {
-      .name {
-        font-weight: 700;
+        .square {
+          display: block;
+          margin-right: 15px;
+          width: 36px;
+          height: 36px;
+          border-radius: 5px;
+          background-color: white;
+        }
+
+        .name {
+          width: 118px;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 17px;
+          letter-spacing: 0.04em;
+          color: #181c27;
+        }
       }
 
-      .squareShadow {
-        position: absolute;
-        top: -2px;
-        left: -3px;
-        width: 44px;
-        height: 44px;
-        z-index: -1;
+      // Active Link
+      .activeLink {
+        .name {
+          font-weight: 700;
+        }
+
+        .squareShadow {
+          position: absolute;
+          top: -2px;
+          left: -3px;
+          width: 44px;
+          height: 44px;
+          z-index: -1;
+        }
       }
     }
   }
