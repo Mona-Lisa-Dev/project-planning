@@ -2,7 +2,7 @@ import 'date-fns';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import { createMuiTheme } from '@material-ui/core';
+import { createTheme } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
@@ -74,7 +74,7 @@ const useStyles = makeStyles({
 });
 
 // Calendar
-const materialTheme = createMuiTheme({
+const materialTheme = createTheme({
   overrides: {
     MuiPaper: {
       root: {
