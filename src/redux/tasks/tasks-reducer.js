@@ -28,7 +28,7 @@ import { logoutSuccess } from 'redux/auth/auth-actions';
 const tasksItems = createReducer([], {
   // [getAllTasksSuccess]: (_, { payload }) => payload,
   [createTaskSuccess]: (state, { payload }) => [...state, payload],
-  [updateTaskSuccess]: (state, { payload }) => [...state, payload],
+  [updateTaskSuccess]: (state, { payload }) => state,
   [getTasksByDaySuccess]: (_, { payload }) => payload,
   [getTasksByDayError]: () => [], //Todo сделать условие на ошибку нот фаунд для загрузки карточек новосозданного спринта
   [logoutSuccess]: () => [],
