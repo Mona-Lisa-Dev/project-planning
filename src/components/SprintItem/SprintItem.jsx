@@ -37,7 +37,7 @@ const SprintItem = ({ currentProject, sprint }) => {
                 onClose();
               }}
             >
-              Ready
+              Ok
             </button>
           </div>
         );
