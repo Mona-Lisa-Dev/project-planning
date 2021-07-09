@@ -210,7 +210,6 @@ const TasksPage = props => {
                 className={
                   showChangeTitleForm ? styles.titleDisable : styles.title
                 }
-                data-text={currentSprint?.name}
               >
                 {currentSprint?.name}
               </h1>
