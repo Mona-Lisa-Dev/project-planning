@@ -34,17 +34,9 @@ const TaskItem = ({
 
   const handleInputChange = e => {
     if (isNaN(e.target.value)) return;
-    if (
-      typeof Number(e.target.value) !== 'number' ||
-      Number(e.target.value) < 0
-    ) {
-      console.log('Enter number more 0');
-      console.log(typeof e.target.value);
-      // return;
-    }
+
     // if (spenHours === Number(e.target.value)) return; //
     setQueryCustomTime(Number(e.target.value));
-    if (typeof e.target.value !== 'number') return;
   };
 
   const handleDeleteClick = async () => {
