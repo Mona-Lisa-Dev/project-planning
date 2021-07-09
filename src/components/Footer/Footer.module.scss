@@ -95,11 +95,13 @@
     &:not(:nth-last-child(-n + 4)) {
       margin-bottom: 30px;
     }
+  }
 
-    &:focus,
-    &:hover {
-      box-shadow: 0px 3px 3px 0px $main-orange;
-    }
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:focus,
+  &:hover {
+    box-shadow: 0px 3px 3px 0px $main-orange;
   }
 }
 
