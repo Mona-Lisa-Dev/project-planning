@@ -17,8 +17,6 @@ import styles from './ProjectItem.module.scss';
 const ProjectItem = ({ project }) => {
   // const loading = useSelector(getLoadingProjects);
   const dispatch = useDispatch();
-  console.log('project', project);
-
   const userEmail = useSelector(getUserEmail);
 
   const handleClickDelete = () =>
@@ -46,7 +44,7 @@ const ProjectItem = ({ project }) => {
                 onClose();
               }}
             >
-              Ready
+              Ok
             </button>
           </div>
         );

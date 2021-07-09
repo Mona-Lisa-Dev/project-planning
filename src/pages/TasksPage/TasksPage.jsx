@@ -9,12 +9,11 @@ import CreateTaskForm from 'components/CreateTaskForm';
 import SideBar from 'components/SideBar';
 import CreateSprint from 'components/CreateSprint';
 import DiagramModal from 'components/Diagram/DiagramModal';
-
-import { getTasks } from 'redux/tasks/tasks-selectors';
+import { getTasks, getError } from 'redux/tasks/tasks-selectors';
 import { getSprints, getCurrentSprint } from 'redux/sprints/sprints-selectors';
 import sprintsOperations from 'redux/sprints/sprints-operations';
 import tasksOperations from 'redux/tasks/tasks-operations';
-
+import swal from 'sweetalert';
 import styles from './TasksPage.module.scss';
 
 const TasksPage = props => {
@@ -38,6 +37,17 @@ const TasksPage = props => {
   );
 
   // console.log('currentSprint', currentSprint.startDate);
+
+  const Error = useSelector(getError);
+
+  useEffect(() => {
+    Error &&
+      swal({
+        text: `${Error}`,
+        icon: 'error',
+        button: { text: 'OK', className: `${styles.swalButton}` },
+      });
+  }, [Error]);
 
   useEffect(() => {
     async function fetchData() {
@@ -149,11 +159,14 @@ const TasksPage = props => {
                 </ul>
 
                 {/*Кнопка создания спринта в сайдбаре */}
-                <button
-                  type="button"
-                  className={styles.btnCreateSprint}
-                  onClick={openModalCreateSprint}
-                ></button>
+                <div className={styles.createNewSprintWrap}>
+                  <button
+                    type="button"
+                    className={styles.btnCreateSprint}
+                    onClick={openModalCreateSprint}
+                  ></button>
+                  <span>Create a sprint</span>
+                </div>
               </div>
             </SideBar>
           </aside>
@@ -197,6 +210,7 @@ const TasksPage = props => {
                 className={
                   showChangeTitleForm ? styles.titleDisable : styles.title
                 }
+                data-text={currentSprint?.name}
               >
                 {currentSprint?.name}
               </h1>
@@ -237,7 +251,7 @@ const TasksPage = props => {
               ></button>
             </div>
             {/* Кнопка открытия модалки с аналитикой */}
-            {tasks.length > 2 && (
+            {tasks.length > 2 && !showModalAnalytics && (
               <button
                 type="button"
                 className={styles.btnOpenAnalytics}

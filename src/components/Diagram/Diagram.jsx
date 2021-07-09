@@ -6,7 +6,7 @@ import { Line } from 'react-chartjs-2';
 const Diagram = sprint => {
   const [chartData, setChartData] = useState({});
 
-  const { startDate, endDate, duration, allScheduledTime, totalDaly } =
+  const { startDate, endDate, duration, allScheduledTime, totalDaly, name } =
     sprint.sprint;
   console.log('sprint', sprint);
 
@@ -64,6 +64,7 @@ const Diagram = sprint => {
             backgroundColor: '#FA3B3F',
             borderColor: '#FA3B3F',
             borderWidth: 1,
+            lineTension: 0.2,
           },
           {
             label: 'Current remaining staff time ',
@@ -73,6 +74,7 @@ const Diagram = sprint => {
             backgroundColor: '#1988EE',
             borderColor: '#1988EE',
             borderWidth: 1,
+            lineTension: 0.2,
           },
         ],
       });
@@ -82,7 +84,7 @@ const Diagram = sprint => {
 
   return (
     <div>
-      <h3 className={s.diagram_title}>BurnDown Chart (Calendar Team)</h3>
+      <h3 className={s.diagram_title}>{name}</h3>
       <Line
         data={chartData}
         options={{
