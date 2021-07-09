@@ -33,6 +33,7 @@ const TaskItem = ({
   }, [byDay]);
 
   const handleInputChange = e => {
+    if (isNaN(e.target.value)) return;
     if (
       typeof Number(e.target.value) !== 'number' ||
       Number(e.target.value) < 0
