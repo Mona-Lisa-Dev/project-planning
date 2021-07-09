@@ -90,7 +90,7 @@ const TaskItem = ({
                 onClose();
               }}
             >
-              Ready
+              Ok
             </button>
           </div>
         );

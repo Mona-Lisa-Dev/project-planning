@@ -44,7 +44,7 @@ const ProjectItem = ({ project }) => {
                 onClose();
               }}
             >
-              Ready
+              Ok
             </button>
           </div>
         );
