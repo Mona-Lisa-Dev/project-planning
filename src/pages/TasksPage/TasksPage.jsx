@@ -48,12 +48,25 @@ const TasksPage = props => {
   }, [Error]);
 
   useEffect(() => {
-    async function fetchData() {
+    (async function () {
       const sprint = await dispatch(
         sprintsOperations.getSprintById(projectId, sprintId),
       );
 
       !sprint && history.push(`/projects/${projectId}`);
+
+      await dispatch(
+        tasksOperations.getTasksByDay(
+          sprintId,
+          dayjs(new Date()).format('YYYY-MM-DD'),
+        ),
+      );
+    })();
+  }, [dispatch, projectId, sprintId]);
+
+  useEffect(() => {
+    async function fetchData() {
+      await dispatch(sprintsOperations.getSprintById(projectId, sprintId));
 
       await dispatch(
         tasksOperations.getTasksByDay(
