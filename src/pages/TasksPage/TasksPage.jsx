@@ -24,20 +24,17 @@ const TasksPage = props => {
   const [showChangeTitleForm, setShowChangeTitleForm] = useState(false);
 
   const [currentDay, setCurrentDay] = useState(1);
+
+  const [page, setPage] = useState(1);
+  const [paginationDate, setPaginationDate] = useState('');
+  const [clickOnPage, setClickOnPage] = useState(false);
+
   const { projectId, sprintId } = props.match.params;
   const dispatch = useDispatch();
 
   const currentSprint = useSelector(getCurrentSprint);
   const sprints = useSelector(getSprints);
   const tasks = useSelector(getTasks);
-
-  const arrDate = currentSprint?.totalDaly?.reduce(
-    (acc, day) => [...acc, Object.keys(day)[0]],
-    [],
-  );
-
-  // console.log('currentSprint', currentSprint.startDate);
-
   const Error = useSelector(getError);
 
   useEffect(() => {
@@ -52,6 +49,7 @@ const TasksPage = props => {
   useEffect(() => {
     async function fetchData() {
       await dispatch(sprintsOperations.getSprintById(projectId, sprintId));
+
       await dispatch(
         tasksOperations.getTasksByDay(
           sprintId,
@@ -63,28 +61,80 @@ const TasksPage = props => {
     fetchData();
   }, [dispatch, projectId, sprintId]);
 
-  // console.log(`arrDate`, arrDate);
+  const arrDate = currentSprint?.totalDaly?.reduce(
+    (acc, day) => [...acc, Object.keys(day)[0]],
+    [],
+  );
 
-  const onClickDay = i => {
-    const day = arrDate.find((el, ind) => ind === i - 1 && el);
-    console.log('dayOnClick', day);
+  const [clickOnSprintLink, setClickOnSprintLink] = useState(false);
 
-    setCurrentDay(currentDay === 1 ? currentDay : currentDay - 1);
-    dispatch(tasksOperations.getTasksByDay(currentSprint.id, day));
-  };
-
-  const onClickNextDay = i => {
-    const day = arrDate.find((el, ind) => ind === i + 1 && el);
-    console.log('dayOnClickNext', day);
-
-    setCurrentDay(currentDay !== arrDate.length ? currentDay + 1 : currentDay);
-    dispatch(tasksOperations.getTasksByDay(currentSprint.id, day));
+  const onClickSprintLink = () => {
+    setClickOnSprintLink(true);
+    console.log('отработал');
   };
 
   useEffect(() => {
+    if (!clickOnPage || clickOnSprintLink) {
+      setClickOnSprintLink(false);
+      arrDate?.map((el, ind, arr) => {
+        if (el === dayjs(new Date()).format('YYYY-MM-DD')) {
+          setPage(ind + 1);
+          setPaginationDate(dayjs(new Date()).format('YYYY-MM-DD'));
+        }
+
+        if (
+          arr.length < page ||
+          !arr.includes(dayjs(new Date()).format('YYYY-MM-DD'))
+        ) {
+          setPage(1);
+          setPaginationDate(arr[0]);
+        }
+      });
+    }
+  }, [arrDate, clickOnPage, paginationDate]);
+
+  useEffect(() => {
     dispatch(sprintsOperations.getAllSprints(projectId));
-    dispatch(sprintsOperations.getSprintById(projectId, sprintId));
+    //
   }, [dispatch, projectId, sprintId]);
+
+  const onClickDay = () => {
+    setClickOnPage(true);
+    const day = arrDate.find((el, ind) => {
+      if (ind === page - 2) {
+        setPaginationDate(el);
+        return el;
+      }
+    });
+
+    arrDate?.map((el, ind) => {
+      if (el === day) {
+        setPage(prevState => prevState - 1);
+      }
+    });
+
+    setCurrentDay(currentDay === 1 ? currentDay : currentDay - 1);
+    dispatch(tasksOperations.getTasksByDay(currentSprint.id, paginationDate));
+  };
+
+  const onClickNextDay = () => {
+    setClickOnPage(true);
+    const day = arrDate.find((el, ind) => {
+      if (ind === page) {
+        setPaginationDate(el);
+        return el;
+      }
+    });
+
+    arrDate?.map((el, ind) => {
+      if (el === day) {
+        setPage(prevState => prevState + 1);
+      }
+    });
+
+    setCurrentDay(currentDay !== arrDate.length ? currentDay + 1 : currentDay);
+    dispatch(tasksOperations.getTasksByDay(currentSprint.id, paginationDate));
+  };
 
   const handleCloseModal = () => {
     setShowModalCreateTask(false);
@@ -143,6 +193,7 @@ const TasksPage = props => {
                   {sprints.map(sprint => (
                     <li key={sprint.id}>
                       <NavLink
+                        onClick={onClickSprintLink}
                         className={styles.linkToSprint}
                         activeClassName={styles.linkToSprintActive}
                         to={{
@@ -185,22 +236,22 @@ const TasksPage = props => {
                   >
                     <button
                       type="button"
-                      onClick={() => onClickDay(i)}
+                      onClick={onClickDay}
                       className={styles.btnBefore}
-                      disabled={currentDay === 1 ? true : false}
+                      disabled={page === 1 ? true : false}
                     >
                       {'<'}
                     </button>
 
-                    <p className={styles.currentDay}>{i + 1} / </p>
+                    <p className={styles.currentDay}>{page} / </p>
                     <p className={styles.totalDay}>{arrDate.length}</p>
                     <button
                       type="button"
-                      onClick={() => onClickNextDay(i)}
+                      onClick={onClickNextDay}
                       className={styles.btnNext}
-                      disabled={currentDay === arrDate.length ? true : false}
+                      disabled={page === arrDate.length ? true : false}
                     >{`>`}</button>
-                    <p className={styles.calendarDay}> {day}</p>
+                    <p className={styles.calendarDay}> {paginationDate}</p>
                   </li>
                 ))}
               </ul>
@@ -210,7 +261,6 @@ const TasksPage = props => {
                 className={
                   showChangeTitleForm ? styles.titleDisable : styles.title
                 }
-                data-text={currentSprint?.name}
               >
                 {currentSprint?.name}
               </h1>

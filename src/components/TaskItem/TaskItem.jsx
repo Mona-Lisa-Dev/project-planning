@@ -100,7 +100,10 @@ const TaskItem = ({
 
   return (
     <li className={styles.taskItem}>
-      <p className={styles.taskName}> {name} </p>
+      <p className={styles.taskName} data-text={name}>
+        {' '}
+        {name}{' '}
+      </p>
       <p className={styles.planTime}> {scheduledTime} </p>
       <div className={styles.inputTimeBefore}>
         <input

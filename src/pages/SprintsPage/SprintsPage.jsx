@@ -9,7 +9,9 @@ import { refs } from './refs';
 import { ReactComponent as AddGroupIcon } from './svg/add_group_icon.svg';
 import { ReactComponent as CreateBtn } from './svg/create_button_icon.svg';
 
+import Aside from 'components/Aside';
 import SideBar from 'components/SideBar';
+import SideBarScrollWrap from 'components/SideBarScrollWrap';
 import ShowProjects from 'components/ShowProjects';
 import SideBarProjects from 'components/SideBarProjects';
 import Modal from 'components/Modal';
@@ -96,10 +98,12 @@ const SprintsPage = props => {
   return (
     <>
       <main className={s.main}>
-        <aside className={s.aside}>
+        <Aside>
           <SideBar>
             <ShowProjects />
-            <SideBarProjects projects={projects} />
+            <SideBarScrollWrap>
+              <SideBarProjects projects={projects} />
+            </SideBarScrollWrap>
 
             {tablet && (
               <div className={s.CreateNewProjectWrap}>
@@ -112,7 +116,7 @@ const SprintsPage = props => {
               </div>
             )}
           </SideBar>
-        </aside>
+        </Aside>
 
         <article>
           <div className={s.headerWrap}>
