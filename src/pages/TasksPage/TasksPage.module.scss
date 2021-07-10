@@ -12,60 +12,55 @@ main {
     display: flex;
     padding: 0 40px 0 0;
     width: $tablet;
-    min-height: calc(100vh - 81px);
+    min-height: 600px;
   }
 
   @media screen and (min-width: $desktop) {
     width: $desktop;
-    padding: 0 55px 0 55px;
+    padding: 0 55px 0 0;
   }
 
   // Sidebar
-  aside {
+  .aside {
     position: relative;
+    padding: 0 0 0 0;
     @media screen and (max-width: $mobile-max) {
-      padding: 10px 0 10px 20px;
       border-bottom: 1px solid rgba(24, 28, 39, 0.1);
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 414px;
+      min-width: 100%;
     }
 
     @media screen and (min-width: $tablet) {
       border-right: 1px solid rgba(24, 28, 39, 0.1);
-      padding: 0 20px 0 0;
-      width: 216px;
+      min-height: calc(100vh - 81px);
+      width: 256px;
       text-align: center;
     }
 
     @media screen and (min-width: $desktop) {
-      width: 200px;
-      padding: 0 30px 40px 0;
+      width: 255px;
     }
   }
 }
-.linkToBack {
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  color: #181c27;
-  &::before {
-    content: url(./svg/arrow.svg);
-    margin-right: 10px;
+
+.sideBarSprintsList {
+  @media screen and (min-width: $tablet) {
+    padding: 10px 0 20px 40px;
   }
-  @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
-    margin-top: 30px;
-    margin-bottom: 80px;
-  }
+
   @media screen and (min-width: $desktop) {
-    margin-top: 25px;
-    margin-bottom: 120px;
+    padding: 10px 0 20px 55px;
   }
-}
-.navSprintsList {
-  font-size: 14px;
+
   @media screen and (max-width: $mobile-max) {
     display: none;
+  }
+}
+.sideBarItem {
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+  @media screen and (min-width: $tablet) {
+    width: 177px;
   }
 }
 .sprintsWrap {
@@ -75,27 +70,32 @@ main {
 
 .linkToSprint {
   position: relative;
-  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  height: 54px;
   color: #181c27;
   font-size: 14px;
   text-align: left;
+
+  @media screen and (min-width: $desktop) {
+    width: 162px;
+  }
   span {
     display: block;
     margin-right: 15px;
-    min-width: 36px;
-    min-height: 36px;
+    width: 36px;
+    height: 36px;
     border-radius: 5px;
     background: $form-background;
-    // color: $form-background;
     &:hover,
     &:focus {
       box-shadow: $primaryShadow;
     }
   }
   h3 {
-    font-weight: normal;
+    font-weight: 400;
     max-height: 60px;
-    max-width: 110px;
+    max-width: 118px;
     // добавить троеточие в конце длинных названий
     overflow: hidden;
     text-overflow: ellipsis;
@@ -108,6 +108,9 @@ main {
       text-overflow: clip;
       white-space: normal;
       word-break: break-all;
+    }
+    @media screen and (min-width: $desktop) {
+      max-width: 110px;
     }
   }
 }
@@ -366,15 +369,17 @@ main {
   }
 }
 .createNewSprintWrap {
-  position: absolute;
   bottom: 0;
-  width: calc(100% - 50px);
-  padding-bottom: 40px;
+  width: 100%;
+  padding: 0 0 30px;
   text-align: center;
   span {
     font-size: 14px;
     font-weight: 400;
     letter-spacing: 0.04em;
+  }
+  @media screen and (max-width: $mobile-max) {
+    display: none;
   }
 }
 
