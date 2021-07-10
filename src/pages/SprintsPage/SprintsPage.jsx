@@ -11,6 +11,7 @@ import { ReactComponent as CreateBtn } from './svg/create_button_icon.svg';
 
 import Aside from 'components/Aside';
 import SideBar from 'components/SideBar';
+import SideBarScrollWrap from 'components/SideBarScrollWrap';
 import ShowProjects from 'components/ShowProjects';
 import SideBarProjects from 'components/SideBarProjects';
 import Modal from 'components/Modal';
@@ -100,7 +101,9 @@ const SprintsPage = props => {
         <Aside>
           <SideBar>
             <ShowProjects />
-            <SideBarProjects projects={projects} />
+            <SideBarScrollWrap>
+              <SideBarProjects projects={projects} />
+            </SideBarScrollWrap>
 
             {tablet && (
               <div className={s.CreateNewProjectWrap}>
