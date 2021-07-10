@@ -6,17 +6,22 @@ import TeamCard from 'components/TeamCard';
 
 const Footer = () => {
   const [showModal, setShowModal] = useState(false);
-  const toggleModal = () => setShowModal(!showModal);
+
+  const toggleModal = () => {
+    !showModal
+      ? (document.body.style.overflow = 'hidden')
+      : (document.body.style.overflow = 'auto');
+    setShowModal(!showModal);
+  };
 
   return (
     <footer className={styles.Footer}>
       <span className={styles.Footer_text}>
-        © 2021 | All Rights Reserved | Developed by
+        &#169; 2021 | All Rights Reserved | Developed by
       </span>
-      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-      <a className={styles.Footer_link} onClick={toggleModal}>
+      <p className={styles.Footer_link} onClick={toggleModal}>
         GoIT Students
-      </a>
+      </p>
       {showModal && (
         <Modal onCloseModal={toggleModal}>
           {
