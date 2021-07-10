@@ -378,6 +378,9 @@ main {
     font-weight: 400;
     letter-spacing: 0.04em;
   }
+  @media screen and (max-width: $mobile-max) {
+    display: none;
+  }
 }
 
 .btnCreateSprint {
