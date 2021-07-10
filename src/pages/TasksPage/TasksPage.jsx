@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import dayjs from 'dayjs';
 
 import TaskList from 'components/TaskList';
@@ -36,6 +36,7 @@ const TasksPage = props => {
   const sprints = useSelector(getSprints);
   const tasks = useSelector(getTasks);
   const Error = useSelector(getError);
+  const history = useHistory();
 
   useEffect(() => {
     Error &&
@@ -48,7 +49,11 @@ const TasksPage = props => {
 
   useEffect(() => {
     async function fetchData() {
-      await dispatch(sprintsOperations.getSprintById(projectId, sprintId));
+      const sprint = await dispatch(
+        sprintsOperations.getSprintById(projectId, sprintId),
+      );
+
+      !sprint && history.push(`/projects/${projectId}`);
 
       await dispatch(
         tasksOperations.getTasksByDay(
