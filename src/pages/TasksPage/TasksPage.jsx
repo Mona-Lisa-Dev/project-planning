@@ -48,7 +48,7 @@ const TasksPage = props => {
   }, [Error]);
 
   useEffect(() => {
-    (async function () {
+    (async function fetchData() {
       const sprint = await dispatch(
         sprintsOperations.getSprintById(projectId, sprintId),
       );
