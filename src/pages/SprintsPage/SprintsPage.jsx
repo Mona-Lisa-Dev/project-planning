@@ -55,7 +55,7 @@ const SprintsPage = props => {
   }, [Error]);
 
   useEffect(() => {
-    (async function () {
+    (async function fetchData() {
       dispatch(projectsOperations.getAllProjects());
 
       const project = await dispatch(
