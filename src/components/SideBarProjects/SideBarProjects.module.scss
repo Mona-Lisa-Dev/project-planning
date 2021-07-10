@@ -3,13 +3,11 @@
 
 .SideBarProjectsList {
   @media screen and (min-width: $tablet) {
-    padding: 30px 0 30px 40px;
-    // width: 185px;
+    padding: 10px 0 20px 40px;
   }
 
   @media screen and (min-width: $desktop) {
-    padding: 30px 0 30px 55px;
-    // width: 170px;
+    padding: 10px 0 20px 55px;
   }
 
   .SideBarProjectsItem {
@@ -48,7 +46,6 @@
     & > .projectLink {
       position: relative;
       display: flex;
-      // justify-content: start;
       align-items: center;
       height: 54px;
       color: #181c27;
@@ -84,7 +81,6 @@
         text-align: start;
         color: #181c27;
 
-        // добавить троеточие в конце длинных названий
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
