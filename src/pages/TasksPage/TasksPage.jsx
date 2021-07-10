@@ -64,21 +64,6 @@ const TasksPage = props => {
     })();
   }, [dispatch, projectId, sprintId]);
 
-  useEffect(() => {
-    async function fetchData() {
-      await dispatch(sprintsOperations.getSprintById(projectId, sprintId));
-
-      await dispatch(
-        tasksOperations.getTasksByDay(
-          sprintId,
-          dayjs(new Date()).format('YYYY-MM-DD'),
-        ),
-      );
-    }
-
-    fetchData();
-  }, [dispatch, projectId, sprintId]);
-
   const arrDate = currentSprint?.totalDaly?.reduce(
     (acc, day) => [...acc, Object.keys(day)[0]],
     [],
