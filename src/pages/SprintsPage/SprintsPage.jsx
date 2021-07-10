@@ -29,6 +29,7 @@ import projectsOperations from 'redux/projects/projects-operations';
 import swal from 'sweetalert';
 
 import s from './SprintsPage.module.scss';
+import { useHistory } from 'react-router-dom';
 
 const SprintsPage = props => {
   const [showModal, setShowModal] = useState(false);
@@ -42,6 +43,7 @@ const SprintsPage = props => {
   const currentProject = useSelector(getCurrentProject);
   const projects = useSelector(getProjects);
   const Error = useSelector(getError);
+  const history = useHistory();
 
   useEffect(() => {
     Error &&
@@ -53,9 +55,17 @@ const SprintsPage = props => {
   }, [Error]);
 
   useEffect(() => {
-    dispatch(projectsOperations.getAllProjects());
-    dispatch(projectsOperations.getProjectById(projectId));
-    dispatch(sprintsOperations.getAllSprints(projectId));
+    (async function fetchData() {
+      dispatch(projectsOperations.getAllProjects());
+
+      const project = await dispatch(
+        projectsOperations.getProjectById(projectId),
+      );
+
+      !project && history.push(`/projects`);
+
+      dispatch(sprintsOperations.getAllSprints(projectId));
+    })();
   }, [dispatch, projectId]);
 
   // ----------- Modal -----------
