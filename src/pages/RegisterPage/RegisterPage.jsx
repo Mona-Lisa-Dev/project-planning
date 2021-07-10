@@ -249,6 +249,9 @@ const RegisterPage = () => {
           <div className={styles.login}>
             <p className={styles.question}> Do you have an account?</p>
             <a className={styles.auth} href="/login">
+              <a href="http://localhost:5000/api/users/google">
+                Click to authorize with GOOGLE
+              </a>
               Log in
             </a>
           </div>
