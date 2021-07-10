@@ -1,8 +1,8 @@
 import { Link, withRouter } from 'react-router-dom';
 import { ReactComponent as Arrow } from './arrow.svg';
-import s from './ShowProjects.module.scss';
+import s from './SideBarGoBackLink.module.scss';
 
-const ShowProjects = ({ match }) => {
+const SideBarGoBackLink = ({ match }) => {
   const {
     path,
     params: { projectId },
@@ -35,4 +35,4 @@ const ShowProjects = ({ match }) => {
   );
 };
 
-export default withRouter(ShowProjects);
+export default withRouter(SideBarGoBackLink);

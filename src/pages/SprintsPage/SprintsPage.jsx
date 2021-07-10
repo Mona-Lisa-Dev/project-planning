@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import { Link } from 'react-router-dom';
-
-// import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import { useMediaQuery } from '@material-ui/core';
 import { refs } from './refs';
 
@@ -12,7 +9,7 @@ import { ReactComponent as CreateBtn } from './svg/create_button_icon.svg';
 import Aside from 'components/Aside';
 import SideBar from 'components/SideBar';
 import SideBarScrollWrap from 'components/SideBarScrollWrap';
-import ShowProjects from 'components/ShowProjects';
+import SideBarGoBackLink from 'components/SideBarGoBackLink';
 import SideBarProjects from 'components/SideBarProjects';
 import Modal from 'components/Modal';
 import CreateSprint from 'components/CreateSprint';
@@ -29,6 +26,7 @@ import projectsOperations from 'redux/projects/projects-operations';
 import swal from 'sweetalert';
 
 import s from './SprintsPage.module.scss';
+import { useHistory } from 'react-router-dom';
 
 const SprintsPage = props => {
   const [showModal, setShowModal] = useState(false);
@@ -42,6 +40,7 @@ const SprintsPage = props => {
   const currentProject = useSelector(getCurrentProject);
   const projects = useSelector(getProjects);
   const Error = useSelector(getError);
+  const history = useHistory();
 
   useEffect(() => {
     Error &&
@@ -53,9 +52,17 @@ const SprintsPage = props => {
   }, [Error]);
 
   useEffect(() => {
-    dispatch(projectsOperations.getAllProjects());
-    dispatch(projectsOperations.getProjectById(projectId));
-    dispatch(sprintsOperations.getAllSprints(projectId));
+    (async function fetchData() {
+      dispatch(projectsOperations.getAllProjects());
+
+      const project = await dispatch(
+        projectsOperations.getProjectById(projectId),
+      );
+
+      !project && history.push(`/projects`);
+
+      dispatch(sprintsOperations.getAllSprints(projectId));
+    })();
   }, [dispatch, projectId]);
 
   // ----------- Modal -----------
@@ -100,7 +107,7 @@ const SprintsPage = props => {
       <main className={s.main}>
         <Aside>
           <SideBar>
-            <ShowProjects />
+            <SideBarGoBackLink />
             <SideBarScrollWrap>
               <SideBarProjects projects={projects} />
             </SideBarScrollWrap>

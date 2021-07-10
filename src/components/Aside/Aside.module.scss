@@ -1,12 +1,16 @@
 @import '../../scss/breakpoints';
 
-.Aside {
+aside.Aside {
+  padding: 0 0 0 0;
+
   @media screen and (max-width: $mobile-max) {
+    min-width: 100%;
     border-bottom: 1px solid rgba(24, 28, 39, 0.1);
   }
 
   @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
-    width: 216px;
+    width: 256px;
+    // width: 216px;
   }
 
   @media screen and (min-width: $tablet) {
@@ -15,6 +19,7 @@
   }
 
   @media screen and (min-width: $desktop) {
-    width: 200px;
+    width: 255px;
+    // width: 200px;
   }
 }
