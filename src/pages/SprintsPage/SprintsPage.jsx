@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import { Link } from 'react-router-dom';
-
-// import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import { useMediaQuery } from '@material-ui/core';
 import { refs } from './refs';
 
@@ -12,7 +9,7 @@ import { ReactComponent as CreateBtn } from './svg/create_button_icon.svg';
 import Aside from 'components/Aside';
 import SideBar from 'components/SideBar';
 import SideBarScrollWrap from 'components/SideBarScrollWrap';
-import ShowProjects from 'components/ShowProjects';
+import SideBarGoBackLink from 'components/SideBarGoBackLink';
 import SideBarProjects from 'components/SideBarProjects';
 import Modal from 'components/Modal';
 import CreateSprint from 'components/CreateSprint';
@@ -110,7 +107,7 @@ const SprintsPage = props => {
       <main className={s.main}>
         <Aside>
           <SideBar>
-            <ShowProjects />
+            <SideBarGoBackLink />
             <SideBarScrollWrap>
               <SideBarProjects projects={projects} />
             </SideBarScrollWrap>
