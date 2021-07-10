@@ -1,122 +1,101 @@
 @import '../../scss/vars';
 @import '../../scss/breakpoints';
 
-.SideBarProjectsWrap {
+.SideBarProjectsList {
   @media screen and (min-width: $tablet) {
-    margin-bottom: 8vh;
-    height: 45vh;
-    min-height: 320px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    scrollbar-width: thin;
-
-    &::-webkit-scrollbar {
-      width: 3px;
-      background-color: #edeef3;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: #ff6b08;
-      border-radius: 1.5px;
-    }
+    width: 185px;
   }
 
-  .SideBarProjectsList {
-    @media screen and (min-width: $tablet) {
-      width: 185px;
+  @media screen and (min-width: $desktop) {
+    width: 170px;
+  }
+
+  li {
+    &:not(:last-child) {
+      margin-bottom: 30px;
     }
 
-    @media screen and (min-width: $desktop) {
-      width: 177px;
+    // Colors and Shadows --------------
+    &:nth-child(3n + 1) {
+      .projectLink .square {
+        background-color: $project-purple;
+      }
+      .activeProjectLink .squareShadow {
+        background-image: url('img/violet-8C72DF.png');
+        background-repeat: no-repeat;
+      }
     }
+    &:nth-child(3n + 2) {
+      .projectLink .square {
+        background-color: $project-rose;
+      }
+      .activeProjectLink .squareShadow {
+        background-image: url('img/orange-FF765F.png');
+        background-repeat: no-repeat;
+      }
+    }
+    &:nth-child(3n) {
+      .projectLink .square {
+        background-color: $project-green;
+      }
+      .activeProjectLink .squareShadow {
+        background-image: url('img/green-71DF87.png');
+        background-repeat: no-repeat;
+      }
+    } // ----------- End Colors and Shadows
 
-    li {
-      &:not(:last-child) {
-        margin-bottom: 30px;
+    .projectLink {
+      position: relative;
+      display: flex;
+      align-items: center;
+      color: #181c27;
+
+      @media screen and (min-width: $tablet) {
+        width: 177px;
       }
 
-      // Colors and Shadows --------------
-      &:nth-child(3n + 1) {
-        .link .square {
-          background-color: $project-purple;
-        }
-        .activeLink .squareShadow {
-          background-image: url('img/violet-8C72DF.png');
-          background-repeat: no-repeat;
-        }
+      @media screen and (min-width: $desktop) {
+        width: 162px;
       }
-      &:nth-child(3n + 2) {
-        .link .square {
-          background-color: $project-rose;
-        }
-        .activeLink .squareShadow {
-          background-image: url('img/orange-FF765F.png');
-          background-repeat: no-repeat;
-        }
-      }
-      &:nth-child(3n) {
-        .link .square {
-          background-color: $project-green;
-        }
-        .activeLink .squareShadow {
-          background-image: url('img/green-71DF87.png');
-          background-repeat: no-repeat;
-        }
-      } // ----------- End Colors and Shadows
 
-      .link {
-        position: relative;
-        display: flex;
-        align-items: center;
+      .square {
+        display: block;
+        margin-right: 15px;
+        width: 36px;
+        height: 36px;
+        border-radius: 5px;
+      }
+
+      .projectName {
+        width: 118px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 0.04em;
         color: #181c27;
 
-        @media screen and (min-width: $tablet) {
-          width: 177px;
-        }
+        // добавить троеточие в конце длинных названий
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+      }
+    }
 
-        @media screen and (min-width: $desktop) {
-          width: 165px;
-        }
-
-        .square {
-          display: block;
-          margin-right: 15px;
-          width: 36px;
-          height: 36px;
-          border-radius: 5px;
-        }
-
-        .name {
-          width: 118px;
-          font-weight: 400;
-          font-size: 14px;
-          line-height: 17px;
-          letter-spacing: 0.04em;
-          color: #181c27;
-
-          // добавить троеточие в конце длинных названий
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
-        }
+    // Active Link
+    .activeProjectLink {
+      .projectName {
+        font-weight: 700;
       }
 
-      // Active Link
-      .activeLink {
-        .name {
-          font-weight: 700;
-        }
-
-        .squareShadow {
-          position: absolute;
-          top: -2px;
-          left: -3px;
-          width: 44px;
-          height: 44px;
-          z-index: -1;
-        }
+      .squareShadow {
+        position: absolute;
+        top: -2px;
+        left: -3px;
+        width: 44px;
+        height: 44px;
+        z-index: -1;
       }
     }
   }
