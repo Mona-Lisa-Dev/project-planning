@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import dayjs from 'dayjs';
 
 import TaskList from 'components/TaskList';
@@ -14,6 +14,8 @@ import { getSprints, getCurrentSprint } from 'redux/sprints/sprints-selectors';
 import sprintsOperations from 'redux/sprints/sprints-operations';
 import tasksOperations from 'redux/tasks/tasks-operations';
 import swal from 'sweetalert';
+import SideBarGoBackLink from 'components/SideBarGoBackLink';
+import SideBarScrollWrap from 'components/SideBarScrollWrap';
 import styles from './TasksPage.module.scss';
 
 const TasksPage = props => {
@@ -181,20 +183,13 @@ const TasksPage = props => {
     currentSprint && (
       <>
         <main>
-          <aside>
+          <aside className={styles.aside}>
             <SideBar>
-              <Link
-                className={styles.linkToBack}
-                to={{
-                  pathname: `/projects/${projectId}`,
-                }}
-              >
-                Show sprints
-              </Link>
-              <div className={styles.navSprintsList}>
-                <ul>
+              <SideBarGoBackLink />
+              <SideBarScrollWrap>
+                <ul className={styles.sideBarSprintsList}>
                   {sprints.map(sprint => (
-                    <li key={sprint.id}>
+                    <li key={sprint.id} className={styles.sideBarItem}>
                       <NavLink
                         onClick={onClickSprintLink}
                         className={styles.linkToSprint}
@@ -211,16 +206,16 @@ const TasksPage = props => {
                     </li>
                   ))}
                 </ul>
+              </SideBarScrollWrap>
 
-                {/*Кнопка создания спринта в сайдбаре */}
-                <div className={styles.createNewSprintWrap}>
-                  <button
-                    type="button"
-                    className={styles.btnCreateSprint}
-                    onClick={openModalCreateSprint}
-                  ></button>
-                  <span>Create a sprint</span>
-                </div>
+              {/*Кнопка создания спринта в сайдбаре */}
+              <div className={styles.createNewSprintWrap}>
+                <button
+                  type="button"
+                  className={styles.btnCreateSprint}
+                  onClick={openModalCreateSprint}
+                ></button>
+                <span>Create a sprint</span>
               </div>
             </SideBar>
           </aside>
