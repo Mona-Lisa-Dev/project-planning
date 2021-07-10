@@ -16,7 +16,7 @@ const SideBarProjects = ({ projects }) => {
       {tablet && (
         <ul className={s.SideBarProjectsList}>
           {projects?.map(project => (
-            <li key={project.id}>
+            <li className={s.SideBarProjectsItem} key={project.id}>
               <NavLink
                 className={s.projectLink}
                 activeClassName={s.activeProjectLink}
@@ -25,7 +25,6 @@ const SideBarProjects = ({ projects }) => {
                 }}
               >
                 <span className={s.square} />
-                <span className={s.squareShadow} />
                 <h3 className={s.projectName}>{project.name}</h3>
               </NavLink>
             </li>

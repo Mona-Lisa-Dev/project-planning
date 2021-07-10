@@ -3,16 +3,18 @@
 
 .SideBarProjectsList {
   @media screen and (min-width: $tablet) {
-    width: 185px;
+    padding: 30px 0 30px 40px;
+    // width: 185px;
   }
 
   @media screen and (min-width: $desktop) {
-    width: 170px;
+    padding: 30px 0 30px 55px;
+    // width: 170px;
   }
 
-  li {
+  .SideBarProjectsItem {
     &:not(:last-child) {
-      margin-bottom: 30px;
+      margin-bottom: 10px;
     }
 
     // Colors and Shadows --------------
@@ -20,34 +22,35 @@
       .projectLink .square {
         background-color: $project-purple;
       }
-      .activeProjectLink .squareShadow {
-        background-image: url('img/violet-8C72DF.png');
-        background-repeat: no-repeat;
+      .activeProjectLink .square {
+        box-shadow: $primaryShadow;
       }
     }
+
     &:nth-child(3n + 2) {
       .projectLink .square {
         background-color: $project-rose;
       }
-      .activeProjectLink .squareShadow {
-        background-image: url('img/orange-FF765F.png');
-        background-repeat: no-repeat;
+      .activeProjectLink .square {
+        box-shadow: $primaryShadow;
       }
     }
+
     &:nth-child(3n) {
       .projectLink .square {
         background-color: $project-green;
       }
-      .activeProjectLink .squareShadow {
-        background-image: url('img/green-71DF87.png');
-        background-repeat: no-repeat;
+      .activeProjectLink .square {
+        box-shadow: $primaryShadow;
       }
     } // ----------- End Colors and Shadows
 
-    .projectLink {
+    & > .projectLink {
       position: relative;
       display: flex;
+      // justify-content: start;
       align-items: center;
+      height: 54px;
       color: #181c27;
 
       @media screen and (min-width: $tablet) {
@@ -64,14 +67,21 @@
         width: 36px;
         height: 36px;
         border-radius: 5px;
+
+        &:hover,
+        &:focus {
+          box-shadow: $primaryShadow;
+        }
       }
 
-      .projectName {
-        width: 118px;
+      & > .projectName {
+        max-width: 118px;
+        max-width: 110px;
         font-weight: 400;
         font-size: 14px;
         line-height: 17px;
         letter-spacing: 0.04em;
+        text-align: start;
         color: #181c27;
 
         // добавить троеточие в конце длинных названий
@@ -80,6 +90,15 @@
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
+
+        @media screen and (min-width: $desktop) {
+          max-width: 110px;
+        }
+
+        &:hover,
+        &:focus {
+          font-weight: 700;
+        }
       }
     }
 
@@ -87,15 +106,6 @@
     .activeProjectLink {
       .projectName {
         font-weight: 700;
-      }
-
-      .squareShadow {
-        position: absolute;
-        top: -2px;
-        left: -3px;
-        width: 44px;
-        height: 44px;
-        z-index: -1;
       }
     }
   }
