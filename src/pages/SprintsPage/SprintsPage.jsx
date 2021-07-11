@@ -16,6 +16,7 @@ import CreateSprint from 'components/CreateSprint';
 import SprintList from 'components/SprintList';
 import AddPeopleForm from 'components/AddPeopleForm';
 import CreateProject from 'components/CreateProject';
+import { getUserEmail } from 'redux/auth/auth-selectors';
 import {
   getProjects,
   getCurrentProject,
@@ -38,6 +39,7 @@ const SprintsPage = props => {
   const dispatch = useDispatch();
 
   const currentProject = useSelector(getCurrentProject);
+  const userEmail = useSelector(getUserEmail);
   const projects = useSelector(getProjects);
   const Error = useSelector(getError);
   const history = useHistory();
@@ -147,13 +149,14 @@ const SprintsPage = props => {
                 {!showInput && (
                   <>
                     <h2>{currentProject?.name}</h2>
-
-                    <button
-                      title="Edit the name"
-                      type="button"
-                      className={s.buttonChange}
-                      onClick={editNameHandle}
-                    ></button>
+                    {userEmail === currentProject?.owner.email && (
+                      <button
+                        title="Edit the name"
+                        type="button"
+                        className={s.buttonChange}
+                        onClick={editNameHandle}
+                      ></button>
+                    )}
                   </>
                 )}
               </div>

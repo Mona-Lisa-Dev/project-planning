@@ -2,20 +2,22 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import dayjs from 'dayjs';
+import swal from 'sweetalert';
 
 import TaskList from 'components/TaskList';
 import Modal from 'components/Modal';
 import CreateTaskForm from 'components/CreateTaskForm';
 import SideBar from 'components/SideBar';
+import SideBarGoBackLink from 'components/SideBarGoBackLink';
+import SideBarScrollWrap from 'components/SideBarScrollWrap';
 import CreateSprint from 'components/CreateSprint';
 import DiagramModal from 'components/Diagram/DiagramModal';
+
 import { getTasks, getError } from 'redux/tasks/tasks-selectors';
 import { getSprints, getCurrentSprint } from 'redux/sprints/sprints-selectors';
 import sprintsOperations from 'redux/sprints/sprints-operations';
 import tasksOperations from 'redux/tasks/tasks-operations';
-import swal from 'sweetalert';
-import SideBarGoBackLink from 'components/SideBarGoBackLink';
-import SideBarScrollWrap from 'components/SideBarScrollWrap';
+
 import styles from './TasksPage.module.scss';
 
 const TasksPage = props => {
@@ -26,7 +28,7 @@ const TasksPage = props => {
   const [showChangeTitleForm, setShowChangeTitleForm] = useState(false);
 
   const [currentDay, setCurrentDay] = useState(1);
-
+  const [arrDate, setArrDate] = useState([]);
   const [page, setPage] = useState(1);
   const [paginationDate, setPaginationDate] = useState('');
   const [clickOnPage, setClickOnPage] = useState(false);
@@ -40,14 +42,14 @@ const TasksPage = props => {
   const Error = useSelector(getError);
   const history = useHistory();
 
-  useEffect(() => {
-    Error &&
-      swal({
-        text: `${Error}`,
-        icon: 'error',
-        button: { text: 'OK', className: `${styles.swalButton}` },
-      });
-  }, [Error]);
+  // useEffect(() => {
+  //   Error &&
+  //     swal({
+  //       text: `${Error}`,
+  //       icon: 'error',
+  //       button: { text: 'OK', className: `${styles.swalButton}` },
+  //     });
+  // }, [Error]);
 
   useEffect(() => {
     (async function fetchData() {
@@ -57,30 +59,44 @@ const TasksPage = props => {
 
       !sprint && history.push(`/projects/${projectId}`);
 
-      await dispatch(
-        tasksOperations.getTasksByDay(
-          sprintId,
-          dayjs(new Date()).format('YYYY-MM-DD'),
-        ),
+      const arr = sprint.totalDaly.reduce(
+        (acc, day) => [...acc, Object.keys(day)[0]],
+        [],
       );
+      setArrDate(arr);
+      // setPaginationDate(arr[0]);
+
+      const tasks = arr.includes(dayjs(new Date()).format('YYYY-MM-DD'))
+        ? await dispatch(
+            tasksOperations.getTasksByDay(
+              sprintId,
+              dayjs(new Date()).format('YYYY-MM-DD'),
+            ),
+          )
+        : await dispatch(tasksOperations.getTasksByDay(sprintId, arr[0]));
+
+      if (
+        arr.length < page ||
+        arr.length === 1 ||
+        !arr.includes(dayjs(new Date()).format('YYYY-MM-DD'))
+      ) {
+        setPage(1);
+        setPaginationDate(arr[0]);
+      }
+
+      // if (tasks.length === 0) return;
     })();
   }, [dispatch, projectId, sprintId]);
 
-  const arrDate = currentSprint?.totalDaly?.reduce(
-    (acc, day) => [...acc, Object.keys(day)[0]],
-    [],
+  useEffect(
+    () => dispatch(sprintsOperations.getAllSprints(projectId)),
+    [dispatch, projectId, sprintId],
   );
 
-  const [clickOnSprintLink, setClickOnSprintLink] = useState(false);
-
-  const onClickSprintLink = () => {
-    setClickOnSprintLink(true);
-    console.log('отработал');
-  };
+  const onClickSprintLink = () => setClickOnPage(false);
 
   useEffect(() => {
-    if (!clickOnPage || clickOnSprintLink) {
-      setClickOnSprintLink(false);
+    if (!clickOnPage) {
       arrDate?.map((el, ind, arr) => {
         if (el === dayjs(new Date()).format('YYYY-MM-DD')) {
           setPage(ind + 1);
@@ -89,6 +105,7 @@ const TasksPage = props => {
 
         if (
           arr.length < page ||
+          arr.length === 1 ||
           !arr.includes(dayjs(new Date()).format('YYYY-MM-DD'))
         ) {
           setPage(1);
@@ -98,47 +115,32 @@ const TasksPage = props => {
     }
   }, [arrDate, clickOnPage, paginationDate]);
 
-  useEffect(() => {
-    dispatch(sprintsOperations.getAllSprints(projectId));
-    //
-  }, [dispatch, projectId, sprintId]);
-
   const onClickDay = () => {
     setClickOnPage(true);
-    const day = arrDate.find((el, ind) => {
+    arrDate.find((el, ind) => {
       if (ind === page - 2) {
         setPaginationDate(el);
+        dispatch(tasksOperations.getTasksByDay(currentSprint.id, el));
+        setPage(prevState => prevState - 1);
+
         return el;
       }
     });
-
-    arrDate?.map((el, ind) => {
-      if (el === day) {
-        setPage(prevState => prevState - 1);
-      }
-    });
-
     setCurrentDay(currentDay === 1 ? currentDay : currentDay - 1);
-    dispatch(tasksOperations.getTasksByDay(currentSprint.id, paginationDate));
   };
 
   const onClickNextDay = () => {
     setClickOnPage(true);
-    const day = arrDate.find((el, ind) => {
+    arrDate.find((el, ind) => {
       if (ind === page) {
         setPaginationDate(el);
+        dispatch(tasksOperations.getTasksByDay(currentSprint.id, el));
+        setPage(prevState => prevState + 1);
+
         return el;
       }
     });
-
-    arrDate?.map((el, ind) => {
-      if (el === day) {
-        setPage(prevState => prevState + 1);
-      }
-    });
-
     setCurrentDay(currentDay !== arrDate.length ? currentDay + 1 : currentDay);
-    dispatch(tasksOperations.getTasksByDay(currentSprint.id, paginationDate));
   };
 
   const handleCloseModal = () => {
@@ -306,7 +308,7 @@ const TasksPage = props => {
                 onClick={openModalAnalytics}
               ></button>
             )}
-            <TaskList tasks={tasks} />
+            <TaskList paginationDate={paginationDate} tasks={tasks} />
           </div>
         </main>
 
