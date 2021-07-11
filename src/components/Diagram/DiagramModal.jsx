@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useMediaQuery } from '@material-ui/core';
+import { ReactComponent as CloseModalBtn } from '../Modal/closeModalBtn.svg';
 
 import PropTypes from 'prop-types';
 import { refs } from './refs';
@@ -44,7 +45,11 @@ const DiagramModal = ({ sprint, onCloseModal }) => {
   return createPortal(
     <div className={s.backdrop} onClick={handleCloseByBackdrop}>
       <div className={s.content}>
-        <ButtonClose onClose={handleCloseByButton} />
+        <CloseModalBtn
+          className={s.CloseModalBtn}
+          onClick={handleCloseByButton}
+        />
+        {/* <ButtonClose onClose={handleCloseByButton} /> */}
         {mobileMax && <p className={s.contentText}>Rotate your device</p>}
         {tabletMin && <Diagram sprint={sprint} />}
       </div>
