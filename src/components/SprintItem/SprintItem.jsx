@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
+import dayjs from 'dayjs';
 import { confirmAlert } from 'react-confirm-alert';
 import '../ButtonDeleteProject/react-confirm-alert.scss';
 
@@ -58,11 +59,11 @@ const SprintItem = ({ currentProject, sprint }) => {
           <ul>
             <li>
               <span>Start date</span>
-              <span>{sprint.startDate}</span>
+              <span>{dayjs(sprint.startDate).format('D MMM')}</span>
             </li>
             <li>
               <span>End date</span>
-              <span>{sprint.endDate}</span>
+              <span>{dayjs(sprint.endDate).format('D MMM')}</span>
             </li>
             <li>
               <span>Duration</span>
