@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import Spinner from 'components/Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import authOperations from 'redux/auth/auth-operations';
-import GoogleIcon from './Google_icon.png';
 
 import { getLoadingUser, getErrorSignup } from 'redux/auth/auth-selectors';
 import styles from './RegisterPage.module.scss';
 import swal from 'sweetalert';
 
+import GoogleLink from 'components/GoogleLink';
 import { useMediaQuery } from '@material-ui/core';
 import { refs } from '../../pages/SprintsPage/refs';
 import { ReactComponent as TabletLeftCircles } from '../LoginPage/svg/tabletLeftCircles.svg';
@@ -253,13 +253,7 @@ const RegisterPage = () => {
               Log in
             </a>
           </div>
-          <a
-            className={styles.googleAuth}
-            href="http://localhost:5000/api/users/google"
-          >
-            <img src={GoogleIcon} alt="Google Icon" width="40" height="40" />
-            Click to authorize with GOOGLE
-          </a>
+          <GoogleLink />
         </form>
       </div>
     </div>
