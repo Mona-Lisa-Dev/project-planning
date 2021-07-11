@@ -7,7 +7,7 @@ import * as tasksActions from 'redux/tasks/tasks-actions';
 
 import styles from './TaskList.module.scss';
 
-const TaskList = ({ tasks }) => {
+const TaskList = ({ paginationDate, tasks }) => {
   const [isVisibleInputFind, setIsVisibleInputFind] = useState(false);
 
   const filter = useSelector(getFilter);
@@ -75,6 +75,7 @@ const TaskList = ({ tasks }) => {
                 scheduledTime={scheduledTime}
                 totalTime={totalTime}
                 byDay={byDay}
+                paginationDate={paginationDate}
               />
             ),
           )}

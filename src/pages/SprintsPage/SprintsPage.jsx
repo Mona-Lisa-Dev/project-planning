@@ -149,7 +149,7 @@ const SprintsPage = props => {
                 {!showInput && (
                   <>
                     <h2>{currentProject?.name}</h2>
-                    {userEmail === currentProject.owner.email && (
+                    {userEmail === currentProject?.owner.email && (
                       <button
                         title="Edit the name"
                         type="button"
