@@ -82,6 +82,7 @@ const TasksPage = props => {
       ) {
         setPage(1);
         setPaginationDate(arr[0]);
+        setCurrentDay(1);
       }
 
       // if (tasks.length === 0) return;
@@ -225,35 +226,39 @@ const TasksPage = props => {
           <div className={styles.sprintContent}>
             <div className={styles.sprintDate}>
               <ul className={styles.pagination}>
-                {arrDate.map((day, i) => (
-                  <li
-                    key={day}
-                    className={
-                      currentDay === i + 1
-                        ? styles.paginationItem
-                        : styles.paginationItemNone
-                    }
-                  >
-                    <button
-                      type="button"
-                      onClick={onClickDay}
-                      className={styles.btnBefore}
-                      disabled={page === 1 ? true : false}
-                    >
-                      {'<'}
-                    </button>
+                {arrDate.map(
+                  (day, i) =>
+                    currentDay === i + 1 && (
+                      <li
+                        key={day}
+                        // className={
+                        //   currentDay === i + 1
+                        //     ? styles.paginationItem
+                        //     : styles.paginationItemNone
+                        // }
+                        className={styles.paginationItem}
+                      >
+                        <button
+                          type="button"
+                          onClick={onClickDay}
+                          className={styles.btnBefore}
+                          disabled={page === 1 ? true : false}
+                        >
+                          {'<'}
+                        </button>
 
-                    <p className={styles.currentDay}>{page} / </p>
-                    <p className={styles.totalDay}>{arrDate.length}</p>
-                    <button
-                      type="button"
-                      onClick={onClickNextDay}
-                      className={styles.btnNext}
-                      disabled={page === arrDate.length ? true : false}
-                    >{`>`}</button>
-                    <p className={styles.calendarDay}> {paginationDate}</p>
-                  </li>
-                ))}
+                        <p className={styles.currentDay}>{page} / </p>
+                        <p className={styles.totalDay}>{arrDate.length}</p>
+                        <button
+                          type="button"
+                          onClick={onClickNextDay}
+                          className={styles.btnNext}
+                          disabled={page === arrDate.length ? true : false}
+                        >{`>`}</button>
+                        <p className={styles.calendarDay}> {paginationDate}</p>
+                      </li>
+                    ),
+                )}
               </ul>
             </div>
             <div className={styles.sprintHeader}>
