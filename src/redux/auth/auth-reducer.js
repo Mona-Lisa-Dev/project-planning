@@ -35,11 +35,13 @@ const user = createReducer(initialUserState, {
 const token = createReducer(null, {
   [loginSuccess]: (_, { payload }) => payload.token,
   [logoutSuccess]: () => null,
+  [getUserByGoogleAuthSuccess]: (_, { payload }) => payload.token,
 });
 
 const isAuthorized = createReducer(false, {
   [loginSuccess]: () => true,
   [getCurrentUserSuccess]: () => true,
+  [getUserByGoogleAuthSuccess]: () => true,
 
   [signupError]: () => false,
   [loginError]: () => false,

@@ -58,6 +58,8 @@ const login = payload => async dispatch => {
     dispatch(loginSuccess(data));
     token.set(data.token);
 
+    console.log('data user login', data);
+
     return data;
   } catch (error) {
     dispatch(loginError(error.message));
@@ -108,10 +110,11 @@ const getUserByGoogleAuth = () => async dispatch => {
   try {
     const {
       data: { data },
-    } = await axios.get('/users/google-redirect');
+    } = await axios.get('/users/google-user');
     dispatch(getUserByGoogleAuthSuccess(data));
 
     token.set(data.token);
+    console.log('data user', data);
 
     return data;
   } catch (error) {

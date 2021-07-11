@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Spinner from 'components/Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import authOperations from 'redux/auth/auth-operations';
+import GoogleIcon from './Google_icon.png';
 
 import { getLoadingUser, getErrorSignup } from 'redux/auth/auth-selectors';
 import styles from './RegisterPage.module.scss';
@@ -249,12 +250,16 @@ const RegisterPage = () => {
           <div className={styles.login}>
             <p className={styles.question}> Do you have an account?</p>
             <a className={styles.auth} href="/login">
-              <a href="http://localhost:5000/api/users/google">
-                Click to authorize with GOOGLE
-              </a>
               Log in
             </a>
           </div>
+          <a
+            className={styles.googleAuth}
+            href="http://localhost:5000/api/users/google"
+          >
+            <img src={GoogleIcon} alt="Google Icon" width="40" height="40" />
+            Click to authorize with GOOGLE
+          </a>
         </form>
       </div>
     </div>
