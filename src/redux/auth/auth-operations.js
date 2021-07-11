@@ -109,10 +109,14 @@ const getUserByGoogleAuth = () => async dispatch => {
     const {
       data: { data },
     } = await axios.get('/users/google-redirect');
+    console.log('+++++++++++++++after axios+++++++++++++++++++');
     dispatch(getUserByGoogleAuthSuccess(data));
 
     token.set(data.token);
-
+    console.log(
+      '===============================================================',
+      data,
+    );
     return data;
   } catch (error) {
     dispatch(getUserByGoogleAuthError(error.message));
