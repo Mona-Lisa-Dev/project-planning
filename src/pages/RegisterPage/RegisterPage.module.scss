@@ -661,3 +661,28 @@
   background-color: $text-white;
   box-shadow: 0px 4px 10px 4px rgba(255, 107, 8, 0.3);
 }
+
+.googleAuth {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 11px 44px;
+  margin: 0 auto 20px;
+  cursor: pointer;
+  // width: 170px;
+  height: 44px;
+  vertical-align: middle;
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.22;
+  text-align: center;
+  letter-spacing: 0.04em;
+  transition: all 0.25s linear;
+  color: black;
+  background-color: rgba(117, 101, 101, 0.3);
+  box-shadow: 0px 6px 26px rgba(0, 5, 97, 0.1);
+  border: none;
+  border-radius: 25px;
+}

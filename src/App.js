@@ -15,6 +15,7 @@ import {
   getIsSignup,
   getStatusLoadingUser,
 } from 'redux/auth/auth-selectors';
+import AuthComponent from './AuthComponent';
 
 import routes from 'routes';
 import './scss/_main.scss';
@@ -72,6 +73,20 @@ const App = () => {
                     <Redirect to={routes.login} />
                   ) : (
                     <RegisterPage />
+                  )
+                }
+              />
+
+              <Route
+                path={'/google-user'}
+                restricted
+                render={props =>
+                  isAuthorized ? (
+                    <Redirect to={routes.projects} />
+                  ) : isSignup ? (
+                    <Redirect to={routes.login} />
+                  ) : (
+                    <AuthComponent />
                   )
                 }
               />
