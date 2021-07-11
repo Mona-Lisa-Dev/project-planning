@@ -8,7 +8,6 @@ const Diagram = sprint => {
 
   const { startDate, endDate, duration, allScheduledTime, totalDaly, name } =
     sprint.sprint;
-  console.log('sprint', sprint);
 
   useEffect(() => {
     // получаем даты
