@@ -57,6 +57,11 @@ const TasksPage = props => {
         sprintsOperations.getSprintById(projectId, sprintId),
       );
 
+      if (!sprint) {
+        history.push(`/projects/${projectId}`);
+        return;
+      }
+
       const arr = sprint.totalDaly.reduce(
         (acc, day) => [...acc, Object.keys(day)[0]],
         [],
