@@ -87,11 +87,8 @@ main {
     height: 36px;
     border-radius: 5px;
     background: $form-background;
-    &:hover,
-    &:focus {
-      box-shadow: $primaryShadow;
-    }
   }
+
   h3 {
     font-weight: 400;
     max-height: 60px;
@@ -102,15 +99,21 @@ main {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
-    &:hover,
-    &:focus {
+    @media screen and (min-width: $desktop) {
+      max-width: 110px;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    span {
+      box-shadow: 0px 6px 26px 0px rgba(0, 5, 97, 0.15);
+    }
+    h3 {
       font-weight: bold;
       text-overflow: clip;
       white-space: normal;
       word-break: break-all;
-    }
-    @media screen and (min-width: $desktop) {
-      max-width: 110px;
     }
   }
 }
@@ -120,7 +123,7 @@ main {
     font-weight: bold;
   }
   span {
-    box-shadow: $primaryShadow;
+    box-shadow: 0px 6px 26px 0px rgba(0, 5, 97, 0.2);
   }
 }
 
