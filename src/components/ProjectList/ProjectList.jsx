@@ -1,11 +1,11 @@
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
-import { getProjects } from 'redux/projects/projects-selectors';
+// import { getProjects } from 'redux/projects/projects-selectors';
 import ProjectItem from '../ProjectItem';
 import styles from './ProjectList.module.scss';
 
-const ProjectList = () => {
-  const projects = useSelector(getProjects);
+const ProjectList = ({ projects }) => {
+  // const projects = useSelector(getProjects);
 
   return projects.length === 0 ? (
     <p className={styles.listWrapper}>Create first project</p>
