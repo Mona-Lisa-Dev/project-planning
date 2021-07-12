@@ -51,6 +51,20 @@ const participants = createReducer([], {
 const currentProject = createReducer(null, {
   [getProjectByIdSuccess]: (_, { payload }) => payload,
   [updateProjectSuccess]: (_, { payload }) => payload,
+
+  [addParticipantSuccess]: (state, { payload }) => {
+    return {
+      ...state,
+      participants: payload,
+    };
+  },
+
+  [deleteParticipantSuccess]: (state, { payload }) => {
+    return {
+      ...state,
+      participants: payload,
+    };
+  },
 });
 
 const loading = createReducer(false, {

@@ -67,7 +67,7 @@ const ProjectItem = ({ project }) => {
           <p className={styles.itemDescription}> {project.description}</p>
         </div>
       </Link>
-      {userEmail === project.owner.email && (
+      {userEmail === project.owner?.email && (
         <div className={styles.buttonWrapper}>
           <ButtonDelete handleClick={onClick} />
         </div>

@@ -2,6 +2,7 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import { confirmAlert } from 'react-confirm-alert';
 
@@ -29,7 +30,23 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
 
   const handleClick = async email => {
     await dispatch(projectsOperations.deleteParticipant(projectId, { email }));
-    // await dispatch(projectsActions.clearState(email));
+    const currentProject = await dispatch(
+      projectsOperations.getProjectById(projectId),
+    );
+
+    if (!currentProject) {
+      onClickCancel();
+      window.location.href = '/projects';
+    }
+
+    // if (
+    //   currentProject.owner.email !== email &&
+    //   !currentProject.participants.includes(email)
+    // ) {
+    //   await dispatch(projectsActions.clearState(email));
+    // }
+    // console.log('currentProject', currentProject);
+    //
   };
 
   const onClick = item => {

@@ -24,7 +24,7 @@ const CreateProject = ({ onClickCancel }) => {
     setDescription(event.target.value);
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
     if (!name) {
       setEmptyInput(true);
@@ -35,8 +35,8 @@ const CreateProject = ({ onClickCancel }) => {
       description,
     };
 
-    dispatch(projectsOperations.createProject(newProject));
-    dispatch(projectsOperations.getAllProjects());
+    await dispatch(projectsOperations.createProject(newProject));
+    await dispatch(projectsOperations.getAllProjects());
     onClickCancel();
 
     setName('');
