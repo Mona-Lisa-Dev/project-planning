@@ -144,6 +144,14 @@ const TasksPage = props => {
     setCurrentDay(currentDay !== arrDate.length ? currentDay + 1 : currentDay);
   };
 
+  useEffect(() => {
+    const body = document.querySelector('body');
+    body.style.overflow =
+      showModalCreateTask || showModalCreateSprint || showModalAnalytics
+        ? 'hidden'
+        : 'auto';
+  }, [showModalCreateTask, showModalCreateSprint, showModalAnalytics]);
+
   const handleCloseModal = () => {
     setShowModalCreateTask(false);
     setShowModalCreateSprint(false);
