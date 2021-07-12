@@ -28,7 +28,7 @@ const ProjectItem = ({ project }) => {
         return (
           <div className={styles.custom_ui}>
             <h1>Are you sure?</h1>
-            <p>You want to delete {project.name} project?</p>
+            <p>You want to delete project?</p>
             <button
               className={styles.cancelBtn}
               type="button"
