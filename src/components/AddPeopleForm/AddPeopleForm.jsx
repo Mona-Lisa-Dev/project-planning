@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 
+import * as projectsActions from 'redux/projects/projects-actions';
 import { getParticipants } from 'redux/projects/projects-selectors';
 import projectsOperations from 'redux/projects/projects-operations';
 import PeopleList from 'components/PeopleList';
@@ -22,8 +23,9 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
     setEmail(e.target.value);
   };
 
-  const handleClick = email => {
-    dispatch(projectsOperations.deleteParticipant(projectId, { email }));
+  const handleClick = async email => {
+    await dispatch(projectsOperations.deleteParticipant(projectId, { email }));
+    // await dispatch(projectsActions.clearState(email));
   };
 
   const handleSubmit = e => {
@@ -104,11 +106,10 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
         </div>
       )}
 
-      {/* при клике на кнопку готово форма не закрывается, а добавляется введенный имейл в список ниже */}
       <button form="add" type="submit" className={s.ready_btn}>
         Ready
       </button>
-      {/* закрытие реализуется на модалке */}
+
       <button
         form="add"
         type="button"

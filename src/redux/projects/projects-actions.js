@@ -67,3 +67,5 @@ export const getProjectByIdError = createAction('projects/getProjectByIdError');
 // export const getAllParticipantsError = createAction(
 //   'projects/getAllParticipantsError',
 // );
+
+export const clearState = createAction('projects/clearState');
