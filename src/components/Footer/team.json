@@ -42,11 +42,11 @@
     "position": "Fullstack developer",
     "doing": [
       "Backend:",
-      "- Worked on backend schemas and the logic of the Project and Task",
-      "- Validation",
+      "- Worked on backend schemas and the logic of the Project and Task, validation",
       "- MongoDB",
       "Frontend:",
       "- Worked on API requests logic",
+      "- Worked on the diagram (logic)",
       "- Control styles",
       "- Control & fix bugs"
     ]
@@ -60,10 +60,10 @@
     "position": "Fullstack developer",
     "doing": [
       "Backend:",
-      "- Worked on backend schemas and the logic of the Sprint and Task",
-      "- Validation",
+      "- Worked on backend schemas and the logic of the Sprint and Task, validation",
       "Frontend:",
-      "- Routing (frontend)",
+      "- Routing",
+      "- Worked on the diagram (logic)",
       "- Control & fix styles",
       "- Control & fix bugs"
     ]
@@ -80,6 +80,7 @@
       "- Created backend user component (scheme and the logic)",
       "- Worked on tasks component",
       "- Created swagger UI interface",
+      "- Google authorization",
       "- Planning",
       "- Control & fix bugs"
     ]
