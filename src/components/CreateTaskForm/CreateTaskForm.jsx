@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import tasksOperations from 'redux/tasks/tasks-operations';
 import sprintsOperations from 'redux/sprints/sprints-operations';
 import s from './CreateTaskForm.module.scss';
@@ -93,6 +95,12 @@ const CreateTaskForm = ({ projectId, sprintId, onClickCancel }) => {
       </button>
     </div>
   );
+};
+
+CreateTaskForm.propTypes = {
+  onClickCancel: PropTypes.func.isRequired,
+  projectId: PropTypes.string.isRequired,
+  sprintId: PropTypes.string.isRequired,
 };
 
 export default CreateTaskForm;

@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -79,9 +79,7 @@ const SprintItem = ({ currentProject, sprint }) => {
 
 export default SprintItem;
 
-// SprintItem.propTypes = {
-//   name: PropTypes.string.isRequired,
-//   startDate: PropTypes.string.isRequired,
-//   endDate: PropTypes.string.isRequired,
-//   duration: PropTypes.number.isRequired,
-// };
+SprintItem.propTypes = {
+  currentProject: PropTypes.object.isRequired,
+  sprint: PropTypes.object.isRequired,
+};

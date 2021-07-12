@@ -1,6 +1,7 @@
 import { useMediaQuery } from '@material-ui/core';
 import { refs } from '../../pages/SprintsPage/refs';
 import { NavLink, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import s from './SideBarProjects.module.scss';
 
 const SideBarProjects = ({ projects }) => {
@@ -33,6 +34,10 @@ const SideBarProjects = ({ projects }) => {
       )}
     </>
   );
+};
+
+SideBarProjects.propTypes = {
+  projects: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default withRouter(SideBarProjects);

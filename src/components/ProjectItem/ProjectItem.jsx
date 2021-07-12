@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -28,7 +28,9 @@ const ProjectItem = ({ project }) => {
         return (
           <div className={styles.custom_ui}>
             <h1>Are you sure?</h1>
+
             <p>You want to delete {project.name} ?</p>
+
             <button
               className={styles.cancelBtn}
               type="button"
@@ -76,7 +78,6 @@ const ProjectItem = ({ project }) => {
 
 export default ProjectItem;
 
-// ProjectItem.propTypes = {
-//   name: PropTypes.string.isRequired,
-//   description: PropTypes.string.isRequired,
-// };
+ProjectItem.propTypes = {
+  project: PropTypes.object.isRequired,
+};

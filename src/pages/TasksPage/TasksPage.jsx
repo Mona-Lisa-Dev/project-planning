@@ -12,6 +12,7 @@ import SideBarGoBackLink from 'components/SideBarGoBackLink';
 import SideBarScrollWrap from 'components/SideBarScrollWrap';
 import CreateSprint from 'components/CreateSprint';
 import DiagramModal from 'components/Diagram/DiagramModal';
+import PropTypes from 'prop-types';
 
 import { getTasks, getError } from 'redux/tasks/tasks-selectors';
 import { getSprints, getCurrentSprint } from 'redux/sprints/sprints-selectors';
@@ -351,6 +352,10 @@ const TasksPage = props => {
       </>
     )
   );
+};
+
+TasksPage.propTypes = {
+  props: PropTypes.object,
 };
 
 export default TasksPage;

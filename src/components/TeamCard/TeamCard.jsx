@@ -1,4 +1,6 @@
+import PropTypes from 'prop-types';
 import styles from './TeamCard.module.scss';
+
 const TeamCard = ({ team }) => {
   const photo = require(`./${team.photo}`).default;
   return (
@@ -52,4 +54,9 @@ const TeamCard = ({ team }) => {
     </div>
   );
 };
+
+TeamCard.propTypes = {
+  team: PropTypes.object.isRequired,
+};
+
 export default TeamCard;

@@ -25,6 +25,7 @@ import { getError } from 'redux/sprints/sprints-selectors';
 import sprintsOperations from 'redux/sprints/sprints-operations';
 import projectsOperations from 'redux/projects/projects-operations';
 import swal from 'sweetalert';
+import PropTypes from 'prop-types';
 
 import s from './SprintsPage.module.scss';
 import { useHistory } from 'react-router-dom';
@@ -206,6 +207,10 @@ const SprintsPage = props => {
       )}
     </>
   );
+};
+
+SprintsPage.propTypes = {
+  props: PropTypes.object,
 };
 
 export default SprintsPage;
