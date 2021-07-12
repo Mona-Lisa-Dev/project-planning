@@ -23,6 +23,11 @@ const ProjectsPage = () => {
   const dispatch = useDispatch();
   useEffect(() => dispatch(projectsOperations.getAllProjects()), [dispatch]);
 
+  useEffect(() => {
+    const body = document.querySelector('body');
+    body.style.overflow = showModal ? 'hidden' : 'auto';
+  }, [showModal]);
+
   const toggleModal = () => setShowModal(!showModal);
 
   useEffect(() => {
