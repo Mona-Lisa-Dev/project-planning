@@ -1,5 +1,7 @@
 import s from './Diagram.module.scss';
 
+import PropTypes from 'prop-types';
+
 import { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 
@@ -118,6 +120,10 @@ const Diagram = sprint => {
       />
     </div>
   );
+};
+
+Diagram.propTypes = {
+  sprint: PropTypes.object.isRequired,
 };
 
 export default Diagram;

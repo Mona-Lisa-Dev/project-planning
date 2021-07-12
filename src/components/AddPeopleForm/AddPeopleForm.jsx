@@ -1,4 +1,5 @@
 // import { Button, TextField } from '@material-ui/core';
+import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
@@ -16,6 +17,8 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
   // const [users, setUsers] = useState([]);
   const [emptyInput, setEmptyInput] = useState(false);
   const participants = useSelector(getParticipants);
+
+  console.log(typeof projectId);
 
   const dispatch = useDispatch();
 
@@ -120,6 +123,11 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
       </button>
     </div>
   );
+};
+
+AddPeopleForm.propTypes = {
+  projectId: PropTypes.string.isRequired,
+  onClickCancel: PropTypes.string.isRequired,
 };
 
 export default AddPeopleForm;

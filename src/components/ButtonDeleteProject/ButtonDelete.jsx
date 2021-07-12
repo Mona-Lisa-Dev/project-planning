@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import styles from './ButtonDelete.module.scss';
 
 const ButtonDelete = ({ handleClick }) => {
@@ -8,6 +10,10 @@ const ButtonDelete = ({ handleClick }) => {
       className={styles.btnDelete}
     ></button>
   );
+};
+
+ButtonDelete.propTypes = {
+  handleClick: PropTypes.func.isRequired,
 };
 
 export default ButtonDelete;

@@ -32,6 +32,7 @@ const PeopleList = ({ projectId, participants }) => {
 
 PeopleList.propTypes = {
   participants: PropTypes.arrayOf(PropTypes.string.isRequired),
+  projectId: PropTypes.string.isRequired,
 };
 
 export default PeopleList;
