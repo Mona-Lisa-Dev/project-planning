@@ -9,7 +9,6 @@ import projectsOperations from 'redux/projects/projects-operations';
 import {
   getLoadingProjects,
   getError,
-  getProjects,
 } from 'redux/projects/projects-selectors';
 
 import styles from './ProjectsPage.module.scss';
@@ -20,7 +19,6 @@ const ProjectsPage = () => {
   const [showModal, setShowModal] = useState(false);
   const loading = useSelector(getLoadingProjects);
   const Error = useSelector(getError);
-  const projects = useSelector(getProjects);
 
   const dispatch = useDispatch();
   useEffect(() => dispatch(projectsOperations.getAllProjects()), [dispatch]);
@@ -65,7 +63,7 @@ const ProjectsPage = () => {
           </Modal>
         )}
       </div>
-      <ProjectList projects={projects} />
+      <ProjectList />
     </>
   );
 };
