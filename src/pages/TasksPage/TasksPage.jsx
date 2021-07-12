@@ -14,6 +14,7 @@ import CreateSprint from 'components/CreateSprint';
 import DiagramModal from 'components/Diagram/DiagramModal';
 import PropTypes from 'prop-types';
 
+import { getCurrentProject } from 'redux/projects/projects-selectors';
 import { getTasks, getError } from 'redux/tasks/tasks-selectors';
 import { getSprints, getCurrentSprint } from 'redux/sprints/sprints-selectors';
 import sprintsOperations from 'redux/sprints/sprints-operations';
@@ -42,6 +43,7 @@ const TasksPage = props => {
   const tasks = useSelector(getTasks);
   const Error = useSelector(getError);
   const history = useHistory();
+  const project = useSelector(getCurrentProject);
 
   // useEffect(() => {
   //   Error &&
@@ -57,6 +59,11 @@ const TasksPage = props => {
       const sprint = await dispatch(
         sprintsOperations.getSprintById(projectId, sprintId),
       );
+
+      if (!project) {
+        window.location.href = '/projects';
+        return;
+      }
 
       if (!sprint) {
         history.push(`/projects/${projectId}`);
@@ -241,15 +248,7 @@ const TasksPage = props => {
                 {arrDate.map(
                   (day, i) =>
                     currentDay === i + 1 && (
-                      <li
-                        key={day}
-                        // className={
-                        //   currentDay === i + 1
-                        //     ? styles.paginationItem
-                        //     : styles.paginationItemNone
-                        // }
-                        className={styles.paginationItem}
-                      >
+                      <li key={day} className={styles.paginationItem}>
                         <button
                           type="button"
                           onClick={onClickDay}
