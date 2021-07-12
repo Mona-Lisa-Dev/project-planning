@@ -7,6 +7,7 @@ import { getLoadingUser, getErrorSignup } from 'redux/auth/auth-selectors';
 import styles from './RegisterPage.module.scss';
 import swal from 'sweetalert';
 
+import GoogleLink from 'components/GoogleLink';
 import { useMediaQuery } from '@material-ui/core';
 import { refs } from '../../pages/SprintsPage/refs';
 import { ReactComponent as TabletLeftCircles } from '../LoginPage/svg/tabletLeftCircles.svg';
@@ -252,6 +253,7 @@ const RegisterPage = () => {
               Log in
             </a>
           </div>
+          <GoogleLink />
         </form>
       </div>
     </div>

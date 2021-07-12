@@ -13,10 +13,13 @@ import {
   getCurrentUserSuccess,
   getCurrentUserError,
   noToken,
+  getUserByGoogleAuthRequest,
+  getUserByGoogleAuthSuccess,
+  getUserByGoogleAuthError,
 } from './auth-actions';
 
-// axios.defaults.baseURL = 'http://localhost:5000/api';
-axios.defaults.baseURL = 'https://project-planning-rest-api.herokuapp.com/api';
+axios.defaults.baseURL = 'http://localhost:5000/api';
+// axios.defaults.baseURL = 'https://project-planning-rest-api.herokuapp.com/api';
 
 const token = {
   set(token) {
@@ -54,6 +57,8 @@ const login = payload => async dispatch => {
 
     dispatch(loginSuccess(data));
     token.set(data.token);
+
+    console.log('data user login', data);
 
     return data;
   } catch (error) {
@@ -99,10 +104,29 @@ const getCurrentUser = () => async (dispatch, getState) => {
   }
 };
 
+const getUserByGoogleAuth = () => async dispatch => {
+  dispatch(getUserByGoogleAuthRequest());
+
+  try {
+    const {
+      data: { data },
+    } = await axios.get('/users/google-user');
+    dispatch(getUserByGoogleAuthSuccess(data));
+
+    token.set(data.token);
+    console.log('data user', data);
+
+    return data;
+  } catch (error) {
+    dispatch(getUserByGoogleAuthError(error.message));
+  }
+};
+
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
   signup,
   login,
   logout,
   getCurrentUser,
+  getUserByGoogleAuth,
 };
