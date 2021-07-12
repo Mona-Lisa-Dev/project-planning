@@ -12,9 +12,8 @@ import { ReactComponent as DeskLeftCircles } from './svg/deskLeftCircles.svg';
 import { ReactComponent as DeskLeftCircle } from './svg/deskLeftCircle.svg';
 import { ReactComponent as DeskRightCircles } from './svg/deskRightCircles.svg';
 // -------------------------------
-
+import GoogleLink from 'components/GoogleLink';
 import { getLoadingUser, getErrorLogin } from 'redux/auth/auth-selectors';
-
 import styles from './LoginPage.module.scss';
 
 const LoginPage = () => {
@@ -213,6 +212,7 @@ const LoginPage = () => {
               Register
             </a>
           </div>
+          <GoogleLink />
         </form>
       </div>
     </div>
