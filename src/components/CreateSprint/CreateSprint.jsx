@@ -1,4 +1,6 @@
 import 'date-fns';
+
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
@@ -370,6 +372,11 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
       </form>
     </div>
   );
+};
+
+CreateSprint.propTypes = {
+  onClickCancel: PropTypes.func.isRequired,
+  projectId: PropTypes.string.isRequired,
 };
 
 export default CreateSprint;

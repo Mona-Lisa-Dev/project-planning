@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import TaskItem from '../TaskItem';
@@ -87,14 +87,14 @@ const TaskList = ({ paginationDate, tasks }) => {
 
 export default TaskList;
 
-// TaskList.propTypes = {
-//   tasks: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       scheduledHours: PropTypes.number.isRequired,
-//       spentHours: PropTypes.number,
-//       allHours: PropTypes.number,
-//     }),
-//   ),
-// };
+TaskList.propTypes = {
+  tasks: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      scheduledHours: PropTypes.number,
+      spentHours: PropTypes.number,
+      allHours: PropTypes.number,
+    }),
+  ),
+};

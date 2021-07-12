@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
@@ -120,6 +122,17 @@ const TaskItem = ({
       <ButtonDelete handleClick={handleClick} />
     </li>
   );
+};
+
+TaskItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  sprint: PropTypes.string.isRequired,
+  scheduledTime: PropTypes.number.isRequired,
+  totalTime: PropTypes.number.isRequired,
+  byDay: PropTypes.object,
+  project: PropTypes.string.isRequired,
+  paginationDate: PropTypes.string.isRequired,
 };
 
 export default TaskItem;
