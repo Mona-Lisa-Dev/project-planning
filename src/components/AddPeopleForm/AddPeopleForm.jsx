@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+import { confirmAlert } from 'react-confirm-alert';
 
 import * as projectsActions from 'redux/projects/projects-actions';
 import { getParticipants } from 'redux/projects/projects-selectors';
@@ -26,6 +27,32 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
   const handleClick = async email => {
     await dispatch(projectsOperations.deleteParticipant(projectId, { email }));
     // await dispatch(projectsActions.clearState(email));
+  };
+
+  const onClick = item => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className={s.custom_ui}>
+            <h1>Are you sure?</h1>
+            <p>You want to delete participant?</p>
+            <button className={s.cancelBtn} type="button" onClick={onClose}>
+              Cancel
+            </button>
+            <button
+              className={s.rdyBtn}
+              type="button"
+              onClick={() => {
+                handleClick(item);
+                onClose();
+              }}
+            >
+              Ok
+            </button>
+          </div>
+        );
+      },
+    });
   };
 
   const handleSubmit = e => {
@@ -93,7 +120,7 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
                 {item}{' '}
                 <button
                   type="button"
-                  onClick={() => handleClick(item)}
+                  onClick={() => onClick(item)}
                   className={s.deleteButton}
                 >
                   <DeleteOutlinedIcon />

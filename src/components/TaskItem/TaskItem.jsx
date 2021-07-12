@@ -75,7 +75,7 @@ const TaskItem = ({
         return (
           <div className={styles.custom_ui}>
             <h1>Are you sure?</h1>
-            <p>You want to delete this task?</p>
+            <p>You want to delete {name}?</p>
             <button
               className={styles.cancelBtn}
               type="button"
