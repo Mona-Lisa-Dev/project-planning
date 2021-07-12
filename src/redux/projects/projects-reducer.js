@@ -26,6 +26,7 @@ import {
   // getAllParticipantsRequest,
   // getAllParticipantsSuccess,
   // getAllParticipantsError,
+  clearState,
 } from './projects-actions';
 
 import { logoutSuccess } from 'redux/auth/auth-actions';

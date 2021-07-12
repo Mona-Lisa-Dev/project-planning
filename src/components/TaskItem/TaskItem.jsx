@@ -19,6 +19,7 @@ const TaskItem = ({
   totalTime,
   byDay,
   project,
+  paginationDate,
 }) => {
   const [queryCustomTime, setQueryCustomTime] = useState(0);
   const [day, setDay] = useState('');
@@ -55,12 +56,12 @@ const TaskItem = ({
     const payload = {
       sprintId: sprint,
       taskId: id,
-      day,
+      day: paginationDate,
       value: queryCustomTime,
     };
 
     await dispatch(tasksOperations.updateTask(payload));
-    await dispatch(tasksOperations.getTasksByDay(sprint, day));
+    await dispatch(tasksOperations.getTasksByDay(sprint, paginationDate));
     await dispatch(sprintsOperations.getSprintById(project, sprint));
 
     // setQueryTotalTime(
@@ -100,7 +101,10 @@ const TaskItem = ({
 
   return (
     <li className={styles.taskItem}>
-      <p className={styles.taskName}> {name} </p>
+      <p className={styles.taskName} data-text={name}>
+        {' '}
+        {name}{' '}
+      </p>
       <p className={styles.planTime}> {scheduledTime} </p>
       <div className={styles.inputTimeBefore}>
         <input

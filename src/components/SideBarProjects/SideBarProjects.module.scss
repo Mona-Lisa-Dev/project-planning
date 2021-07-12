@@ -1,149 +1,107 @@
 @import '../../scss/vars';
 @import '../../scss/breakpoints';
 
-.SideBarProjectsWrap {
+.SideBarProjectsList {
   @media screen and (min-width: $tablet) {
-    margin-bottom: 8vh;
-    height: 45vh;
-    min-height: 320px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    scrollbar-width: thin;
-
-    &::-webkit-scrollbar {
-      width: 3px;
-      background-color: #edeef3;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: #ff6b08;
-      border-radius: 1.5px;
-    }
+    padding: 10px 0 20px 40px;
   }
 
-  .SideBarProjectsList {
-    @media screen and (min-width: $tablet) {
-      width: 185px;
+  @media screen and (min-width: $desktop) {
+    padding: 10px 0 20px 55px;
+  }
+
+  .SideBarProjectsItem {
+    &:not(:last-child) {
+      margin-bottom: 10px;
     }
 
-    @media screen and (min-width: $desktop) {
-      width: 177px;
+    // Colors and Shadows --------------
+    &:nth-child(3n + 1) {
+      .projectLink .square {
+        background-color: $project-purple;
+      }
+      .activeProjectLink .square {
+        box-shadow: $primaryShadow;
+      }
     }
 
-    li {
-      &:not(:last-child) {
-        margin-bottom: 30px;
+    &:nth-child(3n + 2) {
+      .projectLink .square {
+        background-color: $project-rose;
       }
-
-      // Colors and Shadows --------------
-      &:nth-child(3n + 1) {
-        .link .square {
-          background-color: $project-purple;
-        }
-        .activeLink .squareShadow {
-          background-image: url('img/violet-8C72DF.png');
-          background-repeat: no-repeat;
-        }
+      .activeProjectLink .square {
+        box-shadow: $primaryShadow;
       }
-      &:nth-child(3n + 2) {
-        .link .square {
-          background-color: $project-rose;
-        }
-        .activeLink .squareShadow {
-          background-image: url('img/orange-FF765F.png');
-          background-repeat: no-repeat;
-        }
+    }
+
+    &:nth-child(3n) {
+      .projectLink .square {
+        background-color: $project-green;
       }
-      &:nth-child(3n) {
-        .link .square {
-          background-color: $project-green;
-        }
-        .activeLink .squareShadow {
-          background-image: url('img/green-71DF87.png');
-          background-repeat: no-repeat;
-        }
-      } // ----------- End Colors and Shadows
+      .activeProjectLink .square {
+        box-shadow: $primaryShadow;
+      }
+    } // ----------- End Colors and Shadows
 
-
-
-
-    .link {
+    & > .projectLink {
       position: relative;
       display: flex;
       align-items: center;
-      width: 170px;
+      height: 54px;
       color: #181c27;
-      text-align: left;
-      
-         @media screen and (min-width: $tablet) {
-          width: 177px;
-        }
 
-        @media screen and (min-width: $desktop) {
-          width: 165px;
-        }
-      
+      @media screen and (min-width: $tablet) {
+        width: 177px;
+      }
+
+      @media screen and (min-width: $desktop) {
+        width: 162px;
+      }
+
       .square {
         display: block;
         margin-right: 15px;
         width: 36px;
         height: 36px;
         border-radius: 5px;
-        // background-color: white;
+
+        &:hover,
+        &:focus {
+          box-shadow: $primaryShadow;
+        }
       }
 
-      .name {
-        width: 118px;
+      & > .projectName {
+        max-width: 118px;
+        max-width: 110px;
         font-weight: 400;
         font-size: 14px;
         line-height: 17px;
         letter-spacing: 0.04em;
+        text-align: start;
         color: #181c27;
-        max-height: 60px;
-        max-width: 110px;
-        // добавить троеточие в конце длинных названий
+
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
 
-
-      }
-
-
-        .name {
-          width: 118px;
-          font-weight: 400;
-          font-size: 14px;
-          line-height: 17px;
-          letter-spacing: 0.04em;
-          color: #181c27;
-          max-height: 60px;
+        @media screen and (min-width: $desktop) {
           max-width: 110px;
-          // добавить троеточие в конце длинных названий
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
         }
 
-        // Active Link
-        .activeLink {
-          .name {
-            font-weight: 700;
-          }
-
-          .squareShadow {
-            position: absolute;
-            top: -2px;
-            left: -3px;
-            width: 44px;
-            height: 44px;
-            z-index: -1;
-          }
+        &:hover,
+        &:focus {
+          font-weight: 700;
         }
+      }
+    }
+
+    // Active Link
+    .activeProjectLink {
+      .projectName {
+        font-weight: 700;
       }
     }
   }

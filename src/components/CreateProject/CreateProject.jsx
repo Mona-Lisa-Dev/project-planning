@@ -36,6 +36,7 @@ const CreateProject = ({ onClickCancel }) => {
     };
 
     dispatch(projectsOperations.createProject(newProject));
+    dispatch(projectsOperations.getAllProjects());
     onClickCancel();
 
     setName('');

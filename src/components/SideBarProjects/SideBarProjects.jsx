@@ -12,27 +12,26 @@ const SideBarProjects = ({ projects }) => {
   // ----- End useMediaQuery -----
 
   return (
-    <div className={s.SideBarProjectsWrap}>
+    <>
       {tablet && (
         <ul className={s.SideBarProjectsList}>
           {projects?.map(project => (
-            <li key={project.id}>
+            <li className={s.SideBarProjectsItem} key={project.id}>
               <NavLink
+                className={s.projectLink}
+                activeClassName={s.activeProjectLink}
                 to={{
                   pathname: `/projects/${project.id}`,
                 }}
-                className={s.link}
-                activeClassName={s.activeLink}
               >
                 <span className={s.square} />
-                <span className={s.squareShadow} />
-                <h3 className={s.name}>{project.name}</h3>
+                <h3 className={s.projectName}>{project.name}</h3>
               </NavLink>
             </li>
           ))}
         </ul>
       )}
-    </div>
+    </>
   );
 };
 
