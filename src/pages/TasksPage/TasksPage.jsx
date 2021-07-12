@@ -19,6 +19,7 @@ import { getTasks, getError } from 'redux/tasks/tasks-selectors';
 import { getSprints, getCurrentSprint } from 'redux/sprints/sprints-selectors';
 import sprintsOperations from 'redux/sprints/sprints-operations';
 import tasksOperations from 'redux/tasks/tasks-operations';
+import projectsOperations from 'redux/projects/projects-operations';
 
 import styles from './TasksPage.module.scss';
 
@@ -60,9 +61,11 @@ const TasksPage = props => {
         sprintsOperations.getSprintById(projectId, sprintId),
       );
 
-      if (!project) {
+      const currentProject = await dispatch(
+        projectsOperations.getProjectById(projectId),
+      );
+      if (!currentProject) {
         window.location.href = '/projects';
-        return;
       }
 
       if (!sprint) {
