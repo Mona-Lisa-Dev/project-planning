@@ -8,6 +8,7 @@ import { confirmAlert } from 'react-confirm-alert';
 
 import * as projectsActions from 'redux/projects/projects-actions';
 import { getParticipants } from 'redux/projects/projects-selectors';
+import { getUserEmail } from 'redux/auth/auth-selectors';
 import projectsOperations from 'redux/projects/projects-operations';
 import PeopleList from 'components/PeopleList';
 import swal from 'sweetalert';
@@ -19,6 +20,7 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
   // const [users, setUsers] = useState([]);
   const [emptyInput, setEmptyInput] = useState(false);
   const participants = useSelector(getParticipants);
+  const userEmail = useSelector(getUserEmail);
 
   console.log(typeof projectId);
 
@@ -89,6 +91,15 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
     );
     if (isExistingUser) {
       swal('Warning!', `${email} is already in Participants!`, 'warning');
+      return;
+    }
+
+    if (userEmail === normalizedName) {
+      swal(
+        'Warning!',
+        `It's impossible to add yourself to Participants!`,
+        'warning',
+      );
       return;
     }
 
