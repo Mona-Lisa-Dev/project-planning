@@ -107,6 +107,16 @@ const TasksPage = props => {
     [dispatch, projectId, sprintId],
   );
 
+  const noProject = async () => {
+    const currentProject = await dispatch(
+      projectsOperations.getProjectById(projectId),
+    );
+    if (!currentProject) {
+      window.location.href = '/projects';
+      return;
+    }
+  };
+
   const onClickSprintLink = () => setClickOnPage(false);
 
   useEffect(() => {
@@ -129,23 +139,19 @@ const TasksPage = props => {
     }
   }, [arrDate, clickOnPage, paginationDate]);
 
-  const onClickDay = async () => {
-    const currentProject = await dispatch(
-      projectsOperations.getProjectById(projectId),
-    );
+  const [disabled, setDisabled] = useState(false);
 
-    if (!currentProject) {
-      window.location.href = '/projects';
-      return;
-    }
+  const onClickDay = async () => {
+    setDisabled(true);
+    await noProject();
 
     setClickOnPage(true);
-    arrDate.find((el, ind) => {
+    arrDate.find((el, ind, arr) => {
       if (ind === page - 2) {
         setPaginationDate(el);
         dispatch(tasksOperations.getTasksByDay(currentSprint.id, el));
         setPage(prevState => prevState - 1);
-
+        setDisabled(false);
         return el;
       }
     });
@@ -153,22 +159,17 @@ const TasksPage = props => {
   };
 
   const onClickNextDay = async () => {
-    const currentProject = await dispatch(
-      projectsOperations.getProjectById(projectId),
-    );
-
-    if (!currentProject) {
-      window.location.href = '/projects';
-      return;
-    }
+    setDisabled(true);
+    await noProject();
 
     setClickOnPage(true);
-    arrDate.find((el, ind) => {
+    arrDate.find((el, ind, arr) => {
       if (ind === page) {
         setPaginationDate(el);
         dispatch(tasksOperations.getTasksByDay(currentSprint.id, el));
-        setPage(prevState => prevState + 1);
 
+        setPage(prevState => prevState + 1);
+        setDisabled(false);
         return el;
       }
     });
@@ -184,14 +185,7 @@ const TasksPage = props => {
   }, [showModalCreateTask, showModalCreateSprint, showModalAnalytics]);
 
   const handleCloseModal = async () => {
-    const currentProject = await dispatch(
-      projectsOperations.getProjectById(projectId),
-    );
-
-    if (!currentProject) {
-      window.location.href = '/projects';
-      return;
-    }
+    await noProject();
 
     setShowModalCreateTask(false);
     setShowModalCreateSprint(false);
@@ -199,68 +193,33 @@ const TasksPage = props => {
   };
 
   const openModalCreateSprint = async () => {
-    const currentProject = await dispatch(
-      projectsOperations.getProjectById(projectId),
-    );
-
-    if (!currentProject) {
-      window.location.href = '/projects';
-      return;
-    }
+    await noProject();
 
     setShowModalCreateSprint(true);
   };
 
   const openModalCreateTask = async () => {
-    const currentProject = await dispatch(
-      projectsOperations.getProjectById(projectId),
-    );
-
-    if (!currentProject) {
-      window.location.href = '/projects';
-      return;
-    }
+    await noProject();
 
     setShowModalCreateTask(true);
   };
 
   const openModalAnalytics = async () => {
-    const currentProject = await dispatch(
-      projectsOperations.getProjectById(projectId),
-    );
-
-    if (!currentProject) {
-      window.location.href = '/projects';
-      return;
-    }
+    await noProject();
 
     setShowModalAnalytics(true);
   };
 
   const handleClickBtnChange = async () => {
-    const currentProject = await dispatch(
-      projectsOperations.getProjectById(projectId),
-    );
+    await noProject();
 
-    if (!currentProject) {
-      window.location.href = '/projects';
-      return;
-    }
     setSprintName(currentSprint?.name);
     setShowChangeTitleForm(!showChangeTitleForm);
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
-
-    const currentProject = await dispatch(
-      projectsOperations.getProjectById(projectId),
-    );
-
-    if (!currentProject) {
-      window.location.href = '/projects';
-      return;
-    }
+    await noProject();
 
     if (currentSprint.name !== sprintName || sprintName !== '') {
       dispatch(
@@ -329,7 +288,9 @@ const TasksPage = props => {
                           type="button"
                           onClick={onClickDay}
                           className={styles.btnBefore}
-                          disabled={page === 1 || noTasks ? true : false}
+                          disabled={
+                            page === 1 || noTasks || disabled ? true : false
+                          }
                         >
                           {'<'}
                         </button>
@@ -341,7 +302,9 @@ const TasksPage = props => {
                           onClick={onClickNextDay}
                           className={styles.btnNext}
                           disabled={
-                            page === arrDate.length || noTasks ? true : false
+                            page === arrDate.length || noTasks || disabled
+                              ? true
+                              : false
                           }
                         >{`>`}</button>
                         <p className={styles.calendarDay}> {paginationDate}</p>
