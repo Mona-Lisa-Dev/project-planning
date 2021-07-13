@@ -209,8 +209,4 @@ const SprintsPage = props => {
   );
 };
 
-SprintsPage.propTypes = {
-  props: PropTypes.object,
-};
-
 export default SprintsPage;

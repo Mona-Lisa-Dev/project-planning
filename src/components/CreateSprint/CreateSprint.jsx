@@ -304,7 +304,7 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
             )}
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <ThemeProvider theme={materialTheme}>
-                <Grid container justify="space-around">
+                <Grid container justifyContent="space-around">
                   {previousDays ? (
                     <KeyboardDatePicker
                       required

@@ -13,3 +13,5 @@ export const getVisibleTasks = state => {
     name.toLowerCase().includes(normalizedFilter),
   );
 };
+
+export const getNoTasks = state => state.tasks.noTasks;

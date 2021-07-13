@@ -8,11 +8,20 @@ import projectsOperations from 'redux/projects/projects-operations';
 
 import s from './PeopleList.module.scss';
 
-const PeopleList = ({ projectId, participants }) => {
+const PeopleList = ({ onClickCancel, projectId, participants }) => {
   const dispatch = useDispatch();
 
-  const handleClick = item =>
-    dispatch(projectsOperations.deleteParticipant(projectId, item));
+  const handleClick = async email => {
+    await dispatch(projectsOperations.deleteParticipant(projectId, { email }));
+    const currentProject = await dispatch(
+      projectsOperations.getProjectById(projectId),
+    );
+
+    if (!currentProject) {
+      onClickCancel();
+      window.location.href = '/projects';
+    }
+  };
 
   const onClick = item => {
     confirmAlert({
@@ -48,7 +57,7 @@ const PeopleList = ({ projectId, participants }) => {
           <button
             type="button"
             onClick={() => onClick(item)}
-            className={s.editButton}
+            className={s.deleteButton}
           >
             <DeleteOutlinedIcon />
           </button>
@@ -59,7 +68,7 @@ const PeopleList = ({ projectId, participants }) => {
 };
 
 PeopleList.propTypes = {
-  participants: PropTypes.arrayOf(PropTypes.string.isRequired),
+  participants: PropTypes.arrayOf(PropTypes.string),
   projectId: PropTypes.string.isRequired,
 };
 

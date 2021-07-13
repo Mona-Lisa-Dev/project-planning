@@ -15,7 +15,7 @@ import DiagramModal from 'components/Diagram/DiagramModal';
 import PropTypes from 'prop-types';
 
 import { getCurrentProject } from 'redux/projects/projects-selectors';
-import { getTasks, getError } from 'redux/tasks/tasks-selectors';
+import { getTasks, getError, getNoTasks } from 'redux/tasks/tasks-selectors';
 import { getSprints, getCurrentSprint } from 'redux/sprints/sprints-selectors';
 import sprintsOperations from 'redux/sprints/sprints-operations';
 import tasksOperations from 'redux/tasks/tasks-operations';
@@ -45,6 +45,7 @@ const TasksPage = props => {
   const Error = useSelector(getError);
   const history = useHistory();
   const project = useSelector(getCurrentProject);
+  const noTasks = useSelector(getNoTasks);
 
   // useEffect(() => {
   //   Error &&
@@ -64,8 +65,10 @@ const TasksPage = props => {
       const currentProject = await dispatch(
         projectsOperations.getProjectById(projectId),
       );
+
       if (!currentProject) {
         window.location.href = '/projects';
+        return;
       }
 
       if (!sprint) {
@@ -256,7 +259,7 @@ const TasksPage = props => {
                           type="button"
                           onClick={onClickDay}
                           className={styles.btnBefore}
-                          disabled={page === 1 ? true : false}
+                          disabled={page === 1 || noTasks ? true : false}
                         >
                           {'<'}
                         </button>
@@ -267,7 +270,9 @@ const TasksPage = props => {
                           type="button"
                           onClick={onClickNextDay}
                           className={styles.btnNext}
-                          disabled={page === arrDate.length ? true : false}
+                          disabled={
+                            page === arrDate.length || noTasks ? true : false
+                          }
                         >{`>`}</button>
                         <p className={styles.calendarDay}> {paginationDate}</p>
                       </li>

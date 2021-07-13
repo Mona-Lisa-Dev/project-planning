@@ -23,6 +23,8 @@ import {
   changeFilter,
 } from './tasks-actions';
 
+import { createSprintSuccess } from '../sprints/sprints-actions';
+
 import { logoutSuccess } from 'redux/auth/auth-actions';
 
 const tasksItems = createReducer([], {
@@ -41,6 +43,13 @@ const currentTask = createReducer(null, {
 
 const filter = createReducer('', {
   [changeFilter]: (_, { payload }) => payload,
+});
+
+const noTasks = createReducer(false, {
+  [createSprintSuccess]: () => true,
+  [getTasksByDayError]: () => true,
+  [getTasksByDayRequest]: () => false,
+  [createTaskSuccess]: () => false,
 });
 
 const loading = createReducer(false, {
@@ -83,6 +92,7 @@ export default combineReducers({
   items: tasksItems,
   currentTask,
   filter,
+  noTasks,
   loading,
   error,
 });
