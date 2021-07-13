@@ -31,9 +31,8 @@ const tasksItems = createReducer([], {
   [createTaskSuccess]: (state, { payload }) => [...state, payload],
   [updateTaskSuccess]: (state, { payload }) => state,
   [getTasksByDaySuccess]: (_, { payload }) => payload,
-  [getTasksByDayError]: () => [], //Todo сделать условие на ошибку нот фаунд для загрузки карточек новосозданного спринта
+  [getTasksByDayError]: () => [],
 
-  // [getTasksByDayRequest]: () => [],
   [logoutSuccess]: () => [],
 });
 
