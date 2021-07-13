@@ -19,14 +19,26 @@
 
   &:nth-child(3n + 1) {
     background-color: $project-purple;
+    &:hover,
+    &:focus {
+      box-shadow: 0px 6px 26px 0px rgba(140, 114, 223, 0.4);
+    }
   }
 
   &:nth-child(3n + 2) {
     background-color: $project-rose;
+    &:hover,
+    &:focus {
+      box-shadow: 0px 6px 26px 0px rgba(255, 118, 95, 0.4);
+    }
   }
 
   &:nth-child(3n) {
     background-color: $project-green;
+    &:hover,
+    &:focus {
+      box-shadow: 0px 6px 26px 0px rgba(113, 223, 135, 0.4);
+    }
   }
 
   &:hover,
@@ -39,17 +51,21 @@
   .listItem {
     &:nth-child(4n + 1) {
       background: bottom url(./Pictures/FirstWave.svg) no-repeat;
+      background-size: contain;
     }
 
     &:nth-child(4n + 2) {
       background: bottom url(./Pictures/SecondWave.svg) no-repeat;
+      background-size: contain;
     }
 
     &:nth-child(4n + 3) {
       background: bottom url(./Pictures/ThirdWave.svg) no-repeat;
+      background-size: contain;
     }
     &:nth-child(4n) {
       background: bottom url(./Pictures/FourthWave.svg) no-repeat;
+      background-size: contain;
     }
     &:nth-child(3n + 1) {
       background-color: $project-purple;
