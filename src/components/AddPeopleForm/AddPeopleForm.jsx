@@ -24,7 +24,7 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // если нет имейла, подсвечиваем инпут красным
+
     if (!email) {
       setEmptyInput(true);
       return;

@@ -6,7 +6,7 @@ import { ReactComponent as CloseModalBtn } from '../Modal/closeModalBtn.svg';
 import PropTypes from 'prop-types';
 import { refs } from './refs';
 import Diagram from './Diagram';
-// import ButtonClose from 'components/ButtonClose';
+
 import s from './Diagram.module.scss';
 
 const modalRoot = document.querySelector('#modal-root');
@@ -39,7 +39,7 @@ const DiagramModal = ({ sprint, onCloseModal }) => {
   };
   const tabletMin = useMediaQuery(handleMinWidth(refs.tabletMin));
   const mobileMax = useMediaQuery(handleMaxWidth(refs.mobileMax));
-  // const desktop = useMediaQuery(handleMinWidth(refs.desktop));
+
   // ----- End useMediaQuery -----
 
   return createPortal(
@@ -49,7 +49,7 @@ const DiagramModal = ({ sprint, onCloseModal }) => {
           className={s.CloseModalBtn}
           onClick={handleCloseByButton}
         />
-        {/* <ButtonClose onClose={handleCloseByButton} /> */}
+
         {mobileMax && <p className={s.contentText}>Rotate your device</p>}
         {tabletMin && <Diagram sprint={sprint} />}
       </div>

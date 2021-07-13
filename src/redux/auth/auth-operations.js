@@ -39,7 +39,6 @@ const signup = payload => async dispatch => {
     } = await axios.post('/users/signup', payload);
 
     dispatch(signupSuccess(data));
-    console.log('data', data);
 
     return data;
   } catch (error) {
@@ -57,8 +56,6 @@ const login = payload => async dispatch => {
 
     dispatch(loginSuccess(data));
     token.set(data.token);
-
-    console.log('data user login', data);
 
     return data;
   } catch (error) {
@@ -114,7 +111,6 @@ const getUserByGoogleAuth = () => async dispatch => {
     dispatch(getUserByGoogleAuthSuccess(data));
 
     token.set(data.token);
-    console.log('data user', data);
 
     return data;
   } catch (error) {

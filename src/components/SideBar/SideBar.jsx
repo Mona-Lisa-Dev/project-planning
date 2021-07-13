@@ -9,7 +9,3 @@ SideBar.propTypes = {
 };
 
 export default SideBar;
-
-// const SideBar = ({ children }) => <div>{children}</div>;
-
-// export default SideBar;
