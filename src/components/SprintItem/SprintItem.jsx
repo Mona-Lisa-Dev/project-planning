@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import { confirmAlert } from 'react-confirm-alert';
 import '../ButtonDeleteProject/react-confirm-alert.scss';
 
+import projectsOperations from 'redux/projects/projects-operations';
 import sprintsOperations from 'redux/sprints/sprints-operations';
 import ButtonDelete from '../ButtonDelete';
 import styles from './SprintItem.module.scss';
@@ -13,8 +14,20 @@ import styles from './SprintItem.module.scss';
 const SprintItem = ({ currentProject, sprint }) => {
   const dispatch = useDispatch();
 
-  const handleClickDelete = () =>
-    dispatch(sprintsOperations.deleteSprint(currentProject.id, sprint.id));
+  const handleClickDelete = async () => {
+    const project = await dispatch(
+      projectsOperations.getProjectById(currentProject.id),
+    );
+
+    if (!project) {
+      window.location.href = '/projects';
+      return;
+    }
+
+    await dispatch(
+      sprintsOperations.deleteSprint(currentProject.id, sprint.id),
+    );
+  };
 
   const handleClick = () => {
     confirmAlert({
