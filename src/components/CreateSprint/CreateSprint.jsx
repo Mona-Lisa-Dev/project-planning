@@ -14,6 +14,7 @@ import {
 } from '@material-ui/pickers';
 import TextField from '@material-ui/core/TextField';
 
+import projectsOperations from 'redux/projects/projects-operations';
 import sprintsOperations from 'redux/sprints/sprints-operations';
 
 import s from './CreateSprint.module.scss';
@@ -242,9 +243,17 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
   };
 
   // Send new sprint
-  const sendNewSprint = () => {
+  const sendNewSprint = async () => {
     setError(false);
 
+    const currentProject = await dispatch(
+      projectsOperations.getProjectById(projectId),
+    );
+
+    if (!currentProject) {
+      window.location.href = '/projects';
+      return;
+    }
     const newSprint = {
       name: sprintName,
       startDate: selectedDate,

@@ -4,19 +4,28 @@ import { useSelector, useDispatch } from 'react-redux';
 import TaskItem from '../TaskItem';
 import { getFilter, getVisibleTasks } from 'redux/tasks/tasks-selectors';
 import * as tasksActions from 'redux/tasks/tasks-actions';
+import projectsOperations from 'redux/projects/projects-operations';
 
 import styles from './TaskList.module.scss';
 
-const TaskList = ({ paginationDate, tasks }) => {
+const TaskList = ({ paginationDate, tasks, projectId }) => {
   const [isVisibleInputFind, setIsVisibleInputFind] = useState(false);
 
   const filter = useSelector(getFilter);
   const visibleTasks = useSelector(getVisibleTasks);
 
   const dispatch = useDispatch();
-  console.log('tasks', tasks);
+  // console.log('tasks', tasks);
 
-  const changesVisibleInputFind = () => {
+  const changesVisibleInputFind = async () => {
+    const currentProject = await dispatch(
+      projectsOperations.getProjectById(projectId),
+    );
+
+    if (!currentProject) {
+      window.location.href = '/projects';
+      return;
+    }
     setIsVisibleInputFind(!isVisibleInputFind);
   };
 
@@ -97,4 +106,6 @@ TaskList.propTypes = {
       allHours: PropTypes.number,
     }),
   ),
+  project: PropTypes.string.isRequired,
+  paginationDate: PropTypes.string.isRequired,
 };

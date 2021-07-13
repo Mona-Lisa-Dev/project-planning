@@ -133,7 +133,16 @@ const TasksPage = props => {
     }
   }, [arrDate, clickOnPage, paginationDate]);
 
-  const onClickDay = () => {
+  const onClickDay = async () => {
+    const currentProject = await dispatch(
+      projectsOperations.getProjectById(projectId),
+    );
+
+    if (!currentProject) {
+      window.location.href = '/projects';
+      return;
+    }
+
     setClickOnPage(true);
     arrDate.find((el, ind) => {
       if (ind === page - 2) {
@@ -147,7 +156,16 @@ const TasksPage = props => {
     setCurrentDay(currentDay === 1 ? currentDay : currentDay - 1);
   };
 
-  const onClickNextDay = () => {
+  const onClickNextDay = async () => {
+    const currentProject = await dispatch(
+      projectsOperations.getProjectById(projectId),
+    );
+
+    if (!currentProject) {
+      window.location.href = '/projects';
+      return;
+    }
+
     setClickOnPage(true);
     arrDate.find((el, ind) => {
       if (ind === page) {
@@ -169,28 +187,84 @@ const TasksPage = props => {
         : 'auto';
   }, [showModalCreateTask, showModalCreateSprint, showModalAnalytics]);
 
-  const handleCloseModal = () => {
+  const handleCloseModal = async () => {
+    const currentProject = await dispatch(
+      projectsOperations.getProjectById(projectId),
+    );
+
+    if (!currentProject) {
+      window.location.href = '/projects';
+      return;
+    }
+
     setShowModalCreateTask(false);
     setShowModalCreateSprint(false);
     setShowModalAnalytics(false);
   };
-  const openModalCreateSprint = () => {
+
+  const openModalCreateSprint = async () => {
+    const currentProject = await dispatch(
+      projectsOperations.getProjectById(projectId),
+    );
+
+    if (!currentProject) {
+      window.location.href = '/projects';
+      return;
+    }
+
     setShowModalCreateSprint(true);
   };
-  const openModalCreateTask = () => {
+
+  const openModalCreateTask = async () => {
+    const currentProject = await dispatch(
+      projectsOperations.getProjectById(projectId),
+    );
+
+    if (!currentProject) {
+      window.location.href = '/projects';
+      return;
+    }
+
     setShowModalCreateTask(true);
   };
-  const openModalAnalytics = () => {
+
+  const openModalAnalytics = async () => {
+    const currentProject = await dispatch(
+      projectsOperations.getProjectById(projectId),
+    );
+
+    if (!currentProject) {
+      window.location.href = '/projects';
+      return;
+    }
+
     setShowModalAnalytics(true);
   };
 
-  const handleClickBtnChange = () => {
+  const handleClickBtnChange = async () => {
+    const currentProject = await dispatch(
+      projectsOperations.getProjectById(projectId),
+    );
+
+    if (!currentProject) {
+      window.location.href = '/projects';
+      return;
+    }
     setSprintName(currentSprint?.name);
     setShowChangeTitleForm(!showChangeTitleForm);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
+
+    const currentProject = await dispatch(
+      projectsOperations.getProjectById(projectId),
+    );
+
+    if (!currentProject) {
+      window.location.href = '/projects';
+      return;
+    }
 
     if (currentSprint.name !== sprintName || sprintName !== '') {
       dispatch(
@@ -332,7 +406,11 @@ const TasksPage = props => {
                 onClick={openModalAnalytics}
               ></button>
             )}
-            <TaskList paginationDate={paginationDate} tasks={tasks} />
+            <TaskList
+              paginationDate={paginationDate}
+              tasks={tasks}
+              projectId={projectId}
+            />
           </div>
         </main>
 
@@ -364,8 +442,8 @@ const TasksPage = props => {
   );
 };
 
-TasksPage.propTypes = {
-  props: PropTypes.object,
-};
+// TasksPage.propTypes = {
+//   props: PropTypes.object,
+// }; // TODO Delete
 
 export default TasksPage;
