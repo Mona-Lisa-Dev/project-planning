@@ -15,7 +15,7 @@ const TeamCard = ({ team }) => {
       </div>
       <h3 className={styles.name}>{team.name}</h3>
       <p className={styles.position}>{team.position}</p>
-      {/* <p className={styles.doing}> {team.doing}</p> */}
+
       <ul className={styles.doingList}>
         {[...team.doing].map(el => (
           <li key={el} className={styles.doing}>

@@ -1,12 +1,6 @@
 @import '../../scss/vars';
 @import '../../scss/breakpoints';
 
-// header {
-//   @media screen and (max-width: $mobile-max) {
-//     display: fixed;
-//   }
-// }
-
 .Header {
   display: flex;
   align-items: center;
@@ -34,9 +28,6 @@ header {
   // margin: 0px 51px 0px 20px;
   margin-right: auto;
 }
-
-// and (min-width: $mobile)
-// and (max-width: $desktop)
 
 // ======================Mobile===================
 @media screen and (max-width: $mobile-max) {

@@ -16,9 +16,7 @@ import {
   getCurrentUserError,
   clearError,
   noToken,
-  getUserByGoogleAuthRequest,
   getUserByGoogleAuthSuccess,
-  getUserByGoogleAuthError,
 } from './auth-actions';
 
 const initialUserState = { name: null, email: null };

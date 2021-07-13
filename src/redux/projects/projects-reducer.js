@@ -23,9 +23,6 @@ import {
   getProjectByIdRequest,
   getProjectByIdSuccess,
   getProjectByIdError,
-  // getAllParticipantsRequest,
-  // getAllParticipantsSuccess,
-  // getAllParticipantsError,
   clearState,
 } from './projects-actions';
 
@@ -89,9 +86,6 @@ const loading = createReducer(false, {
   [getProjectByIdRequest]: () => true,
   [getProjectByIdSuccess]: () => false,
   [getProjectByIdError]: () => false,
-  // [getAllParticipantsRequest]: () => true,
-  // [getAllParticipantsSuccess]: () => false,
-  // [getAllParticipantsError]: () => false,
 });
 
 const error = createReducer(null, {
@@ -109,8 +103,6 @@ const error = createReducer(null, {
   [deleteParticipantRequest]: () => null,
   [getProjectByIdError]: (_, { payload }) => payload,
   [getProjectByIdRequest]: () => null,
-  // [getAllParticipantsError]: (_, { payload }) => payload,
-  // [getAllParticipantsRequest]: () => null,
 });
 
 export default combineReducers({

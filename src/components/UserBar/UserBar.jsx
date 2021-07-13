@@ -8,7 +8,7 @@ import {
   getError,
 } from 'redux/auth/auth-selectors';
 import swal from 'sweetalert';
-// import exit from './images/exitIcon.svg';
+
 import styles from './UserBar.module.scss';
 
 export default function UserBar() {

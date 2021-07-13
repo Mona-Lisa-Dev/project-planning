@@ -12,7 +12,6 @@ import SideBarGoBackLink from 'components/SideBarGoBackLink';
 import SideBarScrollWrap from 'components/SideBarScrollWrap';
 import CreateSprint from 'components/CreateSprint';
 import DiagramModal from 'components/Diagram/DiagramModal';
-import PropTypes from 'prop-types';
 
 import { getCurrentProject } from 'redux/projects/projects-selectors';
 import { getTasks, getError, getNoTasks } from 'redux/tasks/tasks-selectors';
@@ -44,7 +43,7 @@ const TasksPage = props => {
   const tasks = useSelector(getTasks);
   const Error = useSelector(getError);
   const history = useHistory();
-  const project = useSelector(getCurrentProject);
+  // const project = useSelector(getCurrentProject);
   const noTasks = useSelector(getNoTasks);
 
   // useEffect(() => {
@@ -81,9 +80,8 @@ const TasksPage = props => {
         [],
       );
       setArrDate(arr);
-      // setPaginationDate(arr[0]);
 
-      const tasks = arr.includes(dayjs(new Date()).format('YYYY-MM-DD'))
+      arr.includes(dayjs(new Date()).format('YYYY-MM-DD'))
         ? await dispatch(
             tasksOperations.getTasksByDay(
               sprintId,
@@ -101,8 +99,6 @@ const TasksPage = props => {
         setPaginationDate(arr[0]);
         setCurrentDay(1);
       }
-
-      // if (tasks.length === 0) return;
     })();
   }, [dispatch, projectId, sprintId]);
 
@@ -441,9 +437,5 @@ const TasksPage = props => {
     )
   );
 };
-
-// TasksPage.propTypes = {
-//   props: PropTypes.object,
-// }; // TODO Delete
 
 export default TasksPage;

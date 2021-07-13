@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
 
 import { confirmAlert } from 'react-confirm-alert';
@@ -26,7 +26,6 @@ const TaskItem = ({
 }) => {
   const [queryCustomTime, setQueryCustomTime] = useState(0);
   const [day, setDay] = useState('');
-  // const [queryTotalTime, setQueryTotalTime] = useState(totalTime);
 
   const dispatch = useDispatch();
 
@@ -38,8 +37,6 @@ const TaskItem = ({
 
   const handleInputChange = e => {
     if (isNaN(e.target.value)) return;
-
-    // if (spenHours === Number(e.target.value)) return; //
     setQueryCustomTime(Number(e.target.value));
   };
 
@@ -63,7 +60,6 @@ const TaskItem = ({
     await dispatch(sprintsOperations.getSprintById(project, sprint));
   };
 
-  //TODO функция отправляет запрос на бэк для сохранения часов
   const onSubmitRequest = async () => {
     const currentProject = await dispatch(
       projectsOperations.getProjectById(project),
@@ -84,10 +80,6 @@ const TaskItem = ({
     await dispatch(tasksOperations.updateTask(payload));
     await dispatch(tasksOperations.getTasksByDay(sprint, paginationDate));
     await dispatch(sprintsOperations.getSprintById(project, sprint));
-
-    // setQueryTotalTime(
-    //   Number(queryCustomTime) + Number(queryTotalTime) - Number(spenHours),
-    // );
   };
 
   const handleClick = () => {

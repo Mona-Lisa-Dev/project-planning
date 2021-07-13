@@ -3,19 +3,17 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { confirmAlert } from 'react-confirm-alert';
-// import 'react-confirm-alert/src/react-confirm-alert.css';
+
 import '../ButtonDeleteProject/react-confirm-alert.scss';
 
 import projectsOperations from 'redux/projects/projects-operations';
 import { getUserEmail } from 'redux/auth/auth-selectors';
-// import { getLoadingProjects } from 'redux/projects/projects-selectors';
-// import Spinner from 'components/Loader/Loader';
+
 import ButtonDelete from '../ButtonDeleteProject';
 
 import styles from './ProjectItem.module.scss';
 
 const ProjectItem = ({ project }) => {
-  // const loading = useSelector(getLoadingProjects);
   const dispatch = useDispatch();
   const userEmail = useSelector(getUserEmail);
 
@@ -62,7 +60,6 @@ const ProjectItem = ({ project }) => {
         }}
       >
         <div className={styles.itemWrapper}>
-          {/* {loading && <Spinner />} */}
           <h3 className={styles.itemTitle}>{project.name}</h3>
           <p className={styles.itemDescription}> {project.description}</p>
         </div>

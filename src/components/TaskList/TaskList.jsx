@@ -15,7 +15,6 @@ const TaskList = ({ paginationDate, tasks, projectId }) => {
   const visibleTasks = useSelector(getVisibleTasks);
 
   const dispatch = useDispatch();
-  // console.log('tasks', tasks);
 
   const changesVisibleInputFind = async () => {
     const currentProject = await dispatch(
@@ -106,6 +105,6 @@ TaskList.propTypes = {
       allHours: PropTypes.number,
     }),
   ),
-  project: PropTypes.string.isRequired,
+  project: PropTypes.string,
   paginationDate: PropTypes.string.isRequired,
 };

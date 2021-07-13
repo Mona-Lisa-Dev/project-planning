@@ -1,5 +1,5 @@
 import { getDefaultMiddleware } from '@reduxjs/toolkit';
-import logger from 'redux-logger';
+// import logger from 'redux-logger';
 import {
   FLUSH,
   REHYDRATE,
@@ -15,7 +15,7 @@ const middleware = [
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }),
-  logger,
+  // logger,
 ];
 
 export default middleware;
