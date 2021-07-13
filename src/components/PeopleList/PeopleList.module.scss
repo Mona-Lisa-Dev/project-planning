@@ -2,11 +2,17 @@
 
 .participant {
   display: flex;
+  align-items: center;
 }
 
 .deleteButton {
   border: none;
   background-color: transparent;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    color: $main-orange;
+  }
 }
 
 //====================Styles for confirmation window========

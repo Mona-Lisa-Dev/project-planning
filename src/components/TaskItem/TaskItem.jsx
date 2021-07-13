@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 import { confirmAlert } from 'react-confirm-alert';
 import '../ButtonDeleteProject/react-confirm-alert.scss';
 
+import projectsOperations from 'redux/projects/projects-operations';
 import sprintsOperations from 'redux/sprints/sprints-operations';
 import tasksOperations from 'redux/tasks/tasks-operations';
 
@@ -43,6 +44,15 @@ const TaskItem = ({
   };
 
   const handleDeleteClick = async () => {
+    const currentProject = await dispatch(
+      projectsOperations.getProjectById(project),
+    );
+
+    if (!currentProject) {
+      window.location.href = '/projects';
+      return;
+    }
+
     await dispatch(tasksOperations.deleteTask(sprint, id));
     await dispatch(
       tasksOperations.getTasksByDay(
@@ -55,6 +65,15 @@ const TaskItem = ({
 
   //TODO функция отправляет запрос на бэк для сохранения часов
   const onSubmitRequest = async () => {
+    const currentProject = await dispatch(
+      projectsOperations.getProjectById(project),
+    );
+
+    if (!currentProject) {
+      window.location.href = '/projects';
+      return;
+    }
+
     const payload = {
       sprintId: sprint,
       taskId: id,

@@ -45,14 +45,14 @@ const SprintsPage = props => {
   const Error = useSelector(getError);
   const history = useHistory();
 
-  useEffect(() => {
-    Error &&
-      swal({
-        text: `${Error}`,
-        icon: 'error',
-        button: { text: 'OK', className: `${s.swalButton}` },
-      });
-  }, [Error]);
+  // useEffect(() => {
+  //   Error &&
+  //     swal({
+  //       text: `${Error}`,
+  //       icon: 'error',
+  //       button: { text: 'OK', className: `${s.swalButton}` },
+  //     });
+  // }, [Error]);
 
   useEffect(() => {
     (async function fetchData() {
