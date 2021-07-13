@@ -32,9 +32,10 @@
 // and (max-width: $desktop)
 
 // ======================Modile===================
+
 @media screen and (max-width: $mobile-max) {
   .User {
-    margin-right: 20px;
+    margin: 0 10px 0 10px;
     font-size: 14px;
   }
 
@@ -51,6 +52,12 @@
     &:focus {
       background-color: $form-input-error; //цвет ховер и фокуса обсуждаем
     }
+  }
+}
+
+@media screen and (max-width: $mobilePlus) {
+  .User {
+    font-size: 12px;
   }
 }
 
