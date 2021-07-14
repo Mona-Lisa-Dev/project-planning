@@ -1,14 +1,21 @@
+import PropTypes from 'prop-types';
 import styles from './TeamCard.module.scss';
+
 const TeamCard = ({ team }) => {
   const photo = require(`./${team.photo}`).default;
   return (
     <div className={styles.card}>
       <div className={styles.photoWrapper}>
-        <img src={photo} alt="teammate" className={styles.photo} />
+        <img
+          src={photo}
+          loading="lazy"
+          alt="teammate"
+          className={styles.photo}
+        />
       </div>
       <h3 className={styles.name}>{team.name}</h3>
       <p className={styles.position}>{team.position}</p>
-      {/* <p className={styles.doing}> {team.doing}</p> */}
+
       <ul className={styles.doingList}>
         {[...team.doing].map(el => (
           <li key={el} className={styles.doing}>
@@ -47,4 +54,9 @@ const TeamCard = ({ team }) => {
     </div>
   );
 };
+
+TeamCard.propTypes = {
+  team: PropTypes.object.isRequired,
+};
+
 export default TeamCard;

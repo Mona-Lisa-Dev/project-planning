@@ -1,10 +1,6 @@
 @import '../../scss/vars';
 @import '../../scss/breakpoints';
 
-.isHidden {
-  display: none;
-}
-
 .btnDelete {
   border-radius: 50%;
   cursor: pointer;
@@ -16,20 +12,15 @@
   background-position: right 50% bottom 62%;
   background-size: 250%;
   transition: all 0.5s linear;
+  &:hover,
+  &:focus {
+    transform: rotateZ(75deg);
+  }
 }
 
 @media screen and (min-width: $tablet) {
   .btnDelete {
     width: 34px;
     height: 34px;
-  }
-}
-
-@media screen and (min-width: $desktop) {
-  .btnDelete {
-    &:hover,
-    &:focus {
-      transform: rotateZ(75deg);
-    }
   }
 }

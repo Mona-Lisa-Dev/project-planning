@@ -16,6 +16,7 @@ import {
   getCurrentUserError,
   clearError,
   noToken,
+  getUserByGoogleAuthSuccess,
 } from './auth-actions';
 
 const initialUserState = { name: null, email: null };
@@ -26,16 +27,19 @@ const user = createReducer(initialUserState, {
   [logoutSuccess]: () => initialUserState,
   [logoutError]: () => initialUserState,
   [getCurrentUserSuccess]: (_, { payload }) => payload.user,
+  [getUserByGoogleAuthSuccess]: (_, { payload }) => payload.user,
 });
 
 const token = createReducer(null, {
   [loginSuccess]: (_, { payload }) => payload.token,
   [logoutSuccess]: () => null,
+  [getUserByGoogleAuthSuccess]: (_, { payload }) => payload.token,
 });
 
 const isAuthorized = createReducer(false, {
   [loginSuccess]: () => true,
   [getCurrentUserSuccess]: () => true,
+  [getUserByGoogleAuthSuccess]: () => true,
 
   [signupError]: () => false,
   [loginError]: () => false,

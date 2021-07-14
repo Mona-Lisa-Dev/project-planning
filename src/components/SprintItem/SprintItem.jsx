@@ -1,19 +1,35 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
+import dayjs from 'dayjs';
 import { confirmAlert } from 'react-confirm-alert';
 import '../ButtonDeleteProject/react-confirm-alert.scss';
 
+import projectsOperations from 'redux/projects/projects-operations';
 import sprintsOperations from 'redux/sprints/sprints-operations';
 import ButtonDelete from '../ButtonDelete';
 import styles from './SprintItem.module.scss';
 
 const SprintItem = ({ currentProject, sprint }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
 
-  const handleClickDelete = () =>
-    dispatch(sprintsOperations.deleteSprint(currentProject.id, sprint.id));
+  const handleClickDelete = async () => {
+    const project = await dispatch(
+      projectsOperations.getProjectById(currentProject.id),
+    );
+
+    if (!project) {
+      history.push(`/projects`);
+      return;
+    }
+
+    await dispatch(
+      sprintsOperations.deleteSprint(currentProject.id, sprint.id),
+    );
+  };
 
   const handleClick = () => {
     confirmAlert({
@@ -21,7 +37,7 @@ const SprintItem = ({ currentProject, sprint }) => {
         return (
           <div className={styles.custom_ui}>
             <h1>Are you sure?</h1>
-            <p>You want to delete this sprint?</p>
+            <p>You want to delete {sprint.name} ?</p>
             <button
               className={styles.cancelBtn}
               type="button"
@@ -37,7 +53,7 @@ const SprintItem = ({ currentProject, sprint }) => {
                 onClose();
               }}
             >
-              Ready
+              Ok
             </button>
           </div>
         );
@@ -58,11 +74,11 @@ const SprintItem = ({ currentProject, sprint }) => {
           <ul>
             <li>
               <span>Start date</span>
-              <span>{sprint.startDate}</span>
+              <span>{dayjs(sprint.startDate).format('D MMM')}</span>
             </li>
             <li>
               <span>End date</span>
-              <span>{sprint.endDate}</span>
+              <span>{dayjs(sprint.endDate).format('D MMM')}</span>
             </li>
             <li>
               <span>Duration</span>
@@ -78,9 +94,7 @@ const SprintItem = ({ currentProject, sprint }) => {
 
 export default SprintItem;
 
-// SprintItem.propTypes = {
-//   name: PropTypes.string.isRequired,
-//   startDate: PropTypes.string.isRequired,
-//   endDate: PropTypes.string.isRequired,
-//   duration: PropTypes.number.isRequired,
-// };
+SprintItem.propTypes = {
+  currentProject: PropTypes.object.isRequired,
+  sprint: PropTypes.object.isRequired,
+};

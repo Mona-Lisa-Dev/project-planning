@@ -1,19 +1,22 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import dayjs from 'dayjs';
 
 import TaskList from 'components/TaskList';
 import Modal from 'components/Modal';
 import CreateTaskForm from 'components/CreateTaskForm';
 import SideBar from 'components/SideBar';
+import SideBarGoBackLink from 'components/SideBarGoBackLink';
+import SideBarScrollWrap from 'components/SideBarScrollWrap';
 import CreateSprint from 'components/CreateSprint';
 import DiagramModal from 'components/Diagram/DiagramModal';
 
-import { getTasks } from 'redux/tasks/tasks-selectors';
+import { getTasks, getNoTasks } from 'redux/tasks/tasks-selectors';
 import { getSprints, getCurrentSprint } from 'redux/sprints/sprints-selectors';
 import sprintsOperations from 'redux/sprints/sprints-operations';
 import tasksOperations from 'redux/tasks/tasks-operations';
+import projectsOperations from 'redux/projects/projects-operations';
 
 import styles from './TasksPage.module.scss';
 
@@ -25,6 +28,11 @@ const TasksPage = props => {
   const [showChangeTitleForm, setShowChangeTitleForm] = useState(false);
 
   const [currentDay, setCurrentDay] = useState(1);
+  const [arrDate, setArrDate] = useState([]);
+  const [page, setPage] = useState(1);
+  const [paginationDate, setPaginationDate] = useState('');
+  const [clickOnPage, setClickOnPage] = useState(false);
+
   const { projectId, sprintId } = props.match.params;
   const dispatch = useDispatch();
 
@@ -32,72 +40,175 @@ const TasksPage = props => {
   const sprints = useSelector(getSprints);
   const tasks = useSelector(getTasks);
 
-  const arrDate = currentSprint?.totalDaly?.reduce(
-    (acc, day) => [...acc, Object.keys(day)[0]],
-    [],
+  const history = useHistory();
+
+  const noTasks = useSelector(getNoTasks);
+
+  useEffect(() => {
+    (async function fetchData() {
+      const sprint = await dispatch(
+        sprintsOperations.getSprintById(projectId, sprintId),
+      );
+
+      const currentProject = await dispatch(
+        projectsOperations.getProjectById(projectId),
+      );
+
+      if (!currentProject) {
+        history.push(`/projects`);
+        return;
+      }
+
+      if (!sprint) {
+        history.push(`/projects/${projectId}`);
+        return;
+      }
+
+      const arr = sprint.totalDaly.reduce(
+        (acc, day) => [...acc, Object.keys(day)[0]],
+        [],
+      );
+      setArrDate(arr);
+
+      arr.includes(dayjs(new Date()).format('YYYY-MM-DD'))
+        ? await dispatch(
+            tasksOperations.getTasksByDay(
+              sprintId,
+              dayjs(new Date()).format('YYYY-MM-DD'),
+            ),
+          )
+        : await dispatch(tasksOperations.getTasksByDay(sprintId, arr[0]));
+
+      if (
+        arr.length < page ||
+        arr.length === 1 ||
+        !arr.includes(dayjs(new Date()).format('YYYY-MM-DD'))
+      ) {
+        setPage(1);
+        setPaginationDate(arr[0]);
+        setCurrentDay(1);
+      }
+    })();
+  }, [dispatch, projectId, sprintId]);
+
+  useEffect(
+    () => dispatch(sprintsOperations.getAllSprints(projectId)),
+    [dispatch, projectId, sprintId],
   );
 
-  // console.log('currentSprint', currentSprint.startDate);
-
-  useEffect(() => {
-    async function fetchData() {
-      await dispatch(sprintsOperations.getSprintById(projectId, sprintId));
-      await dispatch(
-        tasksOperations.getTasksByDay(
-          sprintId,
-          dayjs(new Date()).format('YYYY-MM-DD'),
-        ),
-      );
+  const noProject = async () => {
+    const currentProject = await dispatch(
+      projectsOperations.getProjectById(projectId),
+    );
+    if (!currentProject) {
+      history.push(`/projects`);
+      return;
     }
-
-    fetchData();
-  }, [dispatch, projectId, sprintId]);
-
-  // console.log(`arrDate`, arrDate);
-
-  const onClickDay = i => {
-    const day = arrDate.find((el, ind) => ind === i - 1 && el);
-    console.log('dayOnClick', day);
-
-    setCurrentDay(currentDay === 1 ? currentDay : currentDay - 1);
-    dispatch(tasksOperations.getTasksByDay(currentSprint.id, day));
   };
 
-  const onClickNextDay = i => {
-    const day = arrDate.find((el, ind) => ind === i + 1 && el);
-    console.log('dayOnClickNext', day);
+  const onClickSprintLink = () => setClickOnPage(false);
 
+  useEffect(() => {
+    if (!clickOnPage) {
+      arrDate?.map((el, ind, arr) => {
+        if (el === dayjs(new Date()).format('YYYY-MM-DD')) {
+          setPage(ind + 1);
+          setPaginationDate(dayjs(new Date()).format('YYYY-MM-DD'));
+        }
+
+        if (
+          arr.length < page ||
+          arr.length === 1 ||
+          !arr.includes(dayjs(new Date()).format('YYYY-MM-DD'))
+        ) {
+          setPage(1);
+          setPaginationDate(arr[0]);
+        }
+      });
+    }
+  }, [arrDate, clickOnPage, paginationDate]);
+
+  const [disabled, setDisabled] = useState(false);
+
+  const onClickDay = async () => {
+    setDisabled(true);
+    await noProject();
+
+    setClickOnPage(true);
+    arrDate.find((el, ind, arr) => {
+      if (ind === page - 2) {
+        setPaginationDate(el);
+        dispatch(tasksOperations.getTasksByDay(currentSprint.id, el));
+        setPage(prevState => prevState - 1);
+        setDisabled(false);
+        return el;
+      }
+    });
+    setCurrentDay(currentDay === 1 ? currentDay : currentDay - 1);
+  };
+
+  const onClickNextDay = async () => {
+    setDisabled(true);
+    await noProject();
+
+    setClickOnPage(true);
+    arrDate.find((el, ind, arr) => {
+      if (ind === page) {
+        setPaginationDate(el);
+        dispatch(tasksOperations.getTasksByDay(currentSprint.id, el));
+
+        setPage(prevState => prevState + 1);
+        setDisabled(false);
+        return el;
+      }
+    });
     setCurrentDay(currentDay !== arrDate.length ? currentDay + 1 : currentDay);
-    dispatch(tasksOperations.getTasksByDay(currentSprint.id, day));
   };
 
   useEffect(() => {
-    dispatch(sprintsOperations.getAllSprints(projectId));
-    dispatch(sprintsOperations.getSprintById(projectId, sprintId));
-  }, [dispatch, projectId, sprintId]);
+    const body = document.querySelector('body');
+    body.style.overflow =
+      showModalCreateTask || showModalCreateSprint || showModalAnalytics
+        ? 'hidden'
+        : 'auto';
+  }, [showModalCreateTask, showModalCreateSprint, showModalAnalytics]);
 
-  const handleCloseModal = () => {
+  const handleCloseModal = async () => {
+    await noProject();
+
     setShowModalCreateTask(false);
     setShowModalCreateSprint(false);
     setShowModalAnalytics(false);
   };
-  const openModalCreateSprint = () => {
+
+  const openModalCreateSprint = async () => {
+    await noProject();
+
     setShowModalCreateSprint(true);
   };
-  const openModalCreateTask = () => {
+
+  const openModalCreateTask = async () => {
+    await noProject();
+
     setShowModalCreateTask(true);
   };
-  const openModalAnalytics = () => {
+
+  const openModalAnalytics = async () => {
+    await noProject();
+
     setShowModalAnalytics(true);
   };
 
-  const handleClickBtnChange = () => {
+  const handleClickBtnChange = async () => {
+    await noProject();
+
     setSprintName(currentSprint?.name);
     setShowChangeTitleForm(!showChangeTitleForm);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
+    await noProject();
 
     if (currentSprint.name !== sprintName || sprintName !== '') {
       dispatch(
@@ -118,21 +229,15 @@ const TasksPage = props => {
     currentSprint && (
       <>
         <main>
-          <aside>
+          <aside className={styles.aside}>
             <SideBar>
-              <Link
-                className={styles.linkToBack}
-                to={{
-                  pathname: `/projects/${projectId}`,
-                }}
-              >
-                Show sprints
-              </Link>
-              <div className={styles.navSprintsList}>
-                <ul>
+              <SideBarGoBackLink />
+              <SideBarScrollWrap>
+                <ul className={styles.sideBarSprintsList}>
                   {sprints.map(sprint => (
-                    <li key={sprint.id}>
+                    <li key={sprint.id} className={styles.sideBarItem}>
                       <NavLink
+                        onClick={onClickSprintLink}
                         className={styles.linkToSprint}
                         activeClassName={styles.linkToSprintActive}
                         to={{
@@ -147,13 +252,16 @@ const TasksPage = props => {
                     </li>
                   ))}
                 </ul>
+              </SideBarScrollWrap>
 
-                {/*Кнопка создания спринта в сайдбаре */}
+              {/*Кнопка создания спринта в сайдбаре */}
+              <div className={styles.createNewSprintWrap}>
                 <button
                   type="button"
                   className={styles.btnCreateSprint}
                   onClick={openModalCreateSprint}
                 ></button>
+                <span>Create a sprint</span>
               </div>
             </SideBar>
           </aside>
@@ -161,35 +269,37 @@ const TasksPage = props => {
           <div className={styles.sprintContent}>
             <div className={styles.sprintDate}>
               <ul className={styles.pagination}>
-                {arrDate.map((day, i) => (
-                  <li
-                    key={day}
-                    className={
-                      currentDay === i + 1
-                        ? styles.paginationItem
-                        : styles.paginationItemNone
-                    }
-                  >
-                    <button
-                      type="button"
-                      onClick={() => onClickDay(i)}
-                      className={styles.btnBefore}
-                      disabled={currentDay === 1 ? true : false}
-                    >
-                      {'<'}
-                    </button>
+                {arrDate.map(
+                  (day, i) =>
+                    currentDay === i + 1 && (
+                      <li key={day} className={styles.paginationItem}>
+                        <button
+                          type="button"
+                          onClick={onClickDay}
+                          className={styles.btnBefore}
+                          disabled={
+                            page === 1 || noTasks || disabled ? true : false
+                          }
+                        >
+                          {'<'}
+                        </button>
 
-                    <p className={styles.currentDay}>{i + 1} / </p>
-                    <p className={styles.totalDay}>{arrDate.length}</p>
-                    <button
-                      type="button"
-                      onClick={() => onClickNextDay(i)}
-                      className={styles.btnNext}
-                      disabled={currentDay === arrDate.length ? true : false}
-                    >{`>`}</button>
-                    <p className={styles.calendarDay}> {day}</p>
-                  </li>
-                ))}
+                        <p className={styles.currentDay}>{page} / </p>
+                        <p className={styles.totalDay}>{arrDate.length}</p>
+                        <button
+                          type="button"
+                          onClick={onClickNextDay}
+                          className={styles.btnNext}
+                          disabled={
+                            page === arrDate.length || noTasks || disabled
+                              ? true
+                              : false
+                          }
+                        >{`>`}</button>
+                        <p className={styles.calendarDay}> {paginationDate}</p>
+                      </li>
+                    ),
+                )}
               </ul>
             </div>
             <div className={styles.sprintHeader}>
@@ -237,14 +347,18 @@ const TasksPage = props => {
               ></button>
             </div>
             {/* Кнопка открытия модалки с аналитикой */}
-            {tasks.length > 2 && (
+            {tasks.length > 2 && !showModalAnalytics && (
               <button
                 type="button"
                 className={styles.btnOpenAnalytics}
                 onClick={openModalAnalytics}
               ></button>
             )}
-            <TaskList tasks={tasks} />
+            <TaskList
+              paginationDate={paginationDate}
+              tasks={tasks}
+              projectId={projectId}
+            />
           </div>
         </main>
 

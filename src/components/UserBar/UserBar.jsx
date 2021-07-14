@@ -8,7 +8,7 @@ import {
   getError,
 } from 'redux/auth/auth-selectors';
 import swal from 'sweetalert';
-// import exit from './images/exitIcon.svg';
+
 import styles from './UserBar.module.scss';
 
 export default function UserBar() {
@@ -20,7 +20,7 @@ export default function UserBar() {
     dispatch(authOperations.logout());
     Error &&
       swal({
-        text: `${Error}`,
+        text: `Server internal error`,
         icon: 'error',
         button: { text: 'OK', className: `${styles.swalButton}` },
       });

@@ -18,3 +18,13 @@ export const getCurrentUserError = createAction('auth/getCurrentUserError');
 
 export const clearError = createAction('auth/clearError');
 export const noToken = createAction('auth/noToken');
+
+export const getUserByGoogleAuthRequest = createAction(
+  'auth/getUserByGoogleAuthRequest',
+);
+export const getUserByGoogleAuthSuccess = createAction(
+  'auth/getUserByGoogleAuthSuccess',
+);
+export const getUserByGoogleAuthError = createAction(
+  'auth/getUserByGoogleAuthError',
+);

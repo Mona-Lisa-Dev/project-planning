@@ -1,8 +1,11 @@
 import 'date-fns';
+
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { createMuiTheme } from '@material-ui/core';
+import { createTheme } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
@@ -12,6 +15,7 @@ import {
 } from '@material-ui/pickers';
 import TextField from '@material-ui/core/TextField';
 
+import projectsOperations from 'redux/projects/projects-operations';
 import sprintsOperations from 'redux/sprints/sprints-operations';
 
 import s from './CreateSprint.module.scss';
@@ -74,7 +78,7 @@ const useStyles = makeStyles({
 });
 
 // Calendar
-const materialTheme = createMuiTheme({
+const materialTheme = createTheme({
   overrides: {
     MuiPaper: {
       root: {
@@ -206,7 +210,7 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
   const [error, setError] = useState(false);
   const errorMessage = 'This field is require';
   const classes = useStyles();
-
+  const history = useHistory();
   const dispatch = useDispatch();
 
   // Input - Date
@@ -240,9 +244,17 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
   };
 
   // Send new sprint
-  const sendNewSprint = () => {
+  const sendNewSprint = async () => {
     setError(false);
 
+    const currentProject = await dispatch(
+      projectsOperations.getProjectById(projectId),
+    );
+
+    if (!currentProject) {
+      history.push(`/projects`);
+      return;
+    }
     const newSprint = {
       name: sprintName,
       startDate: selectedDate,
@@ -302,7 +314,7 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
             )}
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <ThemeProvider theme={materialTheme}>
-                <Grid container justify="space-around">
+                <Grid container justifyContent="space-around">
                   {previousDays ? (
                     <KeyboardDatePicker
                       required
@@ -370,6 +382,11 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
       </form>
     </div>
   );
+};
+
+CreateSprint.propTypes = {
+  onClickCancel: PropTypes.func.isRequired,
+  projectId: PropTypes.string.isRequired,
 };
 
 export default CreateSprint;

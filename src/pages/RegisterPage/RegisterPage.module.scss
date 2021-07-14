@@ -7,8 +7,8 @@
   .circlesWrap {
     position: absolute;
     left: 0;
-    width: 100vw;
-    height: calc(100vh - 81px);
+    width: 100%;
+    height: calc(100vh - 41px);
     z-index: -1;
     overflow: hidden;
 
@@ -84,7 +84,7 @@
       position: absolute;
       top: 81px;
       left: 0;
-      width: 100vw;
+      width: 100%;
       pointer-events: none;
 
       .deskCircles {
@@ -120,15 +120,15 @@
 
       @media screen and (min-width: $tablet) {
         padding: 40px 40px;
-        margin: 0 0 100px;
+        margin: 0 0 60px;
         width: 500px;
-        height: 480px;
+        height: 510px;
         border-radius: 5px;
         box-shadow: 0px 6px 26px rgba(0, 5, 97, 0.1);
       }
 
       @media screen and (min-width: $desktop) {
-        margin: 0 0 60px;
+        margin: 0 0 30px;
       }
 
       .title {
@@ -203,6 +203,7 @@
       .login {
         display: flex;
         justify-content: center;
+        align-items: center;
         font-weight: 400;
         font-size: 12px;
         line-height: 1.25;
@@ -286,365 +287,6 @@
     }
   }
 }
-
-// .backgroundMain {
-//   position: fixed;
-//   // width: 100%;
-//   // height: 100%;
-// }
-
-// .registration {
-//   color: $main-background;
-// }
-
-// .title {
-//   font-family: $main-font;
-//   font-style: normal;
-//   font-weight: 500;
-//   font-size: 36px;
-//   line-height: 1.22;
-//   letter-spacing: 0.04em;
-//   color: $text-dark;
-//   margin-left: auto;
-//   margin-right: auto;
-//   padding-bottom: 30px;
-//   font-weight: 500;
-// }
-
-// .form {
-//   padding-left: 20px;
-//   padding-right: 20px;
-//   background-color: $form-reg-background;
-//   box-shadow: $main-shadow;
-//   border-radius: 5px;
-
-//   position: absolute;
-//   left: 50%;
-//   top: 50%;
-//   transform: translate(-50%, -50%);
-// }
-
-// .labelForm {
-//   font-family: $main-font;
-//   position: relative;
-//   display: block;
-//   margin-bottom: 30px;
-//   font-weight: 600;
-//   color: $text-light;
-// }
-
-// .nameInput {
-//   font-family: $main-font;
-//   position: absolute;
-//   left: 5px;
-//   transform: translateY(9px);
-//   transition: transform 250ms linear;
-//   font-weight: normal;
-// }
-
-// .labelForm:focus-within > .nameInput {
-//   transform: translateY(-18px);
-//   font-size: 12px;
-// }
-
-// .inputForm {
-//   padding: 10px;
-//   width: 100%;
-//   outline: none;
-//   border-style: none;
-//   border-bottom: 1px solid $text-dark;
-//   background-color: $form-reg-background;
-// }
-
-// .inputForm:invalid {
-//   margin-bottom: 5px;
-//   color: $form-input-error;
-//   border-bottom: 1px solid $form-input-border;
-// }
-
-// .inputForm:focus {
-//   border-color: $main-orange;
-//   box-shadow: 0px 3px 4px $main-orange;
-// }
-
-// .inputForm:not(:placeholder-shown) + .nameInput {
-//   transform: translateY(-8px);
-//   font-size: 12px;
-// }
-// .error {
-//   font-family: $main-font;
-//   padding-left: 8px;
-//   font-weight: 400;
-//   font-size: 12px;
-// }
-
-// .login {
-//   display: flex;
-//   justify-content: center;
-//   font-weight: 400;
-//   font-size: 12px;
-// }
-
-// .auth {
-//   padding-left: 5px;
-//   text-decoration: underline;
-//   color: $text-light;
-// }
-
-// .auth:visited {
-//   color: $text-light;
-// }
-
-// .btnReg {
-//   display: flex;
-//   flex-direction: row;
-//   align-items: center;
-//   padding: 11px 44px;
-//   margin: 0 auto 20px;
-//   cursor: pointer;
-//   width: 170px;
-//   height: 44px;
-//   vertical-align: middle;
-//   font-family: Montserrat, sans-serif;
-//   font-style: normal;
-//   font-weight: 500;
-//   font-size: 18px;
-//   line-height: 1.22;
-//   text-align: center;
-//   letter-spacing: 0.04em;
-//   transition: all 0.25s linear;
-//   color: $text-white;
-//   background-color: rgba(255, 107, 8, 0.3);
-//   border: none;
-//   border-radius: 25px;
-// }
-
-// .btnReg:enabled {
-//   background-color: $main-orange;
-//   box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
-//   transition: all 300ms ease;
-// }
-// .btnReg:enabled:hover {
-//   color: $main-orange;
-//   font-weight: 800;
-//   background-color: $text-white;
-//   box-shadow: 0px 4px 10px 4px rgba(255, 107, 8, 0.3);
-// }
-
-// .question {
-//   font-style: normal;
-//   font-weight: 400;
-//   font-size: 12px;
-//   line-height: 1.22;
-//   letter-spacing: 0.04em;
-//   color: $text-light;
-// }
-
-// @media screen and (min-width: $mobile) {
-//   .general {
-//     display: none;
-//   }
-
-//   .title {
-//     font-family: Montserrat, sans-serif;
-//     font-style: normal;
-//     font-weight: 500;
-//     font-size: 26px;
-//     line-height: 1.23;
-//     letter-spacing: 0.04em;
-//     color: $text-dark;
-//     width: 174px;
-//     height: 32px;
-//     font-size: 26px;
-//     margin-bottom: 53px;
-//   }
-
-//   .form {
-//     padding: 47px 20px;
-//     width: 320px;
-//     height: 508px;
-//   }
-
-//   .nameInput {
-//     font-size: 16px;
-//   }
-
-//   .inputForm {
-//     font-size: 16px;
-//   }
-// }
-// @media screen and (min-width: $mobilePlus) {
-//   .form {
-//     padding: 47px 70px;
-//   }
-// }
-
-// @media screen and (min-width: $tablet) {
-//   .general {
-//     display: block;
-//     position: absolute;
-//     border-radius: 50%;
-//     z-index: -1;
-//   }
-
-//   .ellipse1 {
-//     background-color: $main-orange;
-//     width: 78px;
-//     height: 78px;
-//     top: 161px;
-//     left: 622px;
-//   }
-
-//   // .ellipse2 {
-//   //   background-color: $main-orange;
-//   //   width: 26px;
-//   //   height: 26px;
-//   //   top: 139px;
-//   //   left: 800px;
-//   // }
-
-//   .ellipse3 {
-//     background-color: $text-white;
-//     width: 431px;
-//     height: 431px;
-//     top: 259px;
-//     left: 669px;
-//   }
-
-//   .ellipse4 {
-//     background-color: $main-orange;
-//     width: 387px;
-//     height: 387px;
-//     left: 670px;
-//     top: 291px;
-//     border-radius: 193.5px;
-//   }
-
-//   .ellipse5 {
-//     background-color: $text-white;
-//     width: 314px;
-//     height: 314px;
-//     top: 509px;
-//     left: 496px;
-//     z-index: -2;
-//   }
-
-//   .ellipse6 {
-//     background-color: $main-orange;
-//     width: 282px;
-//     height: 282px;
-//     left: 515px;
-//     top: 511px;
-//   }
-
-//   .ellipse7 {
-//     background-color: $main-orange;
-//     width: 252px;
-//     height: 252px;
-//     left: -72px;
-//     top: 574px;
-//   }
-
-//   .ellipse8 {
-//     background-color: $text-white;
-//     width: 298px;
-//     height: 298px;
-//     left: -110px;
-//     top: 565px;
-//     z-index: -2;
-//   }
-
-//   // .ellipse9 {
-//   // top: 377px;
-//   // left: -145px;
-//   // }
-
-//   .ellipse10 {
-//     background-color: $text-white;
-//     width: 48px;
-//     height: 48px;
-//     left: -26px;
-//     top: 250px;
-//   }
-
-//   .title {
-//     width: 241px;
-//     font-size: 36px;
-//     margin-bottom: 53px;
-//   }
-
-//   .form {
-//     width: 570px;
-//     height: 538px;
-//     padding: 50px 70px;
-//   }
-
-//   .nameInput {
-//     font-size: 18px;
-//   }
-
-//   .inputForm {
-//     font-size: 18px;
-//   }
-// }
-
-// @media screen and (min-width: $desktop) {
-//   .ellipse1 {
-//     top: 103px;
-//     left: 877px;
-//   }
-
-//   .ellipse2 {
-//     background-color: $main-orange;
-//     width: 26px;
-//     height: 26px;
-//     top: 129px;
-//     left: 1055px;
-//   }
-
-//   .ellipse3 {
-//     left: 925px;
-//     top: 200px;
-//   }
-
-//   .ellipse4 {
-//     top: 233px;
-//     left: 925px;
-//   }
-
-//   .ellipse5 {
-//     top: 449px;
-//     left: 752px;
-//   }
-
-//   .ellipse6 {
-//     top: 453px;
-//     left: 770px;
-//   }
-
-//   .ellipse7 {
-//     top: 516px;
-//     left: 183px;
-//   }
-
-//   .ellipse8 {
-//     top: 507px;
-//     left: 145px;
-//   }
-
-//   .ellipse9 {
-//     background-color: $text-white;
-//     width: 118px;
-//     height: 118px;
-//     top: 367px;
-//     left: 111px;
-//   }
-
-//   .ellipse10 {
-//     top: 240px;
-//     left: 230px;
-//   }
-// }
 
 .swalButton {
   background-color: $main-orange;

@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+import projectsOperations from 'redux/projects/projects-operations';
 import tasksOperations from 'redux/tasks/tasks-operations';
 import sprintsOperations from 'redux/sprints/sprints-operations';
 import s from './CreateTaskForm.module.scss';
@@ -8,9 +12,7 @@ const CreateTaskForm = ({ projectId, sprintId, onClickCancel }) => {
   const [task, setTask] = useState('');
   const [hours, setHours] = useState('');
   const [emptyInput, setEmptyInput] = useState(false);
-
-  console.log('projectId', projectId);
-
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const handleChangeTask = e => {
@@ -26,6 +28,15 @@ const CreateTaskForm = ({ projectId, sprintId, onClickCancel }) => {
     // если пустой инпут, подсвечиваем красным
     if (!task || !hours) {
       setEmptyInput(true);
+      return;
+    }
+
+    const currentProject = await dispatch(
+      projectsOperations.getProjectById(projectId),
+    );
+
+    if (!currentProject) {
+      history.push(`/projects`);
       return;
     }
 
@@ -93,6 +104,12 @@ const CreateTaskForm = ({ projectId, sprintId, onClickCancel }) => {
       </button>
     </div>
   );
+};
+
+CreateTaskForm.propTypes = {
+  onClickCancel: PropTypes.func.isRequired,
+  projectId: PropTypes.string.isRequired,
+  sprintId: PropTypes.string.isRequired,
 };
 
 export default CreateTaskForm;

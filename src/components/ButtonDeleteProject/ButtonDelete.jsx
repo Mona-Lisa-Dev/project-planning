@@ -1,14 +1,19 @@
-import { styled } from '@material-ui/styles';
+import PropTypes from 'prop-types';
+
 import styles from './ButtonDelete.module.scss';
 
-const ButtonDelete = ({ className, handleClick }) => {
+const ButtonDelete = ({ handleClick }) => {
   return (
     <button
       type="button"
       onClick={() => handleClick()}
-      className={className ? styles.isHidden : styles.btnDelete}
+      className={styles.btnDelete}
     ></button>
   );
+};
+
+ButtonDelete.propTypes = {
+  handleClick: PropTypes.func.isRequired,
 };
 
 export default ButtonDelete;

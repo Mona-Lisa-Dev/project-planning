@@ -12,6 +12,7 @@
 
   a {
     color: inherit;
+    height: 100%;
   }
 
   button {
@@ -27,8 +28,6 @@
     font-weight: 500;
     font-size: 16px;
     letter-spacing: 0.04em;
-
-    // ...
 
     display: -webkit-box;
     -webkit-line-clamp: 2;

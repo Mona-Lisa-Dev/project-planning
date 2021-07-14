@@ -1,19 +1,38 @@
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { ReactComponent as Arrow } from './arrow.svg';
 import s from './ShowProjects.module.scss';
 
-const ShowProjects = () => {
+const ShowProjects = ({ match }) => {
+  const {
+    path,
+    params: { projectId },
+  } = match;
+
   return (
-    <Link
-      className={s.showProjectsLink}
-      to={{
-        pathname: `/projects`,
-      }}
-    >
-      <Arrow className={s.Arrow} />
-      <span>Show projects</span>
-    </Link>
+    <>
+      {path === '/projects/:projectId' ? (
+        <Link
+          className={s.showProjectsLink}
+          to={{
+            pathname: `/projects`,
+          }}
+        >
+          <Arrow className={s.Arrow} />
+          <span>Show projects</span>
+        </Link>
+      ) : (
+        <Link
+          className={s.showProjectsLink}
+          to={{
+            pathname: `/projects/${projectId}`,
+          }}
+        >
+          <Arrow className={s.Arrow} />
+          <span>Show sprints</span>
+        </Link>
+      )}
+    </>
   );
 };
 
-export default ShowProjects;
+export default withRouter(ShowProjects);

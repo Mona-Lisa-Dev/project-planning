@@ -1,15 +1,55 @@
 import PropTypes from 'prop-types';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+import { confirmAlert } from 'react-confirm-alert';
+
 import projectsOperations from 'redux/projects/projects-operations';
 
 import s from './PeopleList.module.scss';
 
-const PeopleList = ({ projectId, participants }) => {
+const PeopleList = ({ onClickCancel, projectId, participants }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
 
-  const handleClick = item =>
-    dispatch(projectsOperations.deleteParticipant(projectId, item));
+  const handleClick = async email => {
+    await dispatch(projectsOperations.deleteParticipant(projectId, { email }));
+    const currentProject = await dispatch(
+      projectsOperations.getProjectById(projectId),
+    );
+
+    if (!currentProject) {
+      onClickCancel();
+      history.push(`/projects`);
+    }
+  };
+
+  const onClick = item => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className={s.custom_ui}>
+            <h1>Are you sure?</h1>
+            <p>You want to delete participant?</p>
+            <button className={s.cancelBtn} type="button" onClick={onClose}>
+              Cancel
+            </button>
+            <button
+              className={s.rdyBtn}
+              type="button"
+              onClick={() => {
+                handleClick(item);
+                onClose();
+              }}
+            >
+              Ok
+            </button>
+          </div>
+        );
+      },
+    });
+  };
 
   return (
     <ul>
@@ -18,8 +58,8 @@ const PeopleList = ({ projectId, participants }) => {
           {item}{' '}
           <button
             type="button"
-            onClick={() => handleClick(item)}
-            className={s.editButton}
+            onClick={() => onClick(item)}
+            className={s.deleteButton}
           >
             <DeleteOutlinedIcon />
           </button>
@@ -30,7 +70,8 @@ const PeopleList = ({ projectId, participants }) => {
 };
 
 PeopleList.propTypes = {
-  participants: PropTypes.arrayOf(PropTypes.string.isRequired),
+  participants: PropTypes.arrayOf(PropTypes.string),
+  projectId: PropTypes.string.isRequired,
 };
 
 export default PeopleList;

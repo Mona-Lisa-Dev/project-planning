@@ -1,22 +1,31 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import TaskItem from '../TaskItem';
 import { getFilter, getVisibleTasks } from 'redux/tasks/tasks-selectors';
 import * as tasksActions from 'redux/tasks/tasks-actions';
+import projectsOperations from 'redux/projects/projects-operations';
 
 import styles from './TaskList.module.scss';
 
-const TaskList = ({ tasks }) => {
+const TaskList = ({ paginationDate, tasks, projectId }) => {
   const [isVisibleInputFind, setIsVisibleInputFind] = useState(false);
 
   const filter = useSelector(getFilter);
   const visibleTasks = useSelector(getVisibleTasks);
-
+  const history = useHistory();
   const dispatch = useDispatch();
-  console.log('tasks', tasks);
 
-  const changesVisibleInputFind = () => {
+  const changesVisibleInputFind = async () => {
+    const currentProject = await dispatch(
+      projectsOperations.getProjectById(projectId),
+    );
+
+    if (!currentProject) {
+      history.push(`/projects`);
+      return;
+    }
     setIsVisibleInputFind(!isVisibleInputFind);
   };
 
@@ -75,6 +84,7 @@ const TaskList = ({ tasks }) => {
                 scheduledTime={scheduledTime}
                 totalTime={totalTime}
                 byDay={byDay}
+                paginationDate={paginationDate}
               />
             ),
           )}
@@ -86,14 +96,16 @@ const TaskList = ({ tasks }) => {
 
 export default TaskList;
 
-// TaskList.propTypes = {
-//   tasks: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       scheduledHours: PropTypes.number.isRequired,
-//       spentHours: PropTypes.number,
-//       allHours: PropTypes.number,
-//     }),
-//   ),
-// };
+TaskList.propTypes = {
+  tasks: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      scheduledHours: PropTypes.number,
+      spentHours: PropTypes.number,
+      allHours: PropTypes.number,
+    }),
+  ),
+  project: PropTypes.string,
+  paginationDate: PropTypes.string.isRequired,
+};

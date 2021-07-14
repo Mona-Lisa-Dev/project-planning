@@ -1,32 +1,32 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import { Link } from 'react-router-dom';
-
-// import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import { useMediaQuery } from '@material-ui/core';
 import { refs } from './refs';
 
 import { ReactComponent as AddGroupIcon } from './svg/add_group_icon.svg';
 import { ReactComponent as CreateBtn } from './svg/create_button_icon.svg';
 
+import Aside from 'components/Aside';
 import SideBar from 'components/SideBar';
-import ShowProjects from 'components/ShowProjects';
+import SideBarScrollWrap from 'components/SideBarScrollWrap';
+import SideBarGoBackLink from 'components/SideBarGoBackLink';
 import SideBarProjects from 'components/SideBarProjects';
 import Modal from 'components/Modal';
 import CreateSprint from 'components/CreateSprint';
 import SprintList from 'components/SprintList';
 import AddPeopleForm from 'components/AddPeopleForm';
 import CreateProject from 'components/CreateProject';
+import { getUserEmail } from 'redux/auth/auth-selectors';
 import {
   getProjects,
   getCurrentProject,
 } from 'redux/projects/projects-selectors';
-import { getError } from 'redux/sprints/sprints-selectors';
+
 import sprintsOperations from 'redux/sprints/sprints-operations';
 import projectsOperations from 'redux/projects/projects-operations';
-import swal from 'sweetalert';
 
 import s from './SprintsPage.module.scss';
+import { useHistory } from 'react-router-dom';
 
 const SprintsPage = props => {
   const [showModal, setShowModal] = useState(false);
@@ -38,22 +38,23 @@ const SprintsPage = props => {
   const dispatch = useDispatch();
 
   const currentProject = useSelector(getCurrentProject);
+  const userEmail = useSelector(getUserEmail);
   const projects = useSelector(getProjects);
-  const Error = useSelector(getError);
+
+  const history = useHistory();
 
   useEffect(() => {
-    Error &&
-      swal({
-        text: `${Error}`,
-        icon: 'error',
-        button: { text: 'OK', className: `${s.swalButton}` },
-      });
-  }, [Error]);
+    (async function fetchData() {
+      dispatch(projectsOperations.getAllProjects());
 
-  useEffect(() => {
-    dispatch(projectsOperations.getAllProjects());
-    dispatch(projectsOperations.getProjectById(projectId));
-    dispatch(sprintsOperations.getAllSprints(projectId));
+      const project = await dispatch(
+        projectsOperations.getProjectById(projectId),
+      );
+
+      !project && history.push(`/projects`);
+
+      dispatch(sprintsOperations.getAllSprints(projectId));
+    })();
   }, [dispatch, projectId]);
 
   // ----------- Modal -----------
@@ -95,11 +96,13 @@ const SprintsPage = props => {
 
   return (
     <>
-      <main>
-        <aside>
+      <main className={s.main}>
+        <Aside>
           <SideBar>
-            <ShowProjects />
-            <SideBarProjects projects={projects} />
+            <SideBarGoBackLink />
+            <SideBarScrollWrap>
+              <SideBarProjects projects={projects} />
+            </SideBarScrollWrap>
 
             {tablet && (
               <div className={s.CreateNewProjectWrap}>
@@ -112,7 +115,7 @@ const SprintsPage = props => {
               </div>
             )}
           </SideBar>
-        </aside>
+        </Aside>
 
         <article>
           <div className={s.headerWrap}>
@@ -136,13 +139,14 @@ const SprintsPage = props => {
                 {!showInput && (
                   <>
                     <h2>{currentProject?.name}</h2>
-
-                    <button
-                      title="Edit the name"
-                      type="button"
-                      className={s.buttonChange}
-                      onClick={editNameHandle}
-                    ></button>
+                    {userEmail === currentProject?.owner.email && (
+                      <button
+                        title="Edit the name"
+                        type="button"
+                        className={s.buttonChange}
+                        onClick={editNameHandle}
+                      ></button>
+                    )}
                   </>
                 )}
               </div>

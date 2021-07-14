@@ -10,61 +10,57 @@ main {
   }
   @media screen and (min-width: $tablet) {
     display: flex;
-    padding: 0 40px 0 40px;
+    padding: 0 40px 0 0;
     width: $tablet;
-    min-height: calc(100vh - 81px);
+    min-height: 600px;
   }
 
   @media screen and (min-width: $desktop) {
     width: $desktop;
-    padding: 0 55px 0 55px;
+    padding: 0 55px 0 0;
   }
 
   // Sidebar
-  aside {
+  .aside {
     position: relative;
-
+    padding: 0 0 0 0;
     @media screen and (max-width: $mobile-max) {
-      padding: 10px 0 10px 20px;
       border-bottom: 1px solid rgba(24, 28, 39, 0.1);
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 414px;
+      min-width: 100%;
     }
 
     @media screen and (min-width: $tablet) {
       border-right: 1px solid rgba(24, 28, 39, 0.1);
-      padding: 20px 20px 0 0;
-      width: 216px;
+      min-height: calc(100vh - 81px);
+      width: 256px;
+      text-align: center;
     }
 
     @media screen and (min-width: $desktop) {
-      width: 200px;
-      padding: 20px 0 0 0;
+      width: 255px;
     }
   }
 }
-.linkToBack {
-  font-size: 14px;
-  letter-spacing: 0.04em;
-  color: #181c27;
-  &::before {
-    content: url(./svg/arrow.svg);
-    margin-right: 10px;
+
+.sideBarSprintsList {
+  @media screen and (min-width: $tablet) {
+    padding: 10px 0 20px 40px;
   }
-  @media screen and (min-width: $tablet) and (max-width: $tablet-max) {
-    margin-top: 5px;
-    margin-bottom: 80px;
-  }
+
   @media screen and (min-width: $desktop) {
-    margin-top: 25px;
-    margin-bottom: 120px;
+    padding: 10px 0 20px 55px;
   }
-}
-.navSprintsList {
-  font-size: 14px;
+
   @media screen and (max-width: $mobile-max) {
     display: none;
+  }
+}
+.sideBarItem {
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+  @media screen and (min-width: $tablet) {
+    width: 177px;
   }
 }
 .sprintsWrap {
@@ -74,34 +70,60 @@ main {
 
 .linkToSprint {
   position: relative;
-  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  height: 54px;
   color: #181c27;
   font-size: 14px;
+  text-align: left;
+
+  @media screen and (min-width: $desktop) {
+    width: 162px;
+  }
   span {
     display: block;
     margin-right: 15px;
-    min-width: 36px;
-    min-height: 36px;
+    width: 36px;
+    height: 36px;
     border-radius: 5px;
-    color: $form-background;
-    box-shadow: $primaryShadow;
+    background: $form-background;
   }
+
   h3 {
-    font-weight: normal;
+    font-weight: 400;
     max-height: 60px;
-    max-width: 110px;
+    max-width: 118px;
     // добавить троеточие в конце длинных названий
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+    @media screen and (min-width: $desktop) {
+      max-width: 110px;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    span {
+      box-shadow: 0px 6px 26px 0px rgba(0, 5, 97, 0.15);
+    }
+    h3 {
+      font-weight: bold;
+      text-overflow: clip;
+      white-space: normal;
+      word-break: break-all;
+    }
   }
 }
 
 .linkToSprintActive {
   h3 {
     font-weight: bold;
+  }
+  span {
+    box-shadow: 0px 6px 26px 0px rgba(0, 5, 97, 0.2);
   }
 }
 
@@ -152,9 +174,16 @@ main {
 }
 .btnBefore,
 .btnNext {
+  background-color: transparent;
   cursor: pointer;
   border: none;
   font-size: 26px;
+  transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  &:focus:enabled,
+  &:hover:enabled {
+    outline: none;
+    transform: scale(1.3);
+  }
 }
 .paginationItem {
   display: flex;
@@ -162,9 +191,7 @@ main {
     justify-content: space-between;
   }
 }
-.paginationItemNone {
-  display: none;
-}
+
 .currentDay {
   padding: 5px 5px 0 10px;
   font-size: 18px;
@@ -181,10 +208,11 @@ main {
   display: none;
 }
 .title {
+  position: relative;
+  transition: all 0.2s linear;
   color: $text-dark;
   letter-spacing: 0.04em;
   font-family: $main-font;
-  font-style: normal;
   font-weight: 500;
   line-height: 1.22;
   // добавить троеточие в конце длинных названий
@@ -315,7 +343,6 @@ main {
   width: 44px;
   height: 44px;
   background: url(./svg/plus.svg) no-repeat;
-  box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
   transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
   &:focus,
   &:hover {
@@ -324,10 +351,10 @@ main {
     transform: scale(1.15);
   }
   @media screen and (max-width: $mobile-max) {
-    position: absolute;
     z-index: 1;
-    right: 0px;
-    top: calc(100vh - 200px);
+    position: fixed;
+    bottom: 60px;
+    right: 10px;
   }
   @media screen and (min-width: $desktop) {
     &::after {
@@ -342,24 +369,33 @@ main {
     }
   }
 }
+.createNewSprintWrap {
+  bottom: 0;
+  width: 100%;
+  padding: 0 0 30px;
+  text-align: center;
+  span {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+  }
+  @media screen and (max-width: $mobile-max) {
+    display: none;
+  }
+}
+
 .btnCreateSprint {
-  position: relative;
-  margin: 40px 0 0px 60px;
+  display: block;
+  margin-bottom: 11px;
+  margin-left: auto;
+  margin-right: auto;
   cursor: pointer;
   border: none;
   width: 44px;
   height: 44px;
+  border-radius: 50%;
   background: url(./svg/plus.svg) no-repeat;
-  box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
-  border-radius: 25px;
   transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
-  &::after {
-    position: absolute;
-    width: 160px;
-    top: 60px;
-    left: -60px;
-    content: 'Create a sprint';
-  }
   &:focus,
   &:hover {
     outline: none;
@@ -368,14 +404,12 @@ main {
   }
 }
 .btnOpenAnalytics {
-  position: absolute;
-  z-index: 10;
   cursor: pointer;
+  z-index: 1;
   border: none;
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
   background: center url(./svg/analytics.svg) no-repeat;
   transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
   &:focus,
@@ -385,13 +419,30 @@ main {
     transform: scale(1.15);
   }
   @media screen and (min-width: $tablet) {
-    bottom: 80px;
-    right: 10px;
+    position: fixed;
+    bottom: 130px;
+    right: 20px;
   }
   @media screen and (max-width: $mobile-max) {
-    bottom: 30px;
-    left: 0;
-    z-index: 1;
-    top: calc(100vh - 200px);
+    position: fixed;
+    bottom: 60px;
+    left: 10px;
+  }
+}
+
+.swalButton {
+  background-color: $main-orange;
+  box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+  transition: all 300ms ease;
+  padding: 11px 44px;
+  border: none;
+  border-radius: 25px;
+  font-size: 12px;
+  outline: none;
+  &:hover {
+    color: $main-orange;
+    font-weight: 800;
+    box-shadow: 0px 4px 10px 4px rgba(255, 107, 8, 0.3);
+    outline: none;
   }
 }

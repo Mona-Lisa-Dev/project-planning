@@ -5,5 +5,6 @@ const routes = {
   projects: '/projects',
   signup: '/register',
   login: '/login',
+  google: '/google-user',
 };
 export default routes;

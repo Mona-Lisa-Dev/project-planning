@@ -12,9 +12,8 @@ import { ReactComponent as DeskLeftCircles } from './svg/deskLeftCircles.svg';
 import { ReactComponent as DeskLeftCircle } from './svg/deskLeftCircle.svg';
 import { ReactComponent as DeskRightCircles } from './svg/deskRightCircles.svg';
 // -------------------------------
-
+import GoogleLink from 'components/GoogleLink';
 import { getLoadingUser, getErrorLogin } from 'redux/auth/auth-selectors';
-
 import styles from './LoginPage.module.scss';
 
 const LoginPage = () => {
@@ -32,12 +31,22 @@ const LoginPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    Error &&
+    if (Error === 'Request failed with status code 500') {
       swal({
-        text: `${Error}`,
+        text: `This email is not registered, please register`,
         icon: 'error',
         button: { text: 'OK', className: `${styles.swalButton}` },
       });
+    }
+
+    if (Error === 'Request failed with status code 401') {
+      swal({
+        text: `Email or password is wrong`,
+        icon: 'error',
+        button: { text: 'OK', className: `${styles.swalButton}` },
+      });
+    }
+
     setValidForm(false);
   }, [Error]);
 
@@ -213,80 +222,11 @@ const LoginPage = () => {
               Register
             </a>
           </div>
+          <GoogleLink />
         </form>
       </div>
     </div>
   );
-
-  /*
-  return (
-    <div className={styles.backgroundMain}>
-      <div className={styles.registration}>
-        <div className={`${styles.general} ${styles.ellipse1}`}></div>
-        <div className={`${styles.general} ${styles.ellipse2}`}></div>
-        <div className={`${styles.general} ${styles.ellipse3}`}></div>
-        <div className={`${styles.general} ${styles.ellipse4}`}></div>
-        <div className={`${styles.general} ${styles.ellipse5}`}></div>
-        <div className={`${styles.general} ${styles.ellipse6}`}></div>
-        <div className={`${styles.general} ${styles.ellipse7}`}></div>
-        <div className={`${styles.general} ${styles.ellipse8}`}></div>
-        <div className={`${styles.general} ${styles.ellipse9}`}></div>
-        <div className={`${styles.general} ${styles.ellipse10}`}></div>
-      </div>
-      <form
-        onSubmit={handleFormSubmit}
-        className={styles.form}
-        autoComplete="off"
-      >
-        <h1 className={styles.title}>Login</h1>
-        <label className={styles.labelForm}>
-          <input
-            className={styles.inputForm}
-            placeholder=" "
-            type={'email'}
-            name={'email'}
-            onChange={handleChange}
-            onBlur={blurHandler}
-            value={email}
-            required
-          />
-          <span className={styles.nameInput}>E-mail</span>
-          {emailDirty && emailError && (
-            <p className={styles.error}>{emailError}</p>
-          )}
-        </label>
-        <label className={styles.labelForm}>
-          <input
-            className={styles.inputForm}
-            placeholder=" "
-            type={'password'}
-            name={'password'}
-            onChange={handleChange}
-            onBlur={blurHandler}
-            values={password}
-            required
-          />
-          <span className={styles.nameInput}>Password</span>
-          {passwordDirty && passwordError && (
-            <p className={styles.error}>{passwordError}</p>
-          )}
-        </label>
-        <button className={styles.btnLog} type={'submit'} disabled={!validForm}>
-          Login
-        </button>
-
-        {loading && <Spinner />}
-
-        <div className={styles.login}>
-          <p className={styles.question}> No account? </p>
-          <a className={styles.auth} href="/users/signup">
-            Register
-          </a>
-        </div>
-      </form>
-    </>
-  );
-  */
 };
 
 export default LoginPage;

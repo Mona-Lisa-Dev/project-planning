@@ -13,6 +13,9 @@ import {
   getCurrentUserSuccess,
   getCurrentUserError,
   noToken,
+  getUserByGoogleAuthRequest,
+  getUserByGoogleAuthSuccess,
+  getUserByGoogleAuthError,
 } from './auth-actions';
 
 // axios.defaults.baseURL = 'http://localhost:5000/api';
@@ -36,7 +39,6 @@ const signup = payload => async dispatch => {
     } = await axios.post('/users/signup', payload);
 
     dispatch(signupSuccess(data));
-    console.log('data', data);
 
     return data;
   } catch (error) {
@@ -99,10 +101,28 @@ const getCurrentUser = () => async (dispatch, getState) => {
   }
 };
 
+const getUserByGoogleAuth = () => async dispatch => {
+  dispatch(getUserByGoogleAuthRequest());
+
+  try {
+    const {
+      data: { data },
+    } = await axios.get('/users/google-user');
+    dispatch(getUserByGoogleAuthSuccess(data));
+
+    token.set(data.token);
+
+    return data;
+  } catch (error) {
+    dispatch(getUserByGoogleAuthError(error.message));
+  }
+};
+
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
   signup,
   login,
   logout,
   getCurrentUser,
+  getUserByGoogleAuth,
 };

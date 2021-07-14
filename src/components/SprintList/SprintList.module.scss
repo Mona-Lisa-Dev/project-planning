@@ -1,7 +1,6 @@
 @import '../../scss/breakpoints';
 @import '../../scss/vars';
 
-// ul
 .listWrapper {
   @media screen and (min-width: $tablet) {
     display: flex;
@@ -13,7 +12,6 @@
     width: 870px;
   }
 
-  // li
   .listItem {
     height: 170px;
     background-color: $primaryWhiteColor;

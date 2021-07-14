@@ -7,6 +7,7 @@ import { getLoadingUser, getErrorSignup } from 'redux/auth/auth-selectors';
 import styles from './RegisterPage.module.scss';
 import swal from 'sweetalert';
 
+import GoogleLink from 'components/GoogleLink';
 import { useMediaQuery } from '@material-ui/core';
 import { refs } from '../../pages/SprintsPage/refs';
 import { ReactComponent as TabletLeftCircles } from '../LoginPage/svg/tabletLeftCircles.svg';
@@ -35,12 +36,13 @@ const RegisterPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    Error &&
+    if (Error === 'Request failed with status code 409') {
       swal({
-        text: `${Error}`,
+        text: `This email is already in use, please use another email`,
         icon: 'error',
         button: { text: 'OK', className: `${styles.swalButton}` },
       });
+    }
     setValidForm(false);
   }, [Error]);
 
@@ -252,100 +254,11 @@ const RegisterPage = () => {
               Log in
             </a>
           </div>
+          <GoogleLink />
         </form>
       </div>
     </div>
   );
-
-  // return (
-  //   <>
-  //     <div className={styles.backgroundMain}>
-  //       <div className={styles.registration}>
-  //         <div className={`${styles.general} ${styles.ellipse1}`}></div>
-  //         <div className={`${styles.general} ${styles.ellipse2}`}></div>
-  //         <div className={`${styles.general} ${styles.ellipse3}`}></div>
-  //         <div className={`${styles.general} ${styles.ellipse4}`}></div>
-  //         <div className={`${styles.general} ${styles.ellipse5}`}></div>
-  //         <div className={`${styles.general} ${styles.ellipse6}`}></div>
-  //         <div className={`${styles.general} ${styles.ellipse7}`}></div>
-  //         <div className={`${styles.general} ${styles.ellipse8}`}></div>
-  //         <div className={`${styles.general} ${styles.ellipse9}`}></div>
-  //         <div className={`${styles.general} ${styles.ellipse10}`}></div>
-  //       </div>
-  //     </div>
-
-  //     <form
-  //       onSubmit={handleFormSubmit}
-  //       className={styles.form}
-  //       autoComplete="off"
-  //     >
-  //       <h1 className={styles.title}>Registration</h1>
-  //       <label className={styles.labelForm}>
-  //         <input
-  //           className={styles.inputForm}
-  //           placeholder=" "
-  //           type={'email'}
-  //           name={'email'}
-  //           onChange={handleChange}
-  //           onBlur={blurHandler}
-  //           value={email}
-  //           required
-  //         />
-  //         <span className={styles.nameInput}>E-mail</span>
-  //         {emailDirty && emailError && (
-  //           <p className={styles.error}>{emailError}</p>
-  //         )}
-  //       </label>
-
-  //       <label className={styles.labelForm}>
-  //         <input
-  //           className={styles.inputForm}
-  //           placeholder=" "
-  //           type={'password'}
-  //           name={'password'}
-  //           onChange={handleChange}
-  //           onBlur={blurHandler}
-  //           value={password}
-  //           required
-  //         />
-  //         <span className={styles.nameInput}>Password</span>
-  //         {passwordDirty && passwordError && (
-  //           <p className={styles.error}>{passwordError}</p>
-  //         )}
-  //       </label>
-
-  //       <label className={styles.labelForm}>
-  //         <input
-  //           className={styles.inputForm}
-  //           placeholder=" "
-  //           type={'password'}
-  //           name={'confirmPassword'}
-  //           onChange={handleChange}
-  //           onBlur={blurHandler}
-  //           value={confirmPassword}
-  //           required
-  //         />
-  //         <span className={styles.nameInput}>Repeat password</span>
-  //         {confirmPasswordDirty && confirmPasswordError && validPassword && (
-  //           <p className={styles.error}>Passwords do not match</p>
-  //         )}
-  //       </label>
-
-  //       <button disabled={!validForm} className={styles.btnReg} type={'submit'}>
-  //         Register
-  //       </button>
-
-  //       {loading && <Spinner />}
-
-  //       <div className={styles.login}>
-  //         <p className={styles.question}> Do you have an account?</p>
-  //         <a className={styles.auth} href="/login">
-  //           Log in
-  //         </a>
-  //       </div>
-  //     </form>
-  //   </>
-  // );
 };
 
 export default RegisterPage;

@@ -1,9 +1,9 @@
-// import { Button, TextField } from '@material-ui/core';
-import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 
 import { getParticipants } from 'redux/projects/projects-selectors';
+import { getUserEmail } from 'redux/auth/auth-selectors';
 import projectsOperations from 'redux/projects/projects-operations';
 import PeopleList from 'components/PeopleList';
 import swal from 'sweetalert';
@@ -12,9 +12,9 @@ import s from './AddPeopleForm.module.scss';
 
 const AddPeopleForm = ({ onClickCancel, projectId }) => {
   const [email, setEmail] = useState('');
-  // const [users, setUsers] = useState([]);
   const [emptyInput, setEmptyInput] = useState(false);
   const participants = useSelector(getParticipants);
+  const userEmail = useSelector(getUserEmail);
 
   const dispatch = useDispatch();
 
@@ -22,13 +22,9 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
     setEmail(e.target.value);
   };
 
-  const handleClick = email => {
-    dispatch(projectsOperations.deleteParticipant(projectId, { email }));
-  };
-
   const handleSubmit = e => {
     e.preventDefault();
-    // если нет имейла, подсвечиваем инпут красным
+
     if (!email) {
       setEmptyInput(true);
       return;
@@ -43,10 +39,18 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
       return;
     }
 
+    if (userEmail === normalizedName) {
+      swal(
+        'Warning!',
+        `It's impossible to add yourself to Participants!`,
+        'warning',
+      );
+      return;
+    }
+
     const participant = {
       email,
     };
-    // setUsers(prevState => [participant, ...prevState]);
 
     dispatch(projectsOperations.addParticipant(projectId, participant));
 
@@ -85,30 +89,18 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
             There are {participants.length} participants in project now:
           </p>
 
-          <ul>
-            {participants.map(item => (
-              <li className={s.participant} key={item}>
-                {item}{' '}
-                <button
-                  type="button"
-                  onClick={() => handleClick(item)}
-                  className={s.deleteButton}
-                >
-                  <DeleteOutlinedIcon />
-                </button>
-              </li>
-            ))}
-          </ul>
-
-          {/* <PeopleList projectId={projectId} participants={participants} /> */}
+          <PeopleList
+            onClickCancel={onClickCancel}
+            projectId={projectId}
+            participants={participants}
+          />
         </div>
       )}
 
-      {/* при клике на кнопку готово форма не закрывается, а добавляется введенный имейл в список ниже */}
       <button form="add" type="submit" className={s.ready_btn}>
         Ready
       </button>
-      {/* закрытие реализуется на модалке */}
+
       <button
         form="add"
         type="button"
@@ -119,6 +111,11 @@ const AddPeopleForm = ({ onClickCancel, projectId }) => {
       </button>
     </div>
   );
+};
+
+AddPeopleForm.propTypes = {
+  projectId: PropTypes.string.isRequired,
+  onClickCancel: PropTypes.func.isRequired,
 };
 
 export default AddPeopleForm;
