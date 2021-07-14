@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import dayjs from 'dayjs';
-import swal from 'sweetalert';
 
 import TaskList from 'components/TaskList';
 import Modal from 'components/Modal';
@@ -13,8 +12,7 @@ import SideBarScrollWrap from 'components/SideBarScrollWrap';
 import CreateSprint from 'components/CreateSprint';
 import DiagramModal from 'components/Diagram/DiagramModal';
 
-import { getCurrentProject } from 'redux/projects/projects-selectors';
-import { getTasks, getError, getNoTasks } from 'redux/tasks/tasks-selectors';
+import { getTasks, getNoTasks } from 'redux/tasks/tasks-selectors';
 import { getSprints, getCurrentSprint } from 'redux/sprints/sprints-selectors';
 import sprintsOperations from 'redux/sprints/sprints-operations';
 import tasksOperations from 'redux/tasks/tasks-operations';
@@ -41,19 +39,10 @@ const TasksPage = props => {
   const currentSprint = useSelector(getCurrentSprint);
   const sprints = useSelector(getSprints);
   const tasks = useSelector(getTasks);
-  const Error = useSelector(getError);
-  const history = useHistory();
-  // const project = useSelector(getCurrentProject);
-  const noTasks = useSelector(getNoTasks);
 
-  // useEffect(() => {
-  //   Error &&
-  //     swal({
-  //       text: `${Error}`,
-  //       icon: 'error',
-  //       button: { text: 'OK', className: `${styles.swalButton}` },
-  //     });
-  // }, [Error]);
+  const history = useHistory();
+
+  const noTasks = useSelector(getNoTasks);
 
   useEffect(() => {
     (async function fetchData() {
@@ -66,7 +55,7 @@ const TasksPage = props => {
       );
 
       if (!currentProject) {
-        window.location.href = '/projects';
+        history.push(`/projects`);
         return;
       }
 
@@ -112,7 +101,7 @@ const TasksPage = props => {
       projectsOperations.getProjectById(projectId),
     );
     if (!currentProject) {
-      window.location.href = '/projects';
+      history.push(`/projects`);
       return;
     }
   };

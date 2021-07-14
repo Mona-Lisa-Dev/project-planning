@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import TaskItem from '../TaskItem';
 import { getFilter, getVisibleTasks } from 'redux/tasks/tasks-selectors';
 import * as tasksActions from 'redux/tasks/tasks-actions';
@@ -13,7 +14,7 @@ const TaskList = ({ paginationDate, tasks, projectId }) => {
 
   const filter = useSelector(getFilter);
   const visibleTasks = useSelector(getVisibleTasks);
-
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const changesVisibleInputFind = async () => {
@@ -22,7 +23,7 @@ const TaskList = ({ paginationDate, tasks, projectId }) => {
     );
 
     if (!currentProject) {
-      window.location.href = '/projects';
+      history.push(`/projects`);
       return;
     }
     setIsVisibleInputFind(!isVisibleInputFind);

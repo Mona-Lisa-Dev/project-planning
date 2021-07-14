@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import projectsOperations from 'redux/projects/projects-operations';
@@ -11,7 +12,7 @@ const CreateTaskForm = ({ projectId, sprintId, onClickCancel }) => {
   const [task, setTask] = useState('');
   const [hours, setHours] = useState('');
   const [emptyInput, setEmptyInput] = useState(false);
-
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const handleChangeTask = e => {
@@ -35,7 +36,7 @@ const CreateTaskForm = ({ projectId, sprintId, onClickCancel }) => {
     );
 
     if (!currentProject) {
-      window.location.href = '/projects';
+      history.push(`/projects`);
       return;
     }
 

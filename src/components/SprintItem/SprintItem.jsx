@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import dayjs from 'dayjs';
 import { confirmAlert } from 'react-confirm-alert';
@@ -12,6 +13,7 @@ import ButtonDelete from '../ButtonDelete';
 import styles from './SprintItem.module.scss';
 
 const SprintItem = ({ currentProject, sprint }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const handleClickDelete = async () => {
@@ -20,7 +22,7 @@ const SprintItem = ({ currentProject, sprint }) => {
     );
 
     if (!project) {
-      window.location.href = '/projects';
+      history.push(`/projects`);
       return;
     }
 

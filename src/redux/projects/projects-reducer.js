@@ -23,7 +23,6 @@ import {
   getProjectByIdRequest,
   getProjectByIdSuccess,
   getProjectByIdError,
-  clearState,
 } from './projects-actions';
 
 import { logoutSuccess } from 'redux/auth/auth-actions';
@@ -43,6 +42,8 @@ const participants = createReducer([], {
   [getProjectByIdSuccess]: (_, { payload }) => payload.participants,
   [addParticipantSuccess]: (_, { payload }) => payload,
   [deleteParticipantSuccess]: (_, { payload }) => payload,
+
+  [logoutSuccess]: () => [],
 });
 
 const currentProject = createReducer(null, {
@@ -62,6 +63,8 @@ const currentProject = createReducer(null, {
       participants: payload,
     };
   },
+
+  [logoutSuccess]: () => null,
 });
 
 const loading = createReducer(false, {
