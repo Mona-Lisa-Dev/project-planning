@@ -20,7 +20,7 @@ export default function UserBar() {
     dispatch(authOperations.logout());
     Error &&
       swal({
-        text: `${Error}`,
+        text: `Server internal error`,
         icon: 'error',
         button: { text: 'OK', className: `${styles.swalButton}` },
       });

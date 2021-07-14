@@ -38,6 +38,8 @@ const tasksItems = createReducer([], {
 
 const currentTask = createReducer(null, {
   [getTaskByIdSuccess]: (_, { payload }) => payload,
+
+  [logoutSuccess]: () => null,
 });
 
 const filter = createReducer('', {

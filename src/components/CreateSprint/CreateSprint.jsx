@@ -3,6 +3,7 @@ import 'date-fns';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { createTheme } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
@@ -209,7 +210,7 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
   const [error, setError] = useState(false);
   const errorMessage = 'This field is require';
   const classes = useStyles();
-
+  const history = useHistory();
   const dispatch = useDispatch();
 
   // Input - Date
@@ -251,7 +252,7 @@ const CreateSprint = ({ onClickCancel, projectId }) => {
     );
 
     if (!currentProject) {
-      window.location.href = '/projects';
+      history.push(`/projects`);
       return;
     }
     const newSprint = {

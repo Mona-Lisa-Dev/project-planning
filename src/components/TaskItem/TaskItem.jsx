@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import dayjs from 'dayjs';
 
 import { confirmAlert } from 'react-confirm-alert';
@@ -26,7 +27,7 @@ const TaskItem = ({
 }) => {
   const [queryCustomTime, setQueryCustomTime] = useState(0);
   const [day, setDay] = useState('');
-
+  const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -46,7 +47,7 @@ const TaskItem = ({
     );
 
     if (!currentProject) {
-      window.location.href = '/projects';
+      history.push(`/projects`);
       return;
     }
 
@@ -66,7 +67,7 @@ const TaskItem = ({
     );
 
     if (!currentProject) {
-      window.location.href = '/projects';
+      history.push(`/projects`);
       return;
     }
 

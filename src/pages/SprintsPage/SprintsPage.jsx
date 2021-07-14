@@ -21,10 +21,9 @@ import {
   getProjects,
   getCurrentProject,
 } from 'redux/projects/projects-selectors';
-import { getError } from 'redux/sprints/sprints-selectors';
+
 import sprintsOperations from 'redux/sprints/sprints-operations';
 import projectsOperations from 'redux/projects/projects-operations';
-import swal from 'sweetalert';
 
 import s from './SprintsPage.module.scss';
 import { useHistory } from 'react-router-dom';
@@ -41,17 +40,8 @@ const SprintsPage = props => {
   const currentProject = useSelector(getCurrentProject);
   const userEmail = useSelector(getUserEmail);
   const projects = useSelector(getProjects);
-  const Error = useSelector(getError);
-  const history = useHistory();
 
-  // useEffect(() => {
-  //   Error &&
-  //     swal({
-  //       text: `${Error}`,
-  //       icon: 'error',
-  //       button: { text: 'OK', className: `${s.swalButton}` },
-  //     });
-  // }, [Error]);
+  const history = useHistory();
 
   useEffect(() => {
     (async function fetchData() {

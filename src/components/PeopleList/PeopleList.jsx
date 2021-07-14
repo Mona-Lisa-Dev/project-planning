@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { confirmAlert } from 'react-confirm-alert';
 
@@ -9,6 +10,7 @@ import projectsOperations from 'redux/projects/projects-operations';
 import s from './PeopleList.module.scss';
 
 const PeopleList = ({ onClickCancel, projectId, participants }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const handleClick = async email => {
@@ -19,7 +21,7 @@ const PeopleList = ({ onClickCancel, projectId, participants }) => {
 
     if (!currentProject) {
       onClickCancel();
-      window.location.href = '/projects';
+      history.push(`/projects`);
     }
   };
 

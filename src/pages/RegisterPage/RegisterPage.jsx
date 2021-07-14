@@ -36,12 +36,13 @@ const RegisterPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    Error &&
+    if (Error === 'Request failed with status code 409') {
       swal({
-        text: `${Error}`,
+        text: `This email is already in use, please use another email`,
         icon: 'error',
         button: { text: 'OK', className: `${styles.swalButton}` },
       });
+    }
     setValidForm(false);
   }, [Error]);
 

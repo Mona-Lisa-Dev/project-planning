@@ -31,12 +31,13 @@ const ProjectsPage = () => {
   const toggleModal = () => setShowModal(!showModal);
 
   useEffect(() => {
-    Error &&
+    if (Error === 'Request failed with status code 404') {
       swal({
-        text: `${Error}`,
+        text: `You are not a user of this project or it has been deleted`,
         icon: 'error',
         button: { text: 'OK', className: `${styles.swalButton}` },
       });
+    }
   }, [Error]);
 
   return (
