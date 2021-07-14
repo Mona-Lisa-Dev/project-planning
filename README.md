@@ -1,5 +1,7 @@
 # Project Planning
 
+- Наша [презентация](./ProjectPlanning.pptx) (идея проекта)
+
 - Для выполнения работы и контроля качества (обнаружение и фикс багов) командой
   был составлен
   [Backlog](https://docs.google.com/spreadsheets/d/1Zrvskypl8i18djFlCf2WILMA5kWJyz_2fjWHNCDWDL8/edit#gid=1501834089)
@@ -116,6 +118,8 @@ SCSS modules | Axios | Material Ui | React chartjs 2
 2. Поиск и фикс багов, фикс стилей
 
 Сложности: написание функций для обработки данных
+
+---
 
 ### Ihor Prokopets
 
