@@ -39,6 +39,14 @@ const LoginPage = () => {
       });
     }
 
+    if (Error === 'Request failed with status code 401') {
+      swal({
+        text: `Email or password is wrong`,
+        icon: 'error',
+        button: { text: 'OK', className: `${styles.swalButton}` },
+      });
+    }
+
     setValidForm(false);
   }, [Error]);
 
