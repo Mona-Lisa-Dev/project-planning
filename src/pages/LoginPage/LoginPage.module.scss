@@ -7,7 +7,7 @@
   .circlesWrap {
     position: absolute;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: calc(100vh - 81px);
     z-index: -1;
     overflow: hidden;
@@ -84,7 +84,7 @@
       position: absolute;
       top: 81px;
       left: 0;
-      width: 100vw;
+      width: 100%;
       pointer-events: none;
 
       .deskCircles {
